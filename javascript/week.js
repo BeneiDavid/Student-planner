@@ -22,6 +22,7 @@ function showPrevMonth(){
     var firstdayOfWeek = new Date(firstdayOfWeekString);
     firstdayOfWeek.setDate(firstdayOfWeek.getDate() - 7);
     setWeekDate(firstdayOfWeek);
+    refreshWeeklyDisplay();
 }
 
 // Következő hónap click
@@ -30,6 +31,7 @@ function showNextMonth(){
     var firstdayOfWeek = new Date(firstdayOfWeekString);
     firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 7);
     setWeekDate(firstdayOfWeek);
+    refreshWeeklyDisplay();
 }
 
 
@@ -98,6 +100,7 @@ function listWeekTasks(){
 function fillWeekDay(dayIndex, task_details){
     if(task_details.length != 0){
         var list;
+
         switch(dayIndex){
             case 0:
                 list = document.getElementById('mondayList');
@@ -121,6 +124,7 @@ function fillWeekDay(dayIndex, task_details){
                 list = document.getElementById('sundayList');
             break;
         }
+
         var tasks = task_details.tasks;
         for (var i = 0; i < tasks.length; i++) {
             var li = document.createElement('li');
@@ -130,27 +134,42 @@ function fillWeekDay(dayIndex, task_details){
             var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
             li.style.backgroundImage = "url('" + svgDataURL + "')";
-
+            li.classList.add("clickable");
             li.textContent = tasks[i].title;
+            li.id = "li-" + tasks[i].task_id;
+            li.addEventListener('click', taskClick, false);
 
-        
             list.appendChild(li);
         }
     }
+}
+
+function deleteWeekTasks(){
+    document.getElementById('mondayList').innerHTML = "";
+    document.getElementById('tuesdayList').innerHTML = "";
+    document.getElementById('wednesdayList').innerHTML = "";
+    document.getElementById('thursdayList').innerHTML = "";
+    document.getElementById('fridayList').innerHTML = "";
+    document.getElementById('saturdayList').innerHTML = "";
+    document.getElementById('sundayList').innerHTML = "";
+}
+
+function refreshWeeklyDisplay(){
+    deleteWeekTasks();
+    listWeekTasks();
 }
 
 function createColoredSVG(color){
     // Create the SVG element
 var svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-svgElement.setAttribute('width', '30px');
-svgElement.setAttribute('height', '30px');
+svgElement.setAttribute('width', '35px');
+svgElement.setAttribute('height', '35px');
 svgElement.setAttribute('viewBox', '0 0 20 20');
 
 // Create the path element
 var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
-console.log(color);
 pathElement.setAttribute('fill', color);
 
 // Append the path element to the SVG element

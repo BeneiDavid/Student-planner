@@ -105,11 +105,14 @@ margin-left:  10px;
   .selected-day-div td{
     
     overflow: inherit;
+    word-break: break-all;
+    
     
   }
  
   .selected-day-div tr{
     height: 60px;
+
   }
 
   .selected-day-div tr td{
@@ -376,10 +379,7 @@ margin-left:  10px;
 .task-text-name{
   height: 25px;
   display: inline-block;
-  vertical-align:top;
-  /* Setting Border Radius */
-  border-radius:  10px / 50%; /* Adjust the values as needed */
-  position: relative;
+
   margin-right: 30px;
   padding-bottom: 30px;
 }

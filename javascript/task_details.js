@@ -267,8 +267,8 @@ function saveTaskButton(event){
         refreshSortByLabelTasks();
     }
 
-    if(document.getElementById('byProgressBody')){
-        //refreshSortByProgressTasks();
+    if(document.getElementById('selectedWeekDate')){
+        refreshWeeklyDisplay();
     }
 
 
@@ -533,8 +533,8 @@ function confirmDelete(event){
     if(document.getElementById('labelBody')){
         refreshSortByLabelTasks();
     }
-    if(document.getElementById('byProgressBody')){
-        //refreshSortByProgressTasks();
+    if(document.getElementById('selectedWeekDate')){
+        refreshWeeklyDisplay();
     }
     $('#taskModal').modal('hide');
 
