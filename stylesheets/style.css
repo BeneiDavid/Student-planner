@@ -1,0 +1,541 @@
+
+.info-picture {
+height: 18px;
+width: 18px;
+margin-left:  10px;
+    
+}
+
+.error {
+    color: red;
+    margin-left:  30px;
+}
+
+
+/* Calendar */
+
+.month {
+    padding: 30px 25px;
+    background: grey;
+    text-align: center;
+  }
+  
+  .month ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  .month .prev {
+    float: left;
+    padding-top: 10px;
+  }
+  
+  .month .next {
+    float: right;
+    padding-top: 10px;
+  }
+  
+  .weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+    white-space: nowrap;
+  }
+  
+  .weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+  }
+  
+  .days {
+    padding: 10px 0;
+    background: rgb(253, 244, 233);
+    margin: 0;
+  }
+  
+  .days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size:12px;
+    color: #777;
+  }
+  
+  .day {
+    padding: 5px;
+    background: rgb(253, 244, 233);
+
+  }
+
+  .activeDay{
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+  }
+
+  .selected-day-div{
+    margin-bottom: 100px;
+
+  }
+
+  .selected-day-div th{
+    color: white;
+    border: 2px solid black;
+    background-color: grey;
+    width: 1000px;
+    text-align: center;
+    font-size: 20px;
+    
+  }
+
+
+  
+  .selected-day-div td{
+    
+    overflow: inherit;
+    
+  }
+ 
+  .selected-day-div tr{
+    height: 60px;
+  }
+
+  .selected-day-div tr td{
+    border: 2px solid black;
+
+  }
+
+  .add-task-icon{
+    width: 25px;
+  }
+
+  .delete-task-icon{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 40px;
+  }
+
+  .add-task-icon:hover {
+    /* Set the styles for hover state */
+    background-color: lightgray;
+  }
+
+  .add-task-button{
+    border: none;
+    background-color: white;
+  }
+
+  .new-task-td{
+    text-align: center;
+  }
+
+  .first-col{
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .second-col{
+    padding-left: 20px;
+    font-weight: bold;
+  }
+
+.colorpicker{
+    vertical-align:middle;
+    border: none;
+}
+
+.task-input{
+    margin-left: 10px;
+}
+
+.task-name{
+  width: 400px;
+}
+
+.add-label-icon{
+  background-color: white;
+}
+
+.add-label-icon:hover{
+  background-color: lightgray;
+}
+
+
+
+.custom-modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 55px;;
+  left:-75px;
+  width: 100; /* Full width */
+  height: 100; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0); /* Black w/ opacity */
+}
+
+
+.delete-modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Modal Content/Box */
+.custom-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.custom-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.custom-close:hover,
+.custom-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.symbol-square {
+  width: 30px; /* Set the width of the rectangle */
+  height: 30px; /* Set the height of the rectangle */
+  background-color: white; /* Set the background color of the rectangle */
+  border: 2px solid #000; /* Add a border around the rectangle */
+  display: inline-block;
+  text-align: center;
+}
+
+.symbol-square:hover {
+  background-color: #ccc;
+}
+
+
+.label-square {
+  width: auto; /* Set the width of the rectangle */
+  height: 30px; /* Set the height of the rectangle */
+  background-color: white; /* Set the background color of the rectangle */
+  border: 2px solid #000; /* Add a border around the rectangle */
+  display: inline-block;
+  text-align: center;
+}
+
+.label-square:hover {
+  background-color: #ccc;
+}
+
+
+
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Display images in 3 columns */
+  grid-gap: 10px; /* Adjust the gap between images */
+}
+
+.image-container img {
+  width: 40px; /* Ensure images fill their container */
+  height: 40px;
+  height: auto;
+}
+
+.image-container img:hover {
+  opacity: 0.8; /* Reduce opacity on hover */
+  border: 2px solid #333; /* Add a border on hover */
+}
+
+
+.popover{
+  max-width: 1000px;
+}
+
+
+.symbol-container{
+  display: inline-block;
+}
+
+.ellipse{
+  height: 25px;
+  display: inline-block;
+  vertical-align:middle;
+  /* Setting Border Radius */
+  border-radius:  10px / 50%; /* Adjust the values as needed */
+  position: relative;
+  margin-left: 10px;
+  border: 3px solid black ;
+
+}
+
+.preview-label{
+  display: inline-block;
+}
+
+.preview-text{
+  padding-left: 5px;
+  padding-right: 5px;
+  transform: translateY(-10%);
+  display: inline-block;
+}
+
+.preview-image{
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  transform: translateY(-20%);
+  display: none;
+  padding-right: 5px;
+}
+
+
+.label-name-error{
+  display: none;
+}
+
+
+.clickable {
+  cursor: pointer;
+}
+
+
+
+.colored-section {
+  position: relative;
+
+}
+
+
+
+.colored-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #000;
+  width: 100%;
+  height: 15px; /* Adjust this percentage to control the height of the colored section */
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
+  background-color: var(--before-bg-color); /* Use custom property for background color */
+}
+
+.colored-section::after {
+  content: "";
+  position: absolute;
+  top: 15px; /* Start after the ::before pseudo-element */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 15px); /* Remaining height */
+  z-index: -1; 
+  background-color: white; /* Color for the area outside of the ::before pseudo-element */
+}
+
+.colored-section:hover::after {
+  background-color: lightgray; /* Color for the area outside of the ::before pseudo-element */
+}
+
+
+.text-container {
+  position: relative;
+  height: auto; /* Adjust this to complement the colored section's height */
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+
+
+
+.task-text-name{
+  height: 25px;
+  display: inline-block;
+  vertical-align:top;
+  /* Setting Border Radius */
+  border-radius:  10px / 50%; /* Adjust the values as needed */
+  position: relative;
+  margin-right: 30px;
+  padding-bottom: 30px;
+}
+
+
+.small-image {
+  display: none;
+  width: 25px; /* Adjust the size of the small image */
+  height: 25px;
+  background-image: url('pictures/apple.svg');
+  background-size: cover;
+}
+
+
+.center-div{
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.sort-by-label-content{
+  cursor: pointer;
+}
+
+.align-center{
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.inline-block{
+  display: inline-block;
+  vertical-align:middle;
+}
+
+.emptylabel{
+  width: 100px;
+}
+
+
+
+.tables_ui {
+ 
+  border-spacing:0;
+  width: 350px;
+  vertical-align: top;
+  margin-bottom: 50px;
+  
+}
+.tables_ui ul li {
+  min-width: 200px;
+}
+.dragging li.ui-state-hover {
+  min-width: 240px;
+}
+.dragging .ui-state-hover a {
+  color:green !important;
+  font-weight: bold;
+}
+.tables_ui th,td {
+  text-align: center;
+  padding: 2px 4px;
+  border: 1px solid black;
+  width: 350px;
+
+  height: 55px;
+}
+.t_sortable tr, .ui-sortable-helper {
+  cursor: move;
+}
+.t_sortable tr:first-child {
+  cursor: default;
+}
+
+.ui-sortable{
+  width: auto !important;
+}
+
+
+.ui-sortable-helper {
+  width: auto !important; /* Set the width of the dragged item */
+
+}
+
+.ui-sortable-placeholder {
+  background: yellow;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-template-rows: 1fr 1fr; /* Two rows */
+  gap: 20px; /* Gap between grid items */
+  width: 80%; /* Set width to 80% of the parent container */
+  margin: 0 auto; /* Center the grid horizontally */
+  height: 20px;
+  align-items: start;
+} 
+
+/* Style for each grid item */
+.grid-item {
+  border: 1px solid black; /* Border for visualization */
+  text-align: center;
+} 
+
+.grid-item .selected-day-div{
+ margin-bottom: 60px;
+}
+
+
+ /* Media query for smaller screens */
+ @media screen and (max-width: 860px) {
+  .grid-container {
+      grid-template-columns: 1fr; /* Change to a single column */
+  
+  }
+}
+
+
+.center-horizontally{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.display-inline{
+  display:inline-block;
+  margin:2px 2%;
+  margin-bottom: 60px;
+}
+
+
+
+.padding-bottom{
+  padding-bottom: 100px;
+}
+
+.week-list-row td{
+  max-width: 200px;
+}
+
+.week-list-row ul{
+  text-align: left;
+  list-style: none;
+  word-wrap: break-word;
+}
+
+
+
+.week-list-row li{
+  background: left no-repeat;
+  vertical-align: middle;
+  line-height: normal;
+  padding-left: 30px;
+  
+}
+
+
