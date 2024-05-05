@@ -134,7 +134,7 @@ class RegistrationValidator {
         `user_id`=NULL,
         `user_type`='student',
         `full_name`='".$this->fields["fullname"]."',
-        `username` = '".$this->fields["username"]."',
+        `username` = '".strtolower($this->fields["username"])."',
         `user_address`='".$this->fields["address"]."',
         `user_password`='".$hashed_password."',
         `reg_date`='".date('Y-m-d H:i:s')."',

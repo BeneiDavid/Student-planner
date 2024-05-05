@@ -93,7 +93,7 @@ function closeModifyLabels(){
     clearHiddenId();
 } 
 
-
+// Hidden input mező értékének törlése
 function clearHiddenId(){
     var hidden_id = document.getElementById('hiddenId');
     hidden_id.value = "";
@@ -196,8 +196,6 @@ function setSymbolSquareAndPreview(){
     previewDiv.style.backgroundColor = labelcolor.value;
 }
     
-
-
 // Preview címke, kép, háttér szín változatása
 function changeLabelColor(){
     var updatedColor = this.value;

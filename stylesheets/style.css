@@ -11,6 +11,10 @@ margin-left:  10px;
     margin-left:  30px;
 }
 
+.info {
+  color: blue;
+  margin-left: 30px;
+}
 
 /* Calendar */
 
@@ -687,6 +691,7 @@ margin-left:  10px;
   width: 425px;
   display: inline-block;
   vertical-align: top;
+  overflow: auto;
 }
 
 .new-member-button{
@@ -694,9 +699,8 @@ margin-left:  10px;
 }
 
 
-/* Members modal styles  */
 .search-input{
-  width: 350px;
+  width: 310px;
 }
 
 .search-image{
@@ -705,6 +709,58 @@ margin-left:  10px;
   margin-top: -5px;
   margin-left: 5px;
 }
+
+.search-results{
+  overflow: auto; 
+  max-height: 300px; 
+}
+
+.student-data{
+  padding: 5px;
+}
+
+.student-data:not(:last-child) {
+  border-bottom: 2px dashed #000;
+}
+
+.student-header-div p{
+  display: inline-block; /* Use inline-block to display columns */
+  width: 45.00%; /* Each column takes up one-third of the space */
+  font-weight: bold;
+}
+
+.student-data p{
+  display: inline-block; /* Use inline-block to display columns */
+  width: 45.00%; /* Each column takes up one-third of the space */
+  vertical-align: top; /* Align columns to the top */
+  margin-top: 12px;
+}
+
+.student-data input[type="checkbox"]{
+  display: inline-block; /* Use inline-block to display columns */
+  vertical-align: middle; /* Align columns to the top */
+  margin-left: -80px;
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+
+}
+
+.student-data img{
+  display: inline-block; /* Use inline-block to display columns */
+  vertical-align: middle; /* Align columns to the top */
+  margin-left: -80px;
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+
+}
+
+.no-result-text{
+  visibility: collapse;
+}
+
+
 
 
 /* Teacher group page END */
