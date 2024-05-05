@@ -662,3 +662,50 @@ margin-left:  10px;
 }
 
 
+
+/* Teacher group page START */
+
+.no-created-groups-div{
+  min-height: 50px;
+  padding: 10px;
+  max-width: 800px;
+  margin: auto;
+  font-size: larger;
+}
+
+
+
+.groups-div{
+  background-color: lightblue;
+}
+
+
+/* Group modal styles */
+.members-div{
+  margin-left: 30px;
+  height: 425px;
+  width: 425px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.new-member-button{
+  margin-left: 150px;
+}
+
+
+/* Members modal styles  */
+.search-input{
+  width: 350px;
+}
+
+.search-image{
+  width: 20px;
+  height: 20px;
+  margin-top: -5px;
+  margin-left: 5px;
+}
+
+
+/* Teacher group page END */
+

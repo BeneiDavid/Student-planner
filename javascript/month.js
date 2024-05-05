@@ -50,7 +50,10 @@ function setDays(currentYear, currentMonth){
     var calendarDaysDiv = document.getElementById('calendarDays');
     calendarDaysDiv.innerHTML = "";
 
-
+    for (i = 1; i < firstWeekday; i++) {
+        var listItem = document.createElement("li");
+        calendarDaysDiv.appendChild(listItem);
+    }
     
     var nextMonth = new Date(currentYear, currentMonth, 1);
     // Subtract one day from the first day of the next month to get the last day of the current month

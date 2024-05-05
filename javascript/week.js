@@ -42,7 +42,9 @@ function setWeekDate(date){
     var mondayDate = new Date(date);
     mondayDate.setDate(date.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
     var sundayDate = new Date(date);
+    if (dayOfWeek !== 0) {
     sundayDate.setDate(date.getDate() - dayOfWeek + 7);
+    }
 
     var monday = mondayDate.getFullYear() + '. ' + (monthNames[mondayDate.getMonth() + 1]) + " " + mondayDate.getDate() + '.';
     var sunday = sundayDate.getFullYear() + '. ' + (monthNames[sundayDate.getMonth() + 1]) + " " + sundayDate.getDate() + '.';
