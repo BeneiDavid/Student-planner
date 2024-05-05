@@ -43,3 +43,21 @@ function getContrastColor(rgb) {
     return 'white';
   }
 }
+
+function createColoredSVG(color){
+  // Create the SVG element
+var svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+svgElement.setAttribute('width', '35px');
+svgElement.setAttribute('height', '35px');
+svgElement.setAttribute('viewBox', '0 0 20 20');
+
+// Create the path element
+var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
+pathElement.setAttribute('fill', color);
+
+// Append the path element to the SVG element
+svgElement.appendChild(pathElement)
+return svgElement;
+}

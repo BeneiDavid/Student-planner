@@ -1,7 +1,5 @@
 <?php
 
-
-
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
     require 'task_details_modal.php';
@@ -12,7 +10,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/add_label_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
+    echo '<script type="text/javascript"  src="javascript/week.js"></script>';
     echo '<script type="text/javascript"  src="javascript/calendar.js"></script>';
+    
 
 
 
@@ -24,8 +24,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 <div class='col col-sm-12 col-12 col-md-12  col-lg-5' >
                     <div class='month'>      
                         <ul>
-                            <li class='prev clickable' id='prevMonth'>&#10094;</li>
-                            <li class='next clickable' id='nextMonth'>&#10095;</li>
+                            <li class='prev clickable no-select' id='prevMonth'>&#10094;</li>
+                            <li class='next clickable no-select' id='nextMonth'>&#10095;</li>
                             <li id='monthAndYear'>
                             
                             </li>
