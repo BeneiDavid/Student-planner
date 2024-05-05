@@ -519,6 +519,7 @@ function confirmDelete(event){
         data: {'taskAddData': taskAddData,
               'taskId': taskId
         },
+        dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
             console.log(response); 

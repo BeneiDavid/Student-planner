@@ -9,19 +9,22 @@
 
 <!-- Modal content -->
 <div class="custom-modal-content">
-    <span class="custom-close" id='taskDelete_xButton'>&times;</span>
+    <span class="custom-close" id='addMembers_xButton'>&times;</span>
     <h3 id='membersModalHeader'><!-- A csoport neve dinamikusan kerül ide --></h3>
 
     <br>
 
     <form method='post' id="addMembersForm">
-    <input type="text" id="searchInput" class='search-input' placeholder="Keressen itt..."><img src='pictures/search.svg' class='search-image'></img>
+    <input type="search" id="searchInput" class='search-input' placeholder="Keresés..."><img src='pictures/search.svg' class='search-image'></img>
         <br><br>
-        <div class='div-with-border' id="searchResults"></div>
+        <div class='student-header-div'><p>Név</p><p>Azonosító</p></div>
+        <div class='div-with-border search-results' id="searchResults"></div>
+        <span class="error no-result-text" id='noResultText'>Nincs a keresésnek megfelelő találat.</span><br>
+        <span class="info no-result-text" id='noStudents'>Nincs több hozzáadható diák.</span>
         <br><br>
-    <input type='submit' name='labels_save_button' value='Tagok hozzáadása' class='btn btn-success' id='confirmDelete'>
-    <button type='button' class='btn btn-primary' id='taskDelete_cancelButton'>Mégsem</button>
-
+    <input type='submit' name='addMembers_submit' value='Tagok hozzáadása' class='btn btn-success' id='addMembers'>
+    <button type='button' class='btn btn-primary' id='addMembers_cancelButton'>Mégsem</button>
+    
     </form>
 </div>
 
