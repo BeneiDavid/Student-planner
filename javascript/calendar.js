@@ -65,11 +65,7 @@ function setDays(currentYear, currentMonth){
     var calendarDaysDiv = document.getElementById('calendarDays');
     calendarDaysDiv.innerHTML = "";
 
-    for (i = 1; i < firstWeekday; i++) {
-        var listItem = document.createElement("li");
-        calendarDaysDiv.appendChild(listItem);
-    }
-    
+
     var nextMonth = new Date(currentYear, currentMonth, 1);
     // Subtract one day from the first day of the next month to get the last day of the current month
     var lastDayOfMonth = new Date(nextMonth - 1);
@@ -92,6 +88,7 @@ function setDays(currentYear, currentMonth){
         var listItem = document.createElement("li");
         listItem.textContent = day;
         listItem.classList.add('clickable');
+        listItem.classList.add('no-select');
         listItem.classList.add('day');
 
         if(calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
@@ -162,7 +159,6 @@ function setCalendar(){
 
     selectedDate = document.getElementById('selectedDate');
     selectedDate.value = currentYear + "-" + currentMonth + "-" + currentDay;
-
     calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
     calendarYearAndMonth.value = currentYear + "-" + currentMonth;
 
@@ -179,13 +175,54 @@ function setCalendar(){
 
 }
 
+function setCalendarToDate(date){
+    var Year = date.split('-')[0];
+    var Month = date.split('-')[1];
+    var Day = date.split('-')[2];
+    selectedDate = document.getElementById('selectedDate');
+    selectedDate.value = Year + "-" + Month + "-" + Day;
+    calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
+    calendarYearAndMonth.value = Year + "-" + Month;
+
+    if(Month == 0){
+        Month = 12;
+    }
+
+    monthAndYearText = document.getElementById('monthAndYear');
+    monthAndYearText.textContent = monthNames[Month] + " " + Year;
+    selectedDayText = document.getElementById('selectedDay');
+    selectedDayText.textContent = Year + ". " + monthNames[Month] + " " + Day + ".";
+
+    setDays(Year, Month);
+
+}
+
+function getDateFromURL() {
+    var urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('date');
+}
+
+function removeDateFromURL() {
+    var urlParams = new URLSearchParams(window.location.search);
+    urlParams.delete('date');
+    var newUrlWithoutDate = window.location.pathname + '?' + urlParams.toString();
+    history.replaceState(null, '', newUrlWithoutDate);
+}
 
 
 function init(){
     document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
     document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);
-
-    setCalendar();
+    
+    var date = getDateFromURL();
+    if(date != null){
+        removeDateFromURL();
+        setCalendarToDate(date);
+    }
+    else{
+        setCalendar();
+    }
+        
  
     
 }

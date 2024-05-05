@@ -126,6 +126,17 @@ function fillWeekDay(dayIndex, task_details){
         }
 
         var tasks = task_details.tasks;
+        // Feladatok rendezése időrendben
+        tasks.sort(function (a, b) {
+            var startTimeComparison = a.start_time.localeCompare(b.start_time);
+        
+            if (startTimeComparison === 0) {
+                return a.end_time.localeCompare(b.end_time);
+            }
+
+            return startTimeComparison;
+        });
+
         for (var i = 0; i < tasks.length; i++) {
             var li = document.createElement('li');
 
@@ -135,6 +146,7 @@ function fillWeekDay(dayIndex, task_details){
 
             li.style.backgroundImage = "url('" + svgDataURL + "')";
             li.classList.add("clickable");
+            li.classList.add("no-select");
             li.textContent = tasks[i].title;
             li.id = "li-" + tasks[i].task_id;
             li.addEventListener('click', taskClick, false);
@@ -157,24 +169,6 @@ function deleteWeekTasks(){
 function refreshWeeklyDisplay(){
     deleteWeekTasks();
     listWeekTasks();
-}
-
-function createColoredSVG(color){
-    // Create the SVG element
-var svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-svgElement.setAttribute('width', '35px');
-svgElement.setAttribute('height', '35px');
-svgElement.setAttribute('viewBox', '0 0 20 20');
-
-// Create the path element
-var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
-pathElement.setAttribute('fill', color);
-
-// Append the path element to the SVG element
-svgElement.appendChild(pathElement)
-return svgElement;
 }
 
 function setSelectedWeekDate(date){
@@ -244,18 +238,62 @@ function addTaskSunday(){
     addTask();
 }
 
+function chooseDayDate(event){
+    var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
+    var firstdayOfWeek = new Date(firstdayOfWeekString);
+    switch(this.id){
+        case 'chooseTuesdayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 1);
+            break;
+        case 'chooseWednesdayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 2);
+            break;
+        case 'chooseThursdayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 3);
+            break;
+        case 'chooseFridayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 4);
+            break;
+        case 'chooseSaturdayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 5);
+            break;
+        case 'chooseSundayDate':
+            firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 6);
+            break;
+        default:
+            break;
+    }
+    
+    var date = changeDateToStringFormat(firstdayOfWeek);
+    window.location.href = "index.php?page=napi_megjelenites&date=" + date;
+
+
+    
+}
+
+
+
 function init(){
-    setCurrentWeekDate();
-    listWeekTasks();
-    document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
-    document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);
-    document.getElementById('addMonday').addEventListener('click', addTaskMonday, false);
-    document.getElementById('addTuesday').addEventListener('click', addTaskTuesday, false);
-    document.getElementById('addWednesday').addEventListener('click', addTaskWednesday, false);
-    document.getElementById('addThursday').addEventListener('click', addTaskThursday, false);
-    document.getElementById('addFriday').addEventListener('click', addTaskFriday, false);
-    document.getElementById('addSaturday').addEventListener('click', addTaskSaturday, false);
-    document.getElementById('addSunday').addEventListener('click', addTaskSunday, false);
+    if(document.getElementById('firstdayOfWeek')){
+        setCurrentWeekDate();
+        listWeekTasks();
+        document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
+        document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);
+        document.getElementById('addMonday').addEventListener('click', addTaskMonday, false);
+        document.getElementById('addTuesday').addEventListener('click', addTaskTuesday, false);
+        document.getElementById('addWednesday').addEventListener('click', addTaskWednesday, false);
+        document.getElementById('addThursday').addEventListener('click', addTaskThursday, false);
+        document.getElementById('addFriday').addEventListener('click', addTaskFriday, false);
+        document.getElementById('addSaturday').addEventListener('click', addTaskSaturday, false);
+        document.getElementById('addSunday').addEventListener('click', addTaskSunday, false);
+        document.getElementById('chooseMondayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseTuesdayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseWednesdayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseThursdayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseFridayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseSaturdayDate').addEventListener('click', chooseDayDate, false);
+        document.getElementById('chooseSundayDate').addEventListener('click', chooseDayDate, false);
+    }
 }
 
 window.addEventListener('load', init, false);

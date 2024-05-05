@@ -266,9 +266,11 @@ function saveTaskButton(event){
     if(document.getElementById('labelBody')){
         refreshSortByLabelTasks();
     }
-
     if(document.getElementById('selectedWeekDate')){
         refreshWeeklyDisplay();
+    }
+    if(document.getElementById('selectedMonthDate')){
+        refreshMonthlyDisplay();
     }
 
 
@@ -535,6 +537,9 @@ function confirmDelete(event){
     }
     if(document.getElementById('selectedWeekDate')){
         refreshWeeklyDisplay();
+    }
+    if(document.getElementById('selectedMonthDate')){
+        refreshMonthlyDisplay();
     }
     $('#taskModal').modal('hide');
 

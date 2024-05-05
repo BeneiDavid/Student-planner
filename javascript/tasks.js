@@ -90,6 +90,7 @@ function fillTaskTable(response, type){
                 userTaskDiv.classList.add("text-container");
                 userTask.classList.add("second-col");
                 userTask.classList.add("clickable");
+                userTask.classList.add("no-select");
                 userTask.classList.add("colored-section");
                 
                 userTask.style.setProperty('--before-bg-color', task.task_color);
@@ -115,6 +116,7 @@ function fillTaskTable(response, type){
                                     newP.classList.add('preview-text');
                                     newImg.classList.add('preview-image');
                                     newDiv.classList.add('clickable');
+                                    newDiv.classList.add("no-select");
                                     var rgb = hexToRgb(labels[i].label_color);
     
                                     var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
@@ -175,6 +177,7 @@ function fillTaskTable(response, type){
                     userTaskDiv.classList.add("text-container");
                     userTask.classList.add("second-col");
                     userTask.classList.add("clickable");
+                    userTask.classList.add("no-select");
                     userTask.classList.add("colored-section");
                     
                     userTask.style.setProperty('--before-bg-color', task.task_color);
@@ -200,6 +203,7 @@ function fillTaskTable(response, type){
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
                                         newDiv.classList.add('clickable');
+                                        newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
         
                                         var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
@@ -258,6 +262,7 @@ function fillTaskTable(response, type){
                     userTaskDiv.classList.add("text-container");
                     userTask.classList.add("second-col");
                     userTask.classList.add("clickable");
+                    userTask.classList.add("no-select");
                     userTask.classList.add("colored-section");
                     
                     userTask.style.setProperty('--before-bg-color', task.task_color);
@@ -283,6 +288,7 @@ function fillTaskTable(response, type){
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
                                         newDiv.classList.add('clickable');
+                                        newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
         
                                         var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
@@ -375,6 +381,7 @@ function fillTaskTable(response, type){
                     userTaskDiv.classList.add("text-container");
                     userTask.classList.add("second-col");
                     userTask.classList.add("clickable");
+                    userTask.classList.add("no-select");
                     userTask.classList.add("colored-section");
                     
                     userTask.style.setProperty('--before-bg-color', task.task_color);
@@ -400,6 +407,7 @@ function fillTaskTable(response, type){
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
                                         newDiv.classList.add('clickable');
+                                        newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
         
                                         var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
