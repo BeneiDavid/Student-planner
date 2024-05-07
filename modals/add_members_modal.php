@@ -1,16 +1,10 @@
-<?php
 
-
-?>
-
-
-
-<div id="addMembersModal" class="custom-modal delete-modal container">
+<div id="addMembersModal" class="custom-modal  delete-group-modal container">
 
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='addMembers_xButton'>&times;</span>
-    <h3 id='membersModalHeader'><!-- A csoport neve dinamikusan kerül ide --></h3>
+    <h3 id='membersModalHeader' class='word-wrap'><!-- A csoport neve dinamikusan kerül ide --></h3>
 
     <br>
 

@@ -1,20 +1,56 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
+if (isset($_POST['groupAddData']))
+{
+  require_once '../user.php';
+    session_start();
+    $l = mysqli_connect('localhost', 'root', '', 'student_planner');
+    
+
+    $user = unserialize($_SESSION['user']);
+    $user_id = $user->getId();
+    $group_name = $_POST['groupName'];
+    echo $user_id;
+    echo $group_name;
+    mysqli_query($l, "INSERT INTO `groups` SET 
+    `group_id`=NULL,
+    `group_teacher_id`='".$user_id."',
+    `group_name`='".$group_name."'  
+    "); 
+
+    if(isset($_POST['studentIds'])) {
+      $student_ids = $_POST['studentIds'];
+
+      $last_inserted_group_id = mysqli_insert_id($l);
+
+      foreach ($student_ids as $student_id) {
+        echo $student_id;
+        mysqli_query($l, "INSERT INTO `group_members` SET 
+        `membership_id`=NULL,
+        `group_id`='".$last_inserted_group_id."',
+        `student_id`='".$student_id."'
+        ");
+      }
+    }
 
 
+    // Feladat és annak címkéinek eltárolása
+   
 
-
-
-
+    mysqli_close($l);
+    
+}
 
 ?>
 
 
 <div class='modal fade' id='groupModal'>
-        <div class='modal-dialog modal-dialog-centered modal-lg'>
-          <div class='modal-content'>
+    <div class='modal-dialog modal-dialog-centered modal-lg'>
+        <div class='modal-content'>
       
             <!-- Modal Header -->
             <div class='modal-header'>
@@ -25,10 +61,10 @@
             <!-- Modal body -->
             <div class='modal-body'>
                 <form method='post'>
-                    <input type='hidden' id='existingTask'>
                     <div id='modalDiv'></div>
+                    <span class="red label-name-error" id="groupNameError">A csoport neve nem lehet üres!<br><br></span>
                     <label for='groupname'>Csoport neve:</label> 
-                    <input type='text' class='task-input task-name' id='groupName' name='groupname' maxlength="50"><span class="error label-name-error" id="groupNameError">A csoport neve nem lehet üres!</span>
+                    <input type='text' class='task-input task-name' id='groupName' name='groupname' maxlength="50">
                     <br><br>
                     <label for='members'>Tagok:</label>
                     
@@ -47,10 +83,10 @@
       
             <!-- Modal footer -->
             <div class='modal-footer'>
-              <input type='submit' name='save_task_button' value='Mentés' class='btn btn-success' id='saveTaskButton'>
+              <input type='submit' name='save_task_button' value='Mentés' class='btn btn-success' id='saveGroupButton'>
               <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Mégsem</button>
             </div>
       
-          </div>
         </div>
-      </div>
+    </div>
+</div>

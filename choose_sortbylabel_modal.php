@@ -1,4 +1,4 @@
-<div id="sortByLabelModal" class="custom-modal container align-center">
+<div id="sortByLabelModal" class="custom-modal delete-modal container">
 
 <!-- Modal content -->
 <div class="custom-modal-content">
