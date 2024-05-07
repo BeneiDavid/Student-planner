@@ -39,6 +39,8 @@ if (isset($_POST['taskAddData']))
       $enable_end_time = 0;
     }
 
+   
+
     
     //NOTE: egyelőre a creator id is a user !!!!
     // Feladat adatainak eltárolása
@@ -57,7 +59,7 @@ if (isset($_POST['taskAddData']))
         ");
 
     $last_inserted_task_id = mysqli_insert_id($l);
-    echo $label_ids;
+    
     foreach ($label_ids as $label_id) {
       echo $label_id;
       mysqli_query($l, "INSERT INTO `task_labels` SET 
@@ -65,6 +67,19 @@ if (isset($_POST['taskAddData']))
       `task_id`='".$last_inserted_task_id."',
       `label_id`='".$label_id."'
       ");
+    }
+
+    $group_id = "";
+
+    if(isset($_SESSION['group_id'])){
+      if($_SESSION['group_id'] != ""){
+        $group_id = $_SESSION['group_id'];
+        mysqli_query($l, "INSERT INTO `group_tasks` SET 
+        `group_task_id`=NULL,
+        `task_id`='".$last_inserted_task_id."',
+        `group_id`='".$group_id."'
+        ");      
+      }
     }
 
 

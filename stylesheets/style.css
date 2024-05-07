@@ -716,7 +716,7 @@ background-color: white;
 
 .groups-div > div > p{
   display: inline-block;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-left: 50px;
   padding-right: 50px;
   width: 20.00%;
@@ -735,6 +735,7 @@ background-color: white;
   display: inline-block;
   word-break: break-all;
   font-weight: bold;
+  padding-top: 5px;
 }
 
 .groups-div > div > div{
@@ -837,6 +838,10 @@ background-color: white;
 
 .word-wrap{
   word-wrap: break-word;
+}
+
+.no-display{
+  display: none;
 }
 
 /* Teacher group page END */

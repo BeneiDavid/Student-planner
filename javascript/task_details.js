@@ -306,10 +306,12 @@ function setDate(){
     if(document.getElementById('selectedDate')){
         selectedDate = document.getElementById('selectedDate').value;
         
-        
     } // Heti megjelenítés esetén
     else if(document.getElementById('selectedWeekDate')){
         selectedDate = document.getElementById('selectedWeekDate').value;
+    }
+    else{
+        return;
     }
     
     var dateComponents = selectedDate.split('-');
@@ -519,8 +521,6 @@ function confirmDelete(event){
         data: {'taskAddData': taskAddData,
               'taskId': taskId
         },
-        dataType: "json",
-        credentials: 'same-origin',
         success: function(response) {
             console.log(response); 
   
@@ -600,6 +600,9 @@ function init(){
         }
         if(document.getElementById('eisenhoverBody')){
             refreshEisenhoverTasks();
+        }
+        if(document.getElementById('groupTasksBody')){
+            refreshGroupTasks();
         }
        
         });

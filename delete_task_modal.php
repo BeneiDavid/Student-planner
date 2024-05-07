@@ -11,6 +11,8 @@ if (isset($_POST['taskAddData']))
     $task_delete_query = mysqli_query($l, "DELETE FROM `tasks` WHERE `task_id`='$task_id'");
     $relation_delete_query =  mysqli_query($l, "DELETE FROM `task_labels` WHERE `task_id`='$task_id'");
     $task_sorting_delete_query = mysqli_query($l, "DELETE FROM `task_sorting` WHERE `task_id`='$task_id'");
+    $group_tasks_delete_query = mysqli_query($l, "DELETE FROM `group_tasks` WHERE `task_id`='$task_id'");
+    mysqli_close($l);
 }
 
 ?>
