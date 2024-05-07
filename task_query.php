@@ -91,7 +91,62 @@ require_once 'user.php';
       }
     }
   }
-} // Összes feladat listázása
+} // Csoport feladatainak listázása - tanár
+else if(isset($_POST['groupId'])){
+
+  $group_id = $_SESSION['group_id'];
+  $task_ids_query = mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+
+  while ($ids = mysqli_fetch_assoc($task_ids_query)) {
+    $task_ids[] = $ids['task_id'];
+  }
+
+  if (!empty($task_ids)) {
+  
+    $task_ids_string = implode(',', $task_ids);
+
+    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' AND `task_id` IN ($task_ids_string)");
+
+  if (!$tasks_query) {
+    http_response_code(500); 
+    echo json_encode(array('error' => 'Database query failed'));
+    exit;
+  }
+
+  if (mysqli_num_rows($tasks_query) > 0) {
+    while ($row = mysqli_fetch_assoc($tasks_query)) {
+        $task_id = $row['task_id'];
+        
+        $tasks_labels_query = mysqli_query($l, "SELECT * FROM `task_labels` WHERE `task_id`='$task_id'");
+        $task_sorting_query = mysqli_query($l, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id'");
+
+        $data["tasks"][] = $row;
+
+        if (mysqli_num_rows($tasks_labels_query) > 0) {
+            while ($label_row = mysqli_fetch_assoc($tasks_labels_query)) {
+                $label_id = $label_row['label_id'];
+                $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$label_id'");
+
+                $data["task_labels"][] = $label_row;
+
+                if(mysqli_num_rows($labels_query) > 0){
+                  while($label = mysqli_fetch_assoc($labels_query)){
+                    $data["labels"][] = $label;
+                  }
+                }
+            }
+        }
+
+
+        if (mysqli_num_rows($task_sorting_query) > 0) {
+          while ($task_sorting_row = mysqli_fetch_assoc($task_sorting_query)) {
+              $data["task_sorting_row"][] = $task_sorting_row;
+          }
+      }
+    }
+  }
+  }
+}// Összes feladat listázása
 else{
     
   $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");

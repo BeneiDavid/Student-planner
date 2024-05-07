@@ -2,7 +2,7 @@
 // Új csoport létrehozása
 function createNewGroup(){
     hideAddMembersModal();
-
+    clearGroupDetailsModalContent();
 
     $('#groupModal').modal('show');
 }
@@ -18,8 +18,6 @@ function setMembersModalHeader(){
     var groupName = document.getElementById('groupName');
     var membersModalHeader = document.getElementById('membersModalHeader');
     membersModalHeader.textContent = "Tagok hozzáadása a \"" + groupName.value + "\" csoporthoz";
-
-
 }
 
 // Tagok hozzáadása modal megjelenítése
@@ -59,7 +57,7 @@ function addMembers(event){
         const newDiv = studentDiv.cloneNode(true);
         
         const svgImage = document.createElement('img');
-        svgImage.src = 'pictures/minus.svg'; // Replace 'your_svg_file.svg' with your SVG file path
+        svgImage.src = 'pictures/minus.svg'; 
         svgImage.classList.add('clickable');
         svgImage.addEventListener('click', removeStudentFromGroup, false);
      
@@ -79,7 +77,7 @@ function addMembers(event){
     hideAddMembersModal();
 }
 
-
+// Diák eltávolítása a csoportból
 function removeStudentFromGroup(){
     const parentDivId = this.parentNode.id;
     var membersDiv = document.getElementById('membersDiv');
@@ -153,6 +151,7 @@ function listNotAddedStudents(){
     });
 }
 
+// Keresés eredményének megjelenítése
 function showSearchResults(){
     const searchTerm = searchInput.value.toLowerCase();
     const studentDivs = Array.from(searchResults.getElementsByClassName('student-data'));
@@ -178,6 +177,7 @@ function showSearchResults(){
       }
 }
 
+// Csoport adatainak mentése
 function saveGroup(event){
     event.preventDefault();
     const groupName = document.getElementById('groupName');
@@ -201,30 +201,57 @@ function saveGroup(event){
             studentIds.push(div.id.split('_')[1]);
         });
         
-        $.ajax({
-            type: 'POST',
-            url: 'modals/group_details_modal.php', 
-            data: {
-                'groupAddData': groupAddData,
-                'groupName': groupName.value,
-                'studentIds': studentIds
-            },
-            credentials: 'same-origin',
-            success: function(response) {
-                console.log(response);
-                groupName.value  = "";
-                membersDiv.innerHTML = "";
-            },
-            error: function(xhr) {
-                console.error(xhr.responseText);
-            }
-        });
+        var groupEditId = document.getElementById('groupEditId');
+
+        if(groupEditId.value == ''){
+            $.ajax({
+                type: 'POST',
+                url: 'modals/group_details_modal.php', 
+                data: {
+                    'groupAddData': groupAddData,
+                    'groupName': groupName.value,
+                    'studentIds': studentIds
+                },
+                credentials: 'same-origin',
+                success: function(response) {
+                    console.log(response);
+                    groupName.value  = "";
+                    membersDiv.innerHTML = "";
+                    listGroups();
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+        else{
+            $.ajax({
+                type: 'POST',
+                url: 'queries/group_edit_query.php', 
+                data: {
+                    'groupAddData': groupAddData,
+                    'groupName': groupName.value,
+                    'studentIds': studentIds,
+                    'groupId': groupEditId.value
+                },
+                credentials: 'same-origin',
+                success: function(response) {
+                    console.log(response);
+                    groupName.value  = "";
+                    membersDiv.innerHTML = "";
+                    listGroups();
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
 
         $('#groupModal').modal('hide');
     }
 }
 
-
+// Csoportok listázása
 function listGroups(){
     $.ajax({
         type: 'POST',
@@ -256,6 +283,9 @@ function listGroups(){
                 tasksText.style.color = "green";
                 tasksDiv.appendChild(tasksImg);
                 tasksDiv.appendChild(tasksText);
+                tasksImg.addEventListener('click', showGroupTasks, false);
+                tasksText.addEventListener('click', showGroupTasks, false);
+
 
 
                 var messageDiv = document.createElement('div');
@@ -285,8 +315,8 @@ function listGroups(){
                 editText.style.color = "darkorange";
                 editDiv.appendChild(editImg);
                 editDiv.appendChild(editText);
-                editImg.addEventListener('click', editGroup, false);
-                editDiv.addEventListener('click', editGroup, false);
+                editText.addEventListener('click', editGroupClick, false);
+                editImg.addEventListener('click', editGroupClick, false);
 
                 var deleteDiv = document.createElement('div');
                 var deleteImg = document.createElement('img');
@@ -301,8 +331,8 @@ function listGroups(){
                 deleteText.style.color = "red";
                 deleteDiv.appendChild(deleteImg);
                 deleteDiv.appendChild(deleteText);
+                deleteText.addEventListener('click', showConfirmDeleteModal, false);
                 deleteImg.addEventListener('click', showConfirmDeleteModal, false);
-                deleteDiv.addEventListener('click', showConfirmDeleteModal, false);
 
 
                 containerDiv.appendChild(groupNameText);
@@ -321,14 +351,106 @@ function listGroups(){
     });
 }
 
+// Csoport feladatai megjelenítése
+function showGroupTasks(){
+    var groupsMainDiv = document.getElementById('groupsMainDiv');
+    groupsMainDiv.style.display = 'none';
 
+    var groupTasksDiv = document.getElementById('groupTasksDiv');
+    groupTasksDiv.style.display = 'block';
+
+    var groupDivElement = this.parentNode.parentNode;
+    var taskNameText = groupDivElement.firstElementChild.textContent;
+
+    var groupHeaderName = document.getElementById('groupHeaderName');
+    groupHeaderName.textContent = "A \"" + taskNameText + "\" csoport feladatai";
+    
+    var groupId = groupDivElement.id.split('_')[1];
+    $.ajax({
+        type: 'POST',
+        url: 'queries/group_session_query.php', 
+        data: {
+            'groupId': groupId
+        },
+        credentials: 'same-origin',
+        success: function(response) {         
+
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: 'task_query.php', 
+        dataType: "json",
+        data: {'groupId': groupId },
+        credentials: 'same-origin',
+        success: function(response) {
+            fillTaskTable(response, "teacher");
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+function refreshGroupTasks(){
+
+    var groupId = "";
+    
+    $.ajax({
+        type: 'POST',
+        url: 'task_query.php', 
+        dataType: "json",
+        data: {'groupId': groupId },
+        credentials: 'same-origin',
+        success: function(response) {
+            fillTaskTable(response, "teacher");
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+function backToGroups(){
+    var groupsMainDiv = document.getElementById('groupsMainDiv');
+    groupsMainDiv.style.display = 'block';
+
+    var groupTasksDiv = document.getElementById('groupTasksDiv');
+    groupTasksDiv.style.display = 'none';
+
+    var groupHeaderName = document.getElementById('groupHeaderName');
+    groupHeaderName.textContent = 'Csoportok';
+
+    $.ajax({
+        type: 'POST',
+        url: 'queries/group_session_query.php', 
+        data: {
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+
+}
+
+
+// Törlés megerősítése modal elrejtése
 function hideConfirmDeleteModal(){
     var groupDeleteConfirmModal = document.getElementById("groupDeleteConfirmModal");
     groupDeleteConfirmModal.style.display = "none";
 }
 
+// Törlés megerősítése modal megjelenítése
 function showConfirmDeleteModal(){
-    var groupDivElement = this.parentNode;
+    var groupDivElement = this.parentNode.parentNode;
     var taskNameText = groupDivElement.firstElementChild.textContent;
     var groupDeleteConfirmModal = document.getElementById("groupDeleteConfirmModal");
     var groupToDeleteSpan = document.getElementById("groupToDeleteSpan");
@@ -339,6 +461,7 @@ function showConfirmDeleteModal(){
     groupDeleteConfirmModal.style.display = "block";
 }
 
+// Csoport törlése
 function deleteGroup(event){
     event.preventDefault();
 
@@ -367,13 +490,83 @@ function deleteGroup(event){
     hideConfirmDeleteModal();
 }
 
-function editGroup(){
+// Csoport adatai modal kiürítése
+function clearGroupDetailsModalContent(){
+    var groupEditId = document.getElementById('groupEditId');
+    if(groupEditId.value != ''){
+        groupEditId.value = '';
+        var membersDiv = document.getElementById('membersDiv');
+        membersDiv.innerHTML = "";
+        var groupName = document.getElementById('groupName');
+        groupName.value = "";
+    }
+}
+
+// Csoport módosítása modal megjelenítése
+function editGroupClick(){
+
+    clearGroupDetailsModalContent();
+
+    var groupDivElement = this.parentNode.parentNode;
+    var taskNameText = groupDivElement.firstElementChild.textContent;
+    document.getElementById('groupName').value = taskNameText;
+    var groupId = groupDivElement.id.split('_')[1];
+    var groupEditId = document.getElementById('groupEditId');
+    groupEditId.value = groupId;
+
+    $.ajax({
+        type: 'POST',
+        url: 'queries/group_members_query.php', 
+        data: {
+            'groupId': groupId
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+            var membersDiv = document.getElementById('membersDiv');
+            var parsedData = JSON.parse(response);
+            var student_data = parsedData.student_data;
+            if(typeof student_data !== 'undefined'){
+
+           
+            for (var i = 0; i < student_data.length; i++) {
+
+                var student = student_data[i];
+
+                const newDiv = document.createElement('div');
+                var studentNameText = document.createElement('p');
+                var studentUserNameText = document.createElement('p');
+                var selectStudentCheckbox = document.createElement('input'); // Change to input for checkbox
+            
+                newDiv.id = "newDiv_" + student.user_id;
+                newDiv.classList.add("student-data");
+                studentNameText.textContent = student.full_name;
+                studentUserNameText.textContent = student.username;
+                selectStudentCheckbox.type = 'checkbox'; // Set input type to checkbox
+
+                const svgImage = document.createElement('img');
+                svgImage.src = 'pictures/minus.svg'; 
+                svgImage.classList.add('clickable');
+                svgImage.addEventListener('click', removeStudentFromGroup, false);
+
+                newDiv.appendChild(studentNameText);
+                newDiv.appendChild(studentUserNameText);
+                newDiv.appendChild(svgImage);
+            
+                membersDiv.appendChild(newDiv);
+            }
+        }
+
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
 
 
     $('#groupModal').modal('show');
 }
 
-
+// Oldal betöltésének funkciói
 function init(){
     listGroups();
 
@@ -387,11 +580,14 @@ function init(){
     document.getElementById('searchInput').addEventListener('input', showSearchResults ,false);
     document.getElementById('saveGroupButton').addEventListener('click', saveGroup, false);
     document.getElementById('confirmGroupDelete').addEventListener('click', deleteGroup, false);
+
+    document.getElementById('add-group-task-button').addEventListener('click', addTask, false);
+    document.getElementById('backToGroups').addEventListener('click', backToGroups, false);
 }
 
 window.addEventListener('load', init, false);
 
-
+// Modalból kikattintás kezelése
 window.onclick = function(event) {
     var addMembersModal = document.getElementById("addMembersModal");
     if (event.target == addMembersModal) {

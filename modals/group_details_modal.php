@@ -66,12 +66,12 @@ if (isset($_POST['groupAddData']))
                     <label for='groupname'>Csoport neve:</label> 
                     <input type='text' class='task-input task-name' id='groupName' name='groupname' maxlength="50">
                     <br><br>
+                      <!-- Itt lesznek a tagok adatai -->
                     <label for='members'>Tagok:</label>
-                    
                     <div name='members' id='membersDiv' class='members-div div-with-border'>
-                        <!-- Itt lesznek a tagok adatai -->
                     </div>
                     <br><br>
+                    <input type='hidden' id='groupEditId'>
                     <div class='new-task-item  clickable no-select new-member-button' id='addNewMember'>
                         <button class='add-task-button'>
                             <img class='add-task-icon' src='pictures/plus-square.svg' alt='Tag hozzáadása'>  Új tag hozzáadása

@@ -5,11 +5,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     require 'modals/add_members_modal.php';
     require 'modals/group_details_modal.php';
     require 'modals/group_delete_confirm_modal.php';
+    require 'task_details_modal.php';
+    require 'add_label_modal.php';
+    require 'new_label_modal.php';
+    require 'delete_task_modal.php';
+    echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
+    echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
+    echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';
+    echo '<script type="text/javascript"  src="javascript/add_label_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/teacher_groups.js"></script>';
 
+
     echo "<div id='deleteGroupModalDiv'></div>";
-    echo "<h1>Csoportok</h1><br><br>";
-    echo "<div class='container groups-main-div'>
+    echo "<h1 id='groupHeaderName'>Csoportok</h1><br><br>";
+    echo "<div id='groupsMainDiv' class='container groups-main-div'>
             <div class='div-with-border groups-div' id='groupsDiv'>
 
             <div class='no-created-groups-div'>Ön még nem hozott létre csoportokat. Csoportok létrehozásához kattintson a lenti gombra! </div>
@@ -22,7 +31,27 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                     <img class='add-task-icon' src='pictures/plus-square.svg' alt='Csoport létrehozása'>  Új csoport létrehozása
                 </button>
             </div>
-            </div>
+        </div>
+       
+        <div id='groupTasksDiv' class='no-display'>
+        <button class='btn btn-primary' id='backToGroups'>". htmlspecialchars('<-') ." Vissza a csoportokhoz</button>
+        <br><br>
+        <table class=' col selected-day-div center-horizontally' id='group_task_table'>
+        <tbody id='groupTasksBody' class='t_sortable'>
+            <tr>
+            <th colspan='1' class='progress-cell'>Feladatok</th>
+            </tr>
+            
+            <tr id='newGroupTaskRow' class='no-drag-drop'>
+            <td class='new-task-td'>
+            <button class='add-task-button' id='add-group-task-button'>
+                <img class='add-task-icon' src='pictures/plus-square.svg' alt='Feladat hozzáadása'>
+            </button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+        </div>
     ";
 }
 else{

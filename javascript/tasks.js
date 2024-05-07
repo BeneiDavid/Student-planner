@@ -480,6 +480,104 @@ function fillTaskTable(response, type){
                         
                 });
             }
+            else if(type == "teacher"){
+                var groupTasksBody = document.getElementById("groupTasksBody");
+             while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 2) {
+                groupTasksBody.removeChild(groupTasksBody.children[1]);
+            }
+
+            if(!hasData){
+                return;
+            }
+            var tasks = response.tasks;
+
+            tasks.sort(function (a, b) {
+                var startTimeComparison = a.start_time.localeCompare(b.start_time);
+            
+                if (startTimeComparison === 0) {
+                    return a.end_time.localeCompare(b.end_time);
+                }
+
+                return startTimeComparison;
+            });
+
+            var taskLabels = response.task_labels;
+            var labels = response.labels;
+            tasks.forEach(function(task) {
+                var taskId = task.task_id;
+                var taskTitle = task.title;
+                var row = document.createElement('tr');
+                var userTask = document.createElement('td');
+                var userTaskDiv = document.createElement('div');
+
+                var taskNameText = document.createElement('div');
+
+                taskNameText.classList.add('task-text-name');
+
+               // userTaskDiv.textContent = taskTitle;
+                userTaskDiv.classList.add("text-container");
+                userTask.classList.add("second-col");
+                userTask.classList.add("clickable");
+                userTask.classList.add("no-select");
+                userTask.classList.add("colored-section");
+                
+                userTask.style.setProperty('--before-bg-color', task.task_color);
+                userTask.id = "task-" + taskId;
+                userTask.addEventListener('click', taskClick, false);
+                taskNameText.textContent = taskTitle;
+                userTaskDiv.appendChild(taskNameText);
+                // Címkék kezelése
+                if (taskLabels && Array.isArray(taskLabels)) {
+                    
+                    for (var i = 0; i < taskLabels.length; i++) {
+                        // Access label properties
+                        if(taskLabels[i].task_id == task.task_id){
+                            for (var i = 0; i < labels.length; i++) {
+                            
+                                if(taskLabels[i].label_id == labels[i].label_id && taskLabels[i].task_id == task.task_id){
+                                    var newDiv = document.createElement('div');
+                                    var newP = document.createElement('p');
+                                    var newImg = document.createElement('img');
+                                    newP.textContent = labels[i].label_name;
+                                    newImg.src = labels[i].label_symbol;
+                                    newDiv.classList.add('ellipse');
+                                    newP.classList.add('preview-text');
+                                    newImg.classList.add('preview-image');
+                                    newDiv.classList.add('clickable');
+                                    newDiv.classList.add("no-select");
+                                    var rgb = hexToRgb(labels[i].label_color);
+    
+                                    var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
+                                    var textColor = getContrastColor(rgbString);
+                                    newP.style.color = textColor; 
+                                
+                                    if(textColor == 'white'){
+                                    newImg.style.filter = "invert(100%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)";
+                                    }
+
+                                    newDiv.style.backgroundColor = labels[i].label_color;
+                
+                                    if(labels[i].label_symbol != ""){
+                                    newImg.style.display = "inline-block";
+                                    }
+                                    
+                                    newDiv.appendChild(newP);
+                                    newDiv.appendChild(newImg);
+                
+                                    userTaskDiv.appendChild(newDiv);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                userTask.appendChild(userTaskDiv);
+                row.appendChild(userTask);
+                var newGroupTaskRow = document.getElementById("newGroupTaskRow");
+                var groupTasksBody = document.getElementById("groupTasksBody");
+                groupTasksBody.insertBefore(row, newGroupTaskRow);
+            });
+            }
             else{ // Type is not defined
                 return;
             }
