@@ -19,4 +19,6 @@ if (mysqli_num_rows($students_query) > 0) {
 
 echo json_encode($data);
 
+mysqli_close($l);
+
 ?>
