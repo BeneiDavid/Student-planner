@@ -120,6 +120,7 @@ function listUserLabels(fromLabelPopover){
     return new Promise((resolve, reject) => {  
         $.ajax({
         type: 'POST',
+        data: {'fromLabelPopover': fromLabelPopover}, 
         url: 'user_label_query.php',
         dataType: "json",
         credentials: 'same-origin',

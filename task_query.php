@@ -80,8 +80,6 @@ require_once 'user.php';
     $label_id = $_POST['labelId'];
 
 
-
-
     $task_labels_query =  mysqli_query($l, "SELECT * FROM `task_labels` WHERE `label_id`='$label_id'");
 
     if (mysqli_num_rows($task_labels_query) > 0) {
