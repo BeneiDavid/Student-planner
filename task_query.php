@@ -85,7 +85,7 @@ require_once 'user.php';
     if (mysqli_num_rows($task_labels_query) > 0) {
       while ($row = mysqli_fetch_assoc($task_labels_query)) {
         $task_id = $row['task_id'];
-        $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' AND `task_id`='$task_id'");
+        $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `task_id`='$task_id'");
 
         if(mysqli_num_rows($tasks_query) > 0){
           while($task = mysqli_fetch_assoc($tasks_query)){
@@ -95,18 +95,18 @@ require_once 'user.php';
           $data["tasks"][] = $task;
 
           if (mysqli_num_rows($tasks_labels_query) > 0) {
-              while ($label_row = mysqli_fetch_assoc($tasks_labels_query)) {
-                  $label_id = $label_row['label_id'];
-                  $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$label_id'");
+            while ($label_row = mysqli_fetch_assoc($tasks_labels_query)) {
+              $label_id = $label_row['label_id'];
+              $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$label_id'");
 
-                  $data["task_labels"][] = $label_row;
+              $data["task_labels"][] = $label_row;
 
-                  if(mysqli_num_rows($labels_query) > 0){
-                    while($label = mysqli_fetch_assoc($labels_query)){
-                      $data["labels"][] = $label;
-                    }
-                  }
+              if(mysqli_num_rows($labels_query) > 0){
+                while($label = mysqli_fetch_assoc($labels_query)){
+                  $data["labels"][] = $label;
+                }
               }
+            }
           }
         }
       }
