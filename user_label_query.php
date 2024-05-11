@@ -39,8 +39,7 @@ require_once 'user.php';
 
   if(isset($_POST['fromLabelPopover'])){
     $query_group_labels = $_POST['fromLabelPopover'];
-    if($query_group_labels){
-      
+    if($query_group_labels == "true"){
       $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
 
       $groups = [];

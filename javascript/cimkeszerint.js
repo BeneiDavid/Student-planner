@@ -33,6 +33,7 @@ function chooseLabel(divId){
     type: 'POST',
     url: 'task_query.php', 
     data: {'labelId': labelId},
+    dataType: "json",
     credentials: 'same-origin',
     success: function(response) {
       console.log("itten");
@@ -43,6 +44,7 @@ function chooseLabel(divId){
           labelsHeader.textContent = "A címkéhez nincs feladat rendelve";
         } 
         else{
+          console.log(divId);
           var labelName = document.getElementById(divId).textContent;
           labelsHeader.textContent = "A(z) \"" + labelName + "\" címkével megjelölt feladatok";
           fillTaskTable(response, "byLabel");
