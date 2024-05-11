@@ -1,5 +1,5 @@
 // Feladat beállítás modal
-function addTask(event, taskDetails) {
+async function addTask(event, taskDetails) {
     resetTask();
     hideAddLabelModal();
     hideNewLabelModal();
@@ -9,46 +9,109 @@ function addTask(event, taskDetails) {
     var deleteTaskButton = document.getElementById('deleteTask');
     // Egy már létező feladat adatai
     if (typeof taskDetails !== 'undefined' && taskDetails != "") {
-      var data = JSON.parse(taskDetails);
-      var task = data.task_details[0];
-      setTaskName(task.title);
-      setTaskColor(task.task_color);
-      setDescription(task.task_description);
-      setExistingDate(task.date);
-      console.log(task.date);
-      if(task.start_time_enabled == "1"){
-        setAndEnableStartTime(task.start_time);
-      }
-  
-      if(task.end_time_enabled == "1"){
-        setAndEnableEndTime(task.end_time);
-      }
+        var userId = await getCurrentUserId();
+        console.log(userId);
+        
 
-      fillAddedLabels(img, data.label_details);
-      existingTask.value = task.task_id;
-      deleteTaskButton.style.visibility = 'visible';
+        var data = JSON.parse(taskDetails);
+        var task = data.task_details[0];
+        setTaskName(task.title);
+        setTaskColor(task.task_color);
+        setDescription(task.task_description);
+        setExistingDate(task.date);
+        console.log(task.date);
+        if(task.start_time_enabled == "1"){
+            setAndEnableStartTime(task.start_time);
+        }
+    
+        if(task.end_time_enabled == "1"){
+            setAndEnableEndTime(task.end_time);
+        }
+        // A felhasználó által létrehozott feladat
+        if(data.task_details[0].user_id == userId){
+            fillAddedLabels(img, data.label_details);
+            existingTask.value = task.task_id;
+            deleteTaskButton.style.visibility = 'visible';
+            enableStartTime();
+            enableEndTime();
+            showCheckboxes();
+            enableFields();
+            showSaveButton();
+        }
+        // Csoportfeladat
+        else{ 
+            deleteTaskButton.style.visibility = 'hidden';
+            img = null;
+            fillAddedLabels(img, data.label_details);
+            disableFields();
+            hideCheckboxes();
+            hideSaveButton();
+        }
+       
 
     }
     else{ // Új feladat adatai
-      setTaskColor("#0000FF");
-      setDate();
-      fillAddedLabels(img);
-      existingTask.value = -1; 
-      deleteTaskButton.style.visibility = 'hidden';
+        setTaskColor("#0000FF");
+        setDate();
+        fillAddedLabels(img);
+        existingTask.value = -1; 
+        deleteTaskButton.style.visibility = 'hidden';
+        enableStartTime();
+        enableEndTime();
+        showCheckboxes();
+        enableFields();
+        showSaveButton();
     }
 
     
     
-    enableStartTime();
-    enableEndTime();
+    
     
     $('#taskModal').modal('show');
 }
 
+// Módosítható mezők letiltása
+function disableFields(){
+    document.getElementById('taskname').disabled = true;
+    document.getElementById('colorpicker').disabled = true;
+    document.getElementById('date').disabled = true;
+    document.getElementById('startTime').disabled = true;
+    document.getElementById('endTime').disabled = true;
+    document.getElementById('taskDescription').disabled = true;
+} 
+
+// Módosítható mezők engedélyezése 
+function enableFields(){
+    document.getElementById('taskname').disabled = false;
+    document.getElementById('colorpicker').disabled = false;
+    document.getElementById('date').disabled = false;
+    document.getElementById('taskDescription').disabled = false;
+} 
+
+// Checkboxok elrejtése
+function hideCheckboxes(){
+    document.getElementById('enableStartTime').style.display = "none";
+    document.getElementById('enableEndTime').style.display = "none";
+}
+
+// Checkboxok megjelenítése
+function showCheckboxes(){
+    document.getElementById('enableStartTime').style.display = "inline-block";
+    document.getElementById('enableEndTime').style.display = "inline-block";
+}
+
+// Mentés gomb elrejtése
+function hideSaveButton(){
+    document.getElementById('saveTaskButton').style.display = "none";
+}
+
+// Mentés gomb megjelenítése
+function showSaveButton(){
+    document.getElementById('saveTaskButton').style.display = "inline-block";
+}
+
 // Címkék hozzádása feltöltése az új feladathoz
 function fillAddedLabels(img){
-
-  
     var added_labels = document.getElementById("added_labels");
     added_labels.appendChild(img);
 }
@@ -96,8 +159,10 @@ function fillAddedLabels(img, labels){
         });
     }
 
+    if(img){
+        added_labels.appendChild(img);
+    }
     
-    added_labels.appendChild(img);
 }
 
 function setExistingDate(date){

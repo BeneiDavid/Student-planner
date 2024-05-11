@@ -24,7 +24,26 @@ require_once 'user.php';
   // Lekérdezés dátum alapján
   if(isset($_POST['date'])){
     $date = $_POST['date'];
-    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' AND `date`='$date'");
+
+    
+    $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
+
+    $groups = [];
+    while ($group = mysqli_fetch_assoc($groups_query)) {
+      $groups[] = $group;
+    }
+    $group_task_ids = [];
+    foreach ($groups as $group) {
+      $group_id = $group['group_id'];
+      $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+
+      while ($group_task = mysqli_fetch_assoc($groups_tasks_query)) {
+        $group_task_ids[] = $group_task['task_id'];
+      }
+    }
+
+
+    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date') OR (`task_id` IN (" . implode(',', $group_task_ids) . ") AND `date`='$date')");
 
     if (!$tasks_query) {
       http_response_code(500); 
@@ -59,6 +78,10 @@ require_once 'user.php';
   } // Lekérdezés címke alapján
   else if(isset($_POST['labelId'])){
     $label_id = $_POST['labelId'];
+
+
+
+
     $task_labels_query =  mysqli_query($l, "SELECT * FROM `task_labels` WHERE `label_id`='$label_id'");
 
     if (mysqli_num_rows($task_labels_query) > 0) {
@@ -148,8 +171,24 @@ else if(isset($_POST['groupId'])){
   }
 }// Összes feladat listázása
 else{
+
+  $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
+
+  $groups = [];
+  while ($group = mysqli_fetch_assoc($groups_query)) {
+    $groups[] = $group;
+  }
+  $group_task_ids = [];
+  foreach ($groups as $group) {
+    $group_id = $group['group_id'];
+    $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+
+    while ($group_task = mysqli_fetch_assoc($groups_tasks_query)) {
+      $group_task_ids[] = $group_task['task_id'];
+    }
+  }
     
-  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
+  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' OR (`task_id` IN (" . implode(',', $group_task_ids) . "))");
 
   if (!$tasks_query) {
     http_response_code(500); 
@@ -162,7 +201,7 @@ else{
         $task_id = $row['task_id'];
         
         $tasks_labels_query = mysqli_query($l, "SELECT * FROM `task_labels` WHERE `task_id`='$task_id'");
-        $task_sorting_query = mysqli_query($l, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id'");
+        $task_sorting_query = mysqli_query($l, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id' AND `user_id`='$user_id'");
 
         $data["tasks"][] = $row;
 

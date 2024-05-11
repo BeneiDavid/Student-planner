@@ -61,3 +61,23 @@ pathElement.setAttribute('fill', color);
 svgElement.appendChild(pathElement)
 return svgElement;
 }
+
+
+async function getCurrentUserId(){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: 'POST',
+      url: 'queries/current_user_query.php', 
+      data: {},
+      credentials: 'same-origin',
+      success: function(response) {
+          console.log(response); 
+          resolve(response);
+      },
+      error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+          reject("");
+      }
+    });
+});
+}

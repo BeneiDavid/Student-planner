@@ -23,21 +23,21 @@ require_once 'user.php';
   $task_id = $_POST['taskId'];
   $table_id = $_POST['tableId'];
 
-  $tasks_query = mysqli_query($l, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id'");
+  $tasks_query = mysqli_query($l, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id' AND `user_id` = '$user_id'");
 
   if($tasks_query){
     if (mysqli_num_rows($tasks_query) > 0) {
         if($table_id == "to_do_table") {
-            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='to_do' WHERE `task_id`='$task_id'"); 
+            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='to_do' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else if($table_id == "in_progress_table") {
-            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='in_progress' WHERE `task_id`='$task_id'"); 
+            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='in_progress' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else if($table_id == "done_table") {
-            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='done' WHERE `task_id`='$task_id'"); 
+            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='done' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else{
-            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='' WHERE `task_id`='$task_id'");
+            mysqli_query($l, "UPDATE `task_sorting` SET `by_progress`='' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'");
         }
     }
     else{
@@ -46,7 +46,8 @@ require_once 'user.php';
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='to_do',
-        `eisenhover`=''
+        `eisenhover`='',
+        `user_id` = '$user_id'
         ");
         }
         else if($table_id == "in_progress_table") {
@@ -54,7 +55,8 @@ require_once 'user.php';
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='in_progress',
-        `eisenhover`=''
+        `eisenhover`='',
+        `user_id` = '$user_id'
         ");
         }
         else if($table_id == "done_table") {
@@ -62,7 +64,8 @@ require_once 'user.php';
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='done',
-        `eisenhover`=''
+        `eisenhover`='',
+        `user_id` = '$user_id'
         ");
         }
         else{
@@ -70,7 +73,8 @@ require_once 'user.php';
             `task_sort_id`=NULL,
             `task_id`='".$task_id."',
             `by_progress`='',
-            `eisenhover`=''
+            `eisenhover`='',
+            `user_id` = '$user_id'
             ");
         }
     }
