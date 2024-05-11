@@ -1,7 +1,8 @@
 var getModalContent = async function() {
   var labelPopoverContentDiv = document.getElementById("labelPopoverContentDiv");
   labelPopoverContentDiv.innerHTML = "";
-  await listUserLabels(true);
+  var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
+  await listUserLabels(true, showGroups);
   
   return $('#labelPopoverContentDiv').html();
 };
@@ -36,8 +37,7 @@ function chooseLabel(divId){
     dataType: "json",
     credentials: 'same-origin',
     success: function(response) {
-      console.log("itten");
-        console.log(response);
+        console.log("here");
         var labelsHeader = document.getElementById('labelsHeader');
         if(response.length == 0){
           removeTasks();
@@ -45,8 +45,9 @@ function chooseLabel(divId){
         } 
         else{
           console.log(divId);
-          var labelName = document.getElementById(divId).textContent;
-          labelsHeader.textContent = "A(z) \"" + labelName + "\" címkével megjelölt feladatok";
+          var labelName = document.getElementById(divId);
+          console.log(labelName);
+          labelsHeader.textContent = "A(z) \"" + labelName.textContent + "\" címkével megjelölt feladatok";
           fillTaskTable(response, "byLabel");
         }
 
@@ -95,10 +96,12 @@ function chooseLabel(divId){
 
   async function getFirstLabel(){
     return new Promise((resolve, reject) => {
+      var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
+
         $.ajax({
           type: 'POST',
           url: 'first_label_query.php', 
-          data: {},
+          data: {'showGroups': showGroups},
           credentials: 'same-origin',
           dataType: 'text',
           success: function(response) {
@@ -113,11 +116,13 @@ function chooseLabel(divId){
   }
 
   async function labelExists(id){
+    var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
+
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'POST',
         url: 'label_exists_query.php', 
-        data: {'labelId': id},
+        data: {'labelId': id, 'showGroups': showGroups},
         credentials: 'same-origin',
         dataType: 'text',
         success: function(response) {
@@ -134,25 +139,35 @@ function chooseLabel(divId){
 
   async function refreshSortByLabelTasks(){
     var chosenLabelId = document.getElementById('chosenLabelId');
+    console.log("First" + chosenLabelId.value);
     // Check if there are still labels
     var labelId = await getFirstLabel();
+    
     if(labelId != '' && chosenLabelId.value == ''){
       chosenLabelId.value = "div_" + labelId;
+      console.log("A" + labelId);
+      console.log(chosenLabelId.value);
     }
-    else if(labelId == ''){
+
+    if(labelId == ''){
       chosenLabelId.value = '';
+      console.log("B" + labelId);
+      console.log(chosenLabelId.value);
     }
 
-    if(await labelExists(chosenLabelId.value.split("_")[1]) == "false"){
+    else if(await labelExists(chosenLabelId.value.split("_")[1]) == "false"){
       labelId = await getFirstLabel();
+      console.log("C" +labelId);
       chosenLabelId.value = "div_" + labelId;
+      console.log(chosenLabelId.value);
     }
 
-    if(chosenLabelId.value == ''){
+    if(labelId == ''){
       var emptyLabel = document.createElement('div');
       emptyLabel.classList.add("ellipse");
       emptyLabel.classList.add("clickable");
       emptyLabel.classList.add("emptylabel");
+      emptyLabel.id = "emptyLabel";
       var selectedLabel = document.getElementById('chooseLabel');
       selectedLabel.innerHTML = "";
       selectedLabel.appendChild(emptyLabel);
@@ -162,7 +177,19 @@ function chooseLabel(divId){
     }
     else{
       if(chosenLabelId != ''){
-        chooseLabel(chosenLabelId.value);
+        console.log("aasd");
+        console.log(chosenLabelId);
+        console.log(labelId);
+        document.getElementById('')
+
+        var selectedLabel = document.getElementById('chooseLabel');
+        if(selectedLabel.firstChild.id == 'emptyLabel'){
+          initializeLabels();
+        }
+        else{
+          chooseLabel(chosenLabelId.value);
+        }
+        
       }
     } 
 
@@ -193,25 +220,32 @@ function chooseLabel(divId){
   } 
 
 async function initializeLabels(){
-  await listUserLabels(true);
+  var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
+  await listUserLabels(true, showGroups);
   
   loadFirstLabel();
 }
 
+function showGroupLabelsCheckboxChanged(){
+  refreshSortByLabelTasks();
 
-  function init(){
-    document.getElementById('chooseLabel').addEventListener('click', onChooseLabelClick, false);
-    document.getElementById('sortByLabel_xButton').addEventListener('click', closeSortByLabelModal, false);
-    initializeLabels();
+}
 
+
+function init(){
+  document.getElementById('chooseLabel').addEventListener('click', onChooseLabelClick, false);
+  document.getElementById('sortByLabel_xButton').addEventListener('click', closeSortByLabelModal, false);
+  document.getElementById('showGroupLabelsCheckbox').addEventListener('change', showGroupLabelsCheckboxChanged ,false);
+  initializeLabels();
+
+}
+
+
+window.onclick = function(event) {
+  var sortByLabelModal = document.getElementById("sortByLabelModal");
+  if (event.target == sortByLabelModal) {
+    sortByLabelModal.style.display = "none";
   }
+}
 
-
-  window.onclick = function(event) {
-    var sortByLabelModal = document.getElementById("sortByLabelModal");
-    if (event.target == sortByLabelModal) {
-      sortByLabelModal.style.display = "none";
-    }
-  }
-
-  window.addEventListener('load', init, false);
+window.addEventListener('load', init, false);

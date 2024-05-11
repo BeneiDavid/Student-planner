@@ -18,7 +18,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     <br><br>
     <div class='center-div'>
     <div id='labelBox'><h4 class='preview-label'>Válassza ki a címkét:</h4>
-    <div id='chooseLabel' class='inline-block'><div class='ellipse clickable emptylabel'></div></div>
+    <div id='chooseLabel' class='inline-block'><div class='ellipse clickable emptylabel' id='emptyLabel'></div></div>
   </div>
 
     <!-- Hidden content for popover -->
@@ -31,6 +31,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     <input type='hidden' id='chosenLabelId' value=''></input>
     <br><br>
     <div id='sortByLabelDiv' class='col selected-day-div'>
+
+    <input type='checkbox' id='showGroupLabelsCheckbox' class='show-group-labels-checkbox' name='showGroupLabelsCheckbox'>
+    <label for='showGroupLabelsCheckbox'>Csoporfeladatok címkéinek megjelenítése</label>
+    
         <table>
             <thead>
                 <tr>
@@ -50,6 +54,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </table>
     </div>
     </div>
+    
     ";
 }
 else{
