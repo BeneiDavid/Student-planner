@@ -111,6 +111,10 @@ require_once 'user.php';
         }
       }
     }
+
+  
+
+
   }
 } // Csoport feladatainak listázása - tanár
 else if(isset($_POST['groupId'])){
