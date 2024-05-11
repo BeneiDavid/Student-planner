@@ -108,19 +108,19 @@ function addLabelModalClick(){
     var modalDiv = document.getElementById("modal_div");
     var addLabelModal = document.getElementById("addLabelModal");
     clearLabelModalLabels();
-    listUserLabels(false);
+    listUserLabels(false, false);
     
     modalDiv.appendChild(addLabelModal);
     addLabelModal.style.display = "block";
 }
 
 // Felhasználó címkéinek listázása
-function listUserLabels(fromLabelPopover){
+function listUserLabels(fromLabelPopover, showGroups){
 
     return new Promise((resolve, reject) => {  
         $.ajax({
         type: 'POST',
-        data: {'fromLabelPopover': fromLabelPopover}, 
+        data: {'showGroups': showGroups}, 
         url: 'user_label_query.php',
         dataType: "json",
         credentials: 'same-origin',

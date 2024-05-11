@@ -35,7 +35,9 @@
             // Access the label_id column from the fetched data
             $first_label_id = $first_label_data['label_id'];
         }
-        else{
+        else if(isset($_POST['showGroups'])){
+
+          if($_POST['showGroups'] == "true"){
           $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
     
           $groups = [];
@@ -75,6 +77,7 @@
             }
           }
         }
+      }
     }
 
 

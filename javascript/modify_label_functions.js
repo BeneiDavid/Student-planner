@@ -38,7 +38,7 @@ function saveLabelSetting(event){
               console.log(response); 
               
               clearLabelModalLabels();
-              listUserLabels(false);
+              listUserLabels(false, false);
               hideLabelNameError();
               hideNewLabelModal();
               resetNewLabelModal();
@@ -69,7 +69,7 @@ function saveLabelSetting(event){
           success: function(response) {
               console.log(response); 
               clearLabelModalLabels();
-              listUserLabels(false);
+              listUserLabels(false, false);
               hideLabelNameError();
               hideNewLabelModal();
               resetNewLabelModal();
