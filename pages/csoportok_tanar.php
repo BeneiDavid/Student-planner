@@ -2,6 +2,15 @@
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
+
+    require_once 'user.php';
+    session_start();
+    $user = unserialize($_SESSION['user']);
+    $user_type = $user->getUserType();
+    if($user_type != 'teacher'){
+        header("Location: index.php?page=kezdolap");
+    }
+
     require 'modals/add_members_modal.php';
     require 'modals/group_details_modal.php';
     require 'modals/group_delete_confirm_modal.php';
