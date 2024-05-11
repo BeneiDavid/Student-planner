@@ -199,11 +199,17 @@ clearTaskName();
 clearTimeFields();
 clearDescription();
 uncheckTimeCheckboxes();
+clearDate();
+}
+
+function clearDate(){
+    var date = document.getElementById('date');
+    date.value = "";
 }
 
 // Kezdési idő input enabled
 function enableStartTime(){
-    startCheckbox = document.getElementById('enableStartTime');
+    var startCheckbox = document.getElementById('enableStartTime');
     const startTimeInput = document.getElementById("startTime");
     if(startCheckbox.checked){
       startTimeInput.disabled = false;
