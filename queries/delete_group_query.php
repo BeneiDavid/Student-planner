@@ -28,7 +28,6 @@ foreach ($deleted_tasks as $task) {
 
 }
 
-$task_labels_query = mysqli_query($l, "DELETE FROM `task_labels` WHERE `group_id`='$group_id'");
 
 echo "success";
 

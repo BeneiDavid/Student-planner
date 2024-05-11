@@ -19,13 +19,7 @@ $(document).ready(function(){
     
 });
   
-
-
-
-
-
   document.addEventListener('DOMContentLoaded', function() {
-    // Your code here
 });
 
 
