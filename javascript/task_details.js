@@ -28,7 +28,7 @@ async function addTask(event, taskDetails) {
             setAndEnableEndTime(task.end_time);
         }
         // A felhasználó által létrehozott feladat
-        if(data.task_details[0].user_id == userId){
+        if(task.user_id == userId){
             fillAddedLabels(img, data.label_details);
             existingTask.value = task.task_id;
             deleteTaskButton.style.visibility = 'visible';
@@ -36,6 +36,7 @@ async function addTask(event, taskDetails) {
             enableEndTime();
             showCheckboxes();
             enableFields();
+           
             showSaveButton();
         }
         // Csoportfeladat
@@ -44,6 +45,8 @@ async function addTask(event, taskDetails) {
             img = null;
             fillAddedLabels(img, data.label_details);
             disableFields();
+            var groupName = await getTaskGroupName(task.task_id);
+            setGroupName(groupName);
             hideCheckboxes();
             hideSaveButton();
         }
@@ -194,12 +197,24 @@ var taskname = document.getElementById('taskname');
 taskname.value = text;
 }
 
+function clearGroupName(){
+    var groupNameSpan = document.getElementById('groupNameSpan');
+    groupNameSpan.textContent = "";
+}
+
+function setGroupName(groupName){
+    var groupNameSpan = document.getElementById('groupNameSpan');
+    groupNameSpan.textContent = " - Csoport: " + groupName;
+}
+    
+
 function resetTask(){
 clearTaskName();
 clearTimeFields();
 clearDescription();
 uncheckTimeCheckboxes();
 clearDate();
+clearGroupName();
 }
 
 function clearDate(){
@@ -672,7 +687,7 @@ function init(){
         if(document.getElementById('eisenhoverBody')){
             refreshEisenhoverTasks();
         }
-        if(document.getElementById('groupTasksBody')){
+        if(document.getElementById('groupTasksBody') && document.getElementById('createNewGroup')){
             refreshGroupTasks();
         }
        

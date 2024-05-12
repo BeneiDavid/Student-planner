@@ -103,7 +103,7 @@ if (isset($_POST['taskAddData']))
       
             <!-- Modal Header -->
             <div class='modal-header'>
-              <h4 class='modal-title'>Feladat adatai</h4>
+              <h4 class='modal-title'>Feladat adatai<span id='groupNameSpan'></span></h4>
               <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
             </div>
       

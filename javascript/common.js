@@ -81,3 +81,22 @@ async function getCurrentUserId(){
     });
 });
 }
+
+async function getTaskGroupName(taskId){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: 'POST',
+      url: 'queries/task_group_name_query.php', 
+      data: {'taskId': taskId},
+      credentials: 'same-origin',
+      success: function(response) {
+          console.log(response); 
+          resolve(response);
+      },
+      error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+          reject("");
+      }
+    });
+});
+}
