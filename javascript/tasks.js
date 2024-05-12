@@ -482,9 +482,17 @@ function fillTaskTable(response, type){
             }
             else if(type == "teacher"){
                 var groupTasksBody = document.getElementById("groupTasksBody");
-             while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 2) {
-                groupTasksBody.removeChild(groupTasksBody.children[1]);
-            }
+
+                if(document.getElementById('createNewGroup')){
+                    while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 2) {
+                        groupTasksBody.removeChild(groupTasksBody.children[1]);
+                    }
+                }
+                else{
+                    while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 1) {
+                        groupTasksBody.removeChild(groupTasksBody.children[1]);
+                    }
+                }
 
             if(!hasData){
                 return;

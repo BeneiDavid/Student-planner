@@ -87,7 +87,48 @@ function listGroups(){
 }
 
 function showGroupTasks(){
+    var groupsMainDiv = document.getElementById('groupsMainDiv');
+    groupsMainDiv.style.display = 'none';
 
+    var groupTasksDiv = document.getElementById('groupTasksDiv');
+    groupTasksDiv.style.display = 'block';
+
+    var groupDivElement = this.parentNode.parentNode;
+    var taskNameText = groupDivElement.firstElementChild.textContent;
+
+    var groupHeaderName = document.getElementById('groupHeaderName');
+    groupHeaderName.textContent = "A \"" + taskNameText + "\" csoport feladatai";
+    
+    var groupId = groupDivElement.id.split('_')[1];
+    $.ajax({
+        type: 'POST',
+        url: 'queries/group_session_query.php', 
+        data: {
+            'groupId': groupId
+        },
+        credentials: 'same-origin',
+        success: function(response) {         
+
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+console.log(groupId);
+    $.ajax({
+        type: 'POST',
+        url: 'task_query.php', 
+        dataType: "json",
+        data: {'groupId': groupId},
+        credentials: 'same-origin',
+        success: function(response) {
+            console.log(response);
+            fillTaskTable(response, "teacher");
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
 }
 
 function showConfirmQuitModal(){
@@ -108,7 +149,7 @@ function hideConfirmQuitModal(){
 }
 
 
-function quitGroup(){
+function quitGroup(event){
     event.preventDefault();
 
     var groupQuitId = document.getElementById("groupQuitId");
@@ -136,6 +177,32 @@ function quitGroup(){
     hideConfirmQuitModal();
 }
 
+
+function backToGroups(){
+    var groupsMainDiv = document.getElementById('groupsMainDiv');
+    groupsMainDiv.style.display = 'block';
+
+    var groupTasksDiv = document.getElementById('groupTasksDiv');
+    groupTasksDiv.style.display = 'none';
+
+    var groupHeaderName = document.getElementById('groupHeaderName');
+    groupHeaderName.textContent = 'Csoportok';
+
+    $.ajax({
+        type: 'POST',
+        url: 'queries/group_session_query.php', 
+        data: {
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+
+}
 
 function init(){
     listGroups();
