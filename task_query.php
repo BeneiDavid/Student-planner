@@ -180,8 +180,6 @@ else if(isset($_POST['groupId'])){
   }
 }// Összes feladat listázása
 else{
-
-  
   $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
   if ($groups_query) {
   $groups = [];
@@ -205,8 +203,6 @@ if (!empty($group_task_ids)) {
 else{
   $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
 }
-
-
 
   if (!$tasks_query) {
     http_response_code(500); 
