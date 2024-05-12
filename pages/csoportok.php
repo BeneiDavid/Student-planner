@@ -9,11 +9,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         header("Location: index.php?page=kezdolap");
     exit;
     }
-    
+    require 'modals/quit_group_confirm_modal.php';
+    echo '<script type="text/javascript"  src="javascript/groups.js"></script>';
 
     echo "<h1 id='groupHeaderName'>Csoportok</h1><br><br>";
     echo "<div id='groupsMainDiv' class='container groups-main-div'>
-            <div class='div-with-border groups-div' id='groupsDiv'>
+            <div class='div-with-border student-groups-div' id='groupsDiv'>
 
             <div class='no-created-groups-div'>Ön még nem nincs benne egy csoportban sem.</div>
         

@@ -5,9 +5,9 @@
     <span class="custom-close" id='groupDelete_xButton'>&times;</span>
     <h3>Csoport törlése</h3>
     <form method='post' id="deleteTaskForm">
-        <p>Biztosan törli a <span id='groupToDeleteSpan'></span> csoportot?</p>
+        <p>Biztosan törli a(z) <span id='groupToDeleteSpan'></span> csoportot?</p>
     <input type='hidden' id='groupToDeleteId'>
-    <input type='submit' name='labels_save_button' value='Törlés' class='btn btn-danger' id='confirmGroupDelete'>
+    <input type='submit' name='labels_save_button' value='Törlés' class='btn btn-danger' id='confirmGroupQuit'>
     <button type='button' class='btn btn-primary' id='groupDelete_cancelButton'>Mégsem</button>
 
     </form>
