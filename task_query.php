@@ -32,6 +32,7 @@ require_once 'user.php';
     while ($group = mysqli_fetch_assoc($groups_query)) {
       $groups[] = $group;
     }
+
     $group_task_ids = [];
     foreach ($groups as $group) {
       $group_id = $group['group_id'];
@@ -42,9 +43,15 @@ require_once 'user.php';
       }
     }
 
-
+if (!empty($group_task_ids)) {
     $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date') OR (`task_id` IN (" . implode(',', $group_task_ids) . ") AND `date`='$date')");
+}
+else{
+  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date')");
+}
+    
 
+  
     if (!$tasks_query) {
       http_response_code(500); 
       echo json_encode(array('error' => 'Database query failed'));
@@ -174,8 +181,9 @@ else if(isset($_POST['groupId'])){
 }// Összes feladat listázása
 else{
 
+  
   $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
-
+  if ($groups_query) {
   $groups = [];
   while ($group = mysqli_fetch_assoc($groups_query)) {
     $groups[] = $group;
@@ -189,8 +197,16 @@ else{
       $group_task_ids[] = $group_task['task_id'];
     }
   }
+}
     
+if (!empty($group_task_ids)) {
   $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' OR (`task_id` IN (" . implode(',', $group_task_ids) . "))");
+}
+else{
+  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
+}
+
+
 
   if (!$tasks_query) {
     http_response_code(500); 
