@@ -45,51 +45,36 @@ function listGroups(){
                 messageImg.style.width = "20px";
                 messageImg.style.height = "20px";
                 messageImg.classList.add('clickable');
-                messageImg.title = "Üzenet írása";
-                messageText.textContent = "Üzenet írása";
+                messageImg.title = "Üzenet írása az oktatónak";
+                messageText.textContent = "Üzenet írása az oktatónak";
                 messageText.classList.add('clickable');
                 messageText.style.color = "blue";
                 messageDiv.appendChild(messageImg);
                 messageDiv.appendChild(messageText);
 
-                var editDiv = document.createElement('div');
-                var editImg = document.createElement('img');
-                var editText = document.createElement('p');
-                editImg.src = 'pictures/edit.svg';
-                editImg.style.width = "20px";
-                editImg.style.height = "20px";
-                editImg.classList.add('clickable');
-                editImg.title = "Csoport szerkesztése";
-                editText.textContent = "Csoport szerkesztése";
-                editText.classList.add('clickable');
-                editText.style.color = "darkorange";
-                editDiv.appendChild(editImg);
-                editDiv.appendChild(editText);
-                editText.addEventListener('click', editGroupClick, false);
-                editImg.addEventListener('click', editGroupClick, false);
 
-                var deleteDiv = document.createElement('div');
-                var deleteImg = document.createElement('img');
-                var deleteText = document.createElement('p');
-                deleteImg.src = 'pictures/delete.svg';
-                deleteImg.style.width = "20px";
-                deleteImg.style.height = "20px";
-                deleteImg.classList.add('clickable');
-                deleteImg.title = "Csoport törlése";
-                deleteText.textContent = "Csoport törlése";
-                deleteText.classList.add('clickable');
-                deleteText.style.color = "red";
-                deleteDiv.appendChild(deleteImg);
-                deleteDiv.appendChild(deleteText);
-                deleteText.addEventListener('click', showConfirmDeleteModal, false);
-                deleteImg.addEventListener('click', showConfirmDeleteModal, false);
+
+                var quitGroupDiv = document.createElement('div');
+                var quitGroupImg = document.createElement('img');
+                var quitGroupText = document.createElement('p');
+                quitGroupImg.src = 'pictures/quit.svg';
+                quitGroupImg.style.width = "20px";
+                quitGroupImg.style.height = "20px";
+                quitGroupImg.classList.add('clickable');
+                quitGroupImg.title = "Kilépés a csoportból";
+                quitGroupText.textContent = "Kilépés a csoportból";
+                quitGroupText.classList.add('clickable');
+                quitGroupText.style.color = "red";
+                quitGroupDiv.appendChild(quitGroupImg);
+                quitGroupDiv.appendChild(quitGroupText);
+                quitGroupText.addEventListener('click', showConfirmQuitModal, false);
+                quitGroupImg.addEventListener('click', showConfirmQuitModal, false);
 
 
                 containerDiv.appendChild(groupNameText);
                 containerDiv.appendChild(tasksDiv);
                 containerDiv.appendChild(messageDiv);
-                containerDiv.appendChild(editDiv);
-                containerDiv.appendChild(deleteDiv);
+                containerDiv.appendChild(quitGroupDiv);
 
                 
                 groupsDiv.appendChild(containerDiv);
@@ -101,14 +86,72 @@ function listGroups(){
     });
 }
 
+function showGroupTasks(){
+
+}
+
+function showConfirmQuitModal(){
+    var groupDivElement = this.parentNode.parentNode;
+    var taskNameText = groupDivElement.firstElementChild.textContent;
+    var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
+    var groupQuitSpan = document.getElementById("groupQuitSpan");
+    var groupQuitId = document.getElementById("groupQuitId");
+
+    groupQuitId.value = groupDivElement.id;
+    groupQuitSpan.textContent = taskNameText;
+    groupQuitConfirmModal.style.display = "block";
+}
+
+function hideConfirmQuitModal(){
+    var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
+    groupQuitConfirmModal.style.display = "none";
+}
 
 
+function quitGroup(){
+    event.preventDefault();
+
+    var groupQuitId = document.getElementById("groupQuitId");
+    var groupId = groupQuitId.value.split('_')[1];
+    var groupsDiv = document.getElementById("groupsDiv");
+   
+
+    $.ajax({
+        type: 'POST',
+        url: 'queries/quit_group_query.php', 
+        data: {
+            'groupId': groupId
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+            console.log(response);
+            var divToDelete = document.getElementById(groupQuitId.value);
+            groupsDiv.removeChild(divToDelete);
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+    
+    hideConfirmQuitModal();
+}
 
 
 function init(){
     listGroups();
+    document.getElementById('groupQuit_cancelButton').addEventListener('click', hideConfirmQuitModal, false);
+    document.getElementById('groupQuit_xButton').addEventListener('click', hideConfirmQuitModal, false);
+    document.getElementById('confirmGroupQuit').addEventListener('click', quitGroup, false);
+
 
     document.getElementById('backToGroups').addEventListener('click', backToGroups, false);
 }
 
 window.addEventListener('load', init, false);
+
+window.onclick = function(event) {
+    var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
+    if (event.target == groupQuitConfirmModal) {
+        groupQuitConfirmModal.style.display = "none";
+    }
+}

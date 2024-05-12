@@ -722,7 +722,8 @@ background-color: white;
   padding-right: 50px;
   width: 20.00%;
   font-weight: bold;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: break-word;
   vertical-align: top;
 }
 
@@ -802,13 +803,13 @@ background-color: white;
 
 .student-header-div p{
   display: inline-block; /* Use inline-block to display columns */
-  width: 45.00%; /* Each column takes up one-third of the space */
+  width: 45.00%; 
   font-weight: bold;
 }
 
 .student-data p{
   display: inline-block; /* Use inline-block to display columns */
-  width: 45.00%; /* Each column takes up one-third of the space */
+  width: 45.00%; 
   vertical-align: top; /* Align columns to the top */
   margin-top: 12px;
 }
@@ -850,3 +851,63 @@ background-color: white;
 .show-group-labels-checkbox{
   margin-bottom: 50px;
 }
+
+
+/* Student group page START */
+
+.student-groups-div{
+  max-width: 1400px;
+}
+
+.student-groups-div > div{
+  border: 2px solid black;
+background-color: white;
+}
+
+.student-groups-div > div > p{
+  display: inline-block;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 20.00%;
+  font-weight: bold;
+  word-break: normal;
+  overflow-wrap: break-word;
+  vertical-align: top;
+}
+
+.student-groups-div > div > div > img{
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.student-groups-div > div > div > p{
+  display: inline-block;
+  word-break: break-all;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+.student-groups-div > div > div{
+  display: inline-block;
+  margin: 12px 0 5px 0;
+  width: 26.6%;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .student-groups-div > div > div > p {
+    text-indent: -9999px;
+  }
+  .student-groups-div > div > div{
+    width: 15.00%;
+  }
+
+  .student-groups-div > div > p{
+    width: 55.00%;
+  }
+}
+
+
+/* Student group page END */

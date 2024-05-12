@@ -15,8 +15,7 @@ $group_id = $_POST['groupId'];
 
 
 
-mysqli_query($l, "UPDATE `groups` SET 
-`group_name`=$group_name WHERE `group_id`=$group_id"); 
+mysqli_query($l, "UPDATE `groups` SET `group_name`='$group_name' WHERE `group_id`='$group_id'"); 
 
 if(isset($_POST['studentIds'])){
 $student_ids =  $_POST['studentIds'];

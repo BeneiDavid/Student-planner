@@ -598,4 +598,4 @@ window.onclick = function(event) {
     if (event.target == groupDeleteConfirmModal) {
         groupDeleteConfirmModal.style.display = "none";
     }
-  }
+}
