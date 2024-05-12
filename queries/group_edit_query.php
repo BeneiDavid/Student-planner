@@ -47,10 +47,21 @@ $not_needed_student_ids = array_diff($associated_student_ids, $student_ids);
 if (!empty($not_needed_student_ids)) {
     $not_needed_student_ids_str = implode("','", $not_needed_student_ids);
     mysqli_query($l, "DELETE FROM `group_members` WHERE `group_id`='$group_id' AND `student_id` IN ('$not_needed_student_ids_str')");
+    // Ki kell törölni a rendezéseket a felhasználónál
+    $task_ids_query =  mysqli_query($l, "SELECT `task_id` FROM `group_tasks` WHERE `group_id`='$group_id'");
+
+    if($task_ids_query){
+        
+    }
+
+    while($task_id_data = mysqli_fetch_assoc($task_ids_query)){
+        $task_id = $task_id_data["task_id"];
+        mysqli_query($l, "DELETE FROM `task_sorting` WHERE `task_id`='$task_id' AND `user_id` IN ('$not_needed_student_ids_str')");
+    }
 }
 
 }
-// Feladat és annak címkéinek eltárolása
+
 
 
 mysqli_close($l);

@@ -17,7 +17,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
             <div class='no-created-groups-div'>Ön még nem nincs benne egy csoportban sem.</div>
         
-        
             </div>
             <br><br>
         </div>
