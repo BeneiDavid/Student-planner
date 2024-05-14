@@ -811,6 +811,18 @@ background-color: white;
   font-weight: bold;
 }
 
+.student-header-div p:nth-child(2) {
+  display: inline-block; /* Use inline-block to display columns */
+  width: 31.00%; 
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .student-header-div p:nth-child(2){
+    width: 23.00%; 
+  }
+}
+
 .student-data p{
   display: inline-block; /* Use inline-block to display columns */
   width: 45.00%; 
@@ -959,10 +971,15 @@ background-color: white;
 .message-input{
   width: 80%;
   display: inline-block;
+  height: 40px;
 }
 
 .send-message-error{
   color: red;
   padding-top: 10px;
   display: none;
+}
+
+.align-top{
+  vertical-align: top;
 }
