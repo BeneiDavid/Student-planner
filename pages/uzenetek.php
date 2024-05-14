@@ -17,6 +17,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     echo "<h1>Üzenetek</h1>";
 
+    echo"<div class='teachers-heading ' ><p>Oktató</p><p>Csoportok</p></div>";
     echo"<div id='teachersDiv' class='group-members-div'></div>";
 
 }
