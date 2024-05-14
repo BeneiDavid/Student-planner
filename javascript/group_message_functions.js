@@ -22,6 +22,8 @@ function listStudents(groupId){
     var searchStudentResults = document.getElementById('searchStudentResults');
     searchStudentResults.innerHTML = "";
     document.getElementById('noSearchResultText').style.visibility = "collapse";
+    document.getElementById('noStudentsSelected').style.visibility = "collapse";
+    document.getElementById('noMessageSpecified').style.visibility = "collapse";
     document.getElementById('groupMessageText').value = "";
     document.getElementById('noSearchResultText').value = "";
     document.getElementById('sendToAllCheckbox').checked = false;
@@ -71,6 +73,14 @@ function listStudents(groupId){
                 else{
                     document.getElementById('noRegisteredStudents').style.visibility = "collapse";
                 }
+
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        document.getElementById('noStudentsSelected').style.visibility = "collapse";
+                    });
+                });
             }
   
         },
@@ -109,6 +119,7 @@ function showGroupMessageSearchResults(){
 }
 
 function sendToAllChanged(){
+    document.getElementById('noStudentsSelected').style.visibility = "collapse";
     var checked = this.checked;
     var searchStudentResults = document.getElementById('searchStudentResults');
     var checkboxes = searchStudentResults.querySelectorAll("input[type='checkbox']");
@@ -134,19 +145,24 @@ function sendGroupMessage(event){
 
     if(message.trim() !== ''){
 
-            var sendToAll = document.getElementById('sendToAllCheckbox').checked;
-            console.log(sendToAll);
+            
+        document.getElementById('noMessageSpecified').style.visibility = "collapse"; 
+        document.getElementById('noStudentsSelected').style.visibility = "collapse";
+    
 
-            var searchStudentResults = document.getElementById("searchStudentResults");
+        var sendToAll = document.getElementById('sendToAllCheckbox').checked;
+        console.log(sendToAll);
 
-            // Get all child divs within the parent div
-            var childDivs = searchStudentResults.getElementsByTagName("div");
+        var searchStudentResults = document.getElementById("searchStudentResults");
 
-            // Create an array to store the IDs
-            var studentIds = [];
+        // Get all child divs within the parent div
+        var childDivs = searchStudentResults.getElementsByTagName("div");
 
-            // Iterate through each child div and get its ID
-           
+        // Create an array to store the IDs
+        var studentIds = [];
+
+        // Iterate through each child div and get its ID
+    
 
         if(!sendToAll){
             for (var i = 0; i < childDivs.length; i++) {
@@ -164,25 +180,34 @@ function sendGroupMessage(event){
             }
         }
 
-        $.ajax({
-            type: 'POST',
-            url: 'queries/send_group_message_query.php', 
-            data: {
-                'studentIds': studentIds,
-                'message': message
-            },
-            dataType: "text",
-            credentials: 'same-origin',
-            success: function(response) {
-                console.log(response);
-                
-            },
-            error: function(xhr) {
-                console.error(xhr.responseText);
-            }
-        });
+        if(!sendToAll && studentIds.length == 0){
+            document.getElementById('noStudentsSelected').style.visibility = "visible";
+        }
+        else{
+            $.ajax({
+                type: 'POST',
+                url: 'queries/send_group_message_query.php', 
+                data: {
+                    'studentIds': studentIds,
+                    'message': message
+                },
+                dataType: "text",
+                credentials: 'same-origin',
+                success: function(response) {
+                    console.log(response);
+                    
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                }
+            });
 
             $('#groupMessageModal').modal('hide');
+        }
+    }
+    else{
+        document.getElementById('noMessageSpecified').style.visibility = "visible";
+        document.getElementById('noStudentsSelected').style.visibility = "collapse";
     }
 }
 
@@ -190,6 +215,8 @@ function init(){
     document.getElementById('messageSearchInput').addEventListener('input', showGroupMessageSearchResults ,false);
     document.getElementById('sendToAllCheckbox').addEventListener('change', sendToAllChanged, false)
     document.getElementById('sendGroupMessageButton').addEventListener('click', sendGroupMessage, false);
+
+    
 }
 
 window.addEventListener('load', init, false);

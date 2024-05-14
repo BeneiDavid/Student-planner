@@ -706,19 +706,21 @@ margin-left:  10px;
   width: auto; /* Set a width for the div */
   margin-bottom: 50px;
   text-align: center;
-  max-width: 1800px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 
 
 
 .groups-div{
-  max-width: 1800px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .groups-div > div{
   border: 2px solid black;
-background-color: white;
+  background-color: white;
 }
 
 
@@ -948,6 +950,7 @@ background-color: white;
 
 .group-member-div{
   border: 2px solid black;
+  margin: auto;
 }
 
 .chat-box{
@@ -986,4 +989,20 @@ background-color: white;
 
 .align-top{
   vertical-align: top;
+}
+
+.teachers-heading{
+  max-width: 1000px;
+  margin: auto;
+}
+
+.teachers-heading p{
+  display: inline-block;
+  font-weight: bold;
+  width: 25%;
+  font-size: larger;
+}
+
+.teachers-heading p:nth-child(2) {
+  width:35%;
 }
