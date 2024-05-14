@@ -10,22 +10,22 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     exit;
     }
     require 'modals/quit_group_confirm_modal.php';
+    require "modals/chat_modal.php";
     require 'task_details_modal.php';
     require 'add_label_modal.php';
     require 'new_label_modal.php';
     require 'delete_task_modal.php';
-    echo '<script type="text/javascript"  src="javascript/groups.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/add_label_functions.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';
+    
+    echo '<script type="text/javascript" src="javascript/groups.js"></script>';
+    echo '<script type="text/javascript" src="javascript/chat.js"></script>';
+    echo '<script type="text/javascript" src="javascript/task_details.js"></script>';
+    echo '<script type="text/javascript" src="javascript/tasks.js"></script>';
+    echo '<script type="text/javascript" src="javascript/add_label_functions.js"></script>';
+    echo '<script type="text/javascript" src="javascript/modify_label_functions.js"></script>';
 
     echo "<h1 id='groupHeaderName'>Csoportok</h1><br><br>";
-    echo "<div id='groupsMainDiv' class='container groups-main-div'>
-            <div class='div-with-border student-groups-div' id='groupsDiv'>
-
-            <div class='no-created-groups-div'>Ön még nem nincs benne egy csoportban sem.</div>
-        
+    echo "<div id='groupsMainDiv' class='container groups-main-div '>
+            <div class='div-with-border student-groups-div align-content' id='groupsDiv'>
             </div>
             <br><br>
         </div>

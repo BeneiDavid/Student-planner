@@ -12,8 +12,5 @@ else{
     $_SESSION['group_id'] = "";
 }
 
-echo "megy";
-
-
 
 ?>

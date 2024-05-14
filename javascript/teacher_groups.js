@@ -236,7 +236,7 @@ function saveGroup(event){
                 },
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
+                    console.log(response + "asd");
                     groupName.value  = "";
                     membersDiv.innerHTML = "";
                     listGroups();
@@ -295,8 +295,8 @@ function listGroups(){
                 messageImg.style.width = "20px";
                 messageImg.style.height = "20px";
                 messageImg.classList.add('clickable');
-                messageImg.title = "Üzenet írása";
-                messageText.textContent = "Üzenet írása";
+                messageImg.title = "Csoportüzenet írása";
+                messageText.textContent = "Csoportüzenet írása";
                 messageText.classList.add('clickable');
                 messageText.style.color = "blue";
                 messageDiv.appendChild(messageImg);
@@ -363,7 +363,7 @@ function showGroupTasks(){
     var taskNameText = groupDivElement.firstElementChild.textContent;
 
     var groupHeaderName = document.getElementById('groupHeaderName');
-    groupHeaderName.textContent = "A \"" + taskNameText + "\" csoport feladatai";
+    groupHeaderName.textContent = "A(z) \"" + taskNameText + "\" csoport feladatai";
     
     var groupId = groupDivElement.id.split('_')[1];
     $.ajax({

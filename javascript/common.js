@@ -100,3 +100,24 @@ async function getTaskGroupName(taskId){
     });
 });
 }
+
+
+async function getFullname(userId){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: 'POST',
+      url: 'queries/full_name_query.php', 
+      data: {'userId': userId},
+      credentials: 'same-origin',
+      success: function(response) {
+          console.log(response); 
+          resolve(response);
+      },
+      error: function(xhr, status, error) {
+          console.error(xhr.responseText);
+          reject("");
+      }
+    });
+});
+}
+

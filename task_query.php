@@ -126,9 +126,10 @@ else{
 } // Csoport feladatainak listázása
 else if(isset($_POST['groupId'])){
   // Tanár
+  $group_id = $_SESSION['group_id'];
   if($user->getUserType() == "teacher"){
 
-    $group_id = $_SESSION['group_id'];
+   
     $task_ids_query = mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
 
     while ($ids = mysqli_fetch_assoc($task_ids_query)) {
@@ -183,7 +184,7 @@ else if(isset($_POST['groupId'])){
   }
   // Diák
   else{
-    $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
+    $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id' AND `group_id`='$group_id'");
     if ($groups_query) {
       $groups = [];
       while ($group = mysqli_fetch_assoc($groups_query)) {
