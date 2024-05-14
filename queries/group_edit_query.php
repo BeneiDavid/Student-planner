@@ -21,6 +21,9 @@ if(isset($_POST['studentIds'])){
 $student_ids =  $_POST['studentIds'];
 $associated_student_ids = array();
 
+
+
+
 $result = mysqli_query($l, "SELECT `student_id` FROM `group_members` WHERE `group_id`='$group_id'");
 while ($row = mysqli_fetch_assoc($result)) {
     $associated_student_ids[] = $row['student_id'];
@@ -49,9 +52,7 @@ if (!empty($not_needed_student_ids)) {
     // Ki kell törölni a rendezéseket a felhasználónál
     $task_ids_query =  mysqli_query($l, "SELECT `task_id` FROM `group_tasks` WHERE `group_id`='$group_id'");
 
-    if($task_ids_query){
-        
-    }
+
 
     while($task_id_data = mysqli_fetch_assoc($task_ids_query)){
         $task_id = $task_id_data["task_id"];
@@ -59,8 +60,17 @@ if (!empty($not_needed_student_ids)) {
     }
 }
 
-}
 
+}
+else{
+    mysqli_query($l, "DELETE FROM `group_members` WHERE `group_id`='$group_id'");
+    $task_ids_query =  mysqli_query($l, "SELECT `task_id` FROM `group_tasks` WHERE `group_id`='$group_id'");
+
+    while($task_id_data = mysqli_fetch_assoc($task_ids_query)){
+        $task_id = $task_id_data["task_id"];
+        mysqli_query($l, "DELETE FROM `task_sorting` WHERE `task_id`='$task_id'");
+    }
+}
 
 
 mysqli_close($l);

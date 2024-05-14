@@ -7,11 +7,13 @@ function listGroups(){
         type: 'POST',
         url: 'queries/list_groups_query_student.php', 
         data: {},
+        dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
-            var parsedData = JSON.parse(response);
-            var groupData = parsedData.group_data;
+            console.log(response);
             var groupsDiv = document.getElementById('groupsDiv');
+            if(response.length != 0){
+            var groupData = response.group_data;
             groupsDiv.innerHTML = "";
             for (var i = 0; i < groupData.length; i++) {
                 var containerDiv = document.createElement('div');
@@ -51,6 +53,9 @@ function listGroups(){
                 messageText.style.color = "blue";
                 messageDiv.appendChild(messageImg);
                 messageDiv.appendChild(messageText);
+                messageDiv.id = "teacher_" + groupData[i].group_teacher_id;
+                messageText.addEventListener('click', openChat, false);
+                messageImg.addEventListener('click', openChat, false);
 
 
 
@@ -79,6 +84,15 @@ function listGroups(){
                 
                 groupsDiv.appendChild(containerDiv);
             }
+        }
+        else{
+
+            var noGroupsDiv = document.createElement('div');
+            noGroupsDiv.textContent = "Ön még nincs benne egy csoportban sem."
+            noGroupsDiv.classList.add('no-created-groups-div');
+
+            groupsDiv.appendChild(noGroupsDiv);
+        }
         },
         error: function(xhr) {
             console.error(xhr.responseText);
@@ -97,7 +111,7 @@ function showGroupTasks(){
     var taskNameText = groupDivElement.firstElementChild.textContent;
 
     var groupHeaderName = document.getElementById('groupHeaderName');
-    groupHeaderName.textContent = "A \"" + taskNameText + "\" csoport feladatai";
+    groupHeaderName.textContent = "A(z) \"" + taskNameText + "\" csoport feladatai";
     
     var groupId = groupDivElement.id.split('_')[1];
     $.ajax({
@@ -168,11 +182,22 @@ function quitGroup(event){
             console.log(response);
             var divToDelete = document.getElementById(groupQuitId.value);
             groupsDiv.removeChild(divToDelete);
+
+            if(!groupsDiv.hasChildNodes()){
+                var noGroupsDiv = document.createElement('div');
+                noGroupsDiv.textContent = "Ön még nincs benne egy csoportban sem."
+                noGroupsDiv.classList.add('no-created-groups-div');
+
+                groupsDiv.appendChild(noGroupsDiv);
+            }
+
         },
         error: function(xhr) {
             console.error(xhr.responseText);
         }
     });
+
+
     
     hideConfirmQuitModal();
 }
@@ -217,7 +242,9 @@ function init(){
 window.addEventListener('load', init, false);
 
 window.onclick = function(event) {
+    console.log("asd");
     var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
+    
     if (event.target == groupQuitConfirmModal) {
         groupQuitConfirmModal.style.display = "none";
     }
