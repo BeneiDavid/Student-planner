@@ -13,8 +13,9 @@
 
                 <div id="chatBox" class='chat-box'></div>
                 <form id="chat-form">
-                    <input type="text" id="messageInput" class='message-input form-control' placeholder="Üzenet írása">
-                    <button class='btn btn-secondary' id='sendButton'>Küldés</button>
+                   <!-- <input type="text" id="messageInput" class='message-input form-control' placeholder="Üzenet írása">-->
+                    <textarea id="messageInput" class='message-input form-control' placeholder="Üzenet írása"></textarea>
+                    <button class='btn btn-secondary align-top' id='sendButton'>Küldés</button>
                 </form>
                 <p class='send-message-error' id='sendMessageError'>Üzenet küldési hiba. Kérem próbálja újra!</p>
 

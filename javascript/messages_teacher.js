@@ -115,14 +115,15 @@ function listGroupMembers(groupId){
                 }
             }
             else{
-                //var noMembersDiv = document.createElement('div');
-                //noMembersDiv.textContent = "A csoport még nem rendelkezik tagokkal. A Csoportok menüpontban hozzáadhat hallgatókat a csoporthoz.";
-                var textPart1 = document.createElement('p');
+                var noMembersDiv = document.createElement('div');
+                noMembersDiv.textContent = "A csoport még nem rendelkezik tagokkal.";
+                noMembersDiv.style.color = "blue";
+                /* var textPart1 = document.createElement('p');
                 var textPart2 = document.createElement('p');
                 textPart1.textContent = "A csoport még nem rendelkezik tagokkal.";
-                textPart2.textContent = "A Csoportok menüpontban kezelheti egy csoport tagjait.";
-                groupMembersDiv.appendChild(textPart1);
-                groupMembersDiv.appendChild(textPart2);
+                textPart2.textContent = "A Csoportok menüpontban kezelheti egy csoport tagjait.";*/
+                groupMembersDiv.appendChild(noMembersDiv);
+                //groupMembersDiv.appendChild(textPart2);
             }
             
         },

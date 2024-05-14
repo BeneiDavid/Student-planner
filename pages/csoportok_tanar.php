@@ -11,6 +11,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         header("Location: index.php?page=kezdolap");
     }
 
+    require "modals/group_message_modal.php";
     require 'modals/add_members_modal.php';
     require 'modals/group_details_modal.php';
     require 'modals/group_delete_confirm_modal.php';
@@ -18,6 +19,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     require 'add_label_modal.php';
     require 'new_label_modal.php';
     require 'delete_task_modal.php';
+    echo '<script type="text/javascript"  src="javascript/group_message_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
     echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
     echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';

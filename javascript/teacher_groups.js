@@ -40,7 +40,8 @@ function hideAddMembersModal(){
 // Tagok hozzáadása a csoporthoz
 function addMembers(event){
     event.preventDefault();
-
+    document.getElementById('noResultText').style.visibility = "collapse";
+    document.getElementById('searchInput').value = "";
     var searchResults = document.getElementById('searchResults');
     const studentDivs = searchResults.querySelectorAll('div');
     var membersDiv = document.getElementById('membersDiv');
@@ -64,6 +65,7 @@ function addMembers(event){
         newDiv.replaceChild(svgImage, newDiv.lastElementChild);
         var studentId = studentDiv.id.split('_')[1];
         newDiv.id = "member_" + studentId;
+        newDiv.style.display = 'block';
         membersDiv.appendChild(newDiv);
 
 
@@ -153,6 +155,8 @@ function listNotAddedStudents(){
 
 // Keresés eredményének megjelenítése
 function showSearchResults(){
+    var searchInput = document.getElementById('searchInput');
+    var searchResults = document.getElementById('searchResults');
     const searchTerm = searchInput.value.toLowerCase();
     const studentDivs = Array.from(searchResults.getElementsByClassName('student-data'));
     var foundResult = false;
@@ -301,6 +305,8 @@ function listGroups(){
                 messageText.style.color = "blue";
                 messageDiv.appendChild(messageImg);
                 messageDiv.appendChild(messageText);
+                messageText.addEventListener('click', showGroupMessageModal, false);
+                messageImg.addEventListener('click', showGroupMessageModal, false);
 
                 var editDiv = document.createElement('div');
                 var editImg = document.createElement('img');
