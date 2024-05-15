@@ -966,6 +966,7 @@ background-color: white;
   clear: both;
   word-break: normal;
   overflow-wrap: break-word;
+  white-space: pre-line;
 }
 
 .chat-box .received-message{
@@ -1005,4 +1006,8 @@ background-color: white;
 
 .teachers-heading p:nth-child(2) {
   width:35%;
+}
+
+.align-button-center{
+  text-align: center;
 }

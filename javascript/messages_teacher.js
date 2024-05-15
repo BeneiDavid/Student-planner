@@ -39,8 +39,8 @@ function fillGroupsDropdown(){
 function selectGroup(){
     var groupId = this.id.split("_")[1];
     var groupName = this.firstChild.textContent;
-
-    document.getElementById('selectedGroupNameHeader').textContent = groupName + " csoport tagjai";
+    var selectedGroupNameHeader = document.getElementById('selectedGroupNameHeader');
+    selectedGroupNameHeader.textContent = groupName + " csoport tagjai";
 
     listGroupMembers(groupId);
 }
@@ -50,11 +50,11 @@ function clearPreviousMembers(){
     groupMembersDiv.innerHTML = "";
 }
 
-function listGroupMembers(groupId){
+async function listGroupMembers(groupId){
 
     clearPreviousMembers();
 
-    $.ajax({
+    await $.ajax({
         type: 'POST',
         url: 'queries/group_members_query.php', 
         data: {'groupId': groupId},
@@ -89,7 +89,6 @@ function listGroupMembers(groupId){
    
                     memberDiv.classList.add('group-member-div');
                     memberDiv.style.maxWidth = "665px"; 
-                    //memberDiv.id = "user_" + studentData[i].user_id;
 
                     messageImage.src = "pictures/message.svg";
                     messageImage.style.width = "30px";
@@ -118,22 +117,49 @@ function listGroupMembers(groupId){
                 var noMembersDiv = document.createElement('div');
                 noMembersDiv.textContent = "A csoport még nem rendelkezik tagokkal.";
                 noMembersDiv.style.color = "blue";
-                /* var textPart1 = document.createElement('p');
-                var textPart2 = document.createElement('p');
-                textPart1.textContent = "A csoport még nem rendelkezik tagokkal.";
-                textPart2.textContent = "A Csoportok menüpontban kezelheti egy csoport tagjait.";*/
+
                 groupMembersDiv.appendChild(noMembersDiv);
-                //groupMembersDiv.appendChild(textPart2);
             }
+            console.log("első");
             
         },
         error: function(xhr) {
             console.error(xhr.responseText);
         }
         });
+
+
+        
+        var groupMembersDiv = document.getElementById('groupMembersDiv');
+        var childDivs = groupMembersDiv.children;
+
+        for (var i = 0; i < childDivs.length; i++) {
+
+            var messageDiv = childDivs[i].lastChild;
+            console.log(messageDiv);
+            var sendToUserId = messageDiv.id.split("_")[1];
+            await  $.ajax({
+                url: 'queries/all_messages_read_query.php',
+                type: 'POST',
+                data: { 'otherUserId': sendToUserId },
+                success: function(secondResponse) {
+                    if(secondResponse == "false"){
+                        var unseenMessageDot = createColoredSVG("blue");
+                        var firstChild = messageDiv.firstChild;
+                        messageDiv.insertBefore(unseenMessageDot, firstChild);
+
+                    }
+                },
+                error: function(error) {
+                    console.error('Error in second AJAX request:', error);
+                }
+            });
+        }
+
+
+
+       
 }
-
-
 
 
 

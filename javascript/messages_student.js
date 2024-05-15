@@ -6,8 +6,8 @@
 
 
 
-function fillTeachersDiv(){
-    $.ajax({
+async function fillTeachersDiv(){
+    await $.ajax({
         type: 'POST',
         url: 'queries/list_teacher_and_groups_query.php', 
         data: {},
@@ -20,7 +20,7 @@ function fillTeachersDiv(){
             var teacherData = response.teacher_data;
            
             const uniqueTeacherData = Array.from(new Set(teacherData.map(item => item.user_id)))
-    .map(user_id => teacherData.find(item => item.user_id === user_id));
+            .map(user_id => teacherData.find(item => item.user_id === user_id));
 
                 console.log(uniqueTeacherData);
 
@@ -102,6 +102,33 @@ function fillTeachersDiv(){
             console.error(xhr.responseText);
         }
         });
+
+
+        var teachersDiv = document.getElementById('teachersDiv');
+        var childDivs = teachersDiv.children;
+
+        for (var i = 0; i < childDivs.length; i++) {
+
+            var messageDiv = childDivs[i].lastChild;
+            console.log(messageDiv);
+            var sendToUserId = messageDiv.id.split("_")[1];
+            await  $.ajax({
+                url: 'queries/all_messages_read_query.php',
+                type: 'POST',
+                data: { 'otherUserId': sendToUserId },
+                success: function(secondResponse) {
+                    if(secondResponse == "false"){
+                        var unseenMessageDot = createColoredSVG("blue");
+                        var firstChild = messageDiv.firstChild;
+                        messageDiv.insertBefore(unseenMessageDot, firstChild);
+
+                    }
+                },
+                error: function(error) {
+                    console.error('Error in second AJAX request:', error);
+                }
+            });
+        }
 }
 
 
