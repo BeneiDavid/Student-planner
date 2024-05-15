@@ -1,6 +1,11 @@
 var chat;
 
 async function openChat(){
+    if(this.parentNode.childElementCount == 3){
+        var firstChild = this.parentNode.firstChild;
+        this.parentNode.removeChild(firstChild);
+    }
+
     removeLogs();
     var currentUserId = await getCurrentUserId();
     var sendToUserId = this.parentNode.id.split("_")[1];
@@ -25,9 +30,15 @@ function sendButtonClick(event){
 async function init(){
     document.getElementById('sendButton').addEventListener('click', sendButtonClick, false);
     document.getElementById('messageInput').addEventListener('input', setSendButtonColor, false);
-    document.addEventListener("DOMContentLoaded", function() {
-        var chatBox = document.getElementById('chatBox');
-        chatBox.scrollTop = chatBox.scrollHeight;
+
+    var messageInput = document.getElementById("messageInput");
+    var sendButton = document.getElementById("sendButton");
+
+    messageInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault(); // Prevent the default Enter key behavior
+        sendButton.click(); // Trigger the button click
+        }
     });
 }
 

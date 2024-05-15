@@ -23,7 +23,8 @@ $message_send_query = mysqli_query($l, "INSERT INTO `messages` SET
 `sender_id`='".$user_id."',
 `receiver_id` = '".$receiving_user_id."',
 `message_text`='".$message."',
-`message_time`='".$currentDate."' 
+`message_time`='".$currentDate."',
+`seen_by_receiver`= 0 
 
 ");
 
