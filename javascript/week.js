@@ -143,7 +143,7 @@ function fillWeekDay(dayIndex, task_details){
             var li = document.createElement('li');
 
 
-            var svg = createColoredSVG(tasks[i].task_color);
+            var svg = createColoredSVG(tasks[i].task_color, "35px", "dot");
             var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
             li.style.backgroundImage = "url('" + svgDataURL + "')";

@@ -84,7 +84,18 @@ function setDays(currentYear, currentMonth){
         tasksList.id = "list-" + day; 
 
         if(calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
-            listItem.classList.add('activeDay');
+            listItem.classList.add('activeDayMonthly');
+            var color = getSeasonDarkColor(firstDayOfMonth);
+            var svg = createColoredSVG(color, "115px", "circle");
+            var svgBlob = new Blob([svg.outerHTML], {type: 'image/svg+xml'});
+            var url = URL.createObjectURL(svgBlob);
+
+// Set the background image of the listItem
+            listItem.style.backgroundImage = 'url("' + url + '")';
+            listItem.style.backgroundRepeat = "no-repeat";
+            listItem.style.backgroundPosition = "center";
+            listItem.style.backgroundSize = "115px"
+
 
         }
 
@@ -167,6 +178,8 @@ function listMonthTasks(){
         // Move this outside of the AJAX call to avoid incrementing `firstdayOfWeek` multiple times
         dayOfMonth.setDate(dayOfMonth.getDate() + 1);
     }
+    setSeasonColors(dayOfMonth);
+    console.log("set");
     
 }
 
@@ -190,7 +203,7 @@ function fillMonthDay(day, task_details){
             var li = document.createElement('li');
 
 
-            var svg = createColoredSVG(tasks[i].task_color);
+            var svg = createColoredSVG(tasks[i].task_color, "35px", "dot");
             var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
             li.style.backgroundImage = "url('" + svgDataURL + "')";

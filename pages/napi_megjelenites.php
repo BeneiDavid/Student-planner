@@ -27,14 +27,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo "<h1>Napi megjelenítés</h1><br>";
 
     echo "
-        <div class='container-fluid'>
+        <div class='container-fluid content-padding'>
             <div class='row'>
                 <div class='col col-sm-12 col-12 col-md-12  col-lg-5' >
                     <div class='month'>      
                         <ul>
                             <li class='prev clickable no-select' id='prevMonth'>&#10094;</li>
                             <li class='next clickable no-select' id='nextMonth'>&#10095;</li>
-                            <li id='monthAndYear'>
+                            <li id='monthAndYear' class='month-and-year'>
                             
                             </li>
                             <input type='hidden' id='selectedDate' name='selectedDate'>
