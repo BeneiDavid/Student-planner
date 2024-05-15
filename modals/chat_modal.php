@@ -5,7 +5,7 @@
             <!-- Modal Header -->
             <div class='modal-header'>
               <h4 class='modal-title'>Chat - <span id='chatGroupNameSpan'></span></h4>
-              <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+              <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
             </div>
       
             <!-- Modal body -->
@@ -15,7 +15,7 @@
                 <form id="chat-form">
                    <!-- <input type="text" id="messageInput" class='message-input form-control' placeholder="Üzenet írása">-->
                     <textarea id="messageInput" class='message-input form-control' placeholder="Üzenet írása"></textarea>
-                    <button class='btn btn-secondary align-top' id='sendButton'>Küldés</button>
+                    <button class='btn btn-secondary align-top' id='sendButton' type='button'>Küldés</button>
                 </form>
                 <p class='send-message-error' id='sendMessageError'>Üzenet küldési hiba. Kérem próbálja újra!</p>
 
@@ -24,7 +24,7 @@
             <!-- Modal footer -->
             <div class='modal-footer'>
 
-              <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Bezárás</button>
+              <button type='button' class='btn btn-primary' data-bs-dismiss='modal' >Bezárás</button>
             </div>
       
         </div>

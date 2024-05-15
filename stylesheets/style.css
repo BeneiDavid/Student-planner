@@ -24,7 +24,6 @@ margin-left:  10px;
 
 .month {
     padding: 30px 25px;
-    background: rgb(245, 154, 50);
     text-align: center;
   }
   
@@ -551,6 +550,10 @@ margin-left:  10px;
   margin-bottom: 60px;
 }
 
+.display-none{
+  display: none;
+}
+
 
 
 .padding-bottom{
@@ -1053,3 +1056,17 @@ h1{
 
 
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.text-align-center{
+  text-align: center;
+}

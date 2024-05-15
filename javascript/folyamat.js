@@ -94,7 +94,7 @@ function clearToDoTasks(){
     var toDoBody = document.getElementById("toDoBody");
     var children = toDoBody.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         toDoBody.removeChild(children[i]);
     }
 }
@@ -103,7 +103,7 @@ function clearInProgressTasks(){
     var inProgressBody = document.getElementById("inProgressBody");
     var children = inProgressBody.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         inProgressBody.removeChild(children[i]);
     }
 }
@@ -113,7 +113,7 @@ function clearDoneTasks(){
 
     var children = doneBody.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         doneBody.removeChild(children[i]);
     }
 }

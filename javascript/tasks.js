@@ -331,6 +331,7 @@ function fillTaskTable(response, type){
                                 else if(task_sorting_row[i].by_progress == 'in_progress'){
                                     var inProgressBody = document.getElementById("inProgressBody");
                                     var lastrow = inProgressBody.lastElementChild;
+                                    console.log(lastrow);
                                     inProgressBody.insertBefore(row, lastrow);
                                     found = true;
                                 }

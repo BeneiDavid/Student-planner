@@ -36,6 +36,7 @@ async function fillTeachersDiv(){
                 var messageText = document.createElement('p');
 
                 messageImage.src = "pictures/message.svg";
+                messageImage.alt = "Chat megnyitása";
                 messageImage.style.width = "30px";
                 messageImage.style.height = "30px";
                 messageImage.style.display = "inline-block";

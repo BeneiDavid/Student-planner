@@ -141,6 +141,7 @@ function listUserLabels(fromLabelPopover, showGroups){
                 
                     var deleteImg = document.createElement('img');
                     deleteImg.src = "pictures/delete.svg";
+                    deleteImg.alt="Címke törlése";
                     deleteImg.id = 'delete_' + item.label_id;
                     deleteImg.style.width = "20px";
                     deleteImg.style.height = "20px";

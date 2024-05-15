@@ -55,7 +55,7 @@ if (isset($_POST['groupAddData']))
             <!-- Modal Header -->
             <div class='modal-header'>
               <h4 class='modal-title'>Csoport adatai</h4>
-              <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+              <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
             </div>
       
             <!-- Modal body -->

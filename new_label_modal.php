@@ -48,7 +48,7 @@ if (isset($_POST['formData']))
     <p class='preview-label'>Előnézet:</p>
     <div class='ellipse' id='previewDiv'>
         <p id='previewText' class='preview-text'></p>   
-        <img id='previewImage' class='preview-image'></img>
+        <img id='previewImage' class='preview-image' alt='Címke előnézet ikon'></img>
     </div>
     <form method='post' id="newLabelForm">
 
@@ -61,12 +61,12 @@ if (isset($_POST['formData']))
         <div class="symbol-container">
         <input type="hidden" name="labelsymbolcheck" value="0">
         <input type='checkbox' id='enableLabelIcon' name='labelsymbolcheck'> 
-        <label for='labelsymbolcheck' >Szimbólum:</label>
-        <div class="symbol-square" data-toggle="popover" title="Válasszon szimbólumot!" data-content="Content" id='symbolSquare'></div><br><br>
+        <label for='enableLabelIcon' >Szimbólum:</label>
+        <div class="symbol-square" data-toggle="popover" tabindex="0" role="button" title="Válasszon szimbólumot!" data-content="Content" id='symbolSquare'></div><br><br>
         </div>
 
 <!-- Hidden content for popover -->
-<div id="popover-content" style="display: none;">
+<div id="popover-content" class='display-none'>
   <div class="image-container">
     <img src="pictures/rhombus.svg" alt="Rombusz ikon" id='rhombus_icon'/>
     <img src="pictures/waves.svg" alt="Hullám ikon" id='waves_icon'>

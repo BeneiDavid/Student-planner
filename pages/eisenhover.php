@@ -31,7 +31,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>
                 </tr>
-                <tr style='display: none;'></tr>
+                <tr class='display-none'></tr>
                 
                 <tr id='newEisenhoverRow' class='no-drag-drop'>
                 <td class='new-task-td'>

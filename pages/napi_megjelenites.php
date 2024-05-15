@@ -37,9 +37,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                             <li id='monthAndYear' class='month-and-year'>
                             
                             </li>
+                            
+                        </ul>
                             <input type='hidden' id='selectedDate' name='selectedDate'>
                             <input type='hidden' id='calendarYearAndMonth' name='calendarYearAndMonth'>
-                        </ul>
                     </div>
                 
                     <ul class='weekdays'>
