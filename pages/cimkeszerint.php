@@ -22,7 +22,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
   </div>
 
     <!-- Hidden content for popover -->
-    <div id='labels-popover-content' style='display: none;'>
+    <div id='labels-popover-content' class='display-none'>
       <div id='labelPopoverContentDiv' class='label-container'>
 
       </div>

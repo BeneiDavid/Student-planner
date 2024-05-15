@@ -104,7 +104,7 @@ if (isset($_POST['taskAddData']))
             <!-- Modal Header -->
             <div class='modal-header'>
               <h4 class='modal-title'>Feladat adatai<span id='groupNameSpan'></span></h4>
-              <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+              <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
             </div>
       
             <!-- Modal body -->
@@ -114,34 +114,35 @@ if (isset($_POST['taskAddData']))
 
                     <label for='taskname'>Feladat neve:</label> 
                     <input type='text' class='task-input task-name' id='taskname' name='taskname' maxlength="50"><span class="error label-name-error" id="taskNameError">A feladat neve nem lehet üres!</span>
-                    <img src="pictures/delete.svg" id="deleteTask" class="delete-task-icon clickable"></img>
+                    <img src="pictures/delete.svg" id="deleteTask" alt='Feladat törlése' class="delete-task-icon clickable"></img>
                     <br><br>
                     
 
                     <label for='colorpicker' >Feladatszín:</label> 
-                    <input type='color' id='colorpicker' class='colorpicker task-input' name='colorpick'><br><br>
+                    <input type='color' id='colorpicker' class='colorpicker task-input'><br><br>
 
-                    <label>Címkék:</label>
+                    <p>Címkék:</p>
                     <div id='added_labels'>
 
                     </div><br>
                     <div id='modal_div'></div>
 
                     <label for='date'>Dátum:</label>
-                    <input type='date' class='task-input' id='date' name='date'><span class="error label-name-error" id="dateError">A dátum nem lehet üres!</span><br><br>
+                    <input type='date' class='task-input' id='date'><span class="error label-name-error" id="dateError">A dátum nem lehet üres!</span><br><br>
                 
+                    <label for='enableStartTime' class='sr-only'>Kezdő időpont használata</label>
                     <input type='checkbox' id='enableStartTime' > 
                     <label for='startTime'>Kezdő időpont:</label>
                     <input type='time' class='task-input' id='startTime'><span class="error label-name-error" id="startTimeError">Ha üresen szeretné hagyni a kezdő időpontot, pipálja ki a mellette lévő négyzetet!</span> <span class="error label-name-error" id="timeValueError">A befejező időpont nem lehet a kezdő időpont előtt!</span><br><br>
                 
-
+                    <label for='enableEndTime' class='sr-only'>Befejező időpont használata</label>
                     <input type='checkbox' id='enableEndTime' > 
                     <label for='endTime' >Befejező időpont:</label>
                     <input type='time' class='task-input' id='endTime'><span class="error label-name-error" id="endTimeError">Ha üresen szeretné hagyni a befejező időpontot, pipálja ki a mellette lévő négyzetet!</span>
 
                 <br><br>
 
-                <label for='description'>Feladat leírása</label><br>
+                <label for='taskDescription'>Feladat leírása</label><br>
                 <textarea rows='10' class='container-fluid' id="taskDescription"  maxlength="400"></textarea>
                 <br><br>
             

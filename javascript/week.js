@@ -97,6 +97,10 @@ function listWeekTasks(){
         firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 1);
     }
     
+    var monthDiv = document.querySelector('.month');
+    var color = getSeasonDarkColor(firstdayOfWeek);
+    monthDiv.style.backgroundColor = color;
+
 }
 
 function fillWeekDay(dayIndex, task_details){
@@ -144,6 +148,7 @@ function fillWeekDay(dayIndex, task_details){
 
 
             var svg = createColoredSVG(tasks[i].task_color, "35px", "dot");
+
             var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
             li.style.backgroundImage = "url('" + svgDataURL + "')";
@@ -156,6 +161,7 @@ function fillWeekDay(dayIndex, task_details){
             list.appendChild(li);
         }
     }
+
 }
 
 function deleteWeekTasks(){

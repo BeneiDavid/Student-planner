@@ -25,12 +25,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     echo "
         <br><br>
-        <div  style='text-align: center;'><table class='tables_ui col selected-day-div display-inline' id='task_table'>
+        <div class='text-align-center' style='text-align: center;'><table class='tables_ui col selected-day-div display-inline' id='task_table'>
             <tbody id='byProgressBody' class='t_sortable'>
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>
                 </tr>
-                <tr style='display: none;'></tr>
+                <tr class='display-none'></tr>
                 
                 <tr id='newSortByProgressRow' class='no-drag-drop'>
                 <td class='new-task-td'>
@@ -48,7 +48,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Teendők</th>
         </tr>
-        <tr style='display: none;'></tr>
+        <tr class='display-none'></tr>
         <tr  class='no-drag-drop'>
             <td class='new-task-td'>
 
@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Folyamatban</th>
         </tr>
-        <tr style='display: none;'></tr>
+        <tr class='display-none'></tr>
         <tr  class='no-drag-drop'>
             <td class='new-task-td'>
 
@@ -76,7 +76,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Befejezve</th>
         </tr>
-        <tr style='display: none;'></tr>
+        <tr class='display-none'></tr>
         <tr  class='no-drag-drop'>
             <td class='new-task-td'>
 
