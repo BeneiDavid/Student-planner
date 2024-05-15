@@ -237,7 +237,6 @@ function init(){
   document.getElementById('sortByLabel_xButton').addEventListener('click', closeSortByLabelModal, false);
   document.getElementById('showGroupLabelsCheckbox').addEventListener('change', showGroupLabelsCheckboxChanged ,false);
   initializeLabels();
-
 }
 
 

@@ -30,7 +30,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     <input type='hidden' id='chosenLabelId' value=''></input>
     <br><br>
-    <div id='sortByLabelDiv' class='col selected-day-div'>
+    <div id='sortByLabelDiv' class='selected-day-div center-sortby-labels-div'>
 
     <input type='checkbox' id='showGroupLabelsCheckbox' class='show-group-labels-checkbox' name='showGroupLabelsCheckbox'>
     <label for='showGroupLabelsCheckbox'>Csoporfeladatok címkéinek megjelenítése</label>
@@ -63,3 +63,6 @@ else{
 
 ?>
 
+<script>
+  document.title = "Student Planner - Feladatok címkék szerint";
+</script>

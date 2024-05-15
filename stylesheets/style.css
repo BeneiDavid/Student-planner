@@ -418,8 +418,13 @@ margin-left:  10px;
 
 .center-div{
   margin: auto;
-  width: 50%;
+  width: 80%;
   text-align: center;
+}
+
+.center-sortby-labels-div table{
+  margin: 0 auto;
+
 }
 
 .sort-by-label-content{

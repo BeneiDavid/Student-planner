@@ -3,28 +3,28 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student planner</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Planner</title>
 
-    
+  
 
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Latest compiled JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<!-- JQUERY -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-   
-    <!-- CSS file -->
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <!-- My javascript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  
+  <!-- CSS file -->
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <!-- My javascript file -->
     
 
 </head>
@@ -146,23 +146,23 @@ require_once 'user.php';
     $l = mysqli_connect('localhost', 'root', '', 'student_planner');
         switch($_GET['page'])
         {
-            case 'regisztracio': include 'pages/regisztracio.php'; break;
-            case 'bejelentkezes': include 'pages/bejelentkezes.php'; break;
-            case 'confirmation': include 'pages/confirmation.php'; break;
-            case 'napi_megjelenites'; include 'pages/napi_megjelenites.php'; break;
-            case 'heti_megjelenites'; include 'pages/heti_megjelenites.php'; break;
-            case 'havi_megjelenites'; include 'pages/havi_megjelenites.php'; break;
-            case 'folyamat'; include 'pages/folyamat.php'; break;
-            case 'eisenhover'; include 'pages/eisenhover.php'; break;
-            case 'cimkeszerint'; include 'pages/cimkeszerint.php'; break;
-            case 'csoportok'; include 'pages/csoportok.php'; break;
-            case 'uzenetek'; include 'pages/uzenetek.php'; break;
-            case 'csoportok_tanar'; include 'pages/csoportok_tanar.php'; break;
-            case 'uzenetek_tanar'; include 'pages/uzenetek_tanar.php'; break;
-            case 'kijelentkezes'; include 'pages/kijelentkezes.php'; break;
-            
+          case 'regisztracio': include 'pages/regisztracio.php';  break;
+          case 'bejelentkezes': include 'pages/bejelentkezes.php'; break;
+          case 'confirmation': include 'pages/confirmation.php'; break;
+          case 'napi_megjelenites'; include 'pages/napi_megjelenites.php'; break;
+          case 'heti_megjelenites'; include 'pages/heti_megjelenites.php'; break;
+          case 'havi_megjelenites'; include 'pages/havi_megjelenites.php'; break;
+          case 'folyamat'; include 'pages/folyamat.php'; break;
+          case 'eisenhover'; include 'pages/eisenhover.php'; break;
+          case 'cimkeszerint'; include 'pages/cimkeszerint.php'; break;
+          case 'csoportok'; include 'pages/csoportok.php'; break;
+          case 'uzenetek'; include 'pages/uzenetek.php'; break;
+          case 'csoportok_tanar'; include 'pages/csoportok_tanar.php'; break;
+          case 'uzenetek_tanar'; include 'pages/uzenetek_tanar.php'; break;
+          case 'kijelentkezes'; include 'pages/kijelentkezes.php'; break;
+          
 
-            default: include 'pages/kezdolap.php'; break;
+          default: include 'pages/kezdolap.php'; break;
         }
 
         mysqli_close($l);

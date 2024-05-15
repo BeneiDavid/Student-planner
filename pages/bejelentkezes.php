@@ -36,3 +36,7 @@ else  // ha már beléptünk, akkor átugrunk az időpontfoglalásra
 }
 // PHP code ends here
 ?>
+
+<script>
+  document.title = "Student Planner - Bejelentkezés";
+</script>

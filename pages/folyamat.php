@@ -48,6 +48,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Teendők</th>
         </tr>
+        <tr style='display: none;'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table>";
     echo "<table class='tables_ui col selected-day-div display-inline' id='in_progress_table'>
@@ -56,7 +62,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Folyamatban</th>
         </tr>
-        
+        <tr style='display: none;'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table>";
     echo "<table class='tables_ui col selected-day-div display-inline' id='done_table'>
@@ -65,7 +76,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader' class='progress-cell'>Befejezve</th>
         </tr>
-        
+        <tr style='display: none;'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table></div>";
 
@@ -76,10 +92,9 @@ else{
 
 ?>
 
-<!-- Drag and drop initializing -->
+
 <script>
-   
-  
+  document.title = "Student Planner - Folyamat alapú rendezés";
+</script>
 
   
-  </script>
