@@ -11,12 +11,12 @@ if ($_SESSION['logged_in'] != 'yes')
     print ' <h1>Bejelentkezés</h1>
             <br><br>
                 
-                        <form method="post">
+                        <form method="post" class="content-padding">
                             <label for="address">E-mail cím</label><span class="error">' . $error . '</span><br> 
-                            <input type="address" id="address" name="address" class="form-control" value="'. $email .'">
+                            <input type="address" id="address" name="address" class="form-control input-length" value="'. $email .'">
                             <br>
                             <label for="email">Jelszó</label><br>    
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control input-length">
                             
                             <br>
                             <input type="submit" name="login_button" value="Belépés" class="btn btn-success">

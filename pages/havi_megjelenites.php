@@ -22,7 +22,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo '<script type="text/javascript"  src="javascript/common.js"></script>';
     echo "<h1>Havi megjelenítés</h1><br><br>";
 
-    echo "<div class='div-padding-bottom'>
+    echo "<div class='div-padding-bottom content-padding'>
             <div class='month'>      
                 <ul>
                     <li class='prev clickable no-select' id='prevMonth'>&#10094;</li>

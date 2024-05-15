@@ -24,7 +24,7 @@ margin-left:  10px;
 
 .month {
     padding: 30px 25px;
-    background: grey;
+    background: rgb(245, 154, 50);
     text-align: center;
   }
   
@@ -50,24 +50,29 @@ margin-left:  10px;
     float: right;
     padding-top: 10px;
   }
+
+  .month-and-year{
+    font-weight: 500;
+  }
+  
   
   .weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #ddd;
+    background-color: rgb(221, 221, 221);
     white-space: nowrap;
   }
   
   .weekdays li {
     display: inline-block;
     width: 13.4%;
-    color: #666;
+    color: black;
     text-align: center;
   }
   
   .days {
     padding: 10px 0;
-    background: rgb(253, 244, 233);
+
     margin: 0;
   }
 
@@ -80,19 +85,26 @@ margin-left:  10px;
     text-align: center;
     margin-bottom: 40px;
     font-size:12px;
-    color: #777;
+    color: black;
   }
   
   .day {
     padding: 5px;
-    background: rgb(253, 244, 233);
+    color: black;
 
   }
 
   .activeDay{
     padding: 5px;
-    background: #1abc9c;
-    color: white !important
+   
+    
+  }
+
+  .activeDayMonthly{
+    background-image: url('../pictures/dot.svg');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .selected-day-div{
@@ -103,7 +115,7 @@ margin-left:  10px;
   .selected-day-div th{
     color: white;
     border: 2px solid black;
-    background-color: grey;
+    background-color: #67563b;
     width: 1000px;
     text-align: center;
     font-size: 20px;
@@ -643,9 +655,10 @@ margin-left:  10px;
 }
 
 .monthly-new-task{
-  padding: 5px;
-  width: auto; /* Set a width for the div */
-  margin-bottom: 50px;
+  padding-left: 5px;
+
+  max-width: 800px; /* Set a width for the div */
+  margin: auto;
   text-align: center;
 }
 
@@ -1016,3 +1029,27 @@ background-color: white;
 .align-button-center{
   text-align: center;
 }
+
+h1{
+  padding-left: 40px;
+  padding-top: 25px;
+}
+
+.content-padding{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.input-length{
+  max-width: 800px;
+}
+
+.succesful-login-alert{
+  max-width: 500px;
+  text-align: center;
+  font-size: large;
+  margin: auto;
+}
+
+
+

@@ -44,21 +44,34 @@ function getContrastColor(rgb) {
   }
 }
 
-function createColoredSVG(color){
+function createColoredSVG(color, size, shape){
   // Create the SVG element
 var svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-svgElement.setAttribute('width', '35px');
-svgElement.setAttribute('height', '35px');
+svgElement.setAttribute('width', size);
+svgElement.setAttribute('height', size);
 svgElement.setAttribute('viewBox', '0 0 20 20');
 
+if(shape == "circle"){
+  var circleElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  circleElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
+  circleElement.setAttribute('stroke', color); // Set stroke color instead of fill
+  circleElement.setAttribute('stroke-width', '0.5');
+  circleElement.setAttribute('fill', "transparent");
+svgElement.appendChild(circleElement);
+}
+else if(shape == "dot"){
 // Create the path element
+
 var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
 pathElement.setAttribute('fill', color);
 
 // Append the path element to the SVG element
 svgElement.appendChild(pathElement)
+}
+
+
 return svgElement;
 }
 
@@ -121,3 +134,158 @@ async function getFullname(userId){
 });
 }
 
+function setSeasonColors(date) {
+
+  const month = date.getMonth() + 1; 
+
+  if (month >= 3 && month <= 5) {
+      const dayElements = document.querySelectorAll('.day');
+
+      dayElements.forEach(dayElement => {
+          if (!dayElement.classList.contains('activeDay')) {
+              dayElement.style.backgroundColor = '#ffe0e2'; 
+          }
+      });
+      
+      const daysElement = document.querySelector('.days');
+      daysElement.style.backgroundColor = '#ffe0e2';
+
+      const month = document.querySelector('.month');
+      month.style.backgroundColor = '#cf366b';
+
+      const calendarArrows = document.querySelectorAll('.month ul li');
+
+      calendarArrows.forEach(arrowElement => {
+              arrowElement.style.color = 'black'; 
+      });
+
+      const activeDay = document.querySelector('.activeDay');
+     
+      if(activeDay){
+          activeDay.style.backgroundColor = '#cf366b';
+      }
+
+      const selectedDay = document.getElementById('selectedDay');
+      if(selectedDay){
+        document.getElementById('selectedDay').style.backgroundColor = '#cf366b';
+      }
+      
+
+  } else if (month >= 6 && month <= 8) {
+      const dayElements = document.querySelectorAll('.day');
+
+      dayElements.forEach(dayElement => {
+          if (!dayElement.classList.contains('activeDay')) {
+              dayElement.style.backgroundColor = '#dcf5dd'; 
+          }
+      });
+      
+      const daysElement = document.querySelector('.days');
+      daysElement.style.backgroundColor = '#dcf5dd';
+
+      const month = document.querySelector('.month');
+      month.style.backgroundColor = '#6f9270';
+
+      const calendarArrows = document.querySelectorAll('.month ul li');
+
+      calendarArrows.forEach(arrowElement => {
+              arrowElement.style.color = 'black'; 
+      });
+
+      const activeDay = document.querySelector('.activeDay');
+      if(activeDay){
+          activeDay.style.backgroundColor = '#6f9270';
+      }
+
+      const selectedDay = document.getElementById('selectedDay');
+      if(selectedDay){
+        document.getElementById('selectedDay').style.backgroundColor = '#6f9270';
+      }
+
+
+  } else if (month >= 9 && month <= 11) {
+      const dayElements = document.querySelectorAll('.day');
+
+      dayElements.forEach(dayElement => {
+          if (!dayElement.classList.contains('activeDay')) {
+              dayElement.style.backgroundColor = '#fcddb8'; 
+          }
+      });
+      
+      const daysElement = document.querySelector('.days');
+      daysElement.style.backgroundColor = '#fcddb8';
+
+      const month = document.querySelector('.month');
+      month.style.backgroundColor = '#dd7116';
+
+      const calendarArrows = document.querySelectorAll('.month ul li');
+
+      calendarArrows.forEach(arrowElement => {
+              arrowElement.style.color = 'black'; 
+      });
+
+      const activeDay = document.querySelector('.activeDay');
+     
+      if(activeDay){
+          activeDay.style.backgroundColor = '#dd7116';
+      }
+
+      const selectedDay = document.getElementById('selectedDay');
+      if(selectedDay){
+        document.getElementById('selectedDay').style.backgroundColor = '#dd7116';
+      }
+      
+  } else {
+      const dayElements = document.querySelectorAll('.day');
+
+      dayElements.forEach(dayElement => {
+          if (!dayElement.classList.contains('activeDay')) {
+              dayElement.style.backgroundColor = '#e6f1fc'; 
+          }
+      });
+      
+      const daysElement = document.querySelector('.days');
+      daysElement.style.backgroundColor = '#e6f1fc';
+
+      const month = document.querySelector('.month');
+      month.style.backgroundColor = '#9AAFC5';
+
+      const calendarArrows = document.querySelectorAll('.month ul li');
+
+      calendarArrows.forEach(arrowElement => {
+              arrowElement.style.color = 'black'; 
+      });
+
+      const activeDay = document.querySelector('.activeDay');
+     
+      if(activeDay){
+          activeDay.style.backgroundColor = '#9AAFC5';
+      }
+
+      const selectedDay = document.getElementById('selectedDay');
+      if(selectedDay){
+        document.getElementById('selectedDay').style.backgroundColor = '#9AAFC5';
+      }
+      }
+     
+
+}
+
+
+function getSeasonDarkColor(date){
+ const month = date.getMonth() + 1; 
+
+  if (month >= 3 && month <= 5) {
+    return '#cf366b';
+  }
+  else if (month >= 6 && month <= 8) {
+    
+    return '#6f9270';
+  }
+  else if (month >= 9 && month <= 11) {
+    return '#dd7116';
+  }
+  else{
+    return '#9AAFC5';
+  }
+}

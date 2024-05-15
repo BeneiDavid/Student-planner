@@ -105,8 +105,12 @@ function setDays(currentYear, currentMonth){
         calendarDaysDiv.appendChild(listItem);
     }
     
-    
+    setSeasonColors(firstDayOfMonth);
 }
+
+
+
+
 
 // Nap kiválasztása a naptárban
 function chooseDay(){
@@ -114,9 +118,13 @@ function chooseDay(){
 
     var items = calendarDaysDiv.querySelectorAll('li'); 
     items.forEach(function(item) {
-        item.classList.remove('activeDay');
+        if(item.classList.contains('activeDay'));{
+            item.classList.remove('activeDay');
+        }  
     });
     this.classList.add('activeDay');
+
+    
 
     // nap száma
     var day = this.textContent;
@@ -127,6 +135,9 @@ function chooseDay(){
     var dateComponents = selectedDateValue.split('-');
     var year = dateComponents[0];
     var month = dateComponents[1];
+
+    var date = new Date(year, month - 1);
+    setSeasonColors(date);
     
     var selectedDayText = document.getElementById('selectedDay');
     selectedDayText.textContent = year + ". " + monthNames[month] + " " + day + ".";
