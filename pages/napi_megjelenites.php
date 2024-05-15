@@ -90,3 +90,6 @@ else
 
 ?>
 
+<script>
+  document.title = "Student Planner - Napi megjelenítés";
+</script>

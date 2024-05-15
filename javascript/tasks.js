@@ -324,17 +324,20 @@ function fillTaskTable(response, type){
                             if(task_sorting_row[i].task_id == task.task_id){
                                 if(task_sorting_row[i].by_progress == 'to_do'){
                                     var toDoBody = document.getElementById("toDoBody");
-                                    toDoBody.appendChild(row);
+                                    var lastrow = toDoBody.lastElementChild;
+                                    toDoBody.insertBefore(row, lastrow);
                                     found = true;
                                 }
                                 else if(task_sorting_row[i].by_progress == 'in_progress'){
                                     var inProgressBody = document.getElementById("inProgressBody");
-                                    inProgressBody.appendChild(row);
+                                    var lastrow = inProgressBody.lastElementChild;
+                                    inProgressBody.insertBefore(row, lastrow);
                                     found = true;
                                 }
                                 else if(task_sorting_row[i].by_progress == 'done'){
                                     var doneBody = document.getElementById("doneBody");
-                                    doneBody.appendChild(row);
+                                    var lastrow = doneBody.lastElementChild;
+                                    doneBody.insertBefore(row, lastrow);
                                     found = true;
                                 }
                                 else{

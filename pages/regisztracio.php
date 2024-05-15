@@ -1,6 +1,5 @@
 <?php
 require 'registrationvalidator.php';
-
 ?>
 
 <h1>Regisztráció</h1>
@@ -46,7 +45,9 @@ require 'registrationvalidator.php';
     </form>
 
 
-
+<script>
+  document.title = "Student Planner - Regisztráció";
+</script>
 
 
 

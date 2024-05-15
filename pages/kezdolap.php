@@ -8,3 +8,8 @@ if (isset($_GET['login_success']) && $_GET['login_success'] == 1) {
 echo "<h1>Kezdőlap</h1>";
 
 ?>
+
+
+<script>
+  document.title = "Student Planner - Kezdőlap";
+</script>

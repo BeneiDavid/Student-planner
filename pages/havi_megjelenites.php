@@ -63,3 +63,7 @@ else{
 }
 
 ?>
+
+<script>
+  document.title = "Student Planner - Havi megjelenítés";
+</script>

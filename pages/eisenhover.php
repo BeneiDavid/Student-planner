@@ -86,3 +86,8 @@ else{
 }
 
 ?>
+
+
+<script>
+  document.title = "Student Planner - Eisenhover mátrix";
+</script>

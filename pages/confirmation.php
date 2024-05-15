@@ -17,3 +17,8 @@
     }
 
 ?>
+
+
+<script>
+  document.title = "Student Planner - Sikeres megerősítés";
+</script>

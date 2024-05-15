@@ -17,6 +17,7 @@ $(document).ready(function() {
                 const match = htmlString.match(regex);
 
             if (match) {
+                console.log("asd");
                 const tdId = match[1];
                 sortTaskByProgress(tdId, tableId);
             } else {

@@ -38,4 +38,6 @@ else{
 ?>
 
 
-
+<script>
+  document.title = "Student Planner - Üzenetek";
+</script>

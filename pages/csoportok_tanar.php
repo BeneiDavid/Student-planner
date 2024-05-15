@@ -64,3 +64,8 @@ else{
 }
 
 ?>
+
+
+<script>
+  document.title = "Student Planner - Csoportok";
+</script>
