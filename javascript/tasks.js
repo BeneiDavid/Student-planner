@@ -446,24 +446,29 @@ function fillTaskTable(response, type){
                         for (var i = 0; i < task_sorting_row.length; i++) {
                             if(task_sorting_row[i].task_id == task.task_id){
                                 if(task_sorting_row[i].eisenhover == 'urgent_important'){
-                                    console.log("asd");
                                     var urgImp = document.getElementById("urgImp");
-                                    urgImp.appendChild(row);
+                                    var lastRow = urgImp.lastElementChild;
+                                    console.log("why?");
+                                    console.log(lastRow);
+                                    urgImp.insertBefore(row, lastRow);
                                     found = true;
                                 }
                                 else if(task_sorting_row[i].eisenhover == 'urgent_not_important'){
                                     var urgNotImp = document.getElementById("urgNotImp");
-                                    urgNotImp.appendChild(row);
+                                    var lastRow = urgNotImp.lastElementChild;
+                                    urgNotImp.insertBefore(row, lastRow);
                                     found = true;
                                 }
                                 else if(task_sorting_row[i].eisenhover == 'not_urgent_important'){
                                     var notUrgImp = document.getElementById("notUrgImp");
-                                    notUrgImp.appendChild(row);
+                                    var lastRow = notUrgImp.lastElementChild;
+                                    notUrgImp.insertBefore(row, lastRow);
                                     found = true;
                                 }
                                 else if(task_sorting_row[i].eisenhover == 'not_urgent_not_important'){
                                     var notUrgNotImp = document.getElementById("notUrgNotImp");
-                                    notUrgNotImp.appendChild(row);
+                                    var lastRow = notUrgNotImp.lastElementChild;
+                                    notUrgNotImp.insertBefore(row, lastRow);
                                     found = true;
                                 }
                                 else{

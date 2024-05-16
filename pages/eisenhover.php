@@ -48,7 +48,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader'>Fontos - Sürgős</th>
         </tr>
+        <tr class='display-none'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
 
+            </td>
+        </tr>
     </tbody>
     </table></div>";
     echo "<div class='grid-item'><table class='col selected-day-div' id='urgent_notimportant'>
@@ -57,7 +62,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader'>Fontos - Nem sürgős</th>
         </tr>
-        
+        <tr class='display-none'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table></div>";
     echo "<div class='grid-item'><table class='col selected-day-div' id='noturgent_important'>
@@ -66,7 +76,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader'>Nem fontos - Sürgős</th>
         </tr>
-        
+        <tr class='display-none'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table></div>";
 
@@ -76,7 +91,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <tr>
             <th colspan='1' id='labelsHeader'>Nem fontos - Nem sürgős</th>
         </tr>
-        
+        <tr class='display-none'></tr>
+        <tr  class='no-drag-drop'>
+            <td class='new-task-td'>
+
+            </td>
+        </tr>
     </tbody>
     </table></div></div>";
 

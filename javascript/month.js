@@ -51,7 +51,8 @@ function setDays(currentYear, currentMonth){
     calendarDaysDiv.innerHTML = "";
 
     for (i = 1; i < firstWeekday; i++) {
-        var listItem = document.createElement("li");
+        var listItem = document.createElement("div");
+        listItem.classList.add('monthlyDayDiv');
         calendarDaysDiv.appendChild(listItem);
     }
     
@@ -86,7 +87,7 @@ function setDays(currentYear, currentMonth){
         if(calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
             listItem.classList.add('activeDayMonthly');
             var color = getSeasonDarkColor(firstDayOfMonth);
-            var svg = createColoredSVG(color, "115px", "circle");
+            var svg = createColoredSVG(color, "115px", "dot");
             var svgBlob = new Blob([svg.outerHTML], {type: 'image/svg+xml'});
             var url = URL.createObjectURL(svgBlob);
 

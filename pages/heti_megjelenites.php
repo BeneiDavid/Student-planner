@@ -35,9 +35,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                         <li class='next clickable no-select' id='nextMonth'>&#10095;</li>
                         <li id='weekDate'>
                         </li>
-                        <input type='hidden' id='firstdayOfWeek' name='firstdayOfWeek'>
-                        <input type='hidden' id='selectedWeekDate' name='selectedWeekDate'>
                     </ul>
+                    <input type='hidden' id='firstdayOfWeek' name='firstdayOfWeek'>
+                        <input type='hidden' id='selectedWeekDate' name='selectedWeekDate'>
                 </div>
 
                 <div class='selected-day-div week-grid'>
