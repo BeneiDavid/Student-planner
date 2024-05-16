@@ -448,8 +448,6 @@ function fillTaskTable(response, type){
                                 if(task_sorting_row[i].eisenhover == 'urgent_important'){
                                     var urgImp = document.getElementById("urgImp");
                                     var lastRow = urgImp.lastElementChild;
-                                    console.log("why?");
-                                    console.log(lastRow);
                                     urgImp.insertBefore(row, lastRow);
                                     found = true;
                                 }

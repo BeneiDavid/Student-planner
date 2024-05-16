@@ -137,7 +137,22 @@ console.log(groupId);
         credentials: 'same-origin',
         success: function(response) {
             console.log(response);
-            fillTaskTable(response, "teacher");
+            if(response.length == 0){
+                var groupTasksBody = document.getElementById('groupTasksBody');
+                var tr = document.createElement('tr');
+                var noTasksTd =  document.createElement('td');
+                noTasksTd.style.backgroundColor = "white";
+                noTasksTd.textContent = "A csoportnak még nincsenek feladatai";
+                tr.appendChild(noTasksTd);
+                while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 1) {
+                    groupTasksBody.removeChild(groupTasksBody.children[1]);
+                }
+                groupTasksBody.appendChild(tr);
+            }
+            else{   
+                fillTaskTable(response, "teacher");
+            }
+            
         },
         error: function(xhr) {
             console.error(xhr.responseText);

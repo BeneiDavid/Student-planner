@@ -13,10 +13,10 @@ if ($_SESSION['logged_in'] != 'yes')
                 
                         <form method="post" class="content-padding">
                             <label for="address">E-mail cím</label><span class="error">' . $error . '</span><br> 
-                            <input type="address" id="address" name="address" class="form-control input-length" value="'. $email .'">
+                            <input type="address" id="address" name="address" autocomplete="address" class="form-control input-length" value="'. $email .'">
                             <br>
-                            <label for="email">Jelszó</label><br>    
-                            <input type="password" name="password" class="form-control input-length">
+                            <label for="password">Jelszó</label><br>    
+                            <input type="password" name="password" id="password" class="form-control input-length">
                             
                             <br>
                             <input type="submit" name="login_button" value="Belépés" class="btn btn-success">

@@ -15,6 +15,8 @@ async function fillTeachersDiv(){
         credentials: 'same-origin',
         success: function(response) {
             console.log(response);
+            var teachersDiv = document.getElementById('teachersDiv');
+
             if(response.length != 0){
             var groupData = response.group_data;
             var teacherData = response.teacher_data;
@@ -89,13 +91,19 @@ async function fillTeachersDiv(){
                 teacherDiv.style.maxWidth = "1000px"; 
                 //teacherDiv.id = "teacher_" + uniqueTeacherData[i].user_id;
 
-                var teachersDiv = document.getElementById('teachersDiv');
+               
                 teacherDiv.appendChild(teacherNameDiv);
                 teacherDiv.appendChild(groupNameDiv);
                 teacherDiv.appendChild(messageTeacherDiv);
                 teachersDiv.appendChild(teacherDiv);
                 
             }
+            }
+            else{
+                var noGroupsDiv = document.createElement('div');
+                noGroupsDiv.textContent = "Ön még nincs benne egy csoportban sem."
+                noGroupsDiv.classList.add('no-created-groups-div');
+                teachersDiv.appendChild(noGroupsDiv);
             }
             
         },
@@ -106,29 +114,34 @@ async function fillTeachersDiv(){
 
 
         var teachersDiv = document.getElementById('teachersDiv');
-        var childDivs = teachersDiv.children;
+        
+        if(!teachersDiv.firstChild.classList.contains('no-created-groups-div')){
 
-        for (var i = 0; i < childDivs.length; i++) {
+        
 
-            var messageDiv = childDivs[i].lastChild;
-            console.log(messageDiv);
-            var sendToUserId = messageDiv.id.split("_")[1];
-            await  $.ajax({
-                url: 'queries/all_messages_read_query.php',
-                type: 'POST',
-                data: { 'otherUserId': sendToUserId },
-                success: function(secondResponse) {
-                    if(secondResponse == "false"){
-                        var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
-                        var firstChild = messageDiv.firstChild;
-                        messageDiv.insertBefore(unseenMessageDot, firstChild);
+            var childDivs = teachersDiv.children;
+            for (var i = 0; i < childDivs.length; i++) {
 
+                var messageDiv = childDivs[i].lastChild;
+                console.log(messageDiv);
+                var sendToUserId = messageDiv.id.split("_")[1];
+                await  $.ajax({
+                    url: 'queries/all_messages_read_query.php',
+                    type: 'POST',
+                    data: { 'otherUserId': sendToUserId },
+                    success: function(secondResponse) {
+                        if(secondResponse == "false"){
+                            var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
+                            var firstChild = messageDiv.firstChild;
+                            messageDiv.insertBefore(unseenMessageDot, firstChild);
+
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error in second AJAX request:', error);
                     }
-                },
-                error: function(error) {
-                    console.error('Error in second AJAX request:', error);
-                }
-            });
+                });
+            }
         }
 }
 

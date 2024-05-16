@@ -5,10 +5,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     require_once 'user.php';
     $user = unserialize($_SESSION['user']);
     $user_type = $user->getUserType();
+
     if($user_type != 'student'){
         header("Location: index.php?page=kezdolap");
     exit;
     }
+
     require 'modals/quit_group_confirm_modal.php';
     require "modals/chat_modal.php";
     require 'task_details_modal.php';
@@ -46,7 +48,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     ";
 }
 else{
-    print '<p class="bg-warning text-white"><a href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></p>';
+        echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';
 }
 
 ?>
