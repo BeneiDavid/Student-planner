@@ -3,7 +3,7 @@
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='groupDelete_xButton'>&times;</span>
-    <h3>Csoport törlése</h3>
+    <p class='modal-header-text'>Csoport törlése</p>
     <form method='post' id="deleteTaskForm">
         <p>Biztosan törli a(z) <span id='groupToDeleteSpan'></span> csoportot?</p>
     <input type='hidden' id='groupToDeleteId'>

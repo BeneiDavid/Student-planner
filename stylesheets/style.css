@@ -210,6 +210,7 @@ margin-left:  10px;
 
 .add-label-icon{
   background-color: white;
+  display: inline-block;
 }
 
 .add-label-icon:hover{
@@ -1152,4 +1153,5 @@ h1{
 .modal-header-text{
   font-size: x-large;
   color: black;
+  font-weight: 500;
 }

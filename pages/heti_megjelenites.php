@@ -3,8 +3,10 @@
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
     require_once 'user.php';
+
     $user = unserialize($_SESSION['user']);
     $user_type = $user->getUserType();
+
     if($user_type != 'student'){
         header("Location: index.php?page=kezdolap");
     exit;
@@ -14,15 +16,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     require 'add_label_modal.php';
     require 'new_label_modal.php';
     require 'delete_task_modal.php';
-    echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/add_label_functions.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/week.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/common.js"></script>';
+    echo '<script type="text/javascript" src="javascript/task_details.js"></script>';
+    echo '<script type="text/javascript" src="javascript/modify_label_functions.js"></script>';
+    echo '<script type="text/javascript" src="javascript/add_label_functions.js"></script>';
+    echo '<script type="text/javascript" src="javascript/tasks.js"></script>';
+    echo '<script type="text/javascript" src="javascript/week.js"></script>';
+    echo '<script type="text/javascript" src="javascript/common.js"></script>';
     
-
-
     echo "<h1>Heti megjelenítés</h1>";
 
     echo "<br><br>
@@ -37,7 +37,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                         </li>
                     </ul>
                     <input type='hidden' id='firstdayOfWeek' name='firstdayOfWeek'>
-                        <input type='hidden' id='selectedWeekDate' name='selectedWeekDate'>
+                    <input type='hidden' id='selectedWeekDate' name='selectedWeekDate'>
                 </div>
 
                 <div class='selected-day-div week-grid'>
@@ -116,15 +116,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </div>
     </div>";
             
-    
-    
-    
-
 }
 else{
     echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';
 }
-
 ?>
 
 <script>

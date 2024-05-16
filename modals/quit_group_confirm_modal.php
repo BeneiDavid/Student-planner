@@ -3,7 +3,7 @@
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='groupQuit_xButton'>&times;</span>
-    <h3>Kilépés a csoportból</h3>
+    <p class='modal-header-text'>Kilépés a csoportból</p>
     <form method='post' id="deleteTaskForm">
         <p>Biztosan kilép a(z) <span id='groupQuitSpan'></span> csoportból?</p>
     <input type='hidden' id='groupQuitId'>

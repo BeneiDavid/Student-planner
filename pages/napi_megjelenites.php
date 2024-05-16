@@ -22,8 +22,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo '<script type="text/javascript"  src="javascript/calendar.js"></script>';
     
 
-
-
     echo "<h1>Napi megjelenítés</h1><br>";
 
     echo "
@@ -34,10 +32,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                         <ul>
                             <li class='prev clickable no-select' id='prevMonth'>&#10094;</li>
                             <li class='next clickable no-select' id='nextMonth'>&#10095;</li>
-                            <li id='monthAndYear' class='month-and-year'>
-                            
-                            </li>
-                            
+                            <li id='monthAndYear' class='month-and-year'></li>
                         </ul>
                             <input type='hidden' id='selectedDate' name='selectedDate'>
                             <input type='hidden' id='calendarYearAndMonth' name='calendarYearAndMonth'>
@@ -54,7 +49,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                     </ul>
                     
                     <ul class='days' id='calendarDays'></ul>
-                    </div>";
+                </div>";
                     
 
                 echo "
@@ -74,11 +69,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                             </button>
                             </td>
                             </tr>
-                            <!-- Add more rows as needed -->
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>";
 

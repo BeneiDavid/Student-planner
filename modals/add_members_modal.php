@@ -4,7 +4,7 @@
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='addMembers_xButton'>&times;</span>
-    <h3 id='membersModalHeader' class='word-wrap'><!-- A csoport neve dinamikusan kerül ide --></h3>
+    <p id='membersModalHeader' class='word-wrap modal-header-text'><!-- A csoport neve dinamikusan kerül ide --></p>
 
     <br>
 
