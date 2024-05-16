@@ -46,8 +46,9 @@ function chooseLabel(divId){
         else{
           console.log(divId);
           var labelName = document.getElementById(divId);
-
           console.log(labelName);
+          console.log(labelName);
+          labelName.style.marginBottom = "0px";
           labelsHeader.textContent = "A(z) \"" + labelName.textContent + "\" címkével megjelölt feladatok";
           fillTaskTable(response, "byLabel");
         }
@@ -109,6 +110,7 @@ function chooseLabel(divId){
           dataType: 'text',
           success: function(response) {
             resolve(response);
+            console.log(response);
           },
           error: function(xhr) {
               console.error(xhr.responseText);
