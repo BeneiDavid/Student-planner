@@ -48,7 +48,7 @@ function chooseLabel(divId){
           var labelName = document.getElementById(divId);
           console.log(labelName);
           console.log(labelName);
-          labelName.style.marginBottom = "0px";
+          //labelName.style.marginBottom = "0px";
           labelsHeader.textContent = "A(z) \"" + labelName.textContent + "\" címkével megjelölt feladatok";
           fillTaskTable(response, "byLabel");
         }
@@ -58,7 +58,7 @@ function chooseLabel(divId){
         
         chooseLabelDiv.innerHTML = "";
         var clone = choseLabelDiv.cloneNode(true);
-
+        clone.style.marginBottom = "0px";
         chooseLabelDiv.appendChild(clone);
     },
     error: function(xhr, status, error) {

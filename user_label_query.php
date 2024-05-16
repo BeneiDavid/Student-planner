@@ -67,7 +67,7 @@ require_once 'user.php';
 
       $group_label_ids = array_unique($group_label_ids);
       foreach ($group_label_ids as $labelId ){
-        $groups_labels_query =  mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$labelId'");
+        $groups_labels_query =  mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$labelId' AND `user_id` != '$user_id'");
 
         while ($label = mysqli_fetch_assoc($groups_labels_query)) {
           $data[] = $label;

@@ -4,7 +4,7 @@
       
             <!-- Modal Header -->
             <div class='modal-header'>
-              <h4 class='modal-title'>Chat - <span id='chatGroupNameSpan'></span></h4>
+              <p class='modal-title modal-header-text'>Chat - <span id='chatGroupNameSpan'></span></p>
               <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
             </div>
       
