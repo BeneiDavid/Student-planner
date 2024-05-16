@@ -14,20 +14,26 @@ function fillGroupsDropdown(){
             console.log(response);
             
             if(response.length != 0){
-            var groupData = response.group_data;
-            for (var i = 0; i < groupData.length; i++) {
-                var groupDropdownList = document.getElementById('groupDropdownList');
-                var li = document.createElement('li');
-                var a = document.createElement('a');
-                a.classList.add('dropdown-item');
-                a.href = "#";
-                a.textContent = groupData[i].group_name;
-                li.id = "group_" + groupData[i].group_id;
-                li.addEventListener('click', selectGroup, false);
-                li.appendChild(a);
-                groupDropdownList.appendChild(li);
+                var groupData = response.group_data;
+                for (var i = 0; i < groupData.length; i++) {
+                    var groupDropdownList = document.getElementById('groupDropdownList');
+                    var li = document.createElement('li');
+                    var a = document.createElement('a');
+                    a.classList.add('dropdown-item');
+                    a.href = "#";
+                    a.textContent = groupData[i].group_name;
+                    li.id = "group_" + groupData[i].group_id;
+                    li.addEventListener('click', selectGroup, false);
+                    li.appendChild(a);
+                    groupDropdownList.appendChild(li);
 
+                }
+                var chooseGroupButton =  document.getElementById('chooseGroupButton');
+                chooseGroupButton.style.display = "block";
             }
+            else{
+                var noCreatedGroupsDiv =  document.getElementById('noCreatedGroupsDiv');
+                noCreatedGroupsDiv.style.display = "block";
             }
         },
         error: function(xhr) {
@@ -116,7 +122,7 @@ async function listGroupMembers(groupId){
             else{
                 var noMembersDiv = document.createElement('div');
                 noMembersDiv.textContent = "A csoport még nem rendelkezik tagokkal.";
-                noMembersDiv.style.color = "blue";
+                noMembersDiv.classList.add('no-members-div');
 
                 groupMembersDiv.appendChild(noMembersDiv);
             }
@@ -131,29 +137,34 @@ async function listGroupMembers(groupId){
 
         
         var groupMembersDiv = document.getElementById('groupMembersDiv');
-        var childDivs = groupMembersDiv.children;
+        console.log(groupMembersDiv);
+        if(!groupMembersDiv.firstChild.classList.contains('no-members-div')){
 
-        for (var i = 0; i < childDivs.length; i++) {
+        
+            var childDivs = groupMembersDiv.children;
 
-            var messageDiv = childDivs[i].lastChild;
-            console.log(messageDiv);
-            var sendToUserId = messageDiv.id.split("_")[1];
-            await  $.ajax({
-                url: 'queries/all_messages_read_query.php',
-                type: 'POST',
-                data: { 'otherUserId': sendToUserId },
-                success: function(secondResponse) {
-                    if(secondResponse == "false"){
-                        var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
-                        var firstChild = messageDiv.firstChild;
-                        messageDiv.insertBefore(unseenMessageDot, firstChild);
+            for (var i = 0; i < childDivs.length; i++) {
 
+                var messageDiv = childDivs[i].lastChild;
+                console.log(messageDiv);
+                var sendToUserId = messageDiv.id.split("_")[1];
+                await  $.ajax({
+                    url: 'queries/all_messages_read_query.php',
+                    type: 'POST',
+                    data: { 'otherUserId': sendToUserId },
+                    success: function(secondResponse) {
+                        if(secondResponse == "false"){
+                            var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
+                            var firstChild = messageDiv.firstChild;
+                            messageDiv.insertBefore(unseenMessageDot, firstChild);
+
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error in second AJAX request:', error);
                     }
-                },
-                error: function(error) {
-                    console.error('Error in second AJAX request:', error);
-                }
-            });
+                });
+            }
         }
 
 

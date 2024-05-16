@@ -46,6 +46,7 @@ function chooseLabel(divId){
         else{
           console.log(divId);
           var labelName = document.getElementById(divId);
+
           console.log(labelName);
           labelsHeader.textContent = "A(z) \"" + labelName.textContent + "\" címkével megjelölt feladatok";
           fillTaskTable(response, "byLabel");
@@ -55,7 +56,9 @@ function chooseLabel(divId){
         var chooseLabelDiv = document.getElementById("chooseLabel");
         
         chooseLabelDiv.innerHTML = "";
-        chooseLabelDiv.appendChild(choseLabelDiv.cloneNode(true));
+        var clone = choseLabelDiv.cloneNode(true);
+
+        chooseLabelDiv.appendChild(clone);
     },
     error: function(xhr, status, error) {
         console.error(xhr.responseText);
@@ -145,21 +148,15 @@ function chooseLabel(divId){
     
     if(labelId != '' && chosenLabelId.value == ''){
       chosenLabelId.value = "div_" + labelId;
-      console.log("A" + labelId);
-      console.log(chosenLabelId.value);
     }
 
     if(labelId == ''){
       chosenLabelId.value = '';
-      console.log("B" + labelId);
-      console.log(chosenLabelId.value);
     }
 
     else if(await labelExists(chosenLabelId.value.split("_")[1]) == "false"){
       labelId = await getFirstLabel();
-      console.log("C" +labelId);
       chosenLabelId.value = "div_" + labelId;
-      console.log(chosenLabelId.value);
     }
 
     if(labelId == ''){
@@ -177,9 +174,6 @@ function chooseLabel(divId){
     }
     else{
       if(chosenLabelId != ''){
-        console.log("aasd");
-        console.log(chosenLabelId);
-        console.log(labelId);
         document.getElementById('')
 
         var selectedLabel = document.getElementById('chooseLabel');

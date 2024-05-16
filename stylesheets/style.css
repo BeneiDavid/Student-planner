@@ -338,13 +338,15 @@ margin-left:  10px;
   position: relative;
   margin-left: 10px;
   border: 3px solid black ;
-  max-width: 90%;
+  max-width: 100%;
   overflow: hidden;
 
 }
 
 .preview-label{
   display: inline-block;
+  font-size: larger;
+  vertical-align: sub;
 }
 
 .preview-text{
@@ -744,6 +746,18 @@ margin-left:  10px;
   border: 1px solid black;
 }
 
+.no-members-div{
+  min-height: 50px;
+  padding: 10px;
+
+  border-radius: 5px;
+  margin: auto;
+  font-size: larger;
+  text-align: center;
+  background-color: white;
+  border: 1px solid black;
+}
+
 .new-group{
   padding: 5px;
   width: auto; /* Set a width for the div */
@@ -834,6 +848,13 @@ margin-left:  10px;
   margin-left: 150px;
 }
 
+.display-messages-button{
+  display: none;
+}
+
+.display-messages-div{
+  display: none;
+}
 
 .search-input{
   width: 310px;
