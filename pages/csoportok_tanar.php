@@ -30,7 +30,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo "<h1 id='groupHeaderName'>Csoportok</h1><br><br>";
     echo "<div id='groupsMainDiv' class='container groups-main-div'>
             <div class='div-with-border groups-div' id='groupsDiv'>
-                <div class='no-created-groups-div'>Ön még nem hozott létre csoportokat. Csoportok létrehozásához kattintson a lenti gombra! </div>
+
             </div>
             <br><br>
             <div class='new-task-item new-group div-with-border clickable no-select' id='createNewGroup'>
@@ -60,7 +60,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </div>";
 }
 else{
-    print '<p class="bg-warning text-white"><a href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></p>';
+    echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';
 }
 
 ?>

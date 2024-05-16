@@ -88,7 +88,7 @@ function clearUrgentImportant(){
     var urgImp = document.getElementById("urgImp");
     var children = urgImp.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         urgImp.removeChild(children[i]);
     }
 }
@@ -97,7 +97,7 @@ function clearUrgentNotImportant(){
     var urgNotImp = document.getElementById("urgNotImp");
     var children = urgNotImp.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         urgNotImp.removeChild(children[i]);
     }
 }
@@ -106,7 +106,7 @@ function clearNotUrgentImportant(){
     var notUrgImp = document.getElementById("notUrgImp");
     var children = notUrgImp.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         notUrgImp.removeChild(children[i]);
     }
 }
@@ -115,7 +115,7 @@ function clearNotUrgentNotImportant(){
     var notUrgNotImp = document.getElementById("notUrgNotImp");
     var children = notUrgNotImp.children;
 
-    for (var i = children.length - 1; i >= 1; i--) {
+    for (var i = children.length - 2; i >= 2; i--) {
         notUrgNotImp.removeChild(children[i]);
     }
 }

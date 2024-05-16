@@ -155,7 +155,7 @@ function listMonthTasks(){
      console.log(daysInMonth);
      console.log(calendarYearAndMonth);
     var dayOfMonth = new Date(year, month, 1);
-
+    setSeasonColors(dayOfMonth);
     for (var i = 0; i < daysInMonth; i++) {
         (function (index) {
             console.log(dayOfMonth);
@@ -179,7 +179,7 @@ function listMonthTasks(){
         // Move this outside of the AJAX call to avoid incrementing `firstdayOfWeek` multiple times
         dayOfMonth.setDate(dayOfMonth.getDate() + 1);
     }
-    setSeasonColors(dayOfMonth);
+    
     console.log("set");
     
 }
