@@ -62,7 +62,7 @@ require_once 'user.php';
 
 
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<nav class="navbar navbar-expand-md navbar-custom navbar-dark">
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigationBar">
     <span class="sr-only">Navigációs sáv kinyitása</span>
     <span class="navbar-toggler-icon"></span>

@@ -263,9 +263,11 @@ function listGroups(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response);
             var parsedData = JSON.parse(response);
             var groupData = parsedData.group_data;
             var groupsDiv = document.getElementById('groupsDiv');
+            console.log(groupData);
             groupsDiv.innerHTML = "";
             for (var i = 0; i < groupData.length; i++) {
                 var containerDiv = document.createElement('div');

@@ -151,7 +151,7 @@ function setSeasonColors(date) {
       daysElement.style.backgroundColor = '#ffe0e2';
 
       const month = document.querySelector('.month');
-      month.style.backgroundColor = '#cf366b';
+      month.style.backgroundColor = '#de5d83';
 
       const calendarArrows = document.querySelectorAll('.month ul li');
 
@@ -162,12 +162,12 @@ function setSeasonColors(date) {
       const activeDay = document.querySelector('.activeDay');
      
       if(activeDay){
-          activeDay.style.backgroundColor = '#cf366b';
+          activeDay.style.backgroundColor = '#de5d83';
       }
 
       const selectedDay = document.getElementById('selectedDay');
       if(selectedDay){
-        document.getElementById('selectedDay').style.backgroundColor = '#cf366b';
+        document.getElementById('selectedDay').style.backgroundColor = '#de5d83';
       }
       
 
@@ -276,7 +276,7 @@ function getSeasonDarkColor(date){
  const month = date.getMonth() + 1; 
 
   if (month >= 3 && month <= 5) {
-    return '#cf366b';
+    return '#de5d83';
   }
   else if (month >= 6 && month <= 8) {
     
