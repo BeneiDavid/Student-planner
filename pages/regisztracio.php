@@ -1,5 +1,11 @@
 <?php
 require 'registrationvalidator.php';
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
+{
+    header("Location: index.php?page=kezdolap");
+}
+
 ?>
 
 <h1>Regisztráció</h1>

@@ -18,9 +18,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
   echo"  <div class='dropdown container'>
           <div class='align-button-center'>
-            <button class='btn btn-primary dropdown-toggle align-button-center' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+            <br>
+            <button id='chooseGroupButton' class='btn btn-primary dropdown-toggle align-button-center  display-messages-button' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
               Válasszon csoportot
             </button>
+            <div class='no-created-groups-div display-messages-div' id='noCreatedGroupsDiv'>Ön még nem hozott létre csoportokat.</div>
             <ul class='dropdown-menu' id='groupDropdownList'>
             </ul>
           </div>

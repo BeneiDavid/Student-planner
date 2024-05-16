@@ -17,7 +17,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo "
     <br><br>
     <div class='center-div'>
-    <div id='labelBox'><h4 class='preview-label'>Válassza ki a címkét:</h4>
+    <div id='labelBox'><p class='preview-label'>Válassza ki a címkét:</p>
     <div id='chooseLabel' class='inline-block'><div class='ellipse clickable emptylabel' id='emptyLabel'></div></div>
   </div>
 

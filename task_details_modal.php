@@ -47,7 +47,6 @@ if (isset($_POST['taskAddData']))
     mysqli_query($l, "INSERT INTO `tasks` SET 
         `task_id`=NULL,
         `user_id`='".$user_id."',
-        `creator_id`='".$user_id."',      
         `title`='".$task_name."',
         `task_description`='".$task_description."',
         `task_color` = '".$task_color."',
