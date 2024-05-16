@@ -44,7 +44,7 @@ if (isset($_POST['formData']))
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='modify_labels_xButton'>&times;</span>
-    <h3>Címke adatai</h3>
+    <p class='modal-header-text'>Címke adatai</p>
     <p class='preview-label'>Előnézet:</p>
     <div class='ellipse' id='previewDiv'>
         <p id='previewText' class='preview-text'></p>   

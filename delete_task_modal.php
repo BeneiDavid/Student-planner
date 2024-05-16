@@ -23,7 +23,7 @@ if (isset($_POST['taskAddData']))
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='taskDelete_xButton'>&times;</span>
-    <h3>Feladat törlése</h3>
+    <p class='modal-header-text'>Feladat törlése</p>
     <form method='post' id="deleteTaskForm">
         <p>Biztosan törli a feladatot?</p>
     
