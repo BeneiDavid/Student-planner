@@ -3,7 +3,7 @@
 <!-- Modal content -->
 <div class="custom-modal-content">
     <span class="custom-close" id='sortByLabel_xButton'>&times;</span>
-    <h3>Válasszon címkét!</h3>
+    <p class='modal-header-text'>Válasszon címkét!</p>
     <div id="sortByLabelModalLabels"></div>
 </div>
 

@@ -346,6 +346,7 @@ margin-left:  10px;
 .preview-label{
   display: inline-block;
   font-size: larger;
+  font-weight: 500;
   vertical-align: sub;
 }
 
@@ -1145,4 +1146,10 @@ h1{
 
 .text-align-center{
   text-align: center;
+}
+
+
+.modal-header-text{
+  font-size: x-large;
+  color: black;
 }
