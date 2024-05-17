@@ -127,7 +127,9 @@ require_once 'user.php';
                     echo ($_GET['page'] == 'uzenetek_tanar') ? 'active' : '';
                     echo '" href="index.php?page=uzenetek_tanar">Üzenetek</a></li>';
                   }
-                  
+                    echo '<li><a class="nav-link ';
+                    echo ($_GET['page'] == 'jelszo_valtoztatas') ? 'active' : '';
+                    echo '" href="index.php?page=jelszo_valtoztatas">Jelszó változtatás</a></li>';
 
                     echo '<li><a class="nav-link ';
                     echo ($_GET['page'] == 'kijelentkezes') ? 'active' : '';
@@ -149,6 +151,7 @@ require_once 'user.php';
         {
           case 'regisztracio': include 'pages/regisztracio.php';  break;
           case 'bejelentkezes': include 'pages/bejelentkezes.php'; break;
+          case 'elfelejtett_jelszo'; include 'pages/elfelejtett_jelszo.php'; break;
           case 'confirmation': include 'pages/confirmation.php'; break;
           case 'napi_megjelenites'; include 'pages/napi_megjelenites.php'; break;
           case 'heti_megjelenites'; include 'pages/heti_megjelenites.php'; break;
@@ -160,6 +163,7 @@ require_once 'user.php';
           case 'uzenetek'; include 'pages/uzenetek.php'; break;
           case 'csoportok_tanar'; include 'pages/csoportok_tanar.php'; break;
           case 'uzenetek_tanar'; include 'pages/uzenetek_tanar.php'; break;
+          case 'jelszo_valtoztatas'; include 'pages/jelszo_valtoztatas.php'; break;
           case 'kijelentkezes'; include 'pages/kijelentkezes.php'; break;
           
 

@@ -115,6 +115,7 @@ function fillTaskTable(response, type){
                                     newDiv.classList.add('ellipse');
                                     newP.classList.add('preview-text');
                                     newImg.classList.add('preview-image');
+                                    newImg.title = "Címke ikon";
                                     newDiv.classList.add('clickable');
                                     newDiv.classList.add("no-select");
                                     var rgb = hexToRgb(labels[i].label_color);
@@ -202,6 +203,7 @@ function fillTaskTable(response, type){
                                         newDiv.classList.add('ellipse');
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
+                                        newImg.title = "Címke ikon";
                                         newDiv.classList.add('clickable');
                                         newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
@@ -287,6 +289,7 @@ function fillTaskTable(response, type){
                                         newDiv.classList.add('ellipse');
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
+                                        newImg.title = "Címke ikon";
                                         newDiv.classList.add('clickable');
                                         newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
@@ -410,6 +413,7 @@ function fillTaskTable(response, type){
                                         newDiv.classList.add('ellipse');
                                         newP.classList.add('preview-text');
                                         newImg.classList.add('preview-image');
+                                        newImg.title = "Címke ikon";
                                         newDiv.classList.add('clickable');
                                         newDiv.classList.add("no-select");
                                         var rgb = hexToRgb(labels[i].label_color);
@@ -558,6 +562,7 @@ function fillTaskTable(response, type){
                                     newDiv.classList.add('ellipse');
                                     newP.classList.add('preview-text');
                                     newImg.classList.add('preview-image');
+                                    newImg.title = "Címke ikon";
                                     newDiv.classList.add('clickable');
                                     newDiv.classList.add("no-select");
                                     var rgb = hexToRgb(labels[i].label_color);

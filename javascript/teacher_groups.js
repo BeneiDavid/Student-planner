@@ -322,7 +322,7 @@ function listGroups(){
                     editImg.title = "Csoport szerkesztése";
                     editText.textContent = "Csoport szerkesztése";
                     editText.classList.add('clickable');
-                    editText.style.color = "darkorange";
+                    editText.style.color = "#fcba03";
                     editDiv.appendChild(editImg);
                     editDiv.appendChild(editText);
                     editText.addEventListener('click', editGroupClick, false);
@@ -338,7 +338,7 @@ function listGroups(){
                     deleteImg.title = "Csoport törlése";
                     deleteText.textContent = "Csoport törlése";
                     deleteText.classList.add('clickable');
-                    deleteText.style.color = "red";
+                    deleteText.style.color = "#d40f0f";
                     deleteDiv.appendChild(deleteImg);
                     deleteDiv.appendChild(deleteText);
                     deleteText.addEventListener('click', showConfirmDeleteModal, false);

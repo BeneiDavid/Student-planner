@@ -157,6 +157,7 @@ function listUserLabels(fromLabelPopover, showGroups){
                 newDiv.classList.add('ellipse');
                 newP.classList.add('preview-text');
                 newImg.classList.add('preview-image');
+                newImg.title = "Címke ikon";
                 newDiv.classList.add('clickable');
                 
                 var rgb = hexToRgb(item.label_color);
