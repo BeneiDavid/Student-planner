@@ -40,7 +40,7 @@ function hideAddMembersModal(){
 // Tagok hozzáadása a csoporthoz
 function addMembers(event){
     event.preventDefault();
-    document.getElementById('noResultText').style.visibility = "collapse";
+    document.getElementById('noResultText').style.display = "none";
     document.getElementById('searchInput').value = "";
     var searchResults = document.getElementById('searchResults');
     const studentDivs = searchResults.querySelectorAll('div');
@@ -103,7 +103,7 @@ function listNotAddedStudents(){
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data === 'undefined'){
-                document.getElementById('noStudents').style.visibility = "visible";
+                document.getElementById('noStudents').style.display = "block";
             }
             else{
                 
@@ -139,10 +139,10 @@ function listNotAddedStudents(){
                 }
 
                 if(!searchResults.hasChildNodes()){
-                    document.getElementById('noStudents').style.visibility = "visible";
+                    document.getElementById('noStudents').style.display = "block";
                 }
                 else{
-                    document.getElementById('noStudents').style.visibility = "collapse";
+                    document.getElementById('noStudents').style.display = "none";
                 }
             }
   
@@ -174,10 +174,10 @@ function showSearchResults(){
       });
     
       if (searchTerm != "" && !foundResult) {
-        document.getElementById('noResultText').style.visibility = "visible";
+        document.getElementById('noResultText').style.display = "block";
       }
       else{
-        document.getElementById('noResultText').style.visibility = "collapse";
+        document.getElementById('noResultText').style.display = "none";
       }
 }
 

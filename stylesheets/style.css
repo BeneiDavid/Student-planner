@@ -128,7 +128,6 @@ margin-left:  10px;
     width: 1000px;
     text-align: center;
     font-size: 20px;
-    
   }
 
   .navbar-custom {
@@ -157,7 +156,7 @@ margin-left:  10px;
 
 
 
-  .selected-day-div tr td{
+  .selected-day-div td{
     border: 2px solid black;
 
   }
@@ -541,7 +540,7 @@ margin-left:  10px;
   gap: 20px; /* Gap between grid items */
   width: 80%; /* Set width to 80% of the parent container */
   margin: 0 auto; /* Center the grid horizontally */
-  height: 20px;
+
   align-items: start;
 } 
 
@@ -587,6 +586,8 @@ margin-left:  10px;
 .padding-bottom{
   padding-bottom: 100px;
 }
+
+
 
 .div-padding-bottom{
   padding-bottom: 20px;
@@ -755,6 +756,16 @@ margin-left:  10px;
   text-align: center;
   background-color: white;
   border: 1px solid black;
+}
+
+.no-registered-students-div{
+  border: 1px solid black;
+  text-align: center;
+
+  font-weight: 500;
+  border-radius: 5px;
+  font-size: larger;
+  vertical-align: center;
 }
 
 .no-members-div{
@@ -937,7 +948,7 @@ margin-left:  10px;
 }
 
 .no-result-text{
-  visibility: collapse;
+  display: none;
 }
 
 .word-wrap{

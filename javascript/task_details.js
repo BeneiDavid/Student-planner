@@ -136,7 +136,7 @@ function fillAddedLabels(img, labels){
             newDiv.classList.add('ellipse');
             newP.classList.add('preview-text');
             newImg.classList.add('preview-image');
-            newDiv.classList.add('clickable');
+            newDiv.classList.add('no-select');
             
             var rgb = hexToRgb(label.label_color);
             var rgbString = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
@@ -457,6 +457,7 @@ function setAndGetAddLabelImage(){
 var img = document.createElement("img");
 img.src = "pictures/plus-circle.svg";
 img.style.marginLeft = "10px";
+img.classList.add('clickable');
 img.addEventListener('click', addLabelModalClick);
 img.onmouseover = function() {
     this.src = 'pictures/image.svg'; 
@@ -490,7 +491,7 @@ endTimeError.style.display = "inline-block";
 // Feladat név hiba megjelenítése
 function showTaskNameError(){
 taskNameError = document.getElementById("taskNameError");
-taskNameError.style.display = "inline-block";
+taskNameError.style.display = "block";
 }
 
 function showTimeValueError(){

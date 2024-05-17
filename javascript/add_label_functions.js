@@ -74,6 +74,8 @@ function refreshTaskLabels(){
     // A címkéket másolat készítés után megjelenítjük és beállítjuk
     checkedDivs.forEach(function(div) {
       var divCopy = div.cloneNode(true);
+      divCopy.classList.remove('clickable');
+      divCopy.classList.add('no-select');
       divCopy.id = divCopy.id.replace('div_', 'copy_');
       added_labels.appendChild(divCopy);
   });

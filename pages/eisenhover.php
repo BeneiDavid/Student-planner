@@ -41,64 +41,68 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 </td>
                 </tr>
             </tbody>
-            </table>";
-    echo "<div class='grid-container padding-bottom'><div class='grid-item'><table class='col selected-day-div sorting-table-header' id='urgent_important'>
+        </table>";
 
-    <tbody id='urgImp' class='t_sortable'>
-        <tr>
-            <th colspan='1' id='labelsHeader'>Fontos - Sürgős</th>
-        </tr>
-        <tr class='display-none'></tr>
-        <tr  class='no-drag-drop'>
-            <td class='new-task-td'>
+    echo "<div class='grid-container padding-bottom'>
+                <div class='grid-item'>
+                    <table class='col selected-day-div sorting-table-header' id='urgent_important'>
+                        <tbody id='urgImp' class='t_sortable'>
+                            <tr>
+                                <th colspan='1' id='labelsHeader'>Fontos - Sürgős</th>
+                            </tr>
+                            <tr class='display-none'></tr>
+                            <tr  class='no-drag-drop'>
+                                <td class='new-task-td'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>";
 
-            </td>
-        </tr>
-    </tbody>
-    </table></div>";
-    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header' id='urgent_notimportant'>
+    echo "      <div class='grid-item'>
+                    <table class='col selected-day-div sorting-table-header' id='urgent_notimportant'>
+                    <tbody id='urgNotImp' class='t_sortable'>
+                        <tr>
+                            <th colspan='1' id='labelsHeader'>Fontos - Nem sürgős</th>
+                        </tr>
+                        <tr class='display-none'></tr>
+                        <tr  class='no-drag-drop'>
+                            <td class='new-task-td'></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>";
 
-    <tbody id='urgNotImp' class='t_sortable'>
-        <tr>
-            <th colspan='1' id='labelsHeader'>Fontos - Nem sürgős</th>
-        </tr>
-        <tr class='display-none'></tr>
-        <tr  class='no-drag-drop'>
-            <td class='new-task-td'>
+    echo "      <div class='grid-item'>
+                    <table class='col selected-day-div sorting-table-header' id='noturgent_important'>
+                        <tbody id='notUrgImp' class='t_sortable'>
+                            <tr>
+                                <th colspan='1' id='labelsHeader'>Nem fontos - Sürgős</th>
+                            </tr>
+                            <tr class='display-none'></tr>
+                            <tr  class='no-drag-drop'>
+                                <td class='new-task-td'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>";
 
-            </td>
-        </tr>
-    </tbody>
-    </table></div>";
-    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header' id='noturgent_important'>
+    echo "      <div class='grid-item'>
+                    <table class='col selected-day-div sorting-table-header' id='noturgent_notimportant'>
 
-    <tbody id='notUrgImp' class='t_sortable'>
-        <tr>
-            <th colspan='1' id='labelsHeader'>Nem fontos - Sürgős</th>
-        </tr>
-        <tr class='display-none'></tr>
-        <tr  class='no-drag-drop'>
-            <td class='new-task-td'>
+                        <tbody id='notUrgNotImp' class='t_sortable'>
+                            <tr>
+                                <th colspan='1' id='labelsHeader'>Nem fontos - Nem sürgős</th>
+                            </tr>
+                            <tr class='display-none'></tr>
+                            <tr  class='no-drag-drop'>
+                                <td class='new-task-td'>
 
-            </td>
-        </tr>
-    </tbody>
-    </table></div>";
-
-    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header'  id='noturgent_notimportant'>
-
-    <tbody id='notUrgNotImp' class='t_sortable'>
-        <tr>
-            <th colspan='1' id='labelsHeader'>Nem fontos - Nem sürgős</th>
-        </tr>
-        <tr class='display-none'></tr>
-        <tr  class='no-drag-drop'>
-            <td class='new-task-td'>
-
-            </td>
-        </tr>
-    </tbody>
-    </table></div></div>";
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>";
 
 }
 else{
