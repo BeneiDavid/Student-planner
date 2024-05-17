@@ -1,7 +1,4 @@
 <?php
-
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -12,8 +9,6 @@ die("Connection failed: " . mysqli_connect_error());
 }
 
 if(isset($_POST['userId'])){
-
-
     $user_id = $_POST['userId'];
     $full_name_query = mysqli_query($l, "SELECT `full_name` FROM `users` WHERE `user_id`='$user_id' LIMIT 1");
 
@@ -22,12 +17,5 @@ if(isset($_POST['userId'])){
 
     mysqli_close($l);
 }
-
-
-
-
-
-
-
 
 ?>

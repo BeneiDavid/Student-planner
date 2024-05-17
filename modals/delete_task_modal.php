@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 if (isset($_POST['taskAddData']))
 {
     session_start();
@@ -17,21 +16,16 @@ if (isset($_POST['taskAddData']))
 
 ?>
 
-
+<!-- Feladat törlés modal -->
 <div id="deleteTaskModal" class="custom-modal delete-modal container">
-
-<!-- Modal content -->
-<div class="custom-modal-content">
-    <span class="custom-close" id='taskDelete_xButton'>&times;</span>
-    <p class='modal-header-text'>Feladat törlése</p>
-    <form method='post' id="deleteTaskForm">
-        <p>Biztosan törli a feladatot?</p>
-    
-    <input type='submit' name='labels_save_button' value='Törlés' class='btn btn-danger' id='confirmDelete'>
-    <button type='button' class='btn btn-primary' id='taskDelete_cancelButton'>Mégsem</button>
-
-    </form>
-</div>
-
+    <div class="custom-modal-content">
+        <span class="custom-close" id='taskDelete_xButton'>&times;</span>
+        <p class='modal-header-text'>Feladat törlése</p>
+        <form method='post' id="deleteTaskForm">
+            <p>Biztosan törli a feladatot?</p>
+            <input type='submit' name='labels_save_button' value='Törlés' class='btn btn-danger' id='confirmDelete'>
+            <button type='button' class='btn btn-primary' id='taskDelete_cancelButton'>Mégsem</button>
+        </form>
+    </div>
 </div>
 

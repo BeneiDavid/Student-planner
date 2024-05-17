@@ -1,17 +1,16 @@
 <?php
-
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
+
 if (!$l) {
-die("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 
 session_start();
 
 if (!isset($_SESSION['user'])) {
-  // If user is not logged in, return an error response
-  http_response_code(403); // Forbidden
+  http_response_code(403); 
   echo json_encode(array('error' => 'User not logged in'));
   exit;
 }
@@ -30,15 +29,11 @@ if(isset($_POST['showGroups'])){
     }
 }
 
-
 if(mysqli_num_rows($labels_query) > 0){
     echo "true";
 }
 else{
     echo "false";
 }
-
-
-
 
 ?>

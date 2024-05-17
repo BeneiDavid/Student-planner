@@ -1,7 +1,4 @@
-
-
-
-
+// Csoportok listázása
 function listGroups(){
     $.ajax({
         type: 'POST',
@@ -10,7 +7,6 @@ function listGroups(){
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var groupsDiv = document.getElementById('groupsDiv');
             if(response.length != 0){
             var groupData = response.group_data;
@@ -38,8 +34,6 @@ function listGroups(){
                 tasksImg.addEventListener('click', showGroupTasks, false);
                 tasksText.addEventListener('click', showGroupTasks, false);
 
-
-
                 var messageDiv = document.createElement('div');
                 var messageImg = document.createElement('img');
                 var messageText = document.createElement('p');
@@ -57,8 +51,6 @@ function listGroups(){
                 messageText.addEventListener('click', openChat, false);
                 messageImg.addEventListener('click', openChat, false);
 
-
-
                 var quitGroupDiv = document.createElement('div');
                 var quitGroupImg = document.createElement('img');
                 var quitGroupText = document.createElement('p');
@@ -75,22 +67,18 @@ function listGroups(){
                 quitGroupText.addEventListener('click', showConfirmQuitModal, false);
                 quitGroupImg.addEventListener('click', showConfirmQuitModal, false);
 
-
                 containerDiv.appendChild(groupNameText);
                 containerDiv.appendChild(tasksDiv);
                 containerDiv.appendChild(messageDiv);
                 containerDiv.appendChild(quitGroupDiv);
 
-                
                 groupsDiv.appendChild(containerDiv);
             }
         }
         else{
-
             var noGroupsDiv = document.createElement('div');
             noGroupsDiv.textContent = "Ön még nincs benne egy csoportban sem."
             noGroupsDiv.classList.add('no-created-groups-div');
-
             groupsDiv.appendChild(noGroupsDiv);
         }
         },
@@ -100,6 +88,7 @@ function listGroups(){
     });
 }
 
+// Csoport feladatainak megjelenítése
 function showGroupTasks(){
     var groupsMainDiv = document.getElementById('groupsMainDiv');
     groupsMainDiv.style.display = 'none';
@@ -114,6 +103,7 @@ function showGroupTasks(){
     groupHeaderName.textContent = "A(z) \"" + taskNameText + "\" csoport feladatai";
     
     var groupId = groupDivElement.id.split('_')[1];
+
     $.ajax({
         type: 'POST',
         url: 'queries/group_session_query.php', 
@@ -128,7 +118,7 @@ function showGroupTasks(){
             console.error(xhr.responseText);
         }
     });
-console.log(groupId);
+
     $.ajax({
         type: 'POST',
         url: 'queries/task_query.php', 
@@ -136,7 +126,6 @@ console.log(groupId);
         data: {'groupId': groupId},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             if(response.length == 0){
                 var groupTasksBody = document.getElementById('groupTasksBody');
                 var tr = document.createElement('tr');
@@ -144,15 +133,16 @@ console.log(groupId);
                 noTasksTd.style.backgroundColor = "white";
                 noTasksTd.textContent = "A csoportnak még nincsenek feladatai";
                 tr.appendChild(noTasksTd);
+                
                 while (groupTasksBody.firstChild && groupTasksBody.childElementCount > 1) {
                     groupTasksBody.removeChild(groupTasksBody.children[1]);
                 }
+
                 groupTasksBody.appendChild(tr);
             }
             else{   
                 fillTaskTable(response, "teacher");
-            }
-            
+            }  
         },
         error: function(xhr) {
             console.error(xhr.responseText);
@@ -160,6 +150,7 @@ console.log(groupId);
     });
 }
 
+// Kilépés a csoportból modal megjelenítése
 function showConfirmQuitModal(){
     var groupDivElement = this.parentNode.parentNode;
     var taskNameText = groupDivElement.firstElementChild.textContent;
@@ -172,12 +163,13 @@ function showConfirmQuitModal(){
     groupQuitConfirmModal.style.display = "block";
 }
 
+// Kilépés a csoportból modal elrejtése
 function hideConfirmQuitModal(){
     var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
     groupQuitConfirmModal.style.display = "none";
 }
 
-
+// Kilépés a csoportból
 function quitGroup(event){
     event.preventDefault();
 
@@ -185,7 +177,6 @@ function quitGroup(event){
     var groupId = groupQuitId.value.split('_')[1];
     var groupsDiv = document.getElementById("groupsDiv");
    
-
     $.ajax({
         type: 'POST',
         url: 'queries/quit_group_query.php', 
@@ -194,7 +185,6 @@ function quitGroup(event){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var divToDelete = document.getElementById(groupQuitId.value);
             groupsDiv.removeChild(divToDelete);
 
@@ -205,19 +195,16 @@ function quitGroup(event){
 
                 groupsDiv.appendChild(noGroupsDiv);
             }
-
         },
         error: function(xhr) {
             console.error(xhr.responseText);
         }
     });
 
-
-    
     hideConfirmQuitModal();
 }
 
-
+// Visszatérés a csoprotokhoz
 function backToGroups(){
     var groupsMainDiv = document.getElementById('groupsMainDiv');
     groupsMainDiv.style.display = 'block';
@@ -244,23 +231,23 @@ function backToGroups(){
 
 }
 
+// Inicializálás
 function init(){
     listGroups();
     document.getElementById('groupQuit_cancelButton').addEventListener('click', hideConfirmQuitModal, false);
     document.getElementById('groupQuit_xButton').addEventListener('click', hideConfirmQuitModal, false);
     document.getElementById('confirmGroupQuit').addEventListener('click', quitGroup, false);
-
-
     document.getElementById('backToGroups').addEventListener('click', backToGroups, false);
 }
 
-window.addEventListener('load', init, false);
-
+// Ablak kattintás kezelése
 window.onclick = function(event) {
-    console.log("asd");
     var groupQuitConfirmModal = document.getElementById("groupQuitConfirmModal");
     
     if (event.target == groupQuitConfirmModal) {
         groupQuitConfirmModal.style.display = "none";
     }
 }
+
+window.addEventListener('load', init, false);
+

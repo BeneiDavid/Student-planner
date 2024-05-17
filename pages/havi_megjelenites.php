@@ -53,11 +53,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
             <button class='add-task-button'>
                 <img class='add-task-icon' src='pictures/plus-square.svg' alt='Feladat hozzáadása'>  Új feladat létrehozása
             </button>
-        </div>
-    ";
-    
-
-
+        </div>";
 }
 else{
     echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';

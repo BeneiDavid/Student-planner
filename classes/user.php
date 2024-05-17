@@ -6,11 +6,7 @@ class User {
     private $userName;
     private $fullName;
     private $userType;
-    private $pwdHash; // ez lehet hogy nem kell
     private $address;
-    private $tasks;
-    private $labels;
-    private $groups;
     private $connection;
 
     // Constructor
@@ -24,59 +20,35 @@ class User {
             $this->userType = $userData['user_type'];
             $this->fullName = $userData['full_name'];
         }
-        
-        
-        // Ide jön az adatok lekérdezése
-        // $userId = ...
     }
 
+    // Methods
+
+    // Felhasználó azonosító lekérdezése
     public function getId(){
         return $this->userId;
     }
 
+    // Azonosító lekérdezése
     public function getUsername(){
         return $this->userName;
     }
 
+    // Felhasználó típus lekérdezése
     public function getUserType(){
         return $this->userType;
     }
 
-    public function getHashedPassword(){ // ez lehet hogy nem kell
-        return $this->pwdHash;
+    // Teljes név lekérdezése
+    public function getFullName(){
+        return $this->fullName;
     }
 
+    // E-mail cím lekérdezése
     public function getAddress(){
-        return $this->userType;
+        return $this->address;
     }
 
-    public function getTasks(){
-        return $this->tasks;
-    }
-
-    public function getLabels(){
-        return $this->labels;
-    }
-
-    public function deleteTask($task){
-
-    }
-
-    public function deleteLabel($label){
-
-    }
-
-    public function quitGroup(){
-
-    }
-
-    public function addNewTask($task){
-
-    }
-
-    public function addNewLabel($task){
-
-    }
 }
 
 ?>

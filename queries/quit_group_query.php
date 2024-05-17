@@ -1,5 +1,4 @@
 <?php 
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once '../config.php';
@@ -23,7 +22,6 @@ while ($task = mysqli_fetch_assoc($select_tasks_query)) {
   $associated_tasks[] = $task;
 }
 
-
 foreach ($associated_tasks as $task) {
   $task_id = $task['task_id'];
 
@@ -31,13 +29,8 @@ foreach ($associated_tasks as $task) {
 
 }
 
-
 echo "success";
 
 mysqli_close($l);
-
-
-
-
 
 ?>

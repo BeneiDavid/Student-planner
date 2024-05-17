@@ -1,6 +1,4 @@
 <?php
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once __DIR__ . '/../config.php';
@@ -29,17 +27,8 @@ $message_send_query = mysqli_query($l, "INSERT INTO `messages` SET
 
 ");
 
-
 echo "success";
 
 mysqli_close($l);
-
-
-
-
-
-
-
-
 
 ?>

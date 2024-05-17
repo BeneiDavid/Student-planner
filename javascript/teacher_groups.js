@@ -45,36 +45,24 @@ function addMembers(event){
     var searchResults = document.getElementById('searchResults');
     const studentDivs = searchResults.querySelectorAll('div');
     var membersDiv = document.getElementById('membersDiv');
-    // Iterate through each result div
+
     studentDivs.forEach(studentDiv => {
-    // Get the last element (checkbox) within the resultDiv
     const checkbox = studentDiv.querySelector('input[type="checkbox"]:last-child');
-    
-    // Check if the checkbox is checked
-    if (checkbox.checked) {
-        console.log('Checkbox is checked in this div:', studentDiv.id);
-        // Do something if the checkbox is checked
 
-        const newDiv = studentDiv.cloneNode(true);
+        if (checkbox.checked) {
+            const newDiv = studentDiv.cloneNode(true);
+            const svgImage = document.createElement('img');
+            svgImage.src = 'pictures/minus.svg'; 
+            svgImage.classList.add('clickable');
+            svgImage.addEventListener('click', removeStudentFromGroup, false);
         
-        const svgImage = document.createElement('img');
-        svgImage.src = 'pictures/minus.svg'; 
-        svgImage.classList.add('clickable');
-        svgImage.addEventListener('click', removeStudentFromGroup, false);
-     
-        newDiv.replaceChild(svgImage, newDiv.lastElementChild);
-        var studentId = studentDiv.id.split('_')[1];
-        newDiv.id = "member_" + studentId;
-        newDiv.style.display = 'block';
-        membersDiv.appendChild(newDiv);
-
-
-    } else {
-        console.log('Checkbox is not checked in this div:', studentDiv.id);
-        // Do something if the checkbox is not checked
-    }
+            newDiv.replaceChild(svgImage, newDiv.lastElementChild);
+            var studentId = studentDiv.id.split('_')[1];
+            newDiv.id = "member_" + studentId;
+            newDiv.style.display = 'block';
+            membersDiv.appendChild(newDiv);
+        }
     });
-
 
     hideAddMembersModal();
 }
@@ -86,7 +74,6 @@ function removeStudentFromGroup(){
 
     const divToRemove = document.getElementById(parentDivId);
     membersDiv.removeChild(divToRemove);
-
 }
 
 // Diákok listázása a tag hozzáadása modalban
@@ -99,14 +86,12 @@ function listNotAddedStudents(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response); 
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data === 'undefined'){
                 document.getElementById('noStudents').style.display = "block";
             }
             else{
-                
                 for (var i = 0; i < student_data.length; i++) {
 
                     var student = student_data[i];
@@ -122,13 +107,13 @@ function listNotAddedStudents(){
                         var studentDiv = document.createElement('div');
                         var studentNameText = document.createElement('p');
                         var studentUserNameText = document.createElement('p');
-                        var selectStudentCheckbox = document.createElement('input'); // Change to input for checkbox
+                        var selectStudentCheckbox = document.createElement('input');
                     
                         studentDiv.id = "studentDiv_" + student.user_id;
                         studentDiv.classList.add("student-data");
                         studentNameText.textContent = student.full_name;
                         studentUserNameText.textContent = student.username;
-                        selectStudentCheckbox.type = 'checkbox'; // Set input type to checkbox
+                        selectStudentCheckbox.type = 'checkbox';
 
                         studentDiv.appendChild(studentNameText);
                         studentDiv.appendChild(studentUserNameText);
@@ -160,18 +145,20 @@ function showSearchResults(){
     const searchTerm = searchInput.value.toLowerCase();
     const studentDivs = Array.from(searchResults.getElementsByClassName('student-data'));
     var foundResult = false;
+
     studentDivs.forEach(studentDiv => {
         const nameElement = studentDiv.querySelector('p:first-child');
         const usernameElement = studentDiv.querySelector('p:nth-child(2)');
         const name = nameElement ? nameElement.textContent.toLowerCase() : '';
         const username = usernameElement ? usernameElement.textContent.toLowerCase() : '';
+        
         if (name.includes(searchTerm) || username.includes(searchTerm)) {
           studentDiv.style.display = 'block';
           foundResult = true;
         } else {
           studentDiv.style.display = 'none';
         }
-      });
+    });
     
       if (searchTerm != "" && !foundResult) {
         document.getElementById('noResultText').style.display = "block";
@@ -194,14 +181,12 @@ function saveGroup(event){
         document.getElementById('groupNameError').style.display = 'none';
 
         var groupAddData = $('#groupModal').serialize();
-        console.log(groupAddData);
         var membersDiv = document.getElementById('membersDiv');
 
         var childDivs = membersDiv.querySelectorAll('div');
         var studentIds = [];
         // Loop through each div
         childDivs.forEach(function(div) {
-            console.log(div.id);
             studentIds.push(div.id.split('_')[1]);
         });
         
@@ -218,7 +203,6 @@ function saveGroup(event){
                 },
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                     groupName.value  = "";
                     membersDiv.innerHTML = "";
                     listGroups();
@@ -240,7 +224,6 @@ function saveGroup(event){
                 },
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response + "asd");
                     groupName.value  = "";
                     membersDiv.innerHTML = "";
                     listGroups();
@@ -263,14 +246,12 @@ function listGroups(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var groupsDiv = document.getElementById('groupsDiv');
             var parsedData = JSON.parse(response);
             if(parsedData.length != 0){
                 var groupData = parsedData.group_data;
-                
-                console.log(groupData);
                 groupsDiv.innerHTML = "";
+
                 for (var i = 0; i < groupData.length; i++) {
                     var containerDiv = document.createElement('div');
                     containerDiv.id = "group_" + groupData[i].group_id;
@@ -293,8 +274,6 @@ function listGroups(){
                     tasksDiv.appendChild(tasksText);
                     tasksImg.addEventListener('click', showGroupTasks, false);
                     tasksText.addEventListener('click', showGroupTasks, false);
-
-
 
                     var messageDiv = document.createElement('div');
                     var messageImg = document.createElement('img');
@@ -344,14 +323,12 @@ function listGroups(){
                     deleteText.addEventListener('click', showConfirmDeleteModal, false);
                     deleteImg.addEventListener('click', showConfirmDeleteModal, false);
 
-
                     containerDiv.appendChild(groupNameText);
                     containerDiv.appendChild(tasksDiv);
                     containerDiv.appendChild(messageDiv);
                     containerDiv.appendChild(editDiv);
                     containerDiv.appendChild(deleteDiv);
 
-                    
                     groupsDiv.appendChild(containerDiv);
                 }
         }
@@ -368,7 +345,7 @@ function listGroups(){
     });
 }
 
-// Csoport feladatai megjelenítése
+// Csoport feladatainak megjelenítése
 function showGroupTasks(){
     var groupsMainDiv = document.getElementById('groupsMainDiv');
     groupsMainDiv.style.display = 'none';
@@ -413,6 +390,7 @@ function showGroupTasks(){
     });
 }
 
+// Csoportfeladatok frissítése
 function refreshGroupTasks(){
 
     var groupId = "";
@@ -432,6 +410,7 @@ function refreshGroupTasks(){
     });
 }
 
+// Vissza a csoportokhoz
 function backToGroups(){
     var groupsMainDiv = document.getElementById('groupsMainDiv');
     groupsMainDiv.style.display = 'block';
@@ -495,7 +474,6 @@ async function deleteGroup(event){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var divToDelete = document.getElementById(groupToDeleteId.value);
             groupsDiv.removeChild(divToDelete);
         },
@@ -505,9 +483,8 @@ async function deleteGroup(event){
     });
     
     hideConfirmDeleteModal();
-    console.log("A");
+
     if(!groupsDiv.hasChildNodes()){
-        console.log("B");
         var noCreatedGroupsDiv = document.createElement('div');
         noCreatedGroupsDiv.textContent = "Ön még nem hozott létre csoportokat. Csoportok létrehozásához kattintson a lenti gombra!";
         noCreatedGroupsDiv.classList.add('no-created-groups-div');
@@ -591,10 +568,9 @@ function editGroupClick(){
     $('#groupModal').modal('show');
 }
 
-// Oldal betöltésének funkciói
+// Inicializálás
 function init(){
     listGroups();
-
     document.getElementById('createNewGroup').addEventListener('click', createNewGroup, false);
     document.getElementById('addNewMember').addEventListener('click', addNewMember, false);
     document.getElementById('addMembers_cancelButton').addEventListener('click', hideAddMembersModal, false);
@@ -605,12 +581,9 @@ function init(){
     document.getElementById('searchInput').addEventListener('input', showSearchResults ,false);
     document.getElementById('saveGroupButton').addEventListener('click', saveGroup, false);
     document.getElementById('confirmGroupDelete').addEventListener('click', deleteGroup, false);
-
     document.getElementById('add-group-task-button').addEventListener('click', addTask, false);
     document.getElementById('backToGroups').addEventListener('click', backToGroups, false);
 }
-
-window.addEventListener('load', init, false);
 
 // Modalból kikattintás kezelése
 window.onclick = function(event) {
@@ -624,3 +597,6 @@ window.onclick = function(event) {
         groupDeleteConfirmModal.style.display = "none";
     }
 }
+
+window.addEventListener('load', init, false);
+

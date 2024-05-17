@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
@@ -18,7 +17,6 @@ $user_id= $user->getId();
 
 $data = [];
 $group_members_data_query = mysqli_query($l, "SELECT * FROM `group_members` WHERE `student_id`='$user_id'");
-
 
 if (mysqli_num_rows($group_members_data_query) > 0) {
     while ($group_member_data = mysqli_fetch_assoc($group_members_data_query)) {
@@ -45,9 +43,5 @@ if (mysqli_num_rows($group_members_data_query) > 0) {
 echo json_encode($data);
 
 mysqli_close($l);
-
-
-
-
 
 ?>

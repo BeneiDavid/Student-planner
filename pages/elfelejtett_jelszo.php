@@ -7,7 +7,6 @@ ini_set('display_errors', 1);
         header("Location: index.php?page=kezdolap");
     }
 
-
     if(isset($_POST['new_password_button']))
     {
         $email = mysqli_real_escape_string($l, $_POST['email']);
@@ -19,11 +18,14 @@ ini_set('display_errors', 1);
             $letters = ["A", "B", "C", "D", "E", "F"];
             $first_letter = $letters[mt_rand(0, 5)];
             $second_letter = $letters[mt_rand(0, 5)];
+
             if (mt_rand(0, 1) == 0) {
                 $first_letter = strtolower($first_letter);
-            } else {
+            } 
+            else {
                 $second_letter = strtolower($second_letter);
             }
+
             $new_password = $first_letter . $second_letter . mt_rand(10000,99999);
             $new_hashed_password = hash('sha256', $new_password);
             mysqli_query($l,"UPDATE `users` SET `user_password`='".$new_hashed_password."' WHERE `user_address`='".$email."'");
@@ -58,13 +60,12 @@ ini_set('display_errors', 1);
     print ' <h1>Elfelejtett jelszó</h1>';
 
     print '<br><br>
-    <div class="content-padding">  
-            <form method="post">
-                <label for="email">E-mail cím</label>
-                <input class="form-control input-length" type="email" name="email" id="email"  autocomplete="email" required>
-                <br>
-                <input type="submit" name="new_password_button" value="Új jelszó igénylése" class="btn btn-success">                                                                           
-            </form>
-    </div>';
-
+            <div class="content-padding">  
+                    <form method="post">
+                        <label for="email">E-mail cím</label>
+                        <input class="form-control input-length" type="email" name="email" id="email"  autocomplete="email" required>
+                        <br>
+                        <input type="submit" name="new_password_button" value="Új jelszó igénylése" class="btn btn-success">                                                                           
+                    </form>
+            </div>';
 ?>

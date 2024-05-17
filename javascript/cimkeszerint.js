@@ -1,3 +1,4 @@
+// Címkék modal tartalmának lekérdezése
 var getModalContent = async function() {
   var labelPopoverContentDiv = document.getElementById("labelPopoverContentDiv");
   labelPopoverContentDiv.innerHTML = "";
@@ -7,8 +8,7 @@ var getModalContent = async function() {
   return $('#labelPopoverContentDiv').html();
 };
 
-
-  
+// Oldal betöltés kezelése
 $(document).ready(function(){
   
     $(document).on("click", ".sort-by-label-content", function() {
@@ -20,10 +20,10 @@ $(document).ready(function(){
     
 });
   
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
 });
 
-
+// Címke kiválasztása
 function chooseLabel(divId){
   var chosenLabelId = document.getElementById('chosenLabelId');
   chosenLabelId.value = divId;
@@ -63,70 +63,47 @@ function chooseLabel(divId){
  
 }
 
+// Feladatok eltávolítása
+function removeTasks(){
+  var labelBody = document.getElementById("labelBody");
 
-
-  function removeTasks(){
-    var labelBody = document.getElementById("labelBody");
-
-    while (labelBody.firstChild && labelBody.childElementCount > 1) {
-        labelBody.removeChild(labelBody.firstChild);
-    }
+  while (labelBody.firstChild && labelBody.childElementCount > 1) {
+      labelBody.removeChild(labelBody.firstChild);
   }
+}
 
-  async function loadFirstLabel(){
-    var labelId = await getFirstLabel();
-    
-    return new Promise((resolve, reject) => {
-    
-    if(labelId != ""){
-      var chosenLabelId = document.getElementById('chosenLabelId');
-      chosenLabelId.value =  "div_" + labelId;
-      chooseLabel("div_" + labelId);
-      resolve();
-    }
-    else{
-      var labelsHeader = document.getElementById('labelsHeader');
-      labelsHeader.textContent = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
-      resolve();
-    }
-  });
+// Első címke betöltése
+async function loadFirstLabel(){
+  var labelId = await getFirstLabel();
+  
+  return new Promise((resolve, reject) => {
+  
+  if(labelId != ""){
+    var chosenLabelId = document.getElementById('chosenLabelId');
+    chosenLabelId.value =  "div_" + labelId;
+    chooseLabel("div_" + labelId);
+    resolve();
   }
-
-
-  async function getFirstLabel(){
-    return new Promise((resolve, reject) => {
-      var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
-
-        $.ajax({
-          type: 'POST',
-          url: 'queries/first_label_query.php', 
-          data: {'showGroups': showGroups},
-          credentials: 'same-origin',
-          dataType: 'text',
-          success: function(response) {
-            resolve(response);
-            console.log(response);
-          },
-          error: function(xhr) {
-              console.error(xhr.responseText);
-              reject(new Error("AJAX request failed"));
-          }
-      });
-    });
+  else{
+    var labelsHeader = document.getElementById('labelsHeader');
+    labelsHeader.textContent = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
+    resolve();
   }
+});
+}
 
-  async function labelExists(id){
+// Első címke lekérdezése
+async function getFirstLabel(){
+  return new Promise((resolve, reject) => {
     var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
 
-    return new Promise((resolve, reject) => {
       $.ajax({
         type: 'POST',
-        url: 'queries/label_exists_query.php', 
-        data: {'labelId': id, 'showGroups': showGroups},
+        url: 'queries/first_label_query.php', 
+        data: {'showGroups': showGroups},
         credentials: 'same-origin',
         dataType: 'text',
         success: function(response) {
-          console.log(response);
           resolve(response);
         },
         error: function(xhr) {
@@ -135,81 +112,103 @@ function chooseLabel(divId){
         }
     });
   });
+}
+
+// Címke létezésének lekérdezése
+async function labelExists(id){
+  var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
+
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: 'POST',
+      url: 'queries/label_exists_query.php', 
+      data: {'labelId': id, 'showGroups': showGroups},
+      credentials: 'same-origin',
+      dataType: 'text',
+      success: function(response) {
+        resolve(response);
+      },
+      error: function(xhr) {
+          console.error(xhr.responseText);
+          reject(new Error("AJAX request failed"));
+      }
+  });
+});
+}
+
+// Feladatok frissítése
+async function refreshSortByLabelTasks(){
+  var chosenLabelId = document.getElementById('chosenLabelId');
+  var labelId = await getFirstLabel();
+  
+  if(labelId != '' && chosenLabelId.value == ''){
+    chosenLabelId.value = "div_" + labelId;
   }
 
-  async function refreshSortByLabelTasks(){
-    var chosenLabelId = document.getElementById('chosenLabelId');
-    console.log("First" + chosenLabelId.value);
-    // Check if there are still labels
-    var labelId = await getFirstLabel();
-    
-    if(labelId != '' && chosenLabelId.value == ''){
-      chosenLabelId.value = "div_" + labelId;
-    }
+  if(labelId == ''){
+    chosenLabelId.value = '';
+  }
 
-    if(labelId == ''){
-      chosenLabelId.value = '';
-    }
+  else if(await labelExists(chosenLabelId.value.split("_")[1]) == "false"){
+    labelId = await getFirstLabel();
+    chosenLabelId.value = "div_" + labelId;
+  }
 
-    else if(await labelExists(chosenLabelId.value.split("_")[1]) == "false"){
-      labelId = await getFirstLabel();
-      chosenLabelId.value = "div_" + labelId;
-    }
+  if(labelId == ''){
+    var emptyLabel = document.createElement('div');
+    emptyLabel.classList.add("ellipse");
+    emptyLabel.classList.add("clickable");
+    emptyLabel.classList.add("emptylabel");
+    emptyLabel.id = "emptyLabel";
+    var selectedLabel = document.getElementById('chooseLabel');
+    selectedLabel.innerHTML = "";
+    selectedLabel.appendChild(emptyLabel);
+    var labelsHeader = document.getElementById('labelsHeader');
+    labelsHeader.textContent = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
+    removeTasks();
+  }
+  else{
+    if(chosenLabelId != ''){
+      document.getElementById('')
 
-    if(labelId == ''){
-      var emptyLabel = document.createElement('div');
-      emptyLabel.classList.add("ellipse");
-      emptyLabel.classList.add("clickable");
-      emptyLabel.classList.add("emptylabel");
-      emptyLabel.id = "emptyLabel";
       var selectedLabel = document.getElementById('chooseLabel');
-      selectedLabel.innerHTML = "";
-      selectedLabel.appendChild(emptyLabel);
-      var labelsHeader = document.getElementById('labelsHeader');
-      labelsHeader.textContent = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
-      removeTasks();
+      if(selectedLabel.firstChild.id == 'emptyLabel'){
+        initializeLabels();
+      }
+      else{
+        chooseLabel(chosenLabelId.value);
+      } 
     }
-    else{
-      if(chosenLabelId != ''){
-        document.getElementById('')
-
-        var selectedLabel = document.getElementById('chooseLabel');
-        if(selectedLabel.firstChild.id == 'emptyLabel'){
-          initializeLabels();
-        }
-        else{
-          chooseLabel(chosenLabelId.value);
-        }
-        
-      }
-    } 
-
-  }
-
-  function onChooseLabelClick(){
-    hideAddLabelModal();
-    hideNewLabelModal();
-    resetNewLabelModal();
-    var sortByLabelModal = document.getElementById("sortByLabelModal");
-    var labelBox = document.getElementById("labelBox");
-    labelBox.appendChild(newLabelModal);
-
-    getModalContent().then(function(content) {
-      var sortByLabelModalLabels = document.getElementById("sortByLabelModalLabels");
-      if(content == ''){
-        content = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
-      }
-      sortByLabelModalLabels.innerHTML = content;
-      sortByLabelModal.style.display = "block";
-    });
-    
-  }
-
-  function closeSortByLabelModal(){
-    var sortByLabelModal = document.getElementById("sortByLabelModal");
-    sortByLabelModal.style.display = "none";
   } 
+}
 
+// Címke kiválasztás kattintás
+function onChooseLabelClick(){
+  hideAddLabelModal();
+  hideNewLabelModal();
+  resetNewLabelModal();
+  var sortByLabelModal = document.getElementById("sortByLabelModal");
+  var labelBox = document.getElementById("labelBox");
+  labelBox.appendChild(newLabelModal);
+
+  getModalContent().then(function(content) {
+    var sortByLabelModalLabels = document.getElementById("sortByLabelModalLabels");
+    if(content == ''){
+      content = "Még nem hozott létre címkéket. A feladat létrehozás ablakból ezt megteheti.";
+    }
+    sortByLabelModalLabels.innerHTML = content;
+    sortByLabelModal.style.display = "block";
+  });
+  
+}
+
+// Címkék modal bezárása
+function closeSortByLabelModal(){
+  var sortByLabelModal = document.getElementById("sortByLabelModal");
+  sortByLabelModal.style.display = "none";
+} 
+
+// Címkék inicializálása
 async function initializeLabels(){
   var showGroups = document.getElementById('showGroupLabelsCheckbox').checked;
   await listUserLabels(true, showGroups);
@@ -217,12 +216,12 @@ async function initializeLabels(){
   loadFirstLabel();
 }
 
+// Csoport címkék megjelenítése/elrejtése
 function showGroupLabelsCheckboxChanged(){
   refreshSortByLabelTasks();
-
 }
 
-
+// Inicializálás
 function init(){
   document.getElementById('chooseLabel').addEventListener('click', onChooseLabelClick, false);
   document.getElementById('sortByLabel_xButton').addEventListener('click', closeSortByLabelModal, false);
@@ -230,7 +229,7 @@ function init(){
   initializeLabels();
 }
 
-
+// Ablak kattintás kezelése
 window.onclick = function(event) {
   var sortByLabelModal = document.getElementById("sortByLabelModal");
   if (event.target == sortByLabelModal) {

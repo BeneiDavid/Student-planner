@@ -40,54 +40,50 @@ if (isset($_POST['formData']))
 }
 
 ?>
-
+<!-- Új címke modal -->
 <div id="newLabelModal" class="custom-modal container">
+  <div class="custom-modal-content">
+      <span class="custom-close" id='modify_labels_xButton'>&times;</span>
+      <p class='modal-header-text'>Címke adatai</p>
+      <p class='preview-label'>Előnézet:</p>
+      <div class='ellipse' id='previewDiv'>
+          <p id='previewText' class='preview-text'></p>   
+          <img id='previewImage' class='preview-image' alt='Címke előnézet ikon'></img>
+      </div>
+      <form method='post' id="newLabelForm">
 
-<!-- Modal content -->
-<div class="custom-modal-content">
-    <span class="custom-close" id='modify_labels_xButton'>&times;</span>
-    <p class='modal-header-text'>Címke adatai</p>
-    <p class='preview-label'>Előnézet:</p>
-    <div class='ellipse' id='previewDiv'>
-        <p id='previewText' class='preview-text'></p>   
-        <img id='previewImage' class='preview-image' alt='Címke előnézet ikon'></img>
-    </div>
-    <form method='post' id="newLabelForm">
+          <label for="labelname">Név:</label>
+          <input type="text" id="labelname" name="labelname" maxlength="50"></input><span class="error label-name-error" id="labelNameError">A címke neve nem lehet üres!</span><br><br>
 
-        <label for="labelname">Név:</label>
-        <input type="text" id="labelname" name="labelname" maxlength="50"></input><span class="error label-name-error" id="labelNameError">A címke neve nem lehet üres!</span><br><br>
+          <label for='labelcolor' >Szín:</label> 
+          <input type='color' id='labelcolor' class='colorpicker task-input' name='labelcolor'><br><br>
 
-        <label for='labelcolor' >Szín:</label> 
-        <input type='color' id='labelcolor' class='colorpicker task-input' name='labelcolor'><br><br>
+          <div class="symbol-container">
+            <input type="hidden" name="labelsymbolcheck" value="0">
+            <input type='checkbox' id='enableLabelIcon' name='labelsymbolcheck'> 
+            <label for='enableLabelIcon' >Szimbólum:</label>
+            <div class="symbol-square" data-toggle="popover" tabindex="0" role="button" title="Válasszon szimbólumot!" data-content="Content" id='symbolSquare'></div><br><br>
+          </div>
 
-        <div class="symbol-container">
-        <input type="hidden" name="labelsymbolcheck" value="0">
-        <input type='checkbox' id='enableLabelIcon' name='labelsymbolcheck'> 
-        <label for='enableLabelIcon' >Szimbólum:</label>
-        <div class="symbol-square" data-toggle="popover" tabindex="0" role="button" title="Válasszon szimbólumot!" data-content="Content" id='symbolSquare'></div><br><br>
-        </div>
+          <!-- Popover -->
+          <div id="popover-content" class='display-none'>
+            <div class="image-container">
+              <img src="pictures/rhombus.svg" alt="Rombusz ikon" id='rhombus_icon'/>
+              <img src="pictures/waves.svg" alt="Hullám ikon" id='waves_icon'>
+              <img src="pictures/star.svg" alt="Csillag ikon" id='star_icon'>
+              <img src="pictures/clock.svg" alt="Óra ikon" id='clock_icon'>
+              <img src="pictures/ball.svg" alt="Kosárlabda ikon" id='ball_icon'>
+              <img src="pictures/pc.svg" alt="Számítógép ikon" id='pc_icon'>
+              <img src="pictures/book.svg" alt="Könyv ikon" id='book_icon'>
+              <img src="pictures/cart.svg" alt="Bevásárlókocsi ikon" id='cart_icon'>
+              <img src="pictures/apple.svg" alt="Alma ikon" id='apple_icon'>
+            </div>
+          </div>
 
-<!-- Hidden content for popover -->
-<div id="popover-content" class='display-none'>
-  <div class="image-container">
-    <img src="pictures/rhombus.svg" alt="Rombusz ikon" id='rhombus_icon'/>
-    <img src="pictures/waves.svg" alt="Hullám ikon" id='waves_icon'>
-    <img src="pictures/star.svg" alt="Csillag ikon" id='star_icon'>
-    <img src="pictures/clock.svg" alt="Óra ikon" id='clock_icon'>
-    <img src="pictures/ball.svg" alt="Kosárlabda ikon" id='ball_icon'>
-    <img src="pictures/pc.svg" alt="Számítógép ikon" id='pc_icon'>
-    <img src="pictures/book.svg" alt="Könyv ikon" id='book_icon'>
-    <img src="pictures/cart.svg" alt="Bevásárlókocsi ikon" id='cart_icon'>
-    <img src="pictures/apple.svg" alt="Alma ikon" id='apple_icon'>
-    <!-- Add more images here -->
+          <br>
+          <input type="hidden" id="hiddenId">
+          <input type='submit' name='labels_save_button' value='Mentés' class='btn btn-success' id='saveLabelSetting'>
+          <button type='button' class='btn btn-primary' id='modify_labels_cancelButton'>Mégsem</button>
+      </form>
   </div>
-</div>
-
-<br>
-    <input type="hidden" id="hiddenId">
-    <input type='submit' name='labels_save_button' value='Mentés' class='btn btn-success' id='saveLabelSetting'>
-    <button type='button' class='btn btn-primary' id='modify_labels_cancelButton'>Mégsem</button>
-    </form>
-</div>
-
 </div>

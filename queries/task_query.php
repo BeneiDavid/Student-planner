@@ -21,20 +21,19 @@ require_once BASE_PATH . '/classes/user.php';
   $user_id = $user->getId();
   $data = [];
 
-
   // Lekérdezés dátum alapján
   if(isset($_POST['date'])){
     $date = $_POST['date'];
-
-    
     $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
 
     $groups = [];
+
     while ($group = mysqli_fetch_assoc($groups_query)) {
       $groups[] = $group;
     }
 
     $group_task_ids = [];
+
     foreach ($groups as $group) {
       $group_id = $group['group_id'];
       $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
@@ -44,15 +43,13 @@ require_once BASE_PATH . '/classes/user.php';
       }
     }
 
-if (!empty($group_task_ids)) {
-    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date') OR (`task_id` IN (" . implode(',', $group_task_ids) . ") AND `date`='$date')");
-}
-else{
-  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date')");
-}
+    if (!empty($group_task_ids)) {
+      $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date') OR (`task_id` IN (" . implode(',', $group_task_ids) . ") AND `date`='$date')");
+    }
+    else{
+      $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date')");
+    }
     
-
-  
     if (!$tasks_query) {
       http_response_code(500); 
       echo json_encode(array('error' => 'Database query failed'));
@@ -86,8 +83,6 @@ else{
   } // Lekérdezés címke alapján
   else if(isset($_POST['labelId'])){
     $label_id = $_POST['labelId'];
-
-
     $task_labels_query =  mysqli_query($l, "SELECT * FROM `task_labels` WHERE `label_id`='$label_id'");
 
     if (mysqli_num_rows($task_labels_query) > 0) {
@@ -119,18 +114,13 @@ else{
         }
       }
     }
-
-  
-
-
   }
 } // Csoport feladatainak listázása
 else if(isset($_POST['groupId'])){
-  // Tanár
+  // Oktató
   $group_id = $_SESSION['group_id'];
   if($user->getUserType() == "teacher"){
 
-   
     $task_ids_query = mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
 
     while ($ids = mysqli_fetch_assoc($task_ids_query)) {
@@ -173,17 +163,16 @@ else if(isset($_POST['groupId'])){
                 }
             }
 
-
             if (mysqli_num_rows($task_sorting_query) > 0) {
               while ($task_sorting_row = mysqli_fetch_assoc($task_sorting_query)) {
                   $data["task_sorting_row"][] = $task_sorting_row;
               }
-          }
+            }
         }
       }
     }
   }
-  // Diák
+  // Hallgató
   else{
     $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id' AND `group_id`='$group_id'");
     if ($groups_query) {
@@ -233,8 +222,6 @@ else if(isset($_POST['groupId'])){
                 }
             }
         }
-
-
         if (mysqli_num_rows($task_sorting_query) > 0) {
           while ($task_sorting_row = mysqli_fetch_assoc($task_sorting_query)) {
               $data["task_sorting_row"][] = $task_sorting_row;
@@ -247,27 +234,27 @@ else if(isset($_POST['groupId'])){
 else{
   $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
   if ($groups_query) {
-  $groups = [];
-  while ($group = mysqli_fetch_assoc($groups_query)) {
-    $groups[] = $group;
-  }
-  $group_task_ids = [];
-  foreach ($groups as $group) {
-    $group_id = $group['group_id'];
-    $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+    $groups = [];
+    while ($group = mysqli_fetch_assoc($groups_query)) {
+      $groups[] = $group;
+    }
+    $group_task_ids = [];
+    foreach ($groups as $group) {
+      $group_id = $group['group_id'];
+      $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
 
-    while ($group_task = mysqli_fetch_assoc($groups_tasks_query)) {
-      $group_task_ids[] = $group_task['task_id'];
+      while ($group_task = mysqli_fetch_assoc($groups_tasks_query)) {
+        $group_task_ids[] = $group_task['task_id'];
+      }
     }
   }
-}
     
-if (!empty($group_task_ids)) {
-  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' OR (`task_id` IN (" . implode(',', $group_task_ids) . "))");
-}
-else{
-  $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
-}
+  if (!empty($group_task_ids)) {
+    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' OR (`task_id` IN (" . implode(',', $group_task_ids) . "))");
+  }
+  else{
+    $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
+  }
 
   if (!$tasks_query) {
     http_response_code(500); 
@@ -299,7 +286,6 @@ else{
             }
         }
 
-
         if (mysqli_num_rows($task_sorting_query) > 0) {
           while ($task_sorting_row = mysqli_fetch_assoc($task_sorting_query)) {
               $data["task_sorting_row"][] = $task_sorting_row;
@@ -309,18 +295,11 @@ else{
   }
 }
 
-  
 $jsonData = json_encode($data);
 
 mysqli_close($l);
-
 
 header('Content-Type: application/json');
 echo $jsonData;
   
 ?>
-
-
-
-
-

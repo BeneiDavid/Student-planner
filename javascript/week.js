@@ -1,23 +1,5 @@
-
-
-// Hónapok nevei szöveggel
-var monthNames = {
-    1: "Január",
-    2: "Február",
-    3: "Március",
-    4: "Április",
-    5: "Május",
-    6: "Június",
-    7: "Július",
-    8: "Augusztus",
-    9: "Szeptember",
-    10: "Október",
-    11: "November",
-    12: "December"
-};
-
-
-function showPrevMonth(){
+// Előző hét kattintás
+function showPrevWeek(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
     firstdayOfWeek.setDate(firstdayOfWeek.getDate() - 7);
@@ -25,8 +7,8 @@ function showPrevMonth(){
     refreshWeeklyDisplay();
 }
 
-// Következő hónap click
-function showNextMonth(){
+// Következő hét kattintás
+function showNextWeek(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
     firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 7);
@@ -34,7 +16,7 @@ function showNextMonth(){
     refreshWeeklyDisplay();
 }
 
-
+// Heti dátum beállítása
 function setWeekDate(date){
     var weekDate = document.getElementById('weekDate');
     var dayOfWeek = date.getDay();
@@ -42,6 +24,7 @@ function setWeekDate(date){
     var mondayDate = new Date(date);
     mondayDate.setDate(date.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
     var sundayDate = new Date(date);
+
     if (dayOfWeek !== 0) {
     sundayDate.setDate(date.getDate() - dayOfWeek + 7);
     }
@@ -56,35 +39,27 @@ function setWeekDate(date){
     weekDate.textContent = monday + " - " + sunday;
 }
 
-
+// Jelenlegi hét dátumának beállítása
 function setCurrentWeekDate(){
     var today = new Date();
     setWeekDate(today);
 }
 
-function changeDateToStringFormat(date){
-    var currentDay = date.getDate();
-    var currentMonth = date.getMonth() + 1; 
-    var currentYear = date.getFullYear();
-    return currentYear + "-" + currentMonth + "-" + currentDay;
-}
-
+// Heti feladatok listázása
 function listWeekTasks(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
 
     for (var i = 0; i < 7; i++) {
         (function (index) {
-            console.log(firstdayOfWeek);
             var date = changeDateToStringFormat(firstdayOfWeek);
             $.ajax({
                 type: 'POST',
                 url: 'queries/task_query.php',
                 dataType: "json",
-                data: {'date': date}, // Use a new instance of the date to prevent modification
+                data: {'date': date}, 
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                     fillWeekDay(index, response);
                 },
                 error: function(xhr) {
@@ -93,16 +68,15 @@ function listWeekTasks(){
             });
         })(i);
 
-        // Move this outside of the AJAX call to avoid incrementing `firstdayOfWeek` multiple times
         firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 1);
     }
     
     var monthDiv = document.querySelector('.month');
     var color = getSeasonDarkColor(firstdayOfWeek);
     monthDiv.style.backgroundColor = color;
-
 }
 
+// Heti naptár feltöltése
 function fillWeekDay(dayIndex, task_details){
     if(task_details.length != 0){
         var list;
@@ -164,6 +138,7 @@ function fillWeekDay(dayIndex, task_details){
 
 }
 
+// Heti feladatok kiürítése
 function deleteWeekTasks(){
     document.getElementById('mondayList').innerHTML = "";
     document.getElementById('tuesdayList').innerHTML = "";
@@ -174,16 +149,19 @@ function deleteWeekTasks(){
     document.getElementById('sundayList').innerHTML = "";
 }
 
+// Heti megjelenítés feladatainak frissítése
 function refreshWeeklyDisplay(){
     deleteWeekTasks();
     listWeekTasks();
 }
 
+// Kiválasztott hét dátumának beállítása
 function setSelectedWeekDate(date){
     var selectedWeekDate = document.getElementById('selectedWeekDate');
     selectedWeekDate.value = date;
 }
 
+// Feladat hozzáadása - hétfő
 function addTaskMonday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -192,6 +170,7 @@ function addTaskMonday(){
     addTask();
 }
 
+// Feladat hozzáadása - kedd
 function addTaskTuesday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -201,6 +180,7 @@ function addTaskTuesday(){
     addTask();
 }
 
+// Feladat hozzáadása - szerda
 function addTaskWednesday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -210,6 +190,7 @@ function addTaskWednesday(){
     addTask();
 }
 
+// Feladat hozzáadása - csütörtök
 function addTaskThursday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -219,6 +200,7 @@ function addTaskThursday(){
     addTask();
 }
 
+// Feladat hozzáadása - péntek
 function addTaskFriday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -228,6 +210,7 @@ function addTaskFriday(){
     addTask();
 }
 
+// Feladat hozzáadása - szombat
 function addTaskSaturday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -237,6 +220,7 @@ function addTaskSaturday(){
     addTask();
 }
 
+// Feladat hozzáadása - vasárnap
 function addTaskSunday(){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
@@ -246,9 +230,11 @@ function addTaskSunday(){
     addTask();
 }
 
+// Nap kiválasztásának kezelése
 function chooseDayDate(event){
     var firstdayOfWeekString = document.getElementById('firstdayOfWeek').value;
     var firstdayOfWeek = new Date(firstdayOfWeekString);
+
     switch(this.id){
         case 'chooseTuesdayDate':
             firstdayOfWeek.setDate(firstdayOfWeek.getDate() + 1);
@@ -274,19 +260,15 @@ function chooseDayDate(event){
     
     var date = changeDateToStringFormat(firstdayOfWeek);
     window.location.href = "index.php?page=napi_megjelenites&date=" + date;
-
-
-    
 }
 
-
-
+// Inicializálás
 function init(){
     if(document.getElementById('firstdayOfWeek')){
         setCurrentWeekDate();
         listWeekTasks();
-        document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
-        document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);
+        document.getElementById('nextMonth').addEventListener('click', showNextWeek, false);
+        document.getElementById('prevMonth').addEventListener('click', showPrevWeek, false);
         document.getElementById('addMonday').addEventListener('click', addTaskMonday, false);
         document.getElementById('addTuesday').addEventListener('click', addTaskTuesday, false);
         document.getElementById('addWednesday').addEventListener('click', addTaskWednesday, false);

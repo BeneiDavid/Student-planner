@@ -1,7 +1,7 @@
 // Címke hozzáadás modal bezárása
 function closeAddLabels(){
     hideAddLabelModal();
-  } 
+} 
   
 // Címke módosítása
 function editLabel(event){
@@ -43,6 +43,7 @@ function deleteLabel(event){
   event.target.parentNode.removeChild(event.target);
 }
 
+// Címkék frissítése
 function refreshTaskLabels(){
     var form = document.getElementById("addLabelForm");
     var checkboxes = form.querySelectorAll('input[type="checkbox"]');
@@ -85,7 +86,6 @@ function refreshTaskLabels(){
     added_labels.appendChild(img);
 }
 
-
 // Címke hozzáadás mentése esetén task oldal feltöltése
 function saveAddLabel(event){
     event.preventDefault();
@@ -127,7 +127,6 @@ function listUserLabels(fromLabelPopover, showGroups){
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             response.forEach(function(item) {
                 var newDiv = document.createElement('div');
                 var newP = document.createElement('p');
@@ -233,6 +232,7 @@ function clearLabelModalLabels(){
     addLabelModalLabels.innerHTML = "";
 }
 
+// Inicializálás
 function init(){
     document.getElementById('labels_cancelButton').addEventListener('click', closeAddLabels,false);
     document.getElementById('labels_xButton').addEventListener('click', closeAddLabels,false);

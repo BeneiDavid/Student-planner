@@ -1,3 +1,4 @@
+// Táblázatok celláinak mozgatása
 $(document).ready(function() {
     var $tables = $('.tables_ui') 
     $("tbody.t_sortable").sortable({
@@ -7,28 +8,23 @@ $(document).ready(function() {
       zIndex: 999990,
       receive: function(event, ui) {
             var movedRow = ui.item;
-            // Get the ID of the table
-            var tableId = $(this).closest('.tables_ui').attr('id');
-            // Do something with the table ID and the moved row
-            console.log("Row moved to table with ID:", tableId);
-            
+            var tableId = $(this).closest('.tables_ui').attr('id');   
             const htmlString = movedRow.html();
             const regex = /id="([^"]+)"/;
-                const match = htmlString.match(regex);
+            const match = htmlString.match(regex);
 
             if (match) {
-                console.log("asd");
                 const tdId = match[1];
                 sortTaskByProgress(tdId, tableId);
             } else {
-                console.log("ID attribute not found");
+                console.error("ID attribute not found");
             }
-
       }
 
   }).disableSelection();
 });
 
+// Táblázatok feltöltése
 function fillSortByProgressTasks(){
     $.ajax({
         type: 'POST',
@@ -36,7 +32,6 @@ function fillSortByProgressTasks(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             if(response.length == 0){
               return;
             } 
@@ -50,7 +45,7 @@ function fillSortByProgressTasks(){
     });
 }
 
-
+// Folyamat szerinti rendezés mentése
 function sortTaskByProgress(tdId, tableId){
     const id = tdId.split('-')[1];
     $.ajax({
@@ -62,7 +57,6 @@ function sortTaskByProgress(tdId, tableId){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             
         },
         error: function(xhr, status, error) {
@@ -71,6 +65,7 @@ function sortTaskByProgress(tdId, tableId){
     });
 }
 
+// Feladatok frissítése
 function refreshSortByProgressTasks(){
     clearProgressTasks();
     clearToDoTasks();
@@ -79,17 +74,17 @@ function refreshSortByProgressTasks(){
     fillSortByProgressTasks();
 }
 
+// Táblázatok kiürítése
 function clearProgressTasks(){
     var byProgressBody = document.getElementById("byProgressBody");
-    console.log(byProgressBody);
     var children = byProgressBody.children;
     var childrenCount = children.length;
-    // Start loop from the third child and iterate up to the second last child
     for (var i = childrenCount - 2; i >= 2; i--) {
         byProgressBody.removeChild(children[i]);
     }
 }
 
+// Teendők táblázat kiürítése
 function clearToDoTasks(){
     var toDoBody = document.getElementById("toDoBody");
     var children = toDoBody.children;
@@ -99,6 +94,7 @@ function clearToDoTasks(){
     }
 }
 
+// Folyamatban táblázat kiürítése
 function clearInProgressTasks(){
     var inProgressBody = document.getElementById("inProgressBody");
     var children = inProgressBody.children;
@@ -108,9 +104,9 @@ function clearInProgressTasks(){
     }
 }
 
+// Befejezve táblázat kiürítése
 function clearDoneTasks(){
     var doneBody = document.getElementById("doneBody");
-
     var children = doneBody.children;
 
     for (var i = children.length - 2; i >= 2; i--) {
@@ -118,10 +114,9 @@ function clearDoneTasks(){
     }
 }
 
-
+// Inicializálás
 function init(){
     fillSortByProgressTasks();
 }
-
 
 window.addEventListener('load', init, false);

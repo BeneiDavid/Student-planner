@@ -12,6 +12,7 @@
 
     class EmailSender {
 
+        // Methods
 
         public function Send($email, $subject, $message){
             $mail = new PHPMailer(true);
