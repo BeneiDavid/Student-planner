@@ -1,7 +1,6 @@
 
 
 <?php
-// PHP code starts here
 
 if ($_SESSION['logged_in'] != 'yes')
 {
@@ -34,7 +33,7 @@ else  // ha már beléptünk, akkor átugrunk az időpontfoglalásra
 {
     print '<meta http-equiv="refresh" content="0;url=index.php?page=kezdolap&login_success=1">';
 }
-// PHP code ends here
+
 ?>
 
 <script>

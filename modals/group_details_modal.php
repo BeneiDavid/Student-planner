@@ -38,22 +38,17 @@ if (isset($_POST['groupAddData']))
       }
     }
 
-
-    // Feladat és annak címkéinek eltárolása
-   
-
-    mysqli_close($l);
-    
+    mysqli_close($l);    
 }
 
 ?>
 
-
+<!-- Csoport adatok modal -->
 <div class='modal fade' id='groupModal'>
     <div class='modal-dialog modal-dialog-centered modal-lg'>
         <div class='modal-content'>
       
-            <!-- Modal Header -->
+            <!-- Modal header -->
             <div class='modal-header'>
               <p class='modal-title modal-header-text'>Csoport adatai</p>
               <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
@@ -67,7 +62,6 @@ if (isset($_POST['groupAddData']))
                     <label for='groupName'>Csoport neve:</label> 
                     <input type='text' class='task-input task-name' id='groupName' name='groupname' maxlength="50">
                     <br><br>
-                      <!-- Itt lesznek a tagok adatai -->
                     <p>Tagok:</p>
                     <div name='members' id='membersDiv' class='members-div div-with-border'>
                     </div>
@@ -87,7 +81,6 @@ if (isset($_POST['groupAddData']))
               <input type='submit' name='save_task_button' value='Mentés' class='btn btn-success' id='saveGroupButton'>
               <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Mégsem</button>
             </div>
-      
         </div>
     </div>
 </div>

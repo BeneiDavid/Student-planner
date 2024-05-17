@@ -1,4 +1,7 @@
 <?php
+    
+    // Email küldés konfiguráció
+    
     define('MAILHOST', "smtp.gmail.com");
 
     define('USERNAME', "beneidavid.it@gmail.com");

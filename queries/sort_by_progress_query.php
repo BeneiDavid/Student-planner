@@ -81,9 +81,6 @@ require_once BASE_PATH . '/classes/user.php';
     }
   }
 
-
   echo 'success';
-
-
 
 ?>

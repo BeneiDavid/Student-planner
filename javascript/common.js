@@ -1,4 +1,4 @@
-// hexadecimális-ból RGB színné konvertálás
+// Hexadecimális színből RGB színné konvertálás
 function hexToRgb(hex) {
   hex = hex.replace(/^#/, '');
 
@@ -44,8 +44,8 @@ function getContrastColor(rgb) {
   }
 }
 
+// Színes svg létrehozása
 function createColoredSVG(color, size, shape){
-  // Create the SVG element
 var svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 svgElement.setAttribute('width', size);
@@ -55,27 +55,22 @@ svgElement.setAttribute('viewBox', '0 0 20 20');
 if(shape == "circle"){
   var circleElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   circleElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
-  circleElement.setAttribute('stroke', color); // Set stroke color instead of fill
+  circleElement.setAttribute('stroke', color);
   circleElement.setAttribute('stroke-width', '0.5');
   circleElement.setAttribute('fill', "transparent");
-svgElement.appendChild(circleElement);
+  svgElement.appendChild(circleElement);
 }
 else if(shape == "dot"){
-// Create the path element
-
-var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
-pathElement.setAttribute('fill', color);
-
-// Append the path element to the SVG element
-svgElement.appendChild(pathElement)
+  var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  pathElement.setAttribute('d', 'M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0');
+  pathElement.setAttribute('fill', color);
+  svgElement.appendChild(pathElement)
 }
-
 
 return svgElement;
 }
 
-
+// Jelenlegi felhasználó azonosítójának lekérdezése
 async function getCurrentUserId(){
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -84,7 +79,6 @@ async function getCurrentUserId(){
       data: {},
       credentials: 'same-origin',
       success: function(response) {
-          console.log(response); 
           resolve(response);
       },
       error: function(xhr, status, error) {
@@ -95,6 +89,7 @@ async function getCurrentUserId(){
 });
 }
 
+// Feladathoz tartozó csoport lekérdezése
 async function getTaskGroupName(taskId){
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -103,7 +98,6 @@ async function getTaskGroupName(taskId){
       data: {'taskId': taskId},
       credentials: 'same-origin',
       success: function(response) {
-          console.log(response); 
           resolve(response);
       },
       error: function(xhr, status, error) {
@@ -114,7 +108,7 @@ async function getTaskGroupName(taskId){
 });
 }
 
-
+// Felhasználó teljes nevének lekérdezése azonosító alapján
 async function getFullname(userId){
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -123,7 +117,6 @@ async function getFullname(userId){
       data: {'userId': userId},
       credentials: 'same-origin',
       success: function(response) {
-          console.log(response); 
           resolve(response);
       },
       error: function(xhr, status, error) {
@@ -134,6 +127,7 @@ async function getFullname(userId){
 });
 }
 
+// Naptár színének beállítása évszak szerint
 function setSeasonColors(date) {
 
   const month = date.getMonth() + 1; 
@@ -271,7 +265,7 @@ function setSeasonColors(date) {
 
 }
 
-
+// Naptár sötét szín lekérdezése
 function getSeasonDarkColor(date){
  const month = date.getMonth() + 1; 
 
@@ -288,4 +282,28 @@ function getSeasonDarkColor(date){
   else{
     return '#9AAFC5';
   }
+}
+
+// Hónapok nevei szöveggel
+var monthNames = {
+  1: "Január",
+  2: "Február",
+  3: "Március",
+  4: "Április",
+  5: "Május",
+  6: "Június",
+  7: "Július",
+  8: "Augusztus",
+  9: "Szeptember",
+  10: "Október",
+  11: "November",
+  12: "December"
+};
+
+// Dátum kötőjeles alakra konvertálása
+function changeDateToStringFormat(date){
+  var currentDay = date.getDate();
+  var currentMonth = date.getMonth() + 1; 
+  var currentYear = date.getFullYear();
+  return currentYear + "-" + currentMonth + "-" + currentDay;
 }

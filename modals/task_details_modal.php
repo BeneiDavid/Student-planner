@@ -40,11 +40,6 @@ if (isset($_POST['taskAddData']))
       $enable_end_time = 0;
     }
 
-   
-
-    
-    //NOTE: egyelőre a creator id is a user !!!!
-    // Feladat adatainak eltárolása
     mysqli_query($l, "INSERT INTO `tasks` SET 
         `task_id`=NULL,
         `user_id`='".$user_id."',
@@ -88,63 +83,62 @@ if (isset($_POST['taskAddData']))
 
 ?>
 
+<!-- Feladat adatai modal -->
 <div class='modal fade' id='taskModal'>
-        <div class='modal-dialog modal-dialog-centered modal-lg'>
-          <div class='modal-content'>
-      
-            <!-- Modal Header -->
-            <div class='modal-header'>
-              <p class='modal-title modal-header-text'>Feladat adatai<span id='groupNameSpan'></span></p>
-              <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
-            </div>
-      
-            <!-- Modal body -->
-            <div class='modal-body'>
-                <form method='post'>
-                    <input type='hidden' id='existingTask'>
-                    <span class="error label-name-error" id="taskNameError">A feladat neve nem lehet üres!</span>
-                    <label for='taskname'>Feladat neve:</label> 
-                    
-                    <input type='text' class='task-input task-name' id='taskname' name='taskname' maxlength="50">
-                    <img src="pictures/delete.svg" id="deleteTask" alt='Feladat törlése' class="delete-task-icon clickable"></img>
-                    <br><br>
-                    
-                    <label for='colorpicker' >Feladatszín:</label> 
-                    <input type='color' id='colorpicker' class='colorpicker task-input'><br><br>
+  <div class='modal-dialog modal-dialog-centered modal-lg'>
+    <div class='modal-content'>
 
-                    <p>Címkék:</p>
-                    <div id='added_labels'></div>
-                    <br>
-                    <div id='modal_div'></div>
+      <!-- Modal header -->
+      <div class='modal-header'>
+        <p class='modal-title modal-header-text'>Feladat adatai<span id='groupNameSpan'></span></p>
+        <button type='button' class='btn-close' data-bs-dismiss='modal'><span class="sr-only">Felugró ablak bezárása</span></button>
+      </div>
 
-                    <label for='date'>Dátum:</label>
-                    <input type='date' class='task-input' id='date'><span class="error label-name-error" id="dateError">A dátum nem lehet üres!</span><br><br>
-                
-                    <label for='enableStartTime' class='sr-only'>Kezdő időpont használata</label>
-                    <input type='checkbox' id='enableStartTime' > 
-                    <label for='startTime'>Kezdő időpont:</label>
-                    <input type='time' class='task-input' id='startTime'><span class="error label-name-error" id="startTimeError">Ha üresen szeretné hagyni a kezdő időpontot, pipálja ki a mellette lévő négyzetet!</span> <span class="error label-name-error" id="timeValueError">A befejező időpont nem lehet a kezdő időpont előtt!</span><br><br>
-                
-                    <label for='enableEndTime' class='sr-only'>Befejező időpont használata</label>
-                    <input type='checkbox' id='enableEndTime' > 
-                    <label for='endTime' >Befejező időpont:</label>
-                    <input type='time' class='task-input' id='endTime'><span class="error label-name-error" id="endTimeError">Ha üresen szeretné hagyni a befejező időpontot, pipálja ki a mellette lévő négyzetet!</span>
+      <!-- Modal body -->
+      <div class='modal-body'>
+          <form method='post'>
+              <input type='hidden' id='existingTask'>
+              <span class="error label-name-error" id="taskNameError">A feladat neve nem lehet üres!</span>
+              <label for='taskname'>Feladat neve:</label> 
+              
+              <input type='text' class='task-input task-name' id='taskname' name='taskname' maxlength="50">
+              <img src="pictures/delete.svg" id="deleteTask" alt='Feladat törlése' class="delete-task-icon clickable"></img>
+              <br><br>
+              
+              <label for='colorpicker' >Feladatszín:</label> 
+              <input type='color' id='colorpicker' class='colorpicker task-input'><br><br>
+
+              <p>Címkék:</p>
+              <div id='added_labels'></div>
+              <br>
+              <div id='modal_div'></div>
+
+              <label for='date'>Dátum:</label>
+              <input type='date' class='task-input' id='date'><span class="error label-name-error" id="dateError">A dátum nem lehet üres!</span><br><br>
+          
+              <label for='enableStartTime' class='sr-only'>Kezdő időpont használata</label>
+              <input type='checkbox' id='enableStartTime' > 
+              <label for='startTime'>Kezdő időpont:</label>
+              <input type='time' class='task-input' id='startTime'><span class="error label-name-error" id="startTimeError">Ha üresen szeretné hagyni a kezdő időpontot, pipálja ki a mellette lévő négyzetet!</span> <span class="error label-name-error" id="timeValueError">A befejező időpont nem lehet a kezdő időpont előtt!</span><br><br>
+          
+              <label for='enableEndTime' class='sr-only'>Befejező időpont használata</label>
+              <input type='checkbox' id='enableEndTime' > 
+              <label for='endTime' >Befejező időpont:</label>
+              <input type='time' class='task-input' id='endTime'><span class="error label-name-error" id="endTimeError">Ha üresen szeretné hagyni a befejező időpontot, pipálja ki a mellette lévő négyzetet!</span>
 
                 <br><br>
 
                 <label for='taskDescription'>Feladat leírása</label><br>
                 <textarea rows='10' class='container-fluid' id="taskDescription"  maxlength="400"></textarea>
                 <br><br>
-            
-                </form>
-            </div>
-      
-            <!-- Modal footer -->
-            <div class='modal-footer'>
-              <input type='submit' name='save_task_button' value='Mentés' class='btn btn-success' id='saveTaskButton'>
-              <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Mégsem</button>
-            </div>
-      
-          </div>
-        </div>
+          </form>
       </div>
+
+      <!-- Modal footer -->
+      <div class='modal-footer'>
+        <input type='submit' name='save_task_button' value='Mentés' class='btn btn-success' id='saveTaskButton'>
+        <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Mégsem</button>
+      </div>
+    </div>
+  </div>
+</div>

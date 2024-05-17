@@ -19,5 +19,4 @@ if(isset($_POST['taskId'])){
     mysqli_close($l);
 }
 
-
 ?>

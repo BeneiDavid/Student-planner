@@ -63,14 +63,10 @@
                     <input type="submit" name="password_modify_button" value="Új jelszó mentése" class="btn btn-success">
                 </form>
             </div>';
-
-
     }
     else
     {
         echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';
     }
-
-
 
 ?>

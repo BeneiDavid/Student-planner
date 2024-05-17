@@ -1,5 +1,6 @@
 var chat;
 
+// Chat modal kinyitása
 async function openChat(){
     if(this.parentNode.childElementCount == 3){
         var firstChild = this.parentNode.firstChild;
@@ -7,26 +8,28 @@ async function openChat(){
     }
 
     removeLogs();
+
     var currentUserId = await getCurrentUserId();
     var sendToUserId = this.parentNode.id.split("_")[1];
-    console.log(this.parentNode.id);
+
     chat = new Chat(currentUserId, sendToUserId, "chatModal");
     await chat.getLogs();
     
     var sendToUserName = await getFullname(sendToUserId);
-
     var sendToUserFullname = sendToUserName;
+
     document.getElementById('chatGroupNameSpan').textContent = sendToUserFullname;
     await $('#chatModal').modal('show');
     
 }
 
-
+// Üzenet küldés gomb kattintás kezelése
 function sendButtonClick(event){
     event.preventDefault();
     chat.sendMessage(document.getElementById('messageInput').value);
 }
 
+// Inicializálás
 async function init(){
     document.getElementById('sendButton').addEventListener('click', sendButtonClick, false);
     document.getElementById('messageInput').addEventListener('input', setSendButtonColor, false);
@@ -36,13 +39,13 @@ async function init(){
 
     messageInput.addEventListener("keydown", function(event) {
         if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault(); // Prevent the default Enter key behavior
-        sendButton.click(); // Trigger the button click
+        event.preventDefault();
+        sendButton.click();
         }
     });
 }
 
-
+// Küldés gomb szín beállítása
 function setSendButtonColor(){
     var sendButton = document.getElementById('sendButton');
     
@@ -60,33 +63,32 @@ function setSendButtonColor(){
 window.addEventListener('load', init, false);
 
 
-// Scrolling down to last message in the chat
+// Chat megnyitás kezelése
 $('#chatModal').on('shown.bs.modal', function() {
     document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
     $('#chat-form').submit(function(event) {
-        // Prevent the default form submission behavior
         event.preventDefault();
-        console.log("shoot");
         document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
     });
 
     chat.startRefreshMessages();
 });
 
+// Chat elrejtés kezelése
 $('#chatModal').on('hidden.bs.modal', function() {
     chat.stopRefreshMessages();
 });
 
-
+// Chat tartalmának törlése
 function removeLogs(){
     document.getElementById('chatBox').innerHTML = "";
 }
 
 
-first = true;
-
-
+// Chat osztály
 class Chat {
+
+    // Constructor
 
     constructor(currentUserId, receivingUserId, modalId) {
         this.currentUserId = currentUserId;
@@ -95,7 +97,10 @@ class Chat {
         this.refreshMessages = null; 
 
     }
+
+    // Methods
     
+    // Üzenet frissítés elindítása
     startRefreshMessages() {
         if (!this.refreshMessages) {
             this.refreshMessages = setInterval(() => {
@@ -104,6 +109,7 @@ class Chat {
         }
     }
 
+    // Üzenet frissítés leállítása
     stopRefreshMessages() {
         if (this.refreshMessages) {
             clearInterval(this.refreshMessages);
@@ -111,11 +117,12 @@ class Chat {
         }
     }
 
+    // Üzenetek frissítése
     refresh(){      
-        console.log("called");
         this.getLogs();
     }
 
+    // Üzenet küldése
     sendMessage(message){   
         var thisClass = this;  
         var receivingUserId = this.receivingUserId;
@@ -129,7 +136,6 @@ class Chat {
                 },
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                     document.getElementById('sendMessageError').style.display = "none";
                     document.getElementById('messageInput').value = "";
                     thisClass.refresh();
@@ -143,8 +149,7 @@ class Chat {
         }
     }
 
-   
-
+    // Beszélgetés lekérdezése
     async getLogs(){
         const receivingUserId = this.receivingUserId;
         await $.ajax({
@@ -156,31 +161,25 @@ class Chat {
             dataType: "json",
             credentials: 'same-origin',
             success: function(response) {
-                console.log(response);
                 if(response.length != 0){
                     var messagesData = response.messages;
 
                     messagesData.sort((a, b) => {
-                        // Convert message_time values to Date objects for comparison
                         const dateA = new Date(a.message_time);
                         const dateB = new Date(b.message_time);
-                        
-                        // Compare the Date objects
                         return dateA - dateB;
                     });
-                    var chatBox = document.getElementById('chatBox');
 
+                    var chatBox = document.getElementById('chatBox');
                     var numberOfMessages = chatBox.childElementCount;
 
                     for (var i = numberOfMessages; i < messagesData.length; i++) {
 
                         var messageDiv = document.createElement('div');
                         messageDiv.style.maxWidth = "400px";
-                        
                         messageDiv.style.marginTop = "10px";
                         messageDiv.style.padding = "10px";
                         messageDiv.style.borderRadius = "10px";
-                        
                         messageDiv.textContent = messagesData[i].message_text;
 
                         if(messagesData[i].receiver_id != receivingUserId){
@@ -191,7 +190,6 @@ class Chat {
                         else{
                             messageDiv.style.marginRight = "10px";
                             messageDiv.classList.add('sent-message');
-
                             messageDiv.style.display = "block";
                             messageDiv.style.border = "2px solid blue";
                         }
@@ -201,22 +199,17 @@ class Chat {
                         }
                        
                         chatBox.appendChild(messageDiv);
-
                     }
 
                     if(numberOfMessages != messagesData.length){
                         document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
                     }
-                    
-        
                 }
-
             },
             error: function(xhr) {
                 console.error(xhr.responseText);
             }
         });
-
     }
 }
       

@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -26,10 +25,8 @@ if (mysqli_num_rows($group_query) > 0) {
     }
 }
 
-
 echo json_encode($data);
 
 mysqli_close($l);
-
 
 ?>

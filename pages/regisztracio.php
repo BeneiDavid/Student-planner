@@ -13,8 +13,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 <h1>Regisztráció</h1>
 <br><br>
 <?php
-    // Az elküldött űrlap feldolgozása
 
+    // Az elküldött űrlap feldolgozása
     if (isset($_POST['reg_button']))
     {
         $validator = new RegistrationValidator($l);
@@ -47,11 +47,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <input type="password" id="password" name="password" class="form-control input-length"><br>
         <label for="password2">Jelszó újra</label><br>
         <input type="password" id="password2" name="password2" class="form-control input-length"><br>
-        
         <input type="submit" name="reg_button" value="Regisztráció" class="btn btn-success">
-    
     </form>
-
 
 <script>
   document.title = "Student Planner - Regisztráció";

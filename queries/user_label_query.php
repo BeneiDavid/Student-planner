@@ -12,8 +12,7 @@ require_once BASE_PATH . '/classes/user.php';
   session_start();
 
   if (!isset($_SESSION['user'])) {
-    // If user is not logged in, return an error response
-    http_response_code(403); // Forbidden
+    http_response_code(403);
     echo json_encode(array('error' => 'User not logged in'));
     exit;
 }
@@ -24,19 +23,16 @@ require_once BASE_PATH . '/classes/user.php';
   $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `user_id`='$user_id'");
 
   if (!$labels_query) {
-    // If query fails, return an error response
-    http_response_code(500); // Internal Server Error
+    http_response_code(500);
     echo json_encode(array('error' => 'Database query failed'));
     exit;
-}
-
+  }
 
   $data = array();
+  
   while ($row = mysqli_fetch_assoc($labels_query)) {
     $data[] = $row;
   }
-
-
 
   if(isset($_POST['showGroups'])){
     $query_group_labels = $_POST['showGroups'];
@@ -81,12 +77,9 @@ require_once BASE_PATH . '/classes/user.php';
 
   mysqli_close($l);
 
-  // Send JSON response
   header('Content-Type: application/json');
   echo $jsonData;
 
-  // Close connection
-  
 ?>
 
 

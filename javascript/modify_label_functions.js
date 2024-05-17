@@ -1,6 +1,5 @@
 // Címke módosítás oldal mentése
 function saveLabelSetting(event){
-
     var previewImage = document.getElementById("previewImage");
     var imageSource = previewImage.src;
     var labelname = document.getElementById("labelname");
@@ -16,13 +15,11 @@ function saveLabelSetting(event){
       showLabelNameError();
       return;
     }
-  
-    // Megnézzük, hogy a címke már létezett-e és módosítani kell, vagy létre kell hozni egy újat 
+
     var hidden_id = document.getElementById('hiddenId');
     var label_id = hidden_id.value;
 
-    if (label_id !== undefined && label_id !== null && label_id !== "") {
-      // Send AJAX request
+    if (label_id !== undefined && label_id !== null && label_id !== "") { 
       $.ajax({
           type: 'POST',
           url: 'queries/edit_label_query.php', 
@@ -34,9 +31,6 @@ function saveLabelSetting(event){
           },
           credentials: 'same-origin',
           success: function(response) {
-              // Handle the response from the server
-              console.log(response); 
-              
               clearLabelModalLabels();
               listUserLabels(false, false);
               hideLabelNameError();
@@ -50,10 +44,8 @@ function saveLabelSetting(event){
               console.error(xhr.responseText);
           }
       });
-  
     }
     else{
-      // Serialize form data
       var formData = $(this).serialize();
   
       $.ajax({
@@ -67,7 +59,6 @@ function saveLabelSetting(event){
           },
           credentials: 'same-origin',
           success: function(response) {
-              console.log(response); 
               clearLabelModalLabels();
               listUserLabels(false, false);
               hideLabelNameError();
@@ -79,9 +70,7 @@ function saveLabelSetting(event){
               console.error(xhr.responseText);
           }
       });
-    
     }
-    
 }
 
 // Címke módosítás modal bezárása
@@ -93,7 +82,7 @@ function closeModifyLabels(){
     clearHiddenId();
 } 
 
-// Hidden input mező értékének törlése
+// Rejtett input mező értékének törlése
 function clearHiddenId(){
     var hidden_id = document.getElementById('hiddenId');
     hidden_id.value = "";
@@ -120,7 +109,7 @@ function createNewLabelModal(event, label_id){
     showNewLabelModal();
 }
 
-  // Új címke alaphelyzetbe állítása
+// Új címke alaphelyzetbe állítása
 function resetNewLabelModal(){
 
     var labelname = document.getElementById("labelname");
@@ -171,6 +160,7 @@ labelNameError.style.display = "none";
 // Címke megjelenítése / elrejtése a previewban
 function enableLabelIconChanged(){
     previewImage = document.getElementById("previewImage");
+
     if(!this.checked){
       previewImage.style.display = 'none';
     }
@@ -182,6 +172,7 @@ function enableLabelIconChanged(){
 // Szimbólum négyzet, preview beállítása 
 function setSymbolSquareAndPreview(){
     var symbolSquare = document.getElementById("symbolSquare");
+    
     if(!symbolSquare.hasChildNodes()){
       var img = document.createElement("img");
       img.src = "pictures/rhombus.svg";
@@ -191,6 +182,7 @@ function setSymbolSquareAndPreview(){
       previewImage = document.getElementById("previewImage");
       previewImage.src = "pictures/rhombus.svg";
     }
+
     var previewDiv = document.getElementById("previewDiv");
     var labelcolor = document.getElementById("labelcolor");
     previewDiv.style.backgroundColor = labelcolor.value;
@@ -218,45 +210,45 @@ function changeLabelColor(){
 
 // Címke módosítás esetén a címke adatainak betöltése
 function setLabelDataToEdit(label_id){
-    div_id = "div_" + label_id;
-    var label_div = document.getElementById(div_id);
+  div_id = "div_" + label_id;
+  var label_div = document.getElementById(div_id);
+
+  var symbolSquare = document.getElementById("symbolSquare");
   
-    var symbolSquare = document.getElementById("symbolSquare");
+  if (symbolSquare.firstChild) {
+    symbolSquare.removeChild(symbolSquare.firstChild);
+  }
+    var img = document.createElement("img");
     
-    if (symbolSquare.firstChild) {
-      symbolSquare.removeChild(symbolSquare.firstChild);
-    }
-      var img = document.createElement("img");
-      
-      var imageElement = document.querySelector('#'+ div_id + ' img');
-      if(imageElement.style.display == 'inline-block'){
-        previewImage.style.display = 'inline-block';
-        var enableLabelIcon = document.getElementById("enableLabelIcon");
-        enableLabelIcon.checked = true;
-      }
-   
-      if (imageElement.src && imageElement.src.endsWith(".svg")) {
-        img.src = imageElement.src;
-      } else {
-        img.src = "pictures/rhombus.svg";
-      }
-      img.width = 25;
-      img.height = 25;
-      symbolSquare.appendChild(img);
-      previewImage = document.getElementById("previewImage");
-      previewImage.src = img.src;
-    
-    var previewDiv = document.getElementById("previewDiv");
-    previewDiv.style.backgroundColor = label_div.style.backgroundColor;
-    labelcolor.value = rgbToHex(label_div.style.backgroundColor);
+  var imageElement = document.querySelector('#'+ div_id + ' img');
+  if(imageElement.style.display == 'inline-block'){
+    previewImage.style.display = 'inline-block';
+    var enableLabelIcon = document.getElementById("enableLabelIcon");
+    enableLabelIcon.checked = true;
+  }
+
+  if (imageElement.src && imageElement.src.endsWith(".svg")) {
+    img.src = imageElement.src;
+  } else {
+    img.src = "pictures/rhombus.svg";
+  }
   
-    //setting the text
-    var pElement = label_div.querySelector('p'); // Select the <p> element within the <div>
-    var textContent = pElement.textContent;
-    var labelname = document.getElementById("labelname");
-    var previewText = document.getElementById("previewText");
-    labelname.value = textContent;
-    previewText.textContent = textContent;
+  img.width = 25;
+  img.height = 25;
+  symbolSquare.appendChild(img);
+  previewImage = document.getElementById("previewImage");
+  previewImage.src = img.src;
+  
+  var previewDiv = document.getElementById("previewDiv");
+  previewDiv.style.backgroundColor = label_div.style.backgroundColor;
+  labelcolor.value = rgbToHex(label_div.style.backgroundColor);
+
+  var pElement = label_div.querySelector('p'); 
+  var textContent = pElement.textContent;
+  var labelname = document.getElementById("labelname");
+  var previewText = document.getElementById("previewText");
+  labelname.value = textContent;
+  previewText.textContent = textContent;
   
 }
 
@@ -282,9 +274,6 @@ function changeLabelName(){
   
 }
   
-
-
-
 // Inicializálás
 function init(){
     document.getElementById('createNewLabel').addEventListener('click', createNewLabelModal, false);
@@ -325,9 +314,7 @@ $(document).ready(function(){
     });
     
     $(document).on('click', function (e) {
-      // Check if the clicked element is inside the popover or the popover trigger
       if (!$(e.target).closest('.popover').length && !$(e.target).closest('[data-toggle="popover"]').length) {
-        // Hide the popover
         $('[data-toggle="popover"]').popover('hide');
       }
     });

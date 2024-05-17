@@ -1,6 +1,4 @@
 <?php
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once __DIR__ . '/../config.php';
@@ -13,7 +11,6 @@ $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 if (!$l) {
   die("Connection failed: " . mysqli_connect_error());
 }
-
 
 $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
@@ -55,26 +52,14 @@ if(!empty($group_task_ids)){
     }
 }
 
-
-
-
-
 if (mysqli_num_rows($date_query) > 0) {
     while ($row = mysqli_fetch_assoc($date_query)) {
         $data["dates"][] = $row['date'];
     }
 }
 
-
 echo json_encode($data);
 
 mysqli_close($l);
-
-
-
-
-
-
-
 
 ?>

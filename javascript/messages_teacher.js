@@ -1,8 +1,4 @@
-
-
-
-
-
+// Csoportok listázása a dropdownban
 function fillGroupsDropdown(){
     $.ajax({
         type: 'POST',
@@ -10,9 +6,7 @@ function fillGroupsDropdown(){
         data: {},
         dataType: "json",
         credentials: 'same-origin',
-        success: function(response) {
-            console.log(response);
-            
+        success: function(response) {            
             if(response.length != 0){
                 var groupData = response.group_data;
                 for (var i = 0; i < groupData.length; i++) {
@@ -26,7 +20,6 @@ function fillGroupsDropdown(){
                     li.addEventListener('click', selectGroup, false);
                     li.appendChild(a);
                     groupDropdownList.appendChild(li);
-
                 }
                 var chooseGroupButton =  document.getElementById('chooseGroupButton');
                 chooseGroupButton.style.display = "block";
@@ -39,9 +32,10 @@ function fillGroupsDropdown(){
         error: function(xhr) {
             console.error(xhr.responseText);
         }
-        });
+    });
 }
 
+// Csoport kiválasztása
 function selectGroup(){
     var groupId = this.id.split("_")[1];
     var groupName = this.firstChild.textContent;
@@ -51,13 +45,14 @@ function selectGroup(){
     listGroupMembers(groupId);
 }
 
+// Tagok eltávolítása a listából
 function clearPreviousMembers(){
     var groupMembersDiv = document.getElementById('groupMembersDiv');
     groupMembersDiv.innerHTML = "";
 }
 
+// Tagok listázása
 async function listGroupMembers(groupId){
-
     clearPreviousMembers();
 
     await $.ajax({
@@ -125,55 +120,42 @@ async function listGroupMembers(groupId){
                 noMembersDiv.classList.add('no-members-div');
 
                 groupMembersDiv.appendChild(noMembersDiv);
-            }
-            console.log("első");
-            
+            }   
         },
         error: function(xhr) {
             console.error(xhr.responseText);
         }
-        });
+    });
 
+    var groupMembersDiv = document.getElementById('groupMembersDiv');
+    
+    if(!groupMembersDiv.firstChild.classList.contains('no-members-div')){
+        var childDivs = groupMembersDiv.children;
 
-        
-        var groupMembersDiv = document.getElementById('groupMembersDiv');
-        console.log(groupMembersDiv);
-        if(!groupMembersDiv.firstChild.classList.contains('no-members-div')){
-
-        
-            var childDivs = groupMembersDiv.children;
-
-            for (var i = 0; i < childDivs.length; i++) {
-
-                var messageDiv = childDivs[i].lastChild;
-                console.log(messageDiv);
-                var sendToUserId = messageDiv.id.split("_")[1];
-                await  $.ajax({
-                    url: 'queries/all_messages_read_query.php',
-                    type: 'POST',
-                    data: { 'otherUserId': sendToUserId },
-                    success: function(secondResponse) {
-                        if(secondResponse == "false"){
-                            var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
-                            var firstChild = messageDiv.firstChild;
-                            messageDiv.insertBefore(unseenMessageDot, firstChild);
-
-                        }
-                    },
-                    error: function(error) {
-                        console.error('Error in second AJAX request:', error);
+        for (var i = 0; i < childDivs.length; i++) {
+            var messageDiv = childDivs[i].lastChild;
+            var sendToUserId = messageDiv.id.split("_")[1];
+            
+            await  $.ajax({
+                url: 'queries/all_messages_read_query.php',
+                type: 'POST',
+                data: { 'otherUserId': sendToUserId },
+                success: function(secondResponse) {
+                    if(secondResponse == "false"){
+                        var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
+                        var firstChild = messageDiv.firstChild;
+                        messageDiv.insertBefore(unseenMessageDot, firstChild);
                     }
-                });
-            }
+                },
+                error: function(error) {
+                    console.error('Error in second AJAX request:', error);
+                }
+            });
         }
-
-
-
-       
+    }   
 }
 
-
-
+// Inicializálás
 function init(){
   fillGroupsDropdown();
 }

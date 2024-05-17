@@ -1,4 +1,4 @@
-// Feladat beállítás modal
+// Feladat beállítás modal megjelenítése és beállítása
 async function addTask(event, taskDetails) {
     resetTask();
     hideAddLabelModal();
@@ -10,16 +10,13 @@ async function addTask(event, taskDetails) {
     // Egy már létező feladat adatai
     if (typeof taskDetails !== 'undefined' && taskDetails != "") {
         var userId = await getCurrentUserId();
-        console.log(userId);
-        
-
         var data = JSON.parse(taskDetails);
         var task = data.task_details[0];
         setTaskName(task.title);
         setTaskColor(task.task_color);
         setDescription(task.task_description);
         setExistingDate(task.date);
-        console.log(task.date);
+
         if(task.start_time_enabled == "1"){
             setAndEnableStartTime(task.start_time);
         }
@@ -27,6 +24,7 @@ async function addTask(event, taskDetails) {
         if(task.end_time_enabled == "1"){
             setAndEnableEndTime(task.end_time);
         }
+
         // A felhasználó által létrehozott feladat
         if(task.user_id == userId){
             fillAddedLabels(img, data.label_details);
@@ -50,8 +48,6 @@ async function addTask(event, taskDetails) {
             hideCheckboxes();
             hideSaveButton();
         }
-       
-
     }
     else{ // Új feladat adatai
         setTaskColor("#0000FF");
@@ -66,10 +62,6 @@ async function addTask(event, taskDetails) {
         showSaveButton();
     }
 
-    
-    
-    
-    
     $('#taskModal').modal('show');
 }
 
@@ -121,7 +113,6 @@ function fillAddedLabels(img){
 
 // Címkék hozzádása feltöltése a létező feladathoz
 function fillAddedLabels(img, labels){
-    // Fel kell tölteni címkékkel amiknek az adatai az adatbázisban vannak a meglévő feladatra kattintáskor
     var added_labels = document.getElementById("added_labels");
 
     if (typeof labels !== 'undefined' && labels != "") {
@@ -159,7 +150,6 @@ function fillAddedLabels(img, labels){
             newDiv.appendChild(newImg);
 
             added_labels.appendChild(newDiv);
-
         });
     }
 
@@ -169,64 +159,73 @@ function fillAddedLabels(img, labels){
     
 }
 
+// Létező feladat dátumának beállítása
 function setExistingDate(date){
     var taskDate = document.getElementById('date');
     taskDate.value = date;
 }
-  
+
+// Feladat leírás beállítása
 function setDescription(description){
-var taskDescription = document.getElementById('taskDescription');
-taskDescription.value = description;
+    var taskDescription = document.getElementById('taskDescription');
+    taskDescription.value = description;
 }
 
+// Kezdő idő beállítása és engedélyezése
 function setAndEnableStartTime(time){
-var startTime = document.getElementById('startTime');
-var enableStart = document.getElementById('enableStartTime');
-startTime.value = time;
-enableStart.checked = true;
+    var startTime = document.getElementById('startTime');
+    var enableStart = document.getElementById('enableStartTime');
+    startTime.value = time;
+    enableStart.checked = true;
 }
 
+// Befejező idő beállítása és engedélyezése
 function setAndEnableEndTime(time){
-var endTime = document.getElementById('endTime');
-var enableEnd = document.getElementById('enableEndTime');
-endTime.value = time;
-enableEnd.checked = true;
+    var endTime = document.getElementById('endTime');
+    var enableEnd = document.getElementById('enableEndTime');
+    endTime.value = time;
+    enableEnd.checked = true;
 }
 
+// Feladatnév beállítása
 function setTaskName(text){
-var taskname = document.getElementById('taskname');
-taskname.value = text;
+    var taskname = document.getElementById('taskname');
+    taskname.value = text;
 }
 
+// Csoport név kiürítése
 function clearGroupName(){
     var groupNameSpan = document.getElementById('groupNameSpan');
     groupNameSpan.textContent = "";
 }
 
+// Csoport név beállítása
 function setGroupName(groupName){
     var groupNameSpan = document.getElementById('groupNameSpan');
     groupNameSpan.textContent = " - Csoport: " + groupName;
 }
     
-
+// Feladat modal alaphelyzetbe állítása
 function resetTask(){
-clearTaskName();
-clearTimeFields();
-clearDescription();
-uncheckTimeCheckboxes();
-clearDate();
-clearGroupName();
+    clearTaskName();
+    clearTimeFields();
+    clearDescription();
+    uncheckTimeCheckboxes();
+    clearDate();
+    clearGroupName();
 }
 
+// Dátum kiürítése
 function clearDate(){
     var date = document.getElementById('date');
     date.value = "";
 }
 
-// Kezdési idő input enabled
+// Kezdési idő input engedélyezése
 function enableStartTime(){
     var startCheckbox = document.getElementById('enableStartTime');
     const startTimeInput = document.getElementById("startTime");
+
     if(startCheckbox.checked){
       startTimeInput.disabled = false;
     }
@@ -235,10 +234,11 @@ function enableStartTime(){
     } 
 }
   
-// Befejező idő input enabled
+// Befejező idő input engedélyezése
 function enableEndTime(){
     endCheckbox = document.getElementById('enableEndTime');
     const endTimeInput = document.getElementById("endTime");
+
     if(endCheckbox.checked){
       endTimeInput.disabled = false;
     }
@@ -268,7 +268,6 @@ function saveTaskButton(event){
     var taskDescription = document.getElementById('taskDescription');
     var idList = [];
   
-    // Submit előtt eltüntetjük a régi hibákat
     hidePreviousTaskErrors();
   
     event.preventDefault();
@@ -279,7 +278,6 @@ function saveTaskButton(event){
   
     var labels = addedLabels.querySelectorAll('div');
     
-    // Eltároljuk a feladatok azonosítóját listába
     labels.forEach(function(div) {
        var parts = div.id.split('_');
        var number = parseInt(parts[parts.length - 1]);
@@ -312,7 +310,6 @@ function saveTaskButton(event){
             },
             credentials: 'same-origin',
             success: function(response) {
-                console.log(response); 
       
             },
             error: function(xhr, status, error) {
@@ -321,31 +318,30 @@ function saveTaskButton(event){
         });
     }
     else{ // Új feladat létrehozása
-    $.ajax({
-        type: 'POST',
-        url: 'modals/task_details_modal.php', 
-        data: {'taskAddData': taskAddData,
-              'taskName': taskName.value,
-              'colorpicker': colorpicker.value,
-              'jsonIdList': jsonIdList,
-              'date': date.value,
-              'startTime': startTime.value,
-              'endTime': endTime.value,
-              'enableStartTime': enableStartTime.checked,
-              'enableEndTime': enableEndTime.checked,
-              'taskDescription': taskDescription.value
-        },
-        credentials: 'same-origin',
-        success: function(response) {
-            console.log(response); 
-  
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-}
-    // Feladatok frissítése - napi
+        $.ajax({
+            type: 'POST',
+            url: 'modals/task_details_modal.php', 
+            data: {'taskAddData': taskAddData,
+                'taskName': taskName.value,
+                'colorpicker': colorpicker.value,
+                'jsonIdList': jsonIdList,
+                'date': date.value,
+                'startTime': startTime.value,
+                'endTime': endTime.value,
+                'enableStartTime': enableStartTime.checked,
+                'enableEndTime': enableEndTime.checked,
+                'taskDescription': taskDescription.value
+            },
+            credentials: 'same-origin',
+            success: function(response) {
+    
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+    // Feladatok frissítése - napi megjelenítése
     if(document.getElementById('selectedDate')){
         refreshDayTasks();
     }
@@ -353,15 +349,15 @@ function saveTaskButton(event){
     if(document.getElementById('labelBody')){
         refreshSortByLabelTasks();
     }
+    // Feladatok frissítése - heti megjelenítése
     if(document.getElementById('selectedWeekDate')){
         refreshWeeklyDisplay();
     }
+    // Feladatok frissítése - havi megjelenítése
     if(document.getElementById('selectedMonthDate')){
         refreshMonthlyDisplay();
     }
 
-
-    // Task modal eltüntetése
     $('#taskModal').modal('hide');
 }
 
@@ -387,12 +383,12 @@ function clearTimeFields(){
 
 // Dátum beállítása
 function setDate(){
-    // be kell majd állítani a dátumot hogy az jelenjen meg ahonnan bejött
     var fullDate = "";
     var selectedDate = "";
+
+    // Napi megjelenítés esetén
     if(document.getElementById('selectedDate')){
-        selectedDate = document.getElementById('selectedDate').value;
-        
+        selectedDate = document.getElementById('selectedDate').value;  
     } // Heti megjelenítés esetén
     else if(document.getElementById('selectedWeekDate')){
         selectedDate = document.getElementById('selectedWeekDate').value;
@@ -405,6 +401,7 @@ function setDate(){
     var year = dateComponents[0];
     var month = ("0" + dateComponents[1]).slice(-2);
     var day = dateComponents[2];
+
     if(day < 10){
         fullDate = year + "-" + month + "-0" + day;
     }
@@ -412,8 +409,6 @@ function setDate(){
         fullDate = year + "-" + month + "-" + day;
     }
 
-  
-    // Set the value of the date input field
     document.getElementById("date").value = fullDate;
 }
   
@@ -455,143 +450,147 @@ function uncheckTimeCheckboxes(){
   
 // Címke hozzáadása gomb (kép) beállítása és visszaadása
 function setAndGetAddLabelImage(){
-var img = document.createElement("img");
-img.src = "pictures/plus-circle.svg";
-img.style.marginLeft = "10px";
-img.classList.add('clickable');
-img.addEventListener('click', addLabelModalClick);
-img.onmouseover = function() {
-    this.src = 'pictures/image.svg'; 
-};
+    var img = document.createElement("img");
+    img.src = "pictures/plus-circle.svg";
+    img.style.marginLeft = "10px";
+    img.classList.add('clickable');
+    img.addEventListener('click', addLabelModalClick);
+    img.onmouseover = function() {
+        this.src = 'pictures/image.svg'; 
+    };
 
-img.onmouseleave = function() {
-    this.src = "pictures/plus-circle.svg"; 
-};
+    img.onmouseleave = function() {
+        this.src = "pictures/plus-circle.svg"; 
+    };
 
-return img;
+    return img;
 }
 
 // Dátum hiba megjelenítése
 function showDateError(){
-    dateError = document.getElementById("dateError");
+    var dateError = document.getElementById("dateError");
     dateError.style.display = "inline-block";
 }
   
 // Kezdési idó hiba megjelenítése
 function showStartTimeError(){
-startTimeError = document.getElementById("startTimeError");
-startTimeError.style.display = "inline-block";
+    var startTimeError = document.getElementById("startTimeError");
+    startTimeError.style.display = "inline-block";
 }
 
 // Befejező idó hiba megjelenítése
 function showEndTimeError(){
-endTimeError = document.getElementById("endTimeError");
-endTimeError.style.display = "inline-block";
+    var endTimeError = document.getElementById("endTimeError");
+    endTimeError.style.display = "inline-block";
 }
 
 // Feladat név hiba megjelenítése
 function showTaskNameError(){
-taskNameError = document.getElementById("taskNameError");
-taskNameError.style.display = "block";
+    var taskNameError = document.getElementById("taskNameError");
+    taskNameError.style.display = "block";
 }
 
+// Idő hiba megjelenítése
 function showTimeValueError(){
-taskValueError = document.getElementById("timeValueError");
-taskValueError.style.display = "inline-block";
+    var taskValueError = document.getElementById("timeValueError");
+    taskValueError.style.display = "inline-block";
 }
 
 // Dátum hiba elrejtése
 function hideDateError(){
-dateError = document.getElementById("dateError");
-dateError.style.display = "none";
+    var dateError = document.getElementById("dateError");
+    dateError.style.display = "none";
 }
 
 // Kezdési idó hiba elrejtése
 function hideStartTimeError(){
-startTimeError = document.getElementById("startTimeError");
-startTimeError.style.display = "none";
+    var startTimeError = document.getElementById("startTimeError");
+    startTimeError.style.display = "none";
 }
 
 // Befejező idó hiba elrejtése
 function hideEndTimeError(){
-endTimeError = document.getElementById("endTimeError");
-endTimeError.style.display = "none";
+    var endTimeError = document.getElementById("endTimeError");
+    endTimeError.style.display = "none";
 }
 
 // Feladat név hiba elrejtése
 function hideTaskNameError(){
-taskNameError = document.getElementById("taskNameError");
-taskNameError.style.display = "none";
+    var taskNameError = document.getElementById("taskNameError");
+    taskNameError.style.display = "none";
 }
 
+// Idő hiba elrejtése
 function hideTimeValueError(){
-taskValueError = document.getElementById("timeValueError");
-taskValueError.style.display = "none";
+    var taskValueError = document.getElementById("timeValueError");
+    taskValueError.style.display = "none";
 }
 
 // Előző feladat módosítás hibák elrejtése
 function hidePreviousTaskErrors(){
-hideDateError();
-hideStartTimeError();
-hideEndTimeError();
-hideTaskNameError();
-hideTimeValueError();
+    hideDateError();
+    hideStartTimeError();
+    hideEndTimeError();
+    hideTaskNameError();
+    hideTimeValueError();
 }
 
 // Feladat módosítás hibák kiírása
 function showTaskSubmitErrors(date, startTime, endTime, enableStartTime, enableEndTime, taskName){
-$canSubmit = true;
-if (date.value == '') {
-    showDateError();
-    $canSubmit = false;
+    var canSubmit = true;
+
+    if (date.value == '') {
+        showDateError();
+        canSubmit = false;
+    }
+
+    if (enableStartTime.checked == true && startTime.value == '') {
+        showStartTimeError();
+        canSubmit = false;
+    }
+
+    if (enableEndTime.checked == true && endTime.value == '') {
+        showEndTimeError();
+        canSubmit = false;
+    }
+
+    if(taskName.value.length === 0){
+        showTaskNameError();
+        canSubmit = false;
+    }
+
+    if(enableStartTime.checked == true && enableEndTime.checked == true && startTime.value > endTime.value){
+        showTimeValueError();
+        canSubmit = false;
+    }
+
+    return canSubmit;
 }
 
-if (enableStartTime.checked == true && startTime.value == '') {
-    showStartTimeError();
-    
-    $canSubmit = false;
-}
-if (enableEndTime.checked == true && endTime.value == '') {
-    showEndTimeError();
-    $canSubmit = false;
-}
-if(taskName.value.length === 0){
-    showTaskNameError();
-    $canSubmit = false;
-}
-if(enableStartTime.checked == true && enableEndTime.checked == true && startTime.value > endTime.value){
-    showTimeValueError();
-    $canSubmit = false;
-}
-
-return $canSubmit;
-}
-
-
-/* Feladat törlés funkciói START */
-
+// Feladat törlése
 function deleteTask(){
     var addLabelModal = document.getElementById("addLabelModal");
     var newLabel_modal = document.getElementById("newLabelModal");
+
     if(addLabelModal.style.display == "block" || newLabel_modal.style.display == "block"){
-        console.log("what");
         return;
     }
 
     showDeleteTaskModal();
-
 }
 
+// Feladat törlés modal bezárása
 function closeDeleteTask(){
     hideDeleteTaskModal();
 }
 
+// Feladat törlés elrejtése
 function hideDeleteTaskModal(){
     var deleteTaskModal = document.getElementById("deleteTaskModal");
     deleteTaskModal.style.display = "none";
 }
 
-// Címke hozzáadás modal megjelenítése
+// Feladat törlése modal megjelenítése
 function showDeleteTaskModal(){
     var deleteTaskModal = document.getElementById("deleteTaskModal");
     var modalDiv = document.getElementById("modal_div");
@@ -599,10 +598,12 @@ function showDeleteTaskModal(){
     deleteTaskModal.style.display = "block";
 }
 
+// Törlés megerősítése
 function confirmDelete(event){
     var taskId = document.getElementById('existingTask').value;
     var taskAddData = $(this).serialize();
     event.preventDefault();
+    
     $.ajax({
         type: 'POST',
         url: 'modals/delete_task_modal.php', 
@@ -610,30 +611,34 @@ function confirmDelete(event){
               'taskId': taskId
         },
         success: function(response) {
-            console.log(response); 
   
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
         }
     });
+
     // Napi megjelenítés
     if(document.getElementById('selectedDate')){
         refreshDayTasks();
     }
+    // Címke szerinte rendezés
     if(document.getElementById('labelBody')){
         refreshSortByLabelTasks();
-    }
+    } 
+    // Heti megjelenítés
     if(document.getElementById('selectedWeekDate')){
         refreshWeeklyDisplay();
     }
+    // Havi megjelenítés
     if(document.getElementById('selectedMonthDate')){
         refreshMonthlyDisplay();
     }
-    $('#taskModal').modal('hide');
 
+    $('#taskModal').modal('hide');
 }
 
+// Napi feladatok frissítése
 function refreshDayTasks(){
     var selectedDate = document.getElementById('selectedDate').value;
     var dateComponents = selectedDate.split('-');
@@ -644,8 +649,6 @@ function refreshDayTasks(){
     listTasks(fullDate);
     refreshCalendarDots();
 }
-
-/* Feladat törlés funkciói END */
 
 // Inicializálás
 function init(){
@@ -700,26 +703,33 @@ function init(){
     
 }
 
-window.addEventListener('load', init, false);
-
 // Címke hozzáadás, módosítás modalok bezárása kikattintáskor
 window.onclick = function(event) {
     var addLabelModal = document.getElementById("addLabelModal");
+
     if (event.target == addLabelModal) {
       addLabelModal.style.display = "none";
     }
+    
     var newLabel_modal = document.getElementById("newLabelModal");
+
     if (event.target == newLabel_modal) {
       newLabel_modal.style.display = "none";
       addLabelModal.style.display = "block";
       hideLabelNameError();
       resetNewLabelModal();
     }
+
     var deleteTaskModal = document.getElementById("deleteTaskModal");
+
     if (event.target == deleteTaskModal) {
         deleteTaskModal.style.display = "none";
     }
-  }
+}
+
+window.addEventListener('load', init, false);
+
+
 
 
 

@@ -1,16 +1,16 @@
+// Táblázatok celláinak mozgatása
 $(document).ready(function() {
 
     $(function() {
         $(".t_sortable").sortable({
           helper: function(event, ui) {
             ui.children().each(function() {
-              $(this).width($(this).width()); // Set width of dragged item to match original row's width
+              $(this).width($(this).width());
             });
             return ui;
           }
         });
       });
-
 
     $("tbody.t_sortable").sortable({
       connectWith: ".t_sortable",
@@ -19,10 +19,7 @@ $(document).ready(function() {
       zIndex: 999990,
       receive: function(event, ui) {
             var movedRow = ui.item;
-            // Get the ID of the table
             var tableId = $(this).closest('.selected-day-div').attr('id');
-            // Do something with the table ID and the moved row
-            console.log("Row moved to table with ID:", tableId);
             
             const htmlString = movedRow.html();
             const regex = /id="([^"]+)"/;
@@ -30,21 +27,15 @@ $(document).ready(function() {
 
             if (match) {
                 const tdId = match[1];
-                //sortTaskByProgress(tdId, tableId);
                 sortTaskByEisenhover(tdId, tableId);
-                // Save data to database
-
             } else {
-                console.log("ID attribute not found");
+                console.error("ID attribute not found");
             }
-
-      }
-
+        }
   }).disableSelection();
 });
 
-
-
+// Eisenhover szerinti rendezés mentése
 function sortTaskByEisenhover(tdId, tableId){
     const id = tdId.split('-')[1];
     $.ajax({
@@ -56,7 +47,6 @@ function sortTaskByEisenhover(tdId, tableId){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             
         },
         error: function(xhr, status, error) {
@@ -65,6 +55,7 @@ function sortTaskByEisenhover(tdId, tableId){
     });
 }
 
+// Feladatok frissítése
 function refreshEisenhoverTasks(){
     clearEisenhoverTasks();
     clearUrgentImportant();
@@ -74,16 +65,17 @@ function refreshEisenhoverTasks(){
     fillEisenhoverTasks();
 }
 
+// Feladatok kiürítése
 function clearEisenhoverTasks(){
     var eisenhoverBody = document.getElementById("eisenhoverBody");
     var children = eisenhoverBody.children;
     var childrenCount = children.length;
-    // Start loop from the third child and iterate up to the second last child
     for (var i = childrenCount - 2; i >= 2; i--) {
         eisenhoverBody.removeChild(children[i]);
     }
 }
 
+// Sürgös - Fontos feladatok kiürítése
 function clearUrgentImportant(){
     var urgImp = document.getElementById("urgImp");
     var children = urgImp.children;
@@ -93,6 +85,7 @@ function clearUrgentImportant(){
     }
 }
 
+// Sürgös - Nem fontos feladatok kiürítése
 function clearUrgentNotImportant(){
     var urgNotImp = document.getElementById("urgNotImp");
     var children = urgNotImp.children;
@@ -102,6 +95,7 @@ function clearUrgentNotImportant(){
     }
 }
 
+// Nem sürgös - Fontos feladatok kiürítése
 function clearNotUrgentImportant(){
     var notUrgImp = document.getElementById("notUrgImp");
     var children = notUrgImp.children;
@@ -111,6 +105,7 @@ function clearNotUrgentImportant(){
     }
 }
 
+// Nem sürgös - Nem fontos feladatok kiürítése
 function clearNotUrgentNotImportant(){
     var notUrgNotImp = document.getElementById("notUrgNotImp");
     var children = notUrgNotImp.children;
@@ -120,6 +115,7 @@ function clearNotUrgentNotImportant(){
     }
 }
 
+// Táblázatok feltöltése
 function fillEisenhoverTasks(){
     $.ajax({
         type: 'POST',
@@ -127,7 +123,6 @@ function fillEisenhoverTasks(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             if(response.length == 0){
               return;
             } 
@@ -141,9 +136,9 @@ function fillEisenhoverTasks(){
     });
 }
 
+// Inicializálás
 function init(){
     fillEisenhoverTasks();
 }
-
 
 window.addEventListener('load', init, false);

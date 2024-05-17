@@ -41,6 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 </tr>
             </tbody>
             </table>";
+
     echo "<table class='tables_ui  col selected-day-div sorting-table-header display-inline' id='to_do_table'>
 
     <tbody class='t_sortable'  id='toDoBody'>
@@ -56,6 +57,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table>";
+
     echo "<table class='tables_ui col selected-day-div sorting-table-header display-inline' id='in_progress_table'>
 
     <tbody class='t_sortable' id='inProgressBody'>
@@ -70,6 +72,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table>";
+    
     echo "<table class='tables_ui col selected-day-div sorting-table-header display-inline' id='done_table'>
 
     <tbody class='t_sortable'  id='doneBody'>

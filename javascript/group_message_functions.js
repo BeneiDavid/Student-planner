@@ -1,5 +1,4 @@
-
-
+// Csoportüzenet modal megjelenítése
 function showGroupMessageModal(){
     var groupMessageGroupNameSpan = document.getElementById('groupMessageGroupNameSpan');
     var groupId = this.parentNode.parentNode.id.split("_")[1];
@@ -10,14 +9,14 @@ function showGroupMessageModal(){
     $('#groupMessageModal').modal('show');
 }
 
-
+// Csoportüzenet modal tooltipek kezelése
 $('#groupMessageModal').on('shown.bs.modal', function() {
-    console.log("modal show");
     $('.tooltips').tooltip({
         container: $(this)
     });
 });
 
+// Hallgatók listázása
 function listStudents(groupId){
     var searchStudentResults = document.getElementById('searchStudentResults');
     searchStudentResults.innerHTML = "";
@@ -33,41 +32,33 @@ function listStudents(groupId){
         data: {'groupId': groupId },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response); 
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data === 'undefined'){
                 document.getElementById('noRegisteredStudents').style.display = "block";
                 document.getElementById('addMembersForm').style.display = "none";
                 document.getElementById('sendGroupMessageButton').style.visibility = "collapse";
-                
             }
             else{
-                
                 for (var i = 0; i < student_data.length; i++) {
 
                     var student = student_data[i];
+                    var studentDiv = document.createElement('div');
+                    var studentNameText = document.createElement('p');
+                    var studentUserNameText = document.createElement('p');
+                    var selectStudentCheckbox = document.createElement('input'); 
+                
+                    studentDiv.id = "studentDiv_" + student.user_id;
+                    studentDiv.classList.add("student-data");
+                    studentDiv.classList.add("group-message-student-data");
+                    studentNameText.textContent = student.full_name;
+                    studentUserNameText.textContent = student.username;
+                    selectStudentCheckbox.type = 'checkbox'; 
 
-
-
-                        var studentDiv = document.createElement('div');
-                        var studentNameText = document.createElement('p');
-                        var studentUserNameText = document.createElement('p');
-                        var selectStudentCheckbox = document.createElement('input'); // Change to input for checkbox
-                    
-                        studentDiv.id = "studentDiv_" + student.user_id;
-                        studentDiv.classList.add("student-data");
-                        studentDiv.classList.add("group-message-student-data");
-                        studentNameText.textContent = student.full_name;
-                        studentUserNameText.textContent = student.username;
-                        selectStudentCheckbox.type = 'checkbox'; // Set input type to radio
-
-                        studentDiv.appendChild(studentNameText);
-                        studentDiv.appendChild(studentUserNameText);
-                        studentDiv.appendChild(selectStudentCheckbox);
-                    
-                        searchStudentResults.appendChild(studentDiv);
-                    
+                    studentDiv.appendChild(studentNameText);
+                    studentDiv.appendChild(studentUserNameText);
+                    studentDiv.appendChild(selectStudentCheckbox);   
+                    searchStudentResults.appendChild(studentDiv); 
                 }
 
                 if(!searchStudentResults.hasChildNodes()){
@@ -89,7 +80,6 @@ function listStudents(groupId){
                     });
                 });
             }
-  
         },
         error: function(xhr) {
             console.error(xhr.responseText);
@@ -97,6 +87,7 @@ function listStudents(groupId){
     });
 }
 
+// Keresési találatok megjelenítése
 function showGroupMessageSearchResults(){
     var messageSearchInput =  document.getElementById('messageSearchInput')
     const searchTerm = messageSearchInput.value.toLowerCase();
@@ -108,6 +99,7 @@ function showGroupMessageSearchResults(){
         const usernameElement = studentDiv.querySelector('p:nth-child(2)');
         const name = nameElement ? nameElement.textContent.toLowerCase() : '';
         const username = usernameElement ? usernameElement.textContent.toLowerCase() : '';
+        
         if (name.includes(searchTerm) || username.includes(searchTerm)) {
           studentDiv.style.display = 'block';
           foundResult = true;
@@ -115,16 +107,17 @@ function showGroupMessageSearchResults(){
         else {
           studentDiv.style.display = 'none';
         }
-      });
+    });
     
-      if (searchTerm != "" && !foundResult) {
-        document.getElementById('noSearchResultText').style.display = "block";
-      }
-      else{
-        document.getElementById('noSearchResultText').style.display = "none";
-      }
+    if (searchTerm != "" && !foundResult) {
+    document.getElementById('noSearchResultText').style.display = "block";
+    }
+    else{
+    document.getElementById('noSearchResultText').style.display = "none";
+    }
 }
 
+// Küldés mindenki részére checkbox kezelése
 function sendToAllChanged(){
     document.getElementById('noStudentsSelected').style.display = "none";
     var checked = this.checked;
@@ -135,42 +128,30 @@ function sendToAllChanged(){
         checkboxes.forEach(function(checkbox) {
             checkbox.disabled = true;
             checkbox.checked = false;
-          });
+        });
     }
     else{
         checkboxes.forEach(function(checkbox) {
             checkbox.disabled = false;
-          });
+        });
     }
 }
 
-
+// Csoportüzenet küldése
 function sendGroupMessage(event){
     event.preventDefault();
 
     var message = document.getElementById('groupMessageText').value;
 
-    if(message.trim() !== ''){
-
-            
+    if(message.trim() !== ''){  
         document.getElementById('noMessageSpecified').style.display = "none"; 
         document.getElementById('noStudentsSelected').style.display = "none";
     
-
         var sendToAll = document.getElementById('sendToAllCheckbox').checked;
-        console.log(sendToAll);
-
         var searchStudentResults = document.getElementById("searchStudentResults");
-
-        // Get all child divs within the parent div
         var childDivs = searchStudentResults.getElementsByTagName("div");
-
-        // Create an array to store the IDs
         var studentIds = [];
-
-        // Iterate through each child div and get its ID
     
-
         if(!sendToAll){
             for (var i = 0; i < childDivs.length; i++) {
                 if(childDivs[i].lastChild.checked){
@@ -201,8 +182,7 @@ function sendGroupMessage(event){
                 dataType: "text",
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
-                    
+
                 },
                 error: function(xhr) {
                     console.error(xhr.responseText);
@@ -218,12 +198,11 @@ function sendGroupMessage(event){
     }
 }
 
+// Inicializálás
 function init(){
     document.getElementById('messageSearchInput').addEventListener('input', showGroupMessageSearchResults ,false);
     document.getElementById('sendToAllCheckbox').addEventListener('change', sendToAllChanged, false)
     document.getElementById('sendGroupMessageButton').addEventListener('click', sendGroupMessage, false);
-
-    
 }
 
 window.addEventListener('load', init, false);

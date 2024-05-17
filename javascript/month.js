@@ -1,20 +1,4 @@
-// Hónapok nevei szöveggel
-var monthNames = {
-    1: "Január",
-    2: "Február",
-    3: "Március",
-    4: "Április",
-    5: "Május",
-    6: "Június",
-    7: "Július",
-    8: "Augusztus",
-    9: "Szeptember",
-    10: "Október",
-    11: "November",
-    12: "December"
-};
-
-
+// Naptár beállítása
 function setCalendar(){
 var currentDate = new Date();
 var currentDay = currentDate.getDate();
@@ -33,18 +17,17 @@ if(currentMonth == 0){
 monthAndYearText = document.getElementById('monthAndYear');
 monthAndYearText.textContent = monthNames[currentMonth] + " " + currentYear;
 
-
 setDays(currentYear, currentMonth);
 }
 
+// Napok beállítása
 function setDays(currentYear, currentMonth){
-    var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1); // Month is zero-based, so subtract 1 from the month
+    var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
     
-    // Get the day of the week (0-6, where 0 is Sunday, 1 is Monday, ..., 6 is Saturday)
     var firstWeekday = firstDayOfMonth.getDay();
     
     if (firstWeekday === 0) {
-        firstWeekday = 7; // Change Sunday (0) to 7
+        firstWeekday = 7;
     }
 
     var calendarDaysDiv = document.getElementById('calendarDays');
@@ -57,9 +40,7 @@ function setDays(currentYear, currentMonth){
     }
     
     var nextMonth = new Date(currentYear, currentMonth, 1);
-    // Subtract one day from the first day of the next month to get the last day of the current month
     var lastDayOfMonth = new Date(nextMonth - 1);
-    // Get the day of the month (1-31)
     var totalDays = lastDayOfMonth.getDate();
 
     var calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
@@ -71,9 +52,6 @@ function setDays(currentYear, currentMonth){
     var selectedMonth = selectedDate.value.split('-')[1];
     var selectedDay = selectedDate.value.split('-')[2];
     
-    
-
-
     for (day = 1; day <= totalDays; day++) {
         var dayDiv = document.createElement("div");
         dayDiv.classList.add('monthlyDayDiv');
@@ -101,26 +79,25 @@ function setDays(currentYear, currentMonth){
         dayDiv.appendChild(tasksList);
         calendarDaysDiv.appendChild(dayDiv);
     }
-    
-    
 }
 
-
+// Naptár feladatok frissítése
 function refreshMonthlyDisplay(){
     deleteMonthlyTasks();
     listMonthTasks();
 }
 
+// Feladatok eltávolítása a naptárból
 function deleteMonthlyTasks(){
     var calendarDaysDiv = document.getElementById('calendarDays');
     var ulElements = calendarDaysDiv.getElementsByTagName('ul');
 
-    // Összes lista törlése
     for (var i = 0; i < ulElements.length; i++) {
         ulElements[i].innerHTML = '';
     }
 }
 
+// Naptár frissítése
 function updateCalendar(year, month){
     if(month == 0){
         month = 12;
@@ -136,26 +113,16 @@ function updateCalendar(year, month){
     refreshMonthlyDisplay();
 }
 
-
-function changeDateToStringFormat(date){
-    var currentDay = date.getDate();
-    var currentMonth = date.getMonth() + 1; 
-    var currentYear = date.getFullYear();
-    return currentYear + "-" + currentMonth + "-" + currentDay;
-}
-
+// Havi feladatok listázása
 function listMonthTasks(){
-     var calendarYearAndMonth = document.getElementById('calendarYearAndMonth').value;
-     var year = calendarYearAndMonth.split('-')[0];
-     var month = calendarYearAndMonth.split('-')[1] -1;
-     var daysInMonth = new Date(year, month, 0).getDate();
-     console.log(daysInMonth);
-     console.log(calendarYearAndMonth);
+    var calendarYearAndMonth = document.getElementById('calendarYearAndMonth').value;
+    var year = calendarYearAndMonth.split('-')[0];
+    var month = calendarYearAndMonth.split('-')[1] -1;
+    var daysInMonth = new Date(year, month, 0).getDate();
     var dayOfMonth = new Date(year, month, 1);
     setSeasonColors(dayOfMonth);
     for (var i = 0; i < daysInMonth; i++) {
         (function (index) {
-            console.log(dayOfMonth);
             var date = changeDateToStringFormat(dayOfMonth);
             $.ajax({
                 type: 'POST',
@@ -164,7 +131,6 @@ function listMonthTasks(){
                 data: {'date': date},
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                     fillMonthDay(index + 1, response);
                 },
                 error: function(xhr) {
@@ -177,15 +143,15 @@ function listMonthTasks(){
     }
 }
 
+// Nap feltöltése a feladatokkal
 function fillMonthDay(day, task_details){
     if(task_details.length != 0){
         var taskList = document.getElementById('list-' + day);
-
         var tasks = task_details.tasks;
-        // Feladatok rendezése időrendben
+
         tasks.sort(function (a, b) {
             var startTimeComparison = a.start_time.localeCompare(b.start_time);
-        
+
             if (startTimeComparison === 0) {
                 return a.end_time.localeCompare(b.end_time);
             }
@@ -195,8 +161,6 @@ function fillMonthDay(day, task_details){
 
         for (var i = 0; i < tasks.length; i++) {
             var li = document.createElement('li');
-
-
             var svg = createColoredSVG(tasks[i].task_color, "35px", "dot");
             var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
@@ -212,8 +176,7 @@ function fillMonthDay(day, task_details){
     }
 }
 
-
-// Előző hónap click
+// Előző hónap kattintása
 function showPrevMonth(){
     var calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
     var date = calendarYearAndMonth.value;
@@ -231,7 +194,7 @@ function showPrevMonth(){
     updateCalendar(year,month);
 }
 
-// Következő hónap click
+// Következő hónap kattintása
 function showNextMonth(){
     calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
     var date = calendarYearAndMonth.value;
@@ -250,6 +213,7 @@ function showNextMonth(){
     updateCalendar(year,month);
 }
 
+// Inicializálás
 function init(){
     document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
     document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);

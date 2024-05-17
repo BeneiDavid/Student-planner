@@ -1,5 +1,4 @@
 <?php
-
     class LoginValidator {
         // Properties
         private $error;
@@ -13,6 +12,8 @@
         }
 
         // Methods
+        
+        // Bejelentkezés form hitelesítése
         public function validateForm() {
             if($this->validateCredentials())
             {
@@ -33,6 +34,7 @@
             return false;
         }
 
+        // Email-cím és jelszó hitelesítése
         private function validateCredentials() {
             $address = mysqli_real_escape_string($this->connection, $_POST['address']);
             $this->address = $address;
@@ -51,6 +53,7 @@
             }
         }
 
+        // Email-cím megerősítésének hitelesítése
         private function validateAddressConfirm() {
             $confirm_count = mysqli_num_rows(mysqli_query($this->connection, "SELECT * FROM `users` WHERE `user_address`='" . $this->address . "' AND `reg_confirm`=1"));
 
@@ -64,6 +67,7 @@
             }
         }
 
+        // Bejelentkezés
         private function login() {
             $user_data = mysqli_fetch_array(mysqli_query($this->connection, "SELECT * FROM `users` WHERE `user_address`='" . $this->address . "'"));
             $_SESSION['logged_in'] = 'yes';
@@ -74,14 +78,14 @@
             $_SESSION['user_address'] = $user_data['user_address'];
         }
 
+        // Hiba lekérdezése
         public function getError(){
             return $this->error;
         }
 
+        // Email-cím lekérdezése
         public function getAddress(){
             return $this->address;
         }
-
     }
-
 ?>

@@ -14,6 +14,8 @@ class RegistrationValidator {
   }
 
   // Methods
+
+  // Regisztrációs form hitelesítése
   public function validateForm() {
     
     $isNameValid = $this->validateName();
@@ -47,6 +49,7 @@ class RegistrationValidator {
     return false;
   }
 
+  // Név hitelesítése
   private function validateName() {
     $fullname = mysqli_real_escape_string($this->connection, $_POST['fullname']);
     $this->fields["fullname"] = $fullname;
@@ -59,6 +62,7 @@ class RegistrationValidator {
     return true;
   }
 
+  // Azonosító hitelesítése
   private function validateId() {
     $username = mysqli_real_escape_string($this->connection, $_POST['username']);
     $this->fields["username"] = $username;
@@ -82,6 +86,7 @@ class RegistrationValidator {
     return true;
   }
 
+  // E-mail cím hitelesítése
   private function validateAddress() {
     $address = mysqli_real_escape_string($this->connection, $_POST['email']);
     $this->fields["address"] = $address;
@@ -105,6 +110,7 @@ class RegistrationValidator {
     return true;
   }
 
+  // Jelszó hitelesítése
   private function validatePassword() {
     $password = mysqli_real_escape_string($this->connection, $_POST['password']);
     $password2 = mysqli_real_escape_string($this->connection, $_POST['password2']);
@@ -127,6 +133,7 @@ class RegistrationValidator {
     return true;
   }
 
+  // Regisztráció mentése
   private function saveRegistration(){
     $hashed_password = hash('sha256',$this->fields["password"]);
 
@@ -143,18 +150,22 @@ class RegistrationValidator {
         }
   }
 
+  // Teljes név lekérdezése
   public function getFullName(){
     return $this->fields["fullname"];
   }
 
+  // Azonosító lekérdezése
   public function getUsername(){
     return $this->fields["username"];
   }
 
+  // E-mail cím lekérdezése
   public function getAddress(){
     return $this->fields["address"];
   }
 
+  // Hibák lekérdezése
   public function getErrors(){
     return $this->errors;
   }

@@ -1,19 +1,3 @@
-// Hónapok nevei szöveggel
-var monthNames = {
-    1: "Január",
-    2: "Február",
-    3: "Március",
-    4: "Április",
-    5: "Május",
-    6: "Június",
-    7: "Július",
-    8: "Augusztus",
-    9: "Szeptember",
-    10: "Október",
-    11: "November",
-    12: "December"
-};
-
 // Előző hónap click
 function showPrevMonth(){
     calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
@@ -97,12 +81,10 @@ async function setDays(currentYear, currentMonth){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var parsedData = JSON.parse(response);
             if(parsedData.length != 0){
                 days = parsedData.dates.map(dateString => new Date(dateString).getDate())
                 .filter((day, index, arr) => arr.indexOf(day) === index);
-                console.log(days);
             }
         },
         error: function(xhr) {
@@ -129,7 +111,6 @@ async function setDays(currentYear, currentMonth){
         }
 
         if(days.includes(day)){
-            console.log(day + " asd");
             var li = document.createElement('li');
             
             var svg = createColoredSVG(getSeasonDarkColor(firstDayOfMonth), "35px", "dot");
@@ -149,11 +130,9 @@ async function setDays(currentYear, currentMonth){
     setSeasonColors(firstDayOfMonth);
 }
 
-
+// Feladat jelző pontok frissítése a naptárban
 async function refreshCalendarDots(){
-   
     var yearAndMonth = document.getElementById('calendarYearAndMonth').value;
-    console.log(yearAndMonth);
     var currentYear = yearAndMonth.split('-')[0];
     var currentMonth = yearAndMonth.split('-')[1];
     var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
@@ -172,7 +151,6 @@ async function refreshCalendarDots(){
             if(parsedData.length != 0){
                 days = parsedData.dates.map(dateString => new Date(dateString).getDate())
                 .filter((day, index, arr) => arr.indexOf(day) === index);
-                console.log(days);
             }
         },
         error: function(xhr) {
@@ -183,9 +161,7 @@ async function refreshCalendarDots(){
     const calendarDays = document.getElementById('calendarDays');
 
     var ulElements = calendarDays.querySelectorAll('ul');
-    console.log("DAYS:" + days);
     ulElements.forEach(function(ulElement) {
-        console.log(ulElement.id.split("-")[1]);
         if(days.includes(parseInt(ulElement.id.split("-")[1])) && ulElement.childNodes.length == 0){
             
             var li = document.createElement('li');
@@ -199,11 +175,9 @@ async function refreshCalendarDots(){
         else if(!days.includes(parseInt(ulElement.id.split("-")[1])) && ulElement.childNodes.length == 1){
             ulElement.innerHTML = "";
         }
-        console.log(ulElement);
     });
 
 }
-
 
 // Nap kiválasztása a naptárban
 function chooseDay(){
@@ -281,6 +255,7 @@ function setCalendar(){
 
 }
 
+// Naptár beállítása adott dátumra
 function setCalendarToDate(date){
     var Year = date.split('-')[0];
     var Month = date.split('-')[1];
@@ -303,11 +278,13 @@ function setCalendarToDate(date){
 
 }
 
+// Dátum lekérdezése az URL-ből
 function getDateFromURL() {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('date');
 }
 
+// Dátum törlése az URL-ből
 function removeDateFromURL() {
     var urlParams = new URLSearchParams(window.location.search);
     urlParams.delete('date');
@@ -315,7 +292,7 @@ function removeDateFromURL() {
     history.replaceState(null, '', newUrlWithoutDate);
 }
 
-
+// Inicializálás
 function init(){
     document.getElementById('nextMonth').addEventListener('click', showNextMonth, false);
     document.getElementById('prevMonth').addEventListener('click', showPrevMonth, false);

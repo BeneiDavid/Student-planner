@@ -1,6 +1,4 @@
 <?php
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once '../config.php';
@@ -18,7 +16,7 @@ $user_id = $user->getId();
 $student_ids = $_POST['studentIds'];
 $message = $_POST['message'];
 $currentDate = date('Y-m-d H:i:s'); 
-// Check if $student_ids is set and is an array
+
 if(isset($student_ids) && is_array($student_ids)) {
     foreach($student_ids as $student_id) {
         $message_send_query = mysqli_query($l, "INSERT INTO `messages` SET
@@ -32,16 +30,6 @@ if(isset($student_ids) && is_array($student_ids)) {
     }
 }
 
-
 echo "success";
-
-
-
-
-
-
-
-
-
 
 ?>
