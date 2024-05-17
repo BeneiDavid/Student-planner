@@ -38,15 +38,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                             <input type='hidden' id='calendarYearAndMonth' name='calendarYearAndMonth'>
                     </div>
                 
-                    <div class='weekdays'>
-                        <li>H</li>
-                        <li>K</li>
-                        <li>Sze</li>
-                        <li>Cs</li>
-                        <li>P</li>
-                        <li>Szo</li>
-                        <li>V</li>
-                    </div>
+                <ul class='weekdays'>
+                    <li>H</li>
+                    <li>K</li>
+                    <li>Sze</li>
+                    <li>Cs</li>
+                    <li>P</li>
+                    <li>Szo</li>
+                    <li>V</li>
+                </ul>
                     <!-- <ul class='days' id='calendarDays'></ul> -->
                     <div class='days' id='calendarDays'></div>
                 </div>";

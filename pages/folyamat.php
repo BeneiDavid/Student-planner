@@ -25,7 +25,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     echo "
         <br><br>
-        <div class='text-align-center' style='text-align: center;'><table class='tables_ui col selected-day-div sorting-table-header display-inline' id='task_table'>
+        <div class='text-align-center'><table class='tables_ui col selected-day-div sorting-table-header display-inline' id='task_table'>
             <tbody id='byProgressBody' class='t_sortable'>
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>

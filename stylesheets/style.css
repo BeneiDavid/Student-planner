@@ -790,6 +790,14 @@ margin-left:  10px;
   background-color: white;
 }
 
+.new-group:hover{
+  background-color: lightgray;
+}
+
+.new-group:hover button{
+  background-color: lightgray;
+}
+
 
 
 
@@ -1155,6 +1163,13 @@ h1{
 
 .succesful-registration-alert{
   max-width: 500px;
+  text-align: center;
+  font-size: large;
+  margin: auto;
+}
+
+.succesful-new-password-alert{
+  max-width: 800px;
   text-align: center;
   font-size: large;
   margin: auto;

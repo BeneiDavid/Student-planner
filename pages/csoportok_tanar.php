@@ -34,7 +34,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
             </div>
             <br><br>
             <div class='new-task-item new-group div-with-border clickable no-select' id='createNewGroup'>
-                <button class='add-task-button'>
+                <button type='button' class='add-task-button'>
                     <img class='add-task-icon' src='pictures/plus-square.svg' alt='Csoport létrehozása'>  Új csoport létrehozása
                 </button>
             </div>
@@ -50,7 +50,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                     </tr>
                     <tr id='newGroupTaskRow' class='no-drag-drop'>
                         <td class='new-task-td'>
-                            <button class='add-task-button' id='add-group-task-button'>
+                            <button class='add-task-button' type='button' id='add-group-task-button'>
                                 <img class='add-task-icon' src='pictures/plus-square.svg' alt='Feladat hozzáadása'>
                             </button>
                         </td>

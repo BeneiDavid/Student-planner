@@ -73,7 +73,7 @@ if (isset($_POST['groupAddData']))
                     <br><br>
                     <input type='hidden' id='groupEditId'>
                     <div class='new-task-item  clickable no-select new-member-button' id='addNewMember'>
-                        <button class='add-task-button'>
+                        <button type='button' class='add-task-button'>
                             <img class='add-task-icon' src='pictures/plus-square.svg' alt='Tag hozzáadása'> Új tag hozzáadása
                         </button>
                     </div>
