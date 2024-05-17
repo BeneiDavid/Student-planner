@@ -21,9 +21,9 @@ $('#groupMessageModal').on('shown.bs.modal', function() {
 function listStudents(groupId){
     var searchStudentResults = document.getElementById('searchStudentResults');
     searchStudentResults.innerHTML = "";
-    document.getElementById('noSearchResultText').style.visibility = "collapse";
-    document.getElementById('noStudentsSelected').style.visibility = "collapse";
-    document.getElementById('noMessageSpecified').style.visibility = "collapse";
+    document.getElementById('noSearchResultText').style.display = "none";
+    document.getElementById('noStudentsSelected').style.display = "none";
+    document.getElementById('noMessageSpecified').style.display = "none";
     document.getElementById('groupMessageText').value = "";
     document.getElementById('noSearchResultText').value = "";
     document.getElementById('sendToAllCheckbox').checked = false;
@@ -37,7 +37,10 @@ function listStudents(groupId){
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data === 'undefined'){
-                document.getElementById('noRegisteredStudents').style.visibility = "visible";
+                document.getElementById('noRegisteredStudents').style.display = "block";
+                document.getElementById('addMembersForm').style.display = "none";
+                document.getElementById('sendGroupMessageButton').style.visibility = "collapse";
+                
             }
             else{
                 
@@ -68,17 +71,21 @@ function listStudents(groupId){
                 }
 
                 if(!searchStudentResults.hasChildNodes()){
-                    document.getElementById('noRegisteredStudents').style.visibility = "visible";
+                    document.getElementById('noRegisteredStudents').style.display = "block";
+                    document.getElementById('addMembersForm').style.display = "none";
+                    document.getElementById('sendGroupMessageButton').style.visibility = "collapse";
                 }
                 else{
-                    document.getElementById('noRegisteredStudents').style.visibility = "collapse";
+                    document.getElementById('noRegisteredStudents').style.display = "none";
+                    document.getElementById('addMembersForm').style.display = "block";
+                    document.getElementById('sendGroupMessageButton').style.visibility = "visible";
                 }
 
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
                 checkboxes.forEach(function(checkbox) {
                     checkbox.addEventListener('change', function() {
-                        document.getElementById('noStudentsSelected').style.visibility = "collapse";
+                        document.getElementById('noStudentsSelected').style.display = "none";
                     });
                 });
             }
@@ -111,15 +118,15 @@ function showGroupMessageSearchResults(){
       });
     
       if (searchTerm != "" && !foundResult) {
-        document.getElementById('noSearchResultText').style.visibility = "visible";
+        document.getElementById('noSearchResultText').style.display = "block";
       }
       else{
-        document.getElementById('noSearchResultText').style.visibility = "collapse";
+        document.getElementById('noSearchResultText').style.display = "none";
       }
 }
 
 function sendToAllChanged(){
-    document.getElementById('noStudentsSelected').style.visibility = "collapse";
+    document.getElementById('noStudentsSelected').style.display = "none";
     var checked = this.checked;
     var searchStudentResults = document.getElementById('searchStudentResults');
     var checkboxes = searchStudentResults.querySelectorAll("input[type='checkbox']");
@@ -146,8 +153,8 @@ function sendGroupMessage(event){
     if(message.trim() !== ''){
 
             
-        document.getElementById('noMessageSpecified').style.visibility = "collapse"; 
-        document.getElementById('noStudentsSelected').style.visibility = "collapse";
+        document.getElementById('noMessageSpecified').style.display = "none"; 
+        document.getElementById('noStudentsSelected').style.display = "none";
     
 
         var sendToAll = document.getElementById('sendToAllCheckbox').checked;
@@ -181,7 +188,7 @@ function sendGroupMessage(event){
         }
 
         if(!sendToAll && studentIds.length == 0){
-            document.getElementById('noStudentsSelected').style.visibility = "visible";
+            document.getElementById('noStudentsSelected').style.display = "block";
         }
         else{
             $.ajax({
@@ -206,8 +213,8 @@ function sendGroupMessage(event){
         }
     }
     else{
-        document.getElementById('noMessageSpecified').style.visibility = "visible";
-        document.getElementById('noStudentsSelected').style.visibility = "collapse";
+        document.getElementById('noMessageSpecified').style.display = "block";
+        document.getElementById('noStudentsSelected').style.display = "none";
     }
 }
 

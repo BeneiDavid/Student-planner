@@ -10,6 +10,7 @@
       
             <!-- Modal body -->
             <div class='modal-body'>
+            <div class="no-registered-students-div" id='noRegisteredStudents'>A csoportnak még nincsenek tagjai.</div>
                 <form method='post' id="addMembersForm">
                     <input type="search" id="messageSearchInput" class='search-input' placeholder="Keresés..."><img src='pictures/search.svg' class='search-image' data-bs-toggle="tooltip" data-bs-placement="right" title="A mezőben kereshet név és azonosító alapján is."></img>
                     <br><br>
@@ -18,7 +19,7 @@
                 </div>
                     <div class='div-with-border search-results' id="searchStudentResults"></div>
                     <span class="error no-result-text" id='noSearchResultText'><br>Nincs a keresésnek megfelelő találat.</span><br>
-                    <span class="info no-result-text" id='noRegisteredStudents'><br>A csoportnak még nincsenek tagjai.</span>
+                    
                     <span class="error no-result-text" id='noStudentsSelected'>Kérem adja meg, hogy kinek szeretné küldeni az üzenetet!</span>
                     
                     <br>
@@ -30,6 +31,7 @@
                     <span class="error no-result-text" id='noMessageSpecified'>Nem küldhet el üres üzenetet!</span>
                     
                 </form>
+                
             </div>
 
       

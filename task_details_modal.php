@@ -81,20 +81,11 @@ if (isset($_POST['taskAddData']))
       }
     }
 
-
-    // Feladat és annak címkéinek eltárolása
-   
-
     mysqli_close($l);
     
 }
 
 ?>
-
-
-
-
-
 
 <div class='modal fade' id='taskModal'>
         <div class='modal-dialog modal-dialog-centered modal-lg'>
@@ -110,20 +101,19 @@ if (isset($_POST['taskAddData']))
             <div class='modal-body'>
                 <form method='post'>
                     <input type='hidden' id='existingTask'>
-
+                    <span class="error label-name-error" id="taskNameError">A feladat neve nem lehet üres!</span>
                     <label for='taskname'>Feladat neve:</label> 
-                    <input type='text' class='task-input task-name' id='taskname' name='taskname' maxlength="50"><span class="error label-name-error" id="taskNameError">A feladat neve nem lehet üres!</span>
+                    
+                    <input type='text' class='task-input task-name' id='taskname' name='taskname' maxlength="50">
                     <img src="pictures/delete.svg" id="deleteTask" alt='Feladat törlése' class="delete-task-icon clickable"></img>
                     <br><br>
                     
-
                     <label for='colorpicker' >Feladatszín:</label> 
                     <input type='color' id='colorpicker' class='colorpicker task-input'><br><br>
 
                     <p>Címkék:</p>
-                    <div id='added_labels'>
-
-                    </div><br>
+                    <div id='added_labels'></div>
+                    <br>
                     <div id='modal_div'></div>
 
                     <label for='date'>Dátum:</label>
