@@ -7,7 +7,7 @@
     require 'PHPMailer/src/PHPMailer.php'; 
     require 'PHPMailer/src/SMTP.php'; 
 
-    require 'emailconfig.php';
+    require 'emailconfig/emailconfig.php';
 
 
     class EmailSender {

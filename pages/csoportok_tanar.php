@@ -2,8 +2,8 @@
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
-
-    require_once 'user.php';
+    require_once 'config.php';
+    require_once BASE_PATH . '/classes/user.php';
     session_start();
     $user = unserialize($_SESSION['user']);
     $user_type = $user->getUserType();
@@ -11,14 +11,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         header("Location: index.php?page=kezdolap");
     }
 
-    require "modals/group_message_modal.php";
-    require 'modals/add_members_modal.php';
-    require 'modals/group_details_modal.php';
-    require 'modals/group_delete_confirm_modal.php';
-    require 'task_details_modal.php';
-    require 'add_label_modal.php';
-    require 'new_label_modal.php';
-    require 'delete_task_modal.php';
+    require_once BASE_PATH . '/modals/group_message_modal.php';
+    require_once BASE_PATH . '/modals/add_members_modal.php';
+    require_once BASE_PATH . '/modals/group_details_modal.php';
+    require_once BASE_PATH . '/modals/group_delete_confirm_modal.php';
+    require_once BASE_PATH . '/modals/task_details_modal.php';
+    require_once BASE_PATH . '/modals/add_label_modal.php';
+    require_once BASE_PATH . '/modals/new_label_modal.php';
+    require_once BASE_PATH . '/modals/delete_task_modal.php';
     echo '<script type="text/javascript"  src="javascript/group_message_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
     echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';

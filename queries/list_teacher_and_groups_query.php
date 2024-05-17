@@ -8,7 +8,8 @@ if (!$l) {
 die("Connection failed: " . mysqli_connect_error());
 }
 
-require_once '../user.php';
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/user.php';
 
 session_start();
 

@@ -31,8 +31,9 @@
 <body>
 
 <?php
-require 'loginvalidator.php';
-require_once 'user.php';
+require_once 'classes/user.php';
+require_once 'classes/loginvalidator.php';
+
 
 
     // itt kell a belépést programozni, mert ha külön php-ban van, akkor a menü hamarabb betöltődik,

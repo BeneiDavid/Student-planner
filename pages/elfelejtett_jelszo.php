@@ -29,8 +29,8 @@ ini_set('display_errors', 1);
             mysqli_query($l,"UPDATE `users` SET `user_password`='".$new_hashed_password."' WHERE `user_address`='".$email."'");
            
             $user_data = $user_query->fetch_assoc();
-            
-            require ('emailsender.php');
+            require_once 'config.php';
+            require_once BASE_PATH . '/classes/emailsender.php';
 
             $sender = new EmailSender();
             $message = ' Kedves '.$user_data['full_name'].'!

@@ -79,7 +79,7 @@ function listWeekTasks(){
             var date = changeDateToStringFormat(firstdayOfWeek);
             $.ajax({
                 type: 'POST',
-                url: 'task_query.php',
+                url: 'queries/task_query.php',
                 dataType: "json",
                 data: {'date': date}, // Use a new instance of the date to prevent modification
                 credentials: 'same-origin',

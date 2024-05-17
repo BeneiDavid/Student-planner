@@ -4,7 +4,8 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once '../user.php';
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/user.php';
 session_start();
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 

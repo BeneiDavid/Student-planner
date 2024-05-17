@@ -49,7 +49,7 @@ function sortTaskByEisenhover(tdId, tableId){
     const id = tdId.split('-')[1];
     $.ajax({
         type: 'POST',
-        url: 'sort_by_eisenhover_query.php', 
+        url: 'queries/sort_by_eisenhover_query.php', 
         data: {
             'taskId': id,
             'tableId': tableId
@@ -123,7 +123,7 @@ function clearNotUrgentNotImportant(){
 function fillEisenhoverTasks(){
     $.ajax({
         type: 'POST',
-        url: 'task_query.php', 
+        url: 'queries/task_query.php', 
         data: {},
         credentials: 'same-origin',
         success: function(response) {

@@ -297,7 +297,7 @@ function saveTaskButton(event){
     if(existingTask.value != -1){
         $.ajax({
             type: 'POST',
-            url: 'task_details_update_modal.php', 
+            url: 'queries/task_details_update_query.php', 
             data: {'taskAddData': taskAddData,
                   'taskId': existingTask.value, 
                   'taskName': taskName.value,
@@ -323,7 +323,7 @@ function saveTaskButton(event){
     else{ // Új feladat létrehozása
     $.ajax({
         type: 'POST',
-        url: 'task_details_modal.php', 
+        url: 'modals/task_details_modal.php', 
         data: {'taskAddData': taskAddData,
               'taskName': taskName.value,
               'colorpicker': colorpicker.value,
@@ -605,7 +605,7 @@ function confirmDelete(event){
     event.preventDefault();
     $.ajax({
         type: 'POST',
-        url: 'delete_task_modal.php', 
+        url: 'modals/delete_task_modal.php', 
         data: {'taskAddData': taskAddData,
               'taskId': taskId
         },
