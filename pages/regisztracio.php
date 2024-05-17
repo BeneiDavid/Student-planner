@@ -19,7 +19,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         $errors = array();
 
         if($validator->validateForm()){
-            print '<p class="bg-success text-white">Sikeres regisztráció!</p>';
+            echo '<div class="content-padding"><div class="alert alert-success succesful-registration-alert" role="alert">Sikeres regisztráció!</div></div><br>';
         }
         else{
             $fullname = $validator->getFullName();

@@ -8,7 +8,7 @@
 
         mysqli_query($l, "UPDATE `users` SET `reg_confirm`=1 WHERE `user_address`='".$email."'");
 
-        print '<p class="bg-success text-white"><a href="index.php?page=bejelentkezes"> Sikeres visszaigazolás, kérjük jelentkezzen be itt!</a></p>';
+        echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Sikeres visszaigazolás, kérem jelentkezzen be itt!</a></div></div>';
     }
     else
     {

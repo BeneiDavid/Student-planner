@@ -1153,6 +1153,14 @@ h1{
   margin: auto;
 }
 
+.succesful-registration-alert{
+  max-width: 500px;
+  text-align: center;
+  font-size: large;
+  margin: auto;
+}
+
+
 
 
 .sr-only {
