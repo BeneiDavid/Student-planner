@@ -25,7 +25,7 @@ function saveLabelSetting(event){
       // Send AJAX request
       $.ajax({
           type: 'POST',
-          url: 'edit_label.php', 
+          url: 'queries/edit_label_query.php', 
           data: {'label_id': label_id,
                 'label_symbol': imageSource,
                 'label_name': labelName,
@@ -58,7 +58,7 @@ function saveLabelSetting(event){
   
       $.ajax({
           type: 'POST',
-          url: 'new_label_modal.php', 
+          url: 'modals/new_label_modal.php', 
           data: {'formData': formData,
                 'imageSource': imageSource,
                 'labelName': labelName,

@@ -32,7 +32,7 @@ $(document).ready(function() {
 function fillSortByProgressTasks(){
     $.ajax({
         type: 'POST',
-        url: 'task_query.php', 
+        url: 'queries/task_query.php', 
         data: {},
         credentials: 'same-origin',
         success: function(response) {
@@ -55,7 +55,7 @@ function sortTaskByProgress(tdId, tableId){
     const id = tdId.split('-')[1];
     $.ajax({
         type: 'POST',
-        url: 'sort_by_progress_query.php', 
+        url: 'queries/sort_by_progress_query.php', 
         data: {
             'taskId': id,
             'tableId': tableId

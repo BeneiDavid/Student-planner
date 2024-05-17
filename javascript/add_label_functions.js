@@ -21,7 +21,7 @@ function deleteLabel(event){
   
     $.ajax({
       type: 'POST',
-      url: 'delete_label.php', 
+      url: 'queries/delete_label_query.php', 
       data: {'label_id': number},
       credentials: 'same-origin',
       success: function() {
@@ -123,7 +123,7 @@ function listUserLabels(fromLabelPopover, showGroups){
         $.ajax({
         type: 'POST',
         data: {'showGroups': showGroups}, 
-        url: 'user_label_query.php',
+        url: 'queries/user_label_query.php',
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {

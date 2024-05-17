@@ -32,7 +32,7 @@ function chooseLabel(divId){
 
   $.ajax({
     type: 'POST',
-    url: 'task_query.php', 
+    url: 'queries/task_query.php', 
     data: {'labelId': labelId},
     dataType: "json",
     credentials: 'same-origin',
@@ -99,7 +99,7 @@ function chooseLabel(divId){
 
         $.ajax({
           type: 'POST',
-          url: 'first_label_query.php', 
+          url: 'queries/first_label_query.php', 
           data: {'showGroups': showGroups},
           credentials: 'same-origin',
           dataType: 'text',
@@ -121,7 +121,7 @@ function chooseLabel(divId){
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'POST',
-        url: 'label_exists_query.php', 
+        url: 'queries/label_exists_query.php', 
         data: {'labelId': id, 'showGroups': showGroups},
         credentials: 'same-origin',
         dataType: 'text',

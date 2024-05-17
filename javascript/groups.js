@@ -131,7 +131,7 @@ function showGroupTasks(){
 console.log(groupId);
     $.ajax({
         type: 'POST',
-        url: 'task_query.php', 
+        url: 'queries/task_query.php', 
         dataType: "json",
         data: {'groupId': groupId},
         credentials: 'same-origin',

@@ -159,7 +159,7 @@ function listMonthTasks(){
             var date = changeDateToStringFormat(dayOfMonth);
             $.ajax({
                 type: 'POST',
-                url: 'task_query.php',
+                url: 'queries/task_query.php',
                 dataType: "json",
                 data: {'date': date},
                 credentials: 'same-origin',

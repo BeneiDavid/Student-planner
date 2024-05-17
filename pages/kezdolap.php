@@ -1,5 +1,8 @@
 <?php
-require_once 'user.php';
+
+require_once 'config.php';
+require_once BASE_PATH . '/classes/user.php';
+
 if (isset($_GET['login_success']) && $_GET['login_success'] == 1) {
     echo '<br><div class="content-padding"><div class="alert alert-success succesful-login-alert" role="alert">Sikeres bejelentkezés!</div></div>';
 

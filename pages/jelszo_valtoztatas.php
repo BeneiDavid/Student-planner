@@ -2,7 +2,8 @@
 
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     {   
-        require_once 'user.php';
+        require_once 'config.php';
+        require_once BASE_PATH . '/classes/user.php';
         session_start();
         $password_error = "";
 
@@ -67,7 +68,7 @@
     }
     else
     {
-        print '<a href="index.php?oldal=bejelentkezes">Ön még nem jelentkezett be, kérjük a regisztráció után jelentkezzen be itt!</a>';
+        echo '<br><div class="content-padding"><div class="alert alert-info succesful-login-alert" role="alert"><a class="link-custom-color" href="index.php?page=bejelentkezes"> Ön még nem jelentkezett be, kérem jelentkezzen be itt!</a></div></div>';
     }
 
 

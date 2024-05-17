@@ -1,7 +1,8 @@
 <?php
 
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
-require_once 'user.php';
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/user.php';
 if (!$l) {
 die("Connection failed: " . mysqli_connect_error());
 }

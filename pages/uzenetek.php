@@ -2,7 +2,8 @@
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
-    require_once 'user.php';
+    require_once 'config.php';
+    require_once BASE_PATH . '/classes/user.php';
     $user = unserialize($_SESSION['user']);
     $user_type = $user->getUserType();
     if($user_type != 'student'){
@@ -10,7 +11,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     exit;
     }
     
-    require "modals/chat_modal.php";
+    require_once BASE_PATH . '/modals/chat_modal.php';
     echo '<script type="text/javascript"  src="javascript/messages_student.js"></script>';
     echo '<script type="text/javascript"  src="javascript/chat.js"></script>';
     echo '<script type="text/javascript"  src="javascript/common.js"></script>';

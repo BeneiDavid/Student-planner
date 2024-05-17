@@ -5,7 +5,7 @@ function taskClick(){
     console.log(taskId);
     $.ajax({
         type: 'POST',
-        url: 'task_details_by_id.php', 
+        url: 'queries/task_details_by_id_query.php', 
         dataType: "html",
         data: {'taskId': taskId},
         credentials: 'same-origin',
@@ -612,7 +612,7 @@ function fillTaskTable(response, type){
 function listTasks(date){
     $.ajax({
         type: 'POST',
-        url: 'task_query.php', 
+        url: 'queries/task_query.php', 
         dataType: "json",
         data: {'date': date},
         credentials: 'same-origin',
