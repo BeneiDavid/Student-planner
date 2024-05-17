@@ -26,7 +26,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo "
         <br><br>
 
-        <table class='tables_ui col selected-day-div center-horizontally' id='task_table'>
+        <table class='tables_ui col selected-day-div sorting-table-header center-horizontally' id='task_table'>
             <tbody id='eisenhoverBody' class='t_sortable'>
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>
@@ -42,7 +42,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 </tr>
             </tbody>
             </table>";
-    echo "<div class='grid-container padding-bottom'><div class='grid-item'><table class='col selected-day-div' id='urgent_important'>
+    echo "<div class='grid-container padding-bottom'><div class='grid-item'><table class='col selected-day-div sorting-table-header' id='urgent_important'>
 
     <tbody id='urgImp' class='t_sortable'>
         <tr>
@@ -56,7 +56,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table></div>";
-    echo "<div class='grid-item'><table class='col selected-day-div' id='urgent_notimportant'>
+    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header' id='urgent_notimportant'>
 
     <tbody id='urgNotImp' class='t_sortable'>
         <tr>
@@ -70,7 +70,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table></div>";
-    echo "<div class='grid-item'><table class='col selected-day-div' id='noturgent_important'>
+    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header' id='noturgent_important'>
 
     <tbody id='notUrgImp' class='t_sortable'>
         <tr>
@@ -85,7 +85,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     </tbody>
     </table></div>";
 
-    echo "<div class='grid-item'><table class='col selected-day-div'  id='noturgent_notimportant'>
+    echo "<div class='grid-item'><table class='col selected-day-div sorting-table-header'  id='noturgent_notimportant'>
 
     <tbody id='notUrgNotImp' class='t_sortable'>
         <tr>

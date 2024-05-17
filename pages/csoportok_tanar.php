@@ -43,7 +43,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         <div id='groupTasksDiv' class='no-display'>
             <button class='btn btn-primary' id='backToGroups'>". htmlspecialchars('<-') ." Vissza a csoportokhoz</button>
             <br><br>
-            <table class=' col selected-day-div center-horizontally' id='group_task_table'>
+            <table class=' col selected-day-div sorting-table-header center-horizontally' id='group_task_table'>
                 <tbody id='groupTasksBody' class='t_sortable'>
                     <tr>
                         <th colspan='1' class='progress-cell'>Feladatok</th>

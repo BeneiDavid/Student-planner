@@ -84,20 +84,17 @@ function setDays(currentYear, currentMonth){
         var tasksList = document.createElement("ul");
         tasksList.id = "list-" + day; 
 
-        if(calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
+        if (calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
             listItem.classList.add('activeDayMonthly');
             var color = getSeasonDarkColor(firstDayOfMonth);
             var svg = createColoredSVG(color, "115px", "dot");
             var svgBlob = new Blob([svg.outerHTML], {type: 'image/svg+xml'});
             var url = URL.createObjectURL(svgBlob);
 
-// Set the background image of the listItem
             listItem.style.backgroundImage = 'url("' + url + '")';
             listItem.style.backgroundRepeat = "no-repeat";
             listItem.style.backgroundPosition = "center";
             listItem.style.backgroundSize = "115px"
-
-
         }
 
         dayDiv.appendChild(listItem);
@@ -164,7 +161,7 @@ function listMonthTasks(){
                 type: 'POST',
                 url: 'task_query.php',
                 dataType: "json",
-                data: {'date': date}, // Use a new instance of the date to prevent modification
+                data: {'date': date},
                 credentials: 'same-origin',
                 success: function(response) {
                     console.log(response);
@@ -176,12 +173,8 @@ function listMonthTasks(){
             });
         })(i);
 
-        // Move this outside of the AJAX call to avoid incrementing `firstdayOfWeek` multiple times
         dayOfMonth.setDate(dayOfMonth.getDate() + 1);
     }
-    
-    console.log("set");
-    
 }
 
 function fillMonthDay(day, task_details){

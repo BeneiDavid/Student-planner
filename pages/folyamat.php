@@ -25,7 +25,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     echo "
         <br><br>
-        <div class='text-align-center' style='text-align: center;'><table class='tables_ui col selected-day-div display-inline' id='task_table'>
+        <div class='text-align-center' style='text-align: center;'><table class='tables_ui col selected-day-div sorting-table-header display-inline' id='task_table'>
             <tbody id='byProgressBody' class='t_sortable'>
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>
@@ -41,7 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                 </tr>
             </tbody>
             </table>";
-    echo "<table class='tables_ui  col selected-day-div display-inline' id='to_do_table'>
+    echo "<table class='tables_ui  col selected-day-div sorting-table-header display-inline' id='to_do_table'>
 
     <tbody class='t_sortable'  id='toDoBody'>
     
@@ -56,7 +56,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table>";
-    echo "<table class='tables_ui col selected-day-div display-inline' id='in_progress_table'>
+    echo "<table class='tables_ui col selected-day-div sorting-table-header display-inline' id='in_progress_table'>
 
     <tbody class='t_sortable' id='inProgressBody'>
         <tr>
@@ -70,7 +70,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         </tr>
     </tbody>
     </table>";
-    echo "<table class='tables_ui col selected-day-div display-inline' id='done_table'>
+    echo "<table class='tables_ui col selected-day-div sorting-table-header display-inline' id='done_table'>
 
     <tbody class='t_sortable'  id='doneBody'>
         <tr>
