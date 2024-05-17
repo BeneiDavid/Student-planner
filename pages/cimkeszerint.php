@@ -30,7 +30,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 
     <input type='hidden' id='chosenLabelId' value=''></input>
     <br><br>
-    <div id='sortByLabelDiv' class='selected-day-div center-sortby-labels-div'>
+    <div id='sortByLabelDiv' class='selected-day-div sorting-table-header center-sortby-labels-div'>
 
     <input type='checkbox' id='showGroupLabelsCheckbox' class='show-group-labels-checkbox' name='showGroupLabelsCheckbox'>
     <label for='showGroupLabelsCheckbox'>Csoporfeladatok címkéinek megjelenítése</label>

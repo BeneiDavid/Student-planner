@@ -640,6 +640,7 @@ function refreshDayTasks(){
     var day = dateComponents[2];
     var fullDate = year + "-" + month + "-" + day;
     listTasks(fullDate);
+    refreshCalendarDots();
 }
 
 /* Feladat törlés funkciói END */

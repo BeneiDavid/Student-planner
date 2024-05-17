@@ -25,7 +25,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo "<h1>Napi megjelenítés</h1><br>";
 
     echo "
-        <div class='container-fluid content-padding'>
+        <div class='container-fluid'>
             <div class='row'>
                 <div class='col col-sm-12 col-12 col-md-12  col-lg-5' >
                     <div class='month'>      
@@ -38,7 +38,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                             <input type='hidden' id='calendarYearAndMonth' name='calendarYearAndMonth'>
                     </div>
                 
-                    <ul class='weekdays'>
+                    <div class='weekdays'>
                         <li>H</li>
                         <li>K</li>
                         <li>Sze</li>
@@ -46,9 +46,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                         <li>P</li>
                         <li>Szo</li>
                         <li>V</li>
-                    </ul>
-                    
-                    <ul class='days' id='calendarDays'></ul>
+                    </div>
+                    <!-- <ul class='days' id='calendarDays'></ul> -->
+                    <div class='days' id='calendarDays'></div>
                 </div>";
                     
 

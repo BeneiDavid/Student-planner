@@ -52,7 +52,7 @@ function showNextMonth(){
 }
 
 // Napok beállítása a naptárban
-function setDays(currentYear, currentMonth){
+async function setDays(currentYear, currentMonth){
     var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1); // Month is zero-based, so subtract 1 from the month
     
     // Get the day of the week (0-6, where 0 is Sunday, 1 is Monday, ..., 6 is Saturday)
@@ -66,14 +66,15 @@ function setDays(currentYear, currentMonth){
     calendarDaysDiv.innerHTML = "";
 
     for (i = 1; i < firstWeekday; i++) {
-        var listItem = document.createElement("li");
+       /* var listItem = document.createElement("li");
+        calendarDaysDiv.appendChild(listItem);*/
+        var listItem = document.createElement("div");
+        listItem.classList.add('dayDiv');
         calendarDaysDiv.appendChild(listItem);
     }
 
     var nextMonth = new Date(currentYear, currentMonth, 1);
-    // Subtract one day from the first day of the next month to get the last day of the current month
     var lastDayOfMonth = new Date(nextMonth - 1);
-    // Get the day of the month (1-31)
     var totalDays = lastDayOfMonth.getDate();
 
     var calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
@@ -84,47 +85,137 @@ function setDays(currentYear, currentMonth){
     var selectedYear = selectedDate.value.split('-')[0];
     var selectedMonth = selectedDate.value.split('-')[1];
     var selectedDay = selectedDate.value.split('-')[2];
-    
-    
+
+    var days = [];
+
+    await $.ajax({
+        type: 'POST',
+        url: 'queries/task_dates_in_month_query.php', 
+        data: {
+            'currentYear': currentYear,
+            'currentMonth': currentMonth
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+            console.log(response);
+            var parsedData = JSON.parse(response);
+            if(parsedData.length != 0){
+                days = parsedData.dates.map(dateString => new Date(dateString).getDate())
+                .filter((day, index, arr) => arr.indexOf(day) === index);
+                console.log(days);
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
 
 
     for (day = 1; day <= totalDays; day++) {
-        var listItem = document.createElement("li");
+
+        var dayDiv = document.createElement("div");
+        dayDiv.classList.add('dayDiv');
+        var listItem = document.createElement("div");
         listItem.textContent = day;
-        listItem.classList.add('clickable');
         listItem.classList.add('no-select');
+        listItem.classList.add('clickable');
         listItem.classList.add('day');
+        var tasksList = document.createElement("ul");
+        tasksList.id = "list-" + day; 
 
         if(calendarYear == selectedYear && calendarMonth == selectedMonth && selectedDay == day){
             listItem.classList.add('activeDay');
             listTasks(calendarYear + "-" + selectedMonth + "-" + selectedDay);
         }
 
+        if(days.includes(day)){
+            console.log(day + " asd");
+            var li = document.createElement('li');
+            
+            var svg = createColoredSVG(getSeasonDarkColor(firstDayOfMonth), "35px", "dot");
+            var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
 
+            li.style.backgroundImage = "url('" + svgDataURL + "')";
+            li.textContent = "-";
+            tasksList.appendChild(li);
+        }
+
+        dayDiv.appendChild(listItem);
+        dayDiv.appendChild(tasksList);
+        calendarDaysDiv.appendChild(dayDiv);
         listItem.addEventListener('click', chooseDay, false);
-        calendarDaysDiv.appendChild(listItem);
     }
     
     setSeasonColors(firstDayOfMonth);
 }
 
 
+async function refreshCalendarDots(){
+   
+    var yearAndMonth = document.getElementById('calendarYearAndMonth').value;
+    console.log(yearAndMonth);
+    var currentYear = yearAndMonth.split('-')[0];
+    var currentMonth = yearAndMonth.split('-')[1];
+    var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
+    var days = [];
 
+    await $.ajax({
+        type: 'POST',
+        url: 'queries/task_dates_in_month_query.php', 
+        data: {
+            'currentYear': currentYear,
+            'currentMonth': currentMonth
+        },
+        credentials: 'same-origin',
+        success: function(response) {
+            var parsedData = JSON.parse(response);
+            if(parsedData.length != 0){
+                days = parsedData.dates.map(dateString => new Date(dateString).getDate())
+                .filter((day, index, arr) => arr.indexOf(day) === index);
+                console.log(days);
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+
+    const calendarDays = document.getElementById('calendarDays');
+
+    var ulElements = calendarDays.querySelectorAll('ul');
+    console.log("DAYS:" + days);
+    ulElements.forEach(function(ulElement) {
+        console.log(ulElement.id.split("-")[1]);
+        if(days.includes(parseInt(ulElement.id.split("-")[1])) && ulElement.childNodes.length == 0){
+            
+            var li = document.createElement('li');
+            var svg = createColoredSVG(getSeasonDarkColor(firstDayOfMonth), "35px", "dot");
+            var svgDataURL = 'data:image/svg+xml;base64,' + btoa(new XMLSerializer().serializeToString(svg));
+
+            li.style.backgroundImage = "url('" + svgDataURL + "')";
+            li.textContent = "-";
+            ulElement.appendChild(li);
+        }
+        else if(!days.includes(parseInt(ulElement.id.split("-")[1])) && ulElement.childNodes.length == 1){
+            ulElement.innerHTML = "";
+        }
+        console.log(ulElement);
+    });
+
+}
 
 
 // Nap kiválasztása a naptárban
 function chooseDay(){
     var calendarDaysDiv = document.getElementById('calendarDays'); 
 
-    var items = calendarDaysDiv.querySelectorAll('li'); 
+    var items = calendarDaysDiv.querySelectorAll('div'); 
     items.forEach(function(item) {
         if(item.classList.contains('activeDay'));{
             item.classList.remove('activeDay');
         }  
     });
     this.classList.add('activeDay');
-
-    
 
     // nap száma
     var day = this.textContent;
