@@ -15,7 +15,6 @@ $user_id = $user->getId();
 
 $other_user_id = $_POST['otherUserId'];
 
-
 $message_seen_query = mysqli_query($l, "SELECT `seen_by_receiver` FROM `messages` WHERE `sender_id`='$other_user_id' AND `receiver_id`='$user_id' AND `seen_by_receiver`='0'");
 
 if (mysqli_num_rows($message_seen_query) > 0) {

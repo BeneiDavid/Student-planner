@@ -20,8 +20,6 @@ $(document).ready(function(){
     
 });
   
-document.addEventListener('DOMContentLoaded', function() {
-});
 
 // Címke kiválasztása
 function chooseLabel(divId){

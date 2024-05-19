@@ -3,7 +3,7 @@
 function createNewGroup(){
     hideAddMembersModal();
     clearGroupDetailsModalContent();
-
+    document.getElementById('groupNameError').style.display = 'none';
     $('#groupModal').modal('show');
 }
 
