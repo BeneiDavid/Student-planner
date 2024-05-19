@@ -70,3 +70,7 @@
     }
 
 ?>
+
+<script>
+  document.title = "Student Planner - Jelszó változtatás";
+</script>

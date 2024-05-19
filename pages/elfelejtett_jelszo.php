@@ -69,3 +69,8 @@ ini_set('display_errors', 1);
                     </form>
             </div>';
 ?>
+
+
+<script>
+  document.title = "Student Planner - Elfelejtett jelszó";
+</script>

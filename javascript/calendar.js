@@ -37,21 +37,18 @@ function showNextMonth(){
 
 // Napok beállítása a naptárban
 async function setDays(currentYear, currentMonth){
-    var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1); // Month is zero-based, so subtract 1 from the month
+    var firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1);
     
-    // Get the day of the week (0-6, where 0 is Sunday, 1 is Monday, ..., 6 is Saturday)
     var firstWeekday = firstDayOfMonth.getDay();
     
     if (firstWeekday === 0) {
-        firstWeekday = 7; // Change Sunday (0) to 7
+        firstWeekday = 7; 
     }
 
     var calendarDaysDiv = document.getElementById('calendarDays');
     calendarDaysDiv.innerHTML = "";
 
     for (i = 1; i < firstWeekday; i++) {
-       /* var listItem = document.createElement("li");
-        calendarDaysDiv.appendChild(listItem);*/
         var listItem = document.createElement("div");
         listItem.classList.add('dayDiv');
         calendarDaysDiv.appendChild(listItem);
