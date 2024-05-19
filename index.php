@@ -19,6 +19,9 @@
   <!-- JQUERY UI -->
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
+  <!-- JQUERY UI Touch Punch for task sorting on touch screen devices -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
   <!-- CSS file -->
   <link rel="stylesheet" href="stylesheets/style.css">
     
