@@ -705,6 +705,7 @@ function init(){
 
 // Címke hozzáadás, módosítás modalok bezárása kikattintáskor
 window.onclick = function(event) {
+
     var addLabelModal = document.getElementById("addLabelModal");
 
     if (event.target == addLabelModal) {
@@ -725,6 +726,22 @@ window.onclick = function(event) {
     if (event.target == deleteTaskModal) {
         deleteTaskModal.style.display = "none";
     }
+
+    var sortByLabelModal = document.getElementById("sortByLabelModal");
+    if (event.target == sortByLabelModal) {
+      sortByLabelModal.style.display = "none";
+    }
+
+    var addMembersModal = document.getElementById("addMembersModal");
+    if (event.target == addMembersModal) {
+        addMembersModal.style.display = "none";
+    }
+
+    var groupDeleteConfirmModal = document.getElementById("groupDeleteConfirmModal");
+    if (event.target == groupDeleteConfirmModal) {
+        groupDeleteConfirmModal.style.display = "none";
+    }
+
 }
 
 window.addEventListener('load', init, false);

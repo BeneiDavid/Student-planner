@@ -41,7 +41,7 @@ if (isset($_POST['formData']))
 
 ?>
 <!-- Új címke modal -->
-<div id="newLabelModal" class="custom-modal container">
+<div id="newLabelModal" class="custom-modal centered-modal container">
   <div class="custom-modal-content">
       <span class="custom-close" id='modify_labels_xButton'>&times;</span>
       <p class='modal-header-text'>Címke adatai</p>

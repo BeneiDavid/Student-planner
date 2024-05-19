@@ -27,7 +27,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo '<script type="text/javascript" src="javascript/modify_label_functions.js"></script>';
 
     echo "<h1 id='groupHeaderName'>Csoportok</h1><br><br>";
-    echo "<div id='groupsMainDiv' class='container groups-main-div '>
+    echo "<div id='groupsMainDiv' class='groups-main-div '>
             <div class='div-with-border student-groups-div align-content' id='groupsDiv'>
             </div>
             <br><br>

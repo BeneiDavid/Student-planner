@@ -17,7 +17,7 @@ if (isset($_POST['taskAddData']))
 ?>
 
 <!-- Feladat törlés modal -->
-<div id="deleteTaskModal" class="custom-modal delete-modal container">
+<div id="deleteTaskModal" class="custom-modal centered-modal container">
     <div class="custom-modal-content">
         <span class="custom-close" id='taskDelete_xButton'>&times;</span>
         <p class='modal-header-text'>Feladat törlése</p>
