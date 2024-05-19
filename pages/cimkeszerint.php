@@ -34,8 +34,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     <br><br>
     <div id='sortByLabelDiv' class='selected-day-div sorting-table-header center-sortby-labels-div'>
 
-    <input type='checkbox' id='showGroupLabelsCheckbox' class='show-group-labels-checkbox' name='showGroupLabelsCheckbox'>
-    <label for='showGroupLabelsCheckbox'>Csoporfeladatok címkéinek megjelenítése</label>
+    <input type='checkbox' id='showGroupLabelsCheckbox' name='showGroupLabelsCheckbox'>
+    <label for='showGroupLabelsCheckbox' class='show-group-labels-label'>Csoporfeladatok címkéinek megjelenítése</label>
     
         <table>
             <thead>

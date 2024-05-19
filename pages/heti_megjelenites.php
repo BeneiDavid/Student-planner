@@ -33,7 +33,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
                     <ul>
                         <li class='prev clickable no-select' id='prevMonth'>&#10094;</li>
                         <li class='next clickable no-select' id='nextMonth'>&#10095;</li>
-                        <li id='weekDate'>
+                        <li id='weekDate' class='week-date'>
                         </li>
                     </ul>
                     <input type='hidden' id='firstdayOfWeek' name='firstdayOfWeek'>

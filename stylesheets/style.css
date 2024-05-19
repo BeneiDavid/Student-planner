@@ -240,7 +240,7 @@ margin-left:  10px;
 }
 
 
-.delete-modal{
+.centered-modal{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -494,6 +494,7 @@ margin-left:  10px;
   margin-bottom: 50px;
   
 }
+
 .tables_ui ul li {
   min-width: 200px;
 }
@@ -969,7 +970,7 @@ margin-left:  10px;
 
 /* Teacher group page END */
 
-.show-group-labels-checkbox{
+.show-group-labels-label{
   margin-bottom: 50px;
 }
 
@@ -1038,7 +1039,7 @@ background-color: white;
 
 .align-content{
   margin: auto;
-  width: 80%;
+  width: 100%;
 }
 
 /* Student group page END */
@@ -1235,3 +1236,130 @@ h1{
   text-align: center;
 }
 
+
+
+/* Phone display */
+
+@media (max-width: 479px) {
+  .container {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .header, .footer {
+      font-size: 1.2em;
+  }
+
+  .nav {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .nav a {
+      padding: 10px;
+      text-align: center;
+      display: block;
+  }
+
+  .content {
+      padding: 10px;
+  }
+
+  .button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1em;
+  }
+
+  img {
+      max-width: 100%;
+      height: auto;
+  }
+
+  table {
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+  }
+
+  td, th {
+      padding: 8px;
+      text-align: left;
+  }
+
+  .task-name{
+    width: auto;
+  }
+
+  .month ul li{
+    font-size: 1em;
+  }
+
+  .tables_ui{
+    width: auto;
+  }
+
+  .center-horizontally{
+    display: table;
+  }
+
+  .grid-container{
+    width: 100%;
+  }
+  
+  .first-col{
+    font-size: 0.9em;
+  }
+
+  .groups-div > div > p{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .search-input{
+    width: auto;
+  }
+
+  .student-data input[type="checkbox"]{
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+    margin-top: 15px;
+  
+  }
+
+  .student-data img{
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+    margin-top: 15px;
+  
+  }
+
+  .student-header-div p:nth-child(2){
+    width: 37.00%; 
+  }
+
+  .members-div{
+    height: 180px;
+    width: auto;
+    min-width: 100px;
+    margin-left: 0px;
+    display: inline-block;
+    vertical-align: top;
+    overflow: auto;
+  }
+
+  .new-member-button{
+    margin-left: 50px;
+  }
+
+}
+
+
+
+@media (max-width: 600px) {
+  .content-padding{
+    padding: 0px;
+  }
+}

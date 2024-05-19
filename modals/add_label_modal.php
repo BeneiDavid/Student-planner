@@ -1,6 +1,6 @@
 <!-- Címke hozzáadás modal -->
 
-<div id="addLabelModal" class="custom-modal container">
+<div id="addLabelModal" class="custom-modal centered-modal container">
     <div class="custom-modal-content">
         <span class="custom-close" id='labels_xButton'>&times;</span>
         <p class='modal-header-text'>Címke hozzáadása</p>

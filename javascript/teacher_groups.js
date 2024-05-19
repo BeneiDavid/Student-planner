@@ -301,7 +301,7 @@ function listGroups(){
                     editImg.title = "Csoport szerkesztése";
                     editText.textContent = "Csoport szerkesztése";
                     editText.classList.add('clickable');
-                    editText.style.color = "#fcba03";
+                    editText.style.color = "#9e641e";
                     editDiv.appendChild(editImg);
                     editDiv.appendChild(editText);
                     editText.addEventListener('click', editGroupClick, false);
@@ -506,7 +506,7 @@ function clearGroupDetailsModalContent(){
 
 // Csoport módosítása modal megjelenítése
 function editGroupClick(){
-
+    hideAddMembersModal();
     clearGroupDetailsModalContent();
 
     var groupDivElement = this.parentNode.parentNode;
@@ -585,18 +585,6 @@ function init(){
     document.getElementById('backToGroups').addEventListener('click', backToGroups, false);
 }
 
-// Modalból kikattintás kezelése
-window.onclick = function(event) {
-    var addMembersModal = document.getElementById("addMembersModal");
-    if (event.target == addMembersModal) {
-        addMembersModal.style.display = "none";
-    }
-
-    var groupDeleteConfirmModal = document.getElementById("groupDeleteConfirmModal");
-    if (event.target == groupDeleteConfirmModal) {
-        groupDeleteConfirmModal.style.display = "none";
-    }
-}
 
 window.addEventListener('load', init, false);
 

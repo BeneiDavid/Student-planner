@@ -61,7 +61,7 @@ function listGroups(){
                 quitGroupImg.title = "Kilépés a csoportból";
                 quitGroupText.textContent = "Kilépés a csoportból";
                 quitGroupText.classList.add('clickable');
-                quitGroupText.style.color = "red";
+                quitGroupText.style.color = "#d40f0f";
                 quitGroupDiv.appendChild(quitGroupImg);
                 quitGroupDiv.appendChild(quitGroupText);
                 quitGroupText.addEventListener('click', showConfirmQuitModal, false);

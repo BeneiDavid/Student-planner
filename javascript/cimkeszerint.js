@@ -227,12 +227,5 @@ function init(){
   initializeLabels();
 }
 
-// Ablak kattintás kezelése
-window.onclick = function(event) {
-  var sortByLabelModal = document.getElementById("sortByLabelModal");
-  if (event.target == sortByLabelModal) {
-    sortByLabelModal.style.display = "none";
-  }
-}
 
 window.addEventListener('load', init, false);
