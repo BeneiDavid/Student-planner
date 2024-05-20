@@ -58,6 +58,18 @@ class Groups {
         
         $this->deleteGroup($group_id);
     }
+
+    // Csoport név lekérdezése feladat azonosítója alapján
+    public function getGroupNameByTaskId($task_id){
+        $group_id_query = mysqli_query($this->connection, "SELECT `group_id` FROM `group_tasks` WHERE `task_id`='$task_id' LIMIT 1");
+        $group_id_fetch = mysqli_fetch_assoc($group_id_query);
+        $group_id = $group_id_fetch['group_id'];
+        
+        $group_name_query = mysqli_query($this->connection, "SELECT `group_name` FROM `groups` WHERE `group_id`='$group_id' LIMIT 1");
+        $group_name_fetch = mysqli_fetch_assoc($group_name_query);
+        
+        return $group_name_fetch['group_name'];
+    }
 }
 
 ?>

@@ -1,10 +1,12 @@
 <?php
 
+
+    require_once 'config.php';
+    require_once BASE_PATH . '/classes/user.php';
+
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     {   
-        require_once 'config.php';
-        require_once BASE_PATH . '/classes/user.php';
-        session_start();
+        
         $password_error = "";
 
         $user = unserialize($_SESSION['user']);

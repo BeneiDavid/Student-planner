@@ -25,8 +25,6 @@ class Tasks {
     public function deleteTaskSorting($task_id){
         $task_sorting_query = mysqli_query($this->connection, "DELETE FROM `task_sorting` WHERE `task_id`='$task_id'");
     }
-
-    
 }
 
 ?>

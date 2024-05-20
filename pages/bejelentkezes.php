@@ -2,7 +2,7 @@
 
 <?php
 
-if ($_SESSION['logged_in'] != 'yes')
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != 'yes')
 {
     $email = isset($_SESSION['login_email']) ? $_SESSION['login_email'] : '';
     $error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : '';
