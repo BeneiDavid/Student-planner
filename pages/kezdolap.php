@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
 
 if (isset($_GET['login_success']) && $_GET['login_success'] == 1) {

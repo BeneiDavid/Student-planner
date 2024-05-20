@@ -2,6 +2,7 @@
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
+require_once BASE_PATH . '/classes/labels.php';
 
 if (!$l) {
     die("Connection failed: " . mysqli_connect_error());
@@ -17,15 +18,16 @@ if (!isset($_SESSION['user'])) {
 
 $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
+$labels = new Labels($l);
 
 $label_id = $_POST['labelId'];
 
 if(isset($_POST['showGroups'])){
     if($_POST['showGroups'] == "true"){
-        $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$label_id'");
+        $labels_query = $labels->getLabel($label_id);
     }
     else{
-        $labels_query = mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$label_id' AND `user_id`='$user_id'");
+        $labels_query = $labels->getUserLabel($label_id, $user_id);
     }
 }
 

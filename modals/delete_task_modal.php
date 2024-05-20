@@ -1,16 +1,21 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/tasks.php';
 
 if (isset($_POST['taskAddData']))
 {
     session_start();
     $l = mysqli_connect('localhost', 'root', '', 'student_planner');
     $task_id = $_POST["taskId"];
-    $relation_delete_query =  mysqli_query($l, "DELETE FROM `task_labels` WHERE `task_id`='$task_id'");
-    $task_sorting_delete_query = mysqli_query($l, "DELETE FROM `task_sorting` WHERE `task_id`='$task_id'");
-    $group_tasks_delete_query = mysqli_query($l, "DELETE FROM `group_tasks` WHERE `task_id`='$task_id'");
-    $task_delete_query = mysqli_query($l, "DELETE FROM `tasks` WHERE `task_id`='$task_id'");
+    $tasks = new Tasks($l);
+
+    $tasks->deleteTaskLabels($task_id);
+    $tasks->deleteTaskSorting($task_id);
+    $tasks->deleteGroupTasks($task_id);
+    $tasks->deleteTask($task_id);
+
     mysqli_close($l);
 }
 

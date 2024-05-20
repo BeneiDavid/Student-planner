@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
+require_once BASE_PATH . '/classes/tasks.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 echo '<script type="text/javascript"  src="javascript/task_details.js"></script>';
 echo '<script type="text/javascript"  src="javascript/common.js"></script>';
-
 
 if (isset($_POST['taskAddData']))
 {
@@ -23,8 +23,8 @@ if (isset($_POST['taskAddData']))
     $task_description = $_POST["taskDescription"];
 
     $user = unserialize($_SESSION['user']);
-
     $user_id = $user->getId();
+    $tasks = new Tasks($l);
 
     if($enable_start_time == "true"){
       $enable_start_time = 1;
@@ -40,28 +40,11 @@ if (isset($_POST['taskAddData']))
       $enable_end_time = 0;
     }
 
-    mysqli_query($l, "INSERT INTO `tasks` SET 
-        `task_id`=NULL,
-        `user_id`='".$user_id."',
-        `title`='".$task_name."',
-        `task_description`='".$task_description."',
-        `task_color` = '".$task_color."',
-        `date`='".$date."',
-        `start_time`='".$startTime."',
-        `end_time`='".$endTime."',
-        `start_time_enabled`='".$enable_start_time."',
-        `end_time_enabled`='".$enable_end_time."'
-        ");
-
+    $tasks->saveTask($user_id, $task_name, $task_description, $task_color, $date, $startTime, $endTime, $enable_start_time, $enable_end_time);
     $last_inserted_task_id = mysqli_insert_id($l);
     
     foreach ($label_ids as $label_id) {
-      echo $label_id;
-      mysqli_query($l, "INSERT INTO `task_labels` SET 
-      `task_label_id`=NULL,
-      `task_id`='".$last_inserted_task_id."',
-      `label_id`='".$label_id."'
-      ");
+      $tasks->saveAssociatedLabel($last_inserted_task_id, $label_id);
     }
 
     $group_id = "";
@@ -69,16 +52,11 @@ if (isset($_POST['taskAddData']))
     if(isset($_SESSION['group_id'])){
       if($_SESSION['group_id'] != ""){
         $group_id = $_SESSION['group_id'];
-        mysqli_query($l, "INSERT INTO `group_tasks` SET 
-        `group_task_id`=NULL,
-        `task_id`='".$last_inserted_task_id."',
-        `group_id`='".$group_id."'
-        ");      
+        $tasks->saveAssociatedGroup($last_inserted_task_id, $group_id);
       }
     }
 
     mysqli_close($l);
-    
 }
 
 ?>

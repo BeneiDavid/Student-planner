@@ -62,6 +62,7 @@ async function listGroupMembers(groupId){
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response);
             var groupMembersDiv = document.getElementById('groupMembersDiv');
             if(response.length != 0){
                 var studentData = response.student_data;

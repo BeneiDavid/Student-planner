@@ -334,7 +334,7 @@ function saveTaskButton(event){
             },
             credentials: 'same-origin',
             success: function(response) {
-    
+                console.log(response);
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -611,7 +611,7 @@ function confirmDelete(event){
               'taskId': taskId
         },
         success: function(response) {
-  
+            console.log(response);
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);

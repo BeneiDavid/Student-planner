@@ -47,7 +47,7 @@ function sortTaskByEisenhover(tdId, tableId){
         },
         credentials: 'same-origin',
         success: function(response) {
-            
+            console.log("asd" + response);
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
