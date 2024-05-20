@@ -182,7 +182,7 @@ function sendGroupMessage(event){
                 dataType: "text",
                 credentials: 'same-origin',
                 success: function(response) {
-
+                    console.log(response);
                 },
                 error: function(xhr) {
                     console.error(xhr.responseText);
