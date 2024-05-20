@@ -8,20 +8,16 @@ if (isset($_POST['groupAddData']))
 {
   require_once __DIR__ . '/../config.php';
   require_once BASE_PATH . '/classes/user.php';
+  require_once BASE_PATH . '/classes/groups.php';
     session_start();
     $l = mysqli_connect('localhost', 'root', '', 'student_planner');
     
-
     $user = unserialize($_SESSION['user']);
     $user_id = $user->getId();
+    $groups =  new Groups($l);
     $group_name = $_POST['groupName'];
-    echo $user_id;
-    echo $group_name;
-    mysqli_query($l, "INSERT INTO `groups` SET 
-    `group_id`=NULL,
-    `group_teacher_id`='".$user_id."',
-    `group_name`='".$group_name."'  
-    "); 
+
+    $groups->saveGroupDetails($user_id, $group_name);
 
     if(isset($_POST['studentIds'])) {
       $student_ids = $_POST['studentIds'];
@@ -29,12 +25,8 @@ if (isset($_POST['groupAddData']))
       $last_inserted_group_id = mysqli_insert_id($l);
 
       foreach ($student_ids as $student_id) {
-        echo $student_id;
-        mysqli_query($l, "INSERT INTO `group_members` SET 
-        `membership_id`=NULL,
-        `group_id`='".$last_inserted_group_id."',
-        `student_id`='".$student_id."'
-        ");
+
+        $groups->setGroupMembersData($last_inserted_group_id, $student_id);
       }
     }
 

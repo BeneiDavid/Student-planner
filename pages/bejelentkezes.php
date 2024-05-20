@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != 'yes')
                 
                         <form method="post" class="content-padding">
                             <label for="address">E-mail cím</label><span class="error">' . $error . '</span><br> 
-                            <input type="address" id="address" name="address" autocomplete="address" class="form-control input-length" value="'. $email .'">
+                            <input type="address" id="address" name="address" autocomplete="email" class="form-control input-length" value="'. $email .'">
                             <br>
                             <label for="password">Jelszó</label><br>    
                             <input type="password" name="password" id="password" class="form-control input-length">
@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != 'yes')
     unset($_SESSION['login_email']);
     unset($_SESSION['login_error']);
 }
-else  // ha már beléptünk, akkor átugrunk az időpontfoglalásra
+else
 {
     print '<meta http-equiv="refresh" content="0;url=index.php?page=kezdolap&login_success=1">';
 }

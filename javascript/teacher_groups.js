@@ -224,6 +224,7 @@ function saveGroup(event){
                 },
                 credentials: 'same-origin',
                 success: function(response) {
+                    console.log(response);
                     groupName.value  = "";
                     membersDiv.innerHTML = "";
                     listGroups();
