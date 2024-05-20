@@ -474,7 +474,6 @@ async function deleteGroup(event){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var divToDelete = document.getElementById(groupToDeleteId.value);
             groupsDiv.removeChild(divToDelete);
         },

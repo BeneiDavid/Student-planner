@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start(); 
+
+?>
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -67,16 +72,17 @@ if (isset($_POST['login_button']))
     <div class="collapse navbar-collapse" id="navigationBar">
       <ul class="nav navbar-nav">
         <li>
-          <a class="nav-link <?php echo ($_GET['page'] == '' || $_GET['page'] == 'kezdolap') ? 'active' : ''; ?>" href="index.php">Kezdőlap</a>
+          <a class="nav-link <?php echo (!isset($_GET['page']) || $_GET['page'] == '' || $_GET['page'] == 'kezdolap') ? 'active' : ''; ?>" href="index.php">Kezdőlap</a>
         </li>
         <?php
-          if ($_SESSION['logged_in'] != "yes")
+          $page = isset($_GET['page']) ? $_GET['page'] : '';
+          if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != "yes")
           {
             echo '<li><a class="nav-link ';
-            echo ($_GET['page'] == 'bejelentkezes') ? 'active' : '';
+            echo ($page  == 'bejelentkezes') ? 'active' : '';
             echo '" href="index.php?page=bejelentkezes">Bejelentkezés</a></li>';
             echo '<li><a class="nav-link ';
-            echo ($_GET['page'] == 'regisztracio') ? 'active' : '';
+            echo ($page  == 'regisztracio') ? 'active' : '';
             echo '" href="index.php?page=regisztracio">Regisztráció</a></li>';  
           }
           else{
@@ -100,30 +106,31 @@ if (isset($_POST['login_button']))
               echo '</li>';
 
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'csoportok') ? 'active' : '';
+              echo ($page  == 'csoportok') ? 'active' : '';
               echo '" href="index.php?page=csoportok">Csoportok</a></li>';
 
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'uzenetek') ? 'active' : '';
+              echo ($page  == 'uzenetek') ? 'active' : '';
               echo '" href="index.php?page=uzenetek">Üzenetek</a></li>';
 
               
             }
             else{
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'csoportok_tanar') ? 'active' : '';
+              echo ($page  == 'csoportok_tanar') ? 'active' : '';
               echo '" href="index.php?page=csoportok_tanar">Csoportok</a></li>';
 
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'uzenetek_tanar') ? 'active' : '';
+              echo ($page  == 'uzenetek_tanar') ? 'active' : '';
               echo '" href="index.php?page=uzenetek_tanar">Üzenetek</a></li>';
             }
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'jelszo_valtoztatas') ? 'active' : '';
+              
+              echo ($page  == 'jelszo_valtoztatas') ? 'active' : '';
               echo '" href="index.php?page=jelszo_valtoztatas">Jelszó változtatás</a></li>';
 
               echo '<li><a class="nav-link ';
-              echo ($_GET['page'] == 'kijelentkezes') ? 'active' : '';
+              echo ($page  == 'kijelentkezes') ? 'active' : '';
               echo '" href="index.php?page=kijelentkezes">Kijelentkezés</a></li>';
           }
 
@@ -135,27 +142,33 @@ if (isset($_POST['login_button']))
 
     <?php
     $l = mysqli_connect('localhost', 'root', '', 'student_planner');
+
+    if(isset($_GET['page'])){
     switch($_GET['page'])
     {
       case 'regisztracio': include 'pages/regisztracio.php';  break;
       case 'bejelentkezes': include 'pages/bejelentkezes.php'; break;
-      case 'elfelejtett_jelszo'; include 'pages/elfelejtett_jelszo.php'; break;
+      case 'elfelejtett_jelszo': include 'pages/elfelejtett_jelszo.php'; break;
       case 'confirmation': include 'pages/confirmation.php'; break;
-      case 'napi_megjelenites'; include 'pages/napi_megjelenites.php'; break;
-      case 'heti_megjelenites'; include 'pages/heti_megjelenites.php'; break;
-      case 'havi_megjelenites'; include 'pages/havi_megjelenites.php'; break;
-      case 'folyamat'; include 'pages/folyamat.php'; break;
-      case 'eisenhover'; include 'pages/eisenhover.php'; break;
-      case 'cimkeszerint'; include 'pages/cimkeszerint.php'; break;
-      case 'csoportok'; include 'pages/csoportok.php'; break;
-      case 'uzenetek'; include 'pages/uzenetek.php'; break;
-      case 'csoportok_tanar'; include 'pages/csoportok_tanar.php'; break;
-      case 'uzenetek_tanar'; include 'pages/uzenetek_tanar.php'; break;
-      case 'jelszo_valtoztatas'; include 'pages/jelszo_valtoztatas.php'; break;
-      case 'kijelentkezes'; include 'pages/kijelentkezes.php'; break;
+      case 'napi_megjelenites': include 'pages/napi_megjelenites.php'; break;
+      case 'heti_megjelenites': include 'pages/heti_megjelenites.php'; break;
+      case 'havi_megjelenites': include 'pages/havi_megjelenites.php'; break;
+      case 'folyamat': include 'pages/folyamat.php'; break;
+      case 'eisenhover': include 'pages/eisenhover.php'; break;
+      case 'cimkeszerint': include 'pages/cimkeszerint.php'; break;
+      case 'csoportok': include 'pages/csoportok.php'; break;
+      case 'uzenetek': include 'pages/uzenetek.php'; break;
+      case 'csoportok_tanar': include 'pages/csoportok_tanar.php'; break;
+      case 'uzenetek_tanar': include 'pages/uzenetek_tanar.php'; break;
+      case 'jelszo_valtoztatas': include 'pages/jelszo_valtoztatas.php'; break;
+      case 'kijelentkezes': include 'pages/kijelentkezes.php'; break;
       
 
       default: include 'pages/kezdolap.php'; break;
+    }
+    }
+    else{
+      include 'pages/kezdolap.php';
     }
 
     mysqli_close($l);

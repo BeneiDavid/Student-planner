@@ -98,6 +98,7 @@ async function getTaskGroupName(taskId){
       data: {'taskId': taskId},
       credentials: 'same-origin',
       success: function(response) {
+        console.log(response);
           resolve(response);
       },
       error: function(xhr, status, error) {
