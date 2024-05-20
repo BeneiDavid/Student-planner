@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/users.php';
+require_once BASE_PATH . '/classes/groups.php';
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 
 if (!$l) {
@@ -9,20 +11,21 @@ if (!$l) {
 }
 
 $group_id = $_POST['groupId'];
-$group_query = mysqli_query($l, "SELECT student_id FROM `group_members` WHERE `group_id`='$group_id'");
+$users = new Users($l);
+$groups = new Groups($l);
 
 $data = [];
 
-if (mysqli_num_rows($group_query) > 0) {
-    while ($row = mysqli_fetch_assoc($group_query)) {
-      $student_id = $row['student_id'];
-      $students_query = mysqli_query($l, "SELECT user_id, full_name, username FROM `users` WHERE `user_id`=$student_id AND `reg_confirm`='1'");
-      if (mysqli_num_rows($students_query) > 0) {
-          while ($student_data = mysqli_fetch_assoc($students_query)) {
-              $data["student_data"][] = $student_data;
-          }
+$student_ids = $groups->getStudentIdsFromGroup($group_id);
+
+foreach ($student_ids as $student_id) {
+  $student_query = $users->getStudentData($student_id);
+
+  if (mysqli_num_rows($student_query) > 0) {
+      while ($student_data = mysqli_fetch_assoc($student_query)) {
+          $data["student_data"][] = $student_data;
       }
-    }
+  }
 }
 
 echo json_encode($data);

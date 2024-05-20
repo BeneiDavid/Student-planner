@@ -525,39 +525,38 @@ function editGroupClick(){
         },
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response);
             var membersDiv = document.getElementById('membersDiv');
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data !== 'undefined'){
+                for (var i = 0; i < student_data.length; i++) {
 
-           
-            for (var i = 0; i < student_data.length; i++) {
+                    var student = student_data[i];
 
-                var student = student_data[i];
+                    const newDiv = document.createElement('div');
+                    var studentNameText = document.createElement('p');
+                    var studentUserNameText = document.createElement('p');
+                    var selectStudentCheckbox = document.createElement('input');
+                
+                    newDiv.id = "newDiv_" + student.user_id;
+                    newDiv.classList.add("student-data");
+                    studentNameText.textContent = student.full_name;
+                    studentUserNameText.textContent = student.username;
+                    selectStudentCheckbox.type = 'checkbox';
 
-                const newDiv = document.createElement('div');
-                var studentNameText = document.createElement('p');
-                var studentUserNameText = document.createElement('p');
-                var selectStudentCheckbox = document.createElement('input'); // Change to input for checkbox
-            
-                newDiv.id = "newDiv_" + student.user_id;
-                newDiv.classList.add("student-data");
-                studentNameText.textContent = student.full_name;
-                studentUserNameText.textContent = student.username;
-                selectStudentCheckbox.type = 'checkbox'; // Set input type to checkbox
+                    const svgImage = document.createElement('img');
+                    svgImage.src = 'pictures/minus.svg'; 
+                    svgImage.classList.add('clickable');
+                    svgImage.addEventListener('click', removeStudentFromGroup, false);
 
-                const svgImage = document.createElement('img');
-                svgImage.src = 'pictures/minus.svg'; 
-                svgImage.classList.add('clickable');
-                svgImage.addEventListener('click', removeStudentFromGroup, false);
-
-                newDiv.appendChild(studentNameText);
-                newDiv.appendChild(studentUserNameText);
-                newDiv.appendChild(svgImage);
-            
-                membersDiv.appendChild(newDiv);
-            }
-        }
+                    newDiv.appendChild(studentNameText);
+                    newDiv.appendChild(studentUserNameText);
+                    newDiv.appendChild(svgImage);
+                
+                    membersDiv.appendChild(newDiv);
+                }
+            }   
 
         },
         error: function(xhr) {

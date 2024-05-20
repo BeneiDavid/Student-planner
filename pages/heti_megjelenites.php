@@ -2,7 +2,7 @@
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
-    require_once 'config.php';
+    require_once __DIR__ . '/../config.php';
     require_once BASE_PATH . '/classes/user.php';
     $user = unserialize($_SESSION['user']);
     $user_type = $user->getUserType();

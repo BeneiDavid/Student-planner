@@ -1,8 +1,9 @@
 <?php
 
 
-    require_once 'config.php';
+    require_once __DIR__ . '/../config.php';
     require_once BASE_PATH . '/classes/user.php';
+    require_once BASE_PATH . '/classes/users.php';
 
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     {   
@@ -17,9 +18,10 @@
             $old_password = mysqli_real_escape_string($l, $_POST['old_password']);
             $new_password = mysqli_real_escape_string($l, $_POST['new_password']);
             $new_password_again = mysqli_real_escape_string($l, $_POST['new_password_again']);
-
+            $l = mysqli_connect('localhost', 'root', '', 'student_planner');
             $old_hashed = hash("sha256", $old_password);
-            $old_password_query = mysqli_query($l, "SELECT `user_password` FROM `users` WHERE `user_id`='".$user_id."'");
+            $users = new Users($l);
+            $old_password_query = $users->getPassword($user_id);
             $old_data = mysqli_fetch_array($old_password_query);
 
 

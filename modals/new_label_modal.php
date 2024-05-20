@@ -1,42 +1,34 @@
- <?php
- error_reporting(E_ALL);
- ini_set('display_errors', 1);
- require_once __DIR__ . '/../config.php';
- require_once BASE_PATH . '/classes/user.php';
-
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require_once __DIR__ . '/../config.php';
+require_once BASE_PATH . '/classes/user.php';
+require_once BASE_PATH . '/classes/labels.php';
 
 if (isset($_POST['formData']))
 {
   session_start();
   $l = mysqli_connect('localhost', 'root', '', 'student_planner');
-    $labelname = mysqli_real_escape_string($l, $_POST['labelName']);
-    $labelcolor = $_POST["labelColor"];
-    $labelsymbolcheck = $_POST["labelIconEnabled"];
+  $labelname = mysqli_real_escape_string($l, $_POST['labelName']);
+  $labelcolor = $_POST["labelColor"];
+  $labelsymbolcheck = $_POST["labelIconEnabled"];
+  $labels = new Labels($l);
     
-    if(!empty($labelname)){
+  if(!empty($labelname)){
+      $user = unserialize($_SESSION['user']);
+      $user_id = $user->getId();
+      
+      if($labelsymbolcheck == "true"){
+        $imageSource = isset($_POST['imageSource']) ? $_POST['imageSource'] : null;
+      }
+      else{
+        $imageSource = NULL;
+      }
 
-        $user = unserialize($_SESSION['user']);
+      $labels->saveLabel($user_id, $labelname, $labelcolor, $imageSource);
+  }
 
-        $user_id = $user->getId();
-        if($labelsymbolcheck == "true"){
-          $imageSource = isset($_POST['imageSource']) ? $_POST['imageSource'] : null;
-        }
-        else{
-          $imageSource = NULL;
-        }
-        
-        if (!mysqli_query($l, "INSERT INTO `labels` SET 
-        `label_id`=NULL,
-        `user_id`='".$user_id."',
-        `label_name`='".$labelname."',
-        `label_color` = '".$labelcolor."',
-        `label_symbol`='".$imageSource."'
-        ")) {
-          echo("Error description: " . mysqli_error($l));
-        }
-    }
-
-    mysqli_close($l);
+  mysqli_close($l);
 }
 
 ?>

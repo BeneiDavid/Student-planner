@@ -2,7 +2,7 @@
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
 {
-    require_once 'config.php';
+    require_once __DIR__ . '/../config.php';
     require_once BASE_PATH . '/modals/task_details_modal.php';
     require_once BASE_PATH . '/modals/add_label_modal.php';
     require_once BASE_PATH . '/modals/new_label_modal.php';
