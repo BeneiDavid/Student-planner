@@ -185,6 +185,7 @@ function quitGroup(event){
         },
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response);
             var divToDelete = document.getElementById(groupQuitId.value);
             groupsDiv.removeChild(divToDelete);
 

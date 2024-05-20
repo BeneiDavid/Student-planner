@@ -17,7 +17,6 @@ $groups = new Groups($l);
 $data = [];
 
 $groups_query = $groups->getGroupDataByTeacherId($user_id);
-//$groups_query = mysqli_query($l, "SELECT * FROM `groups` WHERE `group_teacher_id`='$user_id'");
 
 if (mysqli_num_rows($groups_query) > 0) {
     while ($group_data = mysqli_fetch_assoc($groups_query)) {

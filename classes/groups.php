@@ -17,20 +17,15 @@ class Groups {
     }
 
     // Csoport összes tagjának törlése
-    private function deleteGroupMembers($group_id){
+    public function deleteGroupMembers($group_id){
         $members_query = mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `group_id`='$group_id'");
     }
     
     // Csoport feladatainak lekérdezése
     public function getGroupTasks($group_id){
         $select_tasks_query = mysqli_query($this->connection, "SELECT * FROM `group_tasks` WHERE `group_id`='$group_id'");
-        $group_tasks = [];
-        
-        while ($task = mysqli_fetch_assoc($select_tasks_query)) {
-            $group_tasks[] = $task;
-        }
 
-        return $group_tasks;
+        return $select_tasks_query;
     }
 
     // Csoport összes feladatának törlése
@@ -42,9 +37,15 @@ class Groups {
     public function deleteGroupWithAssociatedData($group_id){
         
         $this->deleteGroupMembers($group_id);
-        
-        $tasks_to_delete = $this->getGroupTasks($group_id);
 
+        $group_tasks_query = $this->getGroupTasks($group_id);
+
+        $tasks_to_delete = [];
+
+        while ($task = mysqli_fetch_assoc($group_tasks_query)) {
+            $tasks_to_delete[] = $task;
+        }
+        
         $this->deleteGroupTasks($group_id);
 
         foreach ($tasks_to_delete as $task) {
@@ -57,6 +58,14 @@ class Groups {
           }
         
         $this->deleteGroup($group_id);
+    }
+
+    public function deleteRemovedMembers($group_id, $members_to_remove){
+        mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `group_id`='$group_id' AND `student_id` IN ('$members_to_remove')");
+    }
+
+    public function quitGroup($group_id, $student_id){
+        mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `student_id`='$student_id' AND `group_id`='$group_id'");
     }
 
     // Csoport név lekérdezése feladat azonosítója alapján
@@ -85,6 +94,44 @@ class Groups {
         $groups_query = mysqli_query($this->connection, "SELECT * FROM `groups` WHERE `group_teacher_id`='$teacher_id'");
         return $groups_query;
     }
+
+    public function saveGroupDetails($teacher_id, $group_name){
+        mysqli_query($this->connection, "INSERT INTO `groups` SET 
+        `group_id`=NULL,
+        `group_teacher_id`='".$teacher_id."',
+        `group_name`='".$group_name."'  
+        "); 
+    }
+
+    public function updateGroupDetails($group_id, $group_name){
+        mysqli_query($this->connection, "UPDATE `groups` SET `group_name`='$group_name' WHERE `group_id`='$group_id'"); 
+    }
+
+    public function setGroupMembersData($group_id, $student_id){
+        mysqli_query($this->connection, "INSERT INTO `group_members` SET 
+        `membership_id`=NULL,
+        `group_id`='".$group_id."',
+        `student_id`='".$student_id."'
+        ");
+    }
+
+    public function getMembershipCountForStudent($group_id, $student_id){
+        $result = mysqli_query($this->connection, "SELECT COUNT(*) FROM `group_members` WHERE `student_id`='".$student_id."' AND `group_id`='".$group_id."'");
+        $count = mysqli_fetch_row($result)[0];
+        return $count;
+    }
+
+    public function getStudentIdsFromGroup($group_id){
+        $result = mysqli_query($this->connection, "SELECT `student_id` FROM `group_members` WHERE `group_id`='$group_id'");
+        $student_ids = [];
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $student_ids[] = $row['student_id'];
+        }
+
+        return $student_ids;
+    }
+
 }
 
 ?>
