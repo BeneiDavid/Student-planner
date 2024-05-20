@@ -70,6 +70,21 @@ class Groups {
         
         return $group_name_fetch['group_name'];
     }
+
+    public function getGroupMembersDataForUser($user_id){
+        $group_members_data_query = mysqli_query($this->connection, "SELECT * FROM `group_members` WHERE `student_id`='$user_id'");
+        return $group_members_data_query;
+    }
+
+    public function getGroupDataById($group_id){
+        $groups_query = mysqli_query($this->connection, "SELECT * FROM `groups` WHERE `group_id`='$group_id'");
+        return $groups_query;
+    }
+
+    public function getGroupDataByTeacherId($teacher_id){
+        $groups_query = mysqli_query($this->connection, "SELECT * FROM `groups` WHERE `group_teacher_id`='$teacher_id'");
+        return $groups_query;
+    }
 }
 
 ?>
