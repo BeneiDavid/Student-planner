@@ -17,7 +17,7 @@ echo "<h2 class='content-padding'>A weboldalról</h2>
   <p>
     Az egyre gyorsuló világban a diákokra egyre több feladat és kötelesség hárul, melyeknek könnyű lehet elveszni a sokaságában. 
     Ezért jött létre ez a weboldal, hogy megkönnyítse a hallgatók napi tevékenységeit.
-    A weboldal által kínált funkciók segítséget nyújtanak a hallgatóknak feladataik rendszerezésében és teendőik könnyebben átláthatóságában.
+    A weboldal által kínált funkciók segítséget nyújtanak a hallgatóknak feladataik rendszerezésében és teendőik könnyebb átláthatóságában.
     Ezen kívül, a hallgatókat oktatóik csoportokba szervezhetik, így az iskolai tevékenységeket, feladatokat is nyomon követhetik.
     A weboldalon bejelentkezés után chat funkció is található a hallgatók és oktatók közötti kommunikáció megkönnyítése érdekében.
   </p>
