@@ -25,8 +25,6 @@ echo "<h2 class='content-padding'>A weboldalról</h2>
 <br><br>
 ";
 
-
-
 echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
 <div class='content-padding'>
   <br><br>
@@ -133,7 +131,6 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
 
   <br>
 
-
   <div class='row'>
     
     <h4>Csoportok</h4>
@@ -147,107 +144,104 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
 
   <br>
 
+  <div class='row'>
 
-<div class='row'>
+    <h4>Üzenetek</h4>
+    <p>
+      Az <a href='index.php?page=uzenetek'>Üzenetek</a> oldalon megtekintheti oktatóit és csoportjait, illetve üzenetet küldhet oktatójának. 
+      Hogy könnyen értesüljön az új üzeneteiről, a \"Chat megnyitása\" gomb mellett egy kék pont jelenik meg.
+    </p>
 
-  <h4>Üzenetek</h4>
-  <p>
-    Az <a href='index.php?page=uzenetek'>Üzenetek</a> oldalon megtekintheti oktatóit és csoportjait, illetve üzenetet küldhet oktatójának. 
-    Hogy könnyen értesüljön az új üzeneteiről, a \"Chat megnyitása\" gomb mellett egy kék pont jelenik meg.
-  </p>
+  </div>
 
-</div>
+  <br><br>
 
-<br><br>
+  <h3>Segítség oktatóknak</h3> <br>
 
-<h3>Segítség oktatóknak</h3> <br>
+  <div class='row'>
 
-<div class='row'>
+    <h4>Fiók létrehozása</h4>
+    <p>
+      A hallgatók személyes adatainak védelme érdekében oktatói jogosultságot csak a rendszergazda adhat. Amennyiben szeretne felhasználói fiókot
+      igényelni kérem keresse meg a rendszergazdát a következő e-mail címen: <a href='mailto:beneidavid.it@gmail.com'>beneidavid.it@gmail.com</a>
+    </p>
 
-  <h4>Fiók létrehozása</h4>
-  <p>
-    A hallgatók személyes adatainak védelme érdekében oktatói jogosultságot csak a rendszergazda adhat. Amennyiben szeretne felhasználói fiókot
-    igényelni kérem keresse meg a rendszergazdát a következő e-mail címen: <a href='mailto:beneidavid.it@gmail.com'>beneidavid.it@gmail.com</a>
-  </p>
+  </div>
 
-</div>
-
-<br>
-
-<div class='row'>
-
-  <h4>Csoportok</h4>
-  <p>
-    A <a href='index.php?page=csoportok_tanar'>Csoportok</a> oldal segítségével létrehozhat csoportokat, feladatokat rendelhet hozzájuk és üzenetet 
-    írhat egy csoport hallgatóinak részére.
-    A létrehozott csoportok melletti Feladatok gombra kattintva megtekintheti egy csoport feladatait és a táblázat utolsó sorában lévő
-    plusz gombra kattintva új feladatot hozhat létre. Egy meglévő feladatra kattintva módosíthatja azt.
-    <br>
-    Ha szeretne hallgatókat rendelni egy csoporthoz, a csoport létrehozás ablakából válassza az \"Új tag hozzáadása\" opciót.
-    A tagok hozzáadása ablakból könnyedén beazonosíthatja a hallgatókat név és azonosító alapján, továbbá segítséget nyújt a kereső mező is, 
-    mellyel bármelyikre rákereshet. Jelölje be a hallgatók melletti jelölőnégyzetet akiket hozzá szeretne adni a csoporthoz, majd kattintson a \"Tagok hozzáadása\"
-    gombra. Amennyiben egy hallgatót mégsem szeretne a csoporthoz adni, a Csoport adatai ablakban kattintson a hallgató melletti mínusz gombra. 
-    <br>
-    Az oldal lehetőséget nyújt ezek mellett csoportüzenet küldésére is. A \"Csoportüzenet\" ablakban a \"Tagok hozzáadása\" ablakhoz hasonlóan 
-    kereshet a csoport hallgatói között,
-    és bejelölheti a hallgatókat akiknek üzenetet szeretne küldeni. Amennyiben az egész csoport részére szeretne üzenetet küldeni, jelölje be az \"Üzenet küldése az 
-    egész csoportnak\" opciót.
-  </p>
-
-</div>
-
-<br>
-
-<div class='row'>
-  <h4>Üzenetek</h4>
-  <p>
-    Az <a href='index.php?page=uzenetek_tanar'>Üzenetek</a> oldalon megtekinthei üzenetváltásait csoportokra bontva. Válassza ki a csoportot a legördülő ablakból 
-    és kattintson a \"Chat megnyitása\" gombra 
-    valamelyik hallgató mellett a csevegés elkezdéséhez. Hogy könnyen értesüljön az új üzeneteiről, a \"Chat megnyitása\" gomb mellett egy kék pont jelenik meg.
-  </p>
-</div>
-
-<br>
-
-<h3>Általános segítség</h3> <br>
-
-<div class='row'>
-<h4>Feladatok beállítása</h4>
-<p>
-  A \"Feladat adatai\" ablakban lehetősége nyílik beállítani egy feladat nevét, a listázáskor megjelenítendő színét, határidejét, címkéit és leírását.
-  Címkék hozzáadásához kattintson a \"Címkék\" felirat alatt taláható plusz gombra. 
   <br>
-  A \"Címkék hozzáadása\" ablakban lehetősége van a létrehozott címkéit kiválasztani a mellettük található jelölőnégyzet segítségével és a mellettük található gombbal
-   törölheti azokat. 
-   Ebből az ablakból érhető el a \"Címke adatai\" ablak is, melyben új címkéket hozhat létre. Amennyiben egy címke adatait módosítani szeretné kattintson a 
-   \"Címkék hozzáadása\" ablak egy címkéjére. <br>
-   A \"Címke adatai\" ablakban lehetősége nyílik beállítani, illetve módosítani egy címke nevét, színét, illetve ikont is rendelhet hozzájuk.
-</p>
-</div>
 
-<div class='row'>
-<h4>Elfelejtett jelszó</h4>
-<p>
-  Amennyiben elfelejtette jelszavát, a <a href='index.php?page=bejelentkezes'>Bejelentkezés</a> menüpont alatt található \"Elfelejtett jelszó\" 
-  hivatkozás segítségével új jelszót generálunk Önnek.
-  Az új jelszót e-mailben elküldjük, majd az ezzel való bejelentkezés után a <a href='index.php?page=jelszo_valtoztatas'>Jelszó változtatás</a> 
-  menüpontban új jelszót adhat meg magának.
-</p>
+  <div class='row'>
 
-<br>
-</div>
+    <h4>Csoportok</h4>
+    <p>
+      A <a href='index.php?page=csoportok_tanar'>Csoportok</a> oldal segítségével létrehozhat csoportokat, feladatokat rendelhet hozzájuk és üzenetet 
+      írhat egy csoport hallgatóinak részére.
+      A létrehozott csoportok melletti Feladatok gombra kattintva megtekintheti egy csoport feladatait és a táblázat utolsó sorában lévő
+      plusz gombra kattintva új feladatot hozhat létre. Egy meglévő feladatra kattintva módosíthatja azt.
+      <br>
+      Ha szeretne hallgatókat rendelni egy csoporthoz, a csoport létrehozás ablakából válassza az \"Új tag hozzáadása\" opciót.
+      A tagok hozzáadása ablakból könnyedén beazonosíthatja a hallgatókat név és azonosító alapján, továbbá segítséget nyújt a kereső mező is, 
+      mellyel bármelyikre rákereshet. Jelölje be a hallgatók melletti jelölőnégyzetet akiket hozzá szeretne adni a csoporthoz, majd kattintson a \"Tagok hozzáadása\"
+      gombra. Amennyiben egy hallgatót mégsem szeretne a csoporthoz adni, a Csoport adatai ablakban kattintson a hallgató melletti mínusz gombra. 
+      <br>
+      Az oldal lehetőséget nyújt ezek mellett csoportüzenet küldésére is. A \"Csoportüzenet\" ablakban a \"Tagok hozzáadása\" ablakhoz hasonlóan 
+      kereshet a csoport hallgatói között,
+      és bejelölheti a hallgatókat akiknek üzenetet szeretne küldeni. Amennyiben az egész csoport részére szeretne üzenetet küldeni, jelölje be az \"Üzenet küldése az 
+      egész csoportnak\" opciót.
+    </p>
+  </div>
 
-<div class='row'>
-<h4>Jelszó változtatás</h4>
-<p>
-  Amennyiben szeretné jelszavát megváltoztatni, bejelentkezés után a <a href='index.php?page=jelszo_valtoztatas'>Jelszó változtatás</a> menüpontból ezt megteheti.
-  Kérem, hogy a jelszót melyet e-mailben küldünk Önnek
-  változtassa meg itt mielőbb fiókja védelme érdekében.
+  <br>
 
-</p>
+  <div class='row'>
+    <h4>Üzenetek</h4>
+    <p>
+      Az <a href='index.php?page=uzenetek_tanar'>Üzenetek</a> oldalon megtekinthei üzenetváltásait csoportokra bontva. Válassza ki a csoportot a legördülő ablakból 
+      és kattintson a \"Chat megnyitása\" gombra 
+      valamelyik hallgató mellett a csevegés elkezdéséhez. Hogy könnyen értesüljön az új üzeneteiről, a \"Chat megnyitása\" gomb mellett egy kék pont jelenik meg.
+    </p>
+  </div>
 
-</div>
+  <br><br>
 
+  <h3>Általános segítség</h3> <br>
+
+  <div class='row'>
+    <h4>Feladatok beállítása</h4>
+    <p>
+      A \"Feladat adatai\" ablakban lehetősége nyílik beállítani egy feladat nevét, a listázáskor megjelenítendő színét, határidejét, címkéit és leírását.
+      Címkék hozzáadásához kattintson a \"Címkék\" felirat alatt taláható plusz gombra. 
+      <br>
+      A \"Címkék hozzáadása\" ablakban lehetősége van a létrehozott címkéit kiválasztani a mellettük található jelölőnégyzet segítségével és a mellettük található gombbal
+      törölheti azokat. 
+      Ebből az ablakból érhető el a \"Címke adatai\" ablak is, melyben új címkéket hozhat létre. Amennyiben egy címke adatait módosítani szeretné kattintson a 
+      \"Címkék hozzáadása\" ablak egy címkéjére. <br>
+      A \"Címke adatai\" ablakban lehetősége nyílik beállítani, illetve módosítani egy címke nevét, színét, illetve ikont is rendelhet hozzájuk.
+    </p>
+  </div>
+
+  <br>
+
+  <div class='row'>
+    <h4>Elfelejtett jelszó</h4>
+    <p>
+      Amennyiben elfelejtette jelszavát, a <a href='index.php?page=bejelentkezes'>Bejelentkezés</a> menüpont alatt található \"Elfelejtett jelszó\" 
+      hivatkozás segítségével új jelszót generálunk Önnek.
+      Az új jelszót e-mailben elküldjük, majd az ezzel való bejelentkezés után a <a href='index.php?page=jelszo_valtoztatas'>Jelszó változtatás</a> 
+      menüpontban új jelszót adhat meg magának.
+    </p>
+  </div>
+
+  <br>
+
+  <div class='row'>
+    <h4>Jelszó változtatás</h4>
+    <p>
+      Amennyiben szeretné jelszavát megváltoztatni, bejelentkezés után a <a href='index.php?page=jelszo_valtoztatas'>Jelszó változtatás</a> menüpontból ezt megteheti.
+      Kérem, hogy a jelszót melyet e-mailben küldünk Önnek
+      változtassa meg itt mielőbb fiókja védelme érdekében.
+    </p>
+  </div>
 </div>
 
 

@@ -161,6 +161,7 @@ class Chat {
             dataType: "json",
             credentials: 'same-origin',
             success: function(response) {
+                console.log(response);
                 if(response.length != 0){
                     var messagesData = response.messages;
 

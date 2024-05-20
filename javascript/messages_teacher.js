@@ -142,6 +142,7 @@ async function listGroupMembers(groupId){
                 data: { 'otherUserId': sendToUserId },
                 success: function(secondResponse) {
                     if(secondResponse == "false"){
+                        console.log(secondResponse);
                         var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
                         var firstChild = messageDiv.firstChild;
                         messageDiv.insertBefore(unseenMessageDot, firstChild);
