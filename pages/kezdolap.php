@@ -37,7 +37,7 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
         A weboldal használatához először hozzon létre egy fiókot a <a href='index.php?page=regisztracio'>Regisztráció</a> oldalon. 
         Itt meg kell adnia hallgatói azonosítóját ami alapján az oktatói meg
         fogják tudni Önt találni és csoportokhoz rendelni. Sikeres regisztráció után kapni fog egy e-mailt egy megerősítő hivatkozással, miután erre
-        rákattint lehetősége nyílik a bejelentkezésre. Amennyiben a diákazonosító melyet megadott már foglalt, vagy a regisztráció során bármilyen egyéb problémába ütközik
+        rákattint lehetősége nyílik a bejelentkezésre. Lehetséges, hogy a megerősítő e-mail a spam mappába érkezik, ezért kérem, hogy ellenőrizze azt. Amennyiben a diákazonosító melyet megadott már foglalt, vagy a regisztráció során bármilyen egyéb problémába ütközik
         vegye fel a kapcsolatot a rendszergazdával a következő e-mail címen: <a href='mailto:beneidavid.it@gmail.com'>beneidavid.it@gmail.com</a>
       </p>
 
