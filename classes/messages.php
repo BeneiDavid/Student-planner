@@ -10,6 +10,7 @@ class Messages {
         $this->connection = $connection; 
     }
 
+    // Üzenet küldése
     public function sendMessage($sender_id, $receiver_id, $message){
         $currentDate = date('Y-m-d H:i:s'); 
 
@@ -21,23 +22,17 @@ class Messages {
         `message_time`='".$currentDate."',
         `seen_by_receiver`= 0 
         ");
-
-        if (!$message_send_query) {
-            die("Message send failed: " . mysqli_error($this->connection));
-        }
     }
 
+    // Felhasználó által látott üzenetek frissítése
     public function updateMessagesSeenByUser($current_user_id, $other_user_id){
         $update_seen_messages_query = mysqli_query($this->connection, "UPDATE `messages` SET `seen_by_receiver`='1' WHERE `sender_id`='$other_user_id' AND `receiver_id`='$current_user_id'");
     }
 
+    // Üzenetváltás lekérdezése
     public function getMessages($current_user_id, $other_user_id){
         $get_message_query = mysqli_query($this->connection, "SELECT * FROM `messages` WHERE `sender_id`='$current_user_id' AND `receiver_id`='$other_user_id' OR 
         `sender_id`='$other_user_id' AND `receiver_id`='$current_user_id'");
-
-        if (!$get_message_query) {
-            die("Query failed: " . mysqli_error($this->connection));
-        }
 
         $messages = [];
         
@@ -48,6 +43,7 @@ class Messages {
         return $messages;
     }
 
+    // Látott-e már minden üzenetet a felhasználó egy másik felhasználótól
     public function areAllMessagesSeenByUser($current_user_id, $other_user_id){
         $messages_seen_query = mysqli_query($this->connection, "SELECT `seen_by_receiver` FROM `messages` WHERE `sender_id`='$other_user_id' AND `receiver_id`='$current_user_id' AND `seen_by_receiver`='0'");
        
@@ -58,7 +54,6 @@ class Messages {
             return true;
         }   
     }
-
 }
 
 ?>
