@@ -21,7 +21,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
         $errors = array();
 
         if($validator->validateForm()){
-            echo '<div class="content-padding"><div class="alert alert-success succesful-registration-alert" role="alert">Sikeres regisztráció! Kérem erősítse meg e-mail címét a postafiókjára érkező link segítségével!</div></div><br>';
+            echo '<div class="content-padding"><div class="alert alert-success succesful-registration-alert" role="alert">Sikeres regisztráció! <br> Kérem erősítse meg e-mail címét a postafiókjára érkező link segítségével! <br> Előfordulhat, hogy az e-mail a spam mappába kerül, vagy nem érkezik meg azonnal.</div></div><br>';
         }
         else{
             $fullname = $validator->getFullName();
