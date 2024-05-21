@@ -40,7 +40,7 @@ if (isset($_POST['formData']))
       <p class='preview-label'>Előnézet:</p>
       <div class='ellipse' id='previewDiv'>
           <p id='previewText' class='preview-text'></p>   
-          <img id='previewImage' class='preview-image' alt='Címke előnézet ikon'></img>
+          <img id='previewImage' class='preview-image' src='pictures/rhombus.svg' alt='Címke előnézet ikon'></img>
       </div>
       <form method='post' id="newLabelForm">
 
