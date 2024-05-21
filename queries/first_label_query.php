@@ -60,7 +60,7 @@ if ($first_label_query) {
       $group_label_ids = [];
 
       foreach ($group_task_ids as $taskId){
-        $groups_task_labels_query = getLabelIdsForTask($taskId);
+        $groups_task_labels_query = $labels->getLabelIdsForTask($taskId);
 
         while ($task_label = mysqli_fetch_assoc($groups_task_labels_query)) {
           $group_label_ids[] = $task_label['label_id'];
@@ -70,7 +70,7 @@ if ($first_label_query) {
       $group_label_ids = array_unique($group_label_ids);
       
       foreach ($group_label_ids as $labelId ){
-        $groups_labels_query = getFirstLabelData($labelId);
+        $groups_labels_query = $labels->getFirstLabelData($labelId);
 
         if ($groups_labels_query) {
           $first_label_data = mysqli_fetch_assoc($groups_labels_query);

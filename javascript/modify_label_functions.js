@@ -95,7 +95,14 @@ function createNewLabelModal(event, label_id){
     if (typeof label_id !== 'undefined' && label_id != "") {
       var hiddenId = document.getElementById("hiddenId");
       hiddenId.value = label_id;
-      setLabelDataToEdit(label_id);
+      div_id = "div_" + label_id;
+      var label_div = document.getElementById(div_id);
+      if(label_div){
+        setLabelDataToEdit(label_id);
+      }
+      else{
+        return;
+      }
     }
     else{
       setSymbolSquareAndPreview();
@@ -105,6 +112,8 @@ function createNewLabelModal(event, label_id){
     var modalDiv = document.getElementById("modal_div");
     var newLabelModal = document.getElementById("newLabelModal");
     modalDiv.appendChild(newLabelModal);
+
+    
   
     changeLabelColor();
     showNewLabelModal();
@@ -160,7 +169,7 @@ labelNameError.style.display = "none";
 
 // Címke megjelenítése / elrejtése a previewban
 function enableLabelIconChanged(){
-    previewImage = document.getElementById("previewImage");
+    var previewImage = document.getElementById("previewImage");
 
     if(!this.checked){
       previewImage.style.display = 'none';
@@ -180,8 +189,12 @@ function setSymbolSquareAndPreview(){
       img.width = 25;
       img.height = 25;
       symbolSquare.appendChild(img);
-      previewImage = document.getElementById("previewImage");
+      var previewImage = document.getElementById("previewImage");
       previewImage.src = "pictures/rhombus.svg";
+    }
+    else{
+      var previewImage = document.getElementById("previewImage");
+    previewImage.src = "pictures/rhombus.svg";
     }
 
     var previewDiv = document.getElementById("previewDiv");
@@ -198,7 +211,7 @@ function changeLabelColor(){
     var style = window.getComputedStyle(previewDiv);
     var color = style.backgroundColor;
     var newTextColor = getContrastColor(color);
-  
+    var previewImage = document.getElementById("previewImage");
     if(newTextColor == 'black'){
       previewImage.style.filter = "";
     }
@@ -219,29 +232,36 @@ function setLabelDataToEdit(label_id){
   if (symbolSquare.firstChild) {
     symbolSquare.removeChild(symbolSquare.firstChild);
   }
-    var img = document.createElement("img");
-    
-  var imageElement = document.querySelector('#'+ div_id + ' img');
-  if(imageElement.style.display == 'inline-block'){
-    previewImage.style.display = 'inline-block';
-    var enableLabelIcon = document.getElementById("enableLabelIcon");
-    enableLabelIcon.checked = true;
-  }
+  var img = document.createElement("img");
+  var previewImage = document.getElementById("previewImage");
 
-  if (imageElement.src && imageElement.src.endsWith(".svg")) {
-    img.src = imageElement.src;
-  } else {
-    img.src = "pictures/rhombus.svg";
+
+ 
+  var imageElement = document.querySelector('#'+ div_id + ' img');
+  if(imageElement){
+    if(imageElement.style.display == 'inline-block'){
+      previewImage.style.display = 'inline-block';
+      var enableLabelIcon = document.getElementById("enableLabelIcon");
+      enableLabelIcon.checked = true;
+    }
+
+    if (imageElement.src && imageElement.src.endsWith(".svg")) {
+      img.src = imageElement.src;
+    } else {
+      img.src = "pictures/rhombus.svg";
+    }
   }
   
   img.width = 25;
   img.height = 25;
   symbolSquare.appendChild(img);
-  previewImage = document.getElementById("previewImage");
+  var previewImage = document.getElementById("previewImage");
   previewImage.src = img.src;
   
   var previewDiv = document.getElementById("previewDiv");
+ 
   previewDiv.style.backgroundColor = label_div.style.backgroundColor;
+  
   labelcolor.value = rgbToHex(label_div.style.backgroundColor);
 
   var pElement = label_div.querySelector('p'); 
@@ -250,6 +270,7 @@ function setLabelDataToEdit(label_id){
   var previewText = document.getElementById("previewText");
   labelname.value = textContent;
   previewText.textContent = textContent;
+
   
 }
 
@@ -309,7 +330,7 @@ $(document).ready(function(){
       img.width = 25;
       img.height = 25;
       symbolSquare.appendChild(img);
-      previewImage = document.getElementById("previewImage");
+      var previewImage = document.getElementById("previewImage");
       previewImage.src = src;
       $('[data-toggle="popover"]').popover('hide');
     });
