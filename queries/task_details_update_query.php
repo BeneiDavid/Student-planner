@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
+require_once BASE_PATH . '/classes/tasks.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -38,47 +39,31 @@ if (isset($_POST['taskAddData']))
     $enable_end_time = 0;
   }
 
+  $tasks = new Tasks($l);
 
-  mysqli_query($l, "UPDATE `tasks` SET 
-      `user_id`='".$user_id."',
-      `title`='".$task_name."',
-      `task_description`='".$task_description."',
-      `task_color` = '".$task_color."',
-      `date`='".$date."',
-      `start_time`='".$startTime."',
-      `end_time`='".$endTime."',
-      `start_time_enabled`='".$enable_start_time."',
-      `end_time_enabled`='".$enable_end_time."'
-      WHERE `task_id` = ".$task_id);
+  $tasks->updateTask($task_id, $user_id, $task_name, $task_description, $task_color, $date, $startTime, $endTime, $enable_start_time, $enable_end_time);
 
-    $associated_label_ids = array();
+  $associated_label_ids = array();
 
-    $result = mysqli_query($l, "SELECT `label_id` FROM `task_labels` WHERE `task_id`='$task_id'");
+  $result = $tasks->getAssociatedLabelIds($task_id);
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $associated_label_ids[] = $row['label_id'];
-    }
+  while ($row = mysqli_fetch_assoc($result)) {
+      $associated_label_ids[] = $row['label_id'];
+  }
 
-    foreach ($label_ids as $label_id) {
-        $result = mysqli_query($l, "SELECT COUNT(*) FROM `task_labels` WHERE `task_id`='".$task_id."' AND `label_id`='".$label_id."'");
-        $row = mysqli_fetch_row($result);
-        $count = $row[0];
-        
-        if ($count == 0) {
-          mysqli_query($l, "INSERT INTO `task_labels` SET 
-              `task_label_id`=NULL,
-              `task_id`='".$task_id."',
-              `label_id`='".$label_id."'
-          ");
-        }
-    }
-    
-    $not_needed_label_ids = array_diff($associated_label_ids, $label_ids);
-    
-    if (!empty($not_needed_label_ids)) {
-        $not_needed_label_ids_str = implode("','", $not_needed_label_ids);
-        mysqli_query($l, "DELETE FROM `task_labels` WHERE `task_id`='$task_id' AND `label_id` IN ('$not_needed_label_ids_str')");
-    }
+  foreach ($label_ids as $label_id) {
+      $count = $tasks->getTaskLabelRelationCount($task_id, $label_id);
+      if ($count == 0) {
+        $tasks->addLabelToTask($task_id, $label_id);
+      }
+  }
+  
+  $not_needed_label_ids = array_diff($associated_label_ids, $label_ids);
+  
+  if (!empty($not_needed_label_ids)) {
+      $not_needed_label_ids_str = implode("','", $not_needed_label_ids);
+      $tasks->removeLabelsFromTask($task_id, $not_needed_label_ids_str);
+  }
 }
 
 ?>

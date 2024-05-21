@@ -102,6 +102,7 @@ async function getFirstLabel(){
         credentials: 'same-origin',
         dataType: 'text',
         success: function(response) {
+          console.log("asd" + response);
           resolve(response);
         },
         error: function(xhr) {

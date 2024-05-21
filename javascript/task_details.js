@@ -310,7 +310,6 @@ function saveTaskButton(event){
             },
             credentials: 'same-origin',
             success: function(response) {
-      
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);

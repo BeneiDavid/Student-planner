@@ -88,6 +88,8 @@ require_once BASE_PATH . '/classes/user.php';
     if (mysqli_num_rows($task_labels_query) > 0) {
       while ($row = mysqli_fetch_assoc($task_labels_query)) {
         $task_id = $row['task_id'];
+      
+
         $tasks_query = mysqli_query($l, "SELECT * FROM `tasks` WHERE `task_id`='$task_id'");
 
         if(mysqli_num_rows($tasks_query) > 0){
@@ -115,6 +117,8 @@ require_once BASE_PATH . '/classes/user.php';
       }
     }
   }
+
+
 } // Csoport feladatainak listázása
 else if(isset($_POST['groupId'])){
   // Oktató

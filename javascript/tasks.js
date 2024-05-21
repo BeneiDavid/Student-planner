@@ -10,6 +10,7 @@ function taskClick(){
         data: {'taskId': taskId},
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response + "asd");
            addTask(null, response);
         }
         ,
@@ -164,6 +165,7 @@ function fillTaskTable(response, type){
         }
 
         var tasks = response.tasks;
+        console.log(tasks);
         var taskLabels = response.task_labels;
         var labels = response.labels;
         tasks.forEach(function(task) {
