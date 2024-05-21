@@ -597,6 +597,7 @@ function listTasks(date){
         data: {'date': date},
         credentials: 'same-origin',
         success: function(response) {
+            console.log(response + "asd");
             fillTaskTable(response, "daily");
         },
         error: function(xhr) {

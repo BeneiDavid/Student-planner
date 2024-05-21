@@ -78,7 +78,6 @@ async function setDays(currentYear, currentMonth){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "bsd");
             var parsedData = JSON.parse(response);
             if(parsedData.length != 0){
                 days = parsedData.dates.map(dateString => new Date(dateString).getDate())
@@ -145,7 +144,6 @@ async function refreshCalendarDots(){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             var parsedData = JSON.parse(response);
             if(parsedData.length != 0){
                 days = parsedData.dates.map(dateString => new Date(dateString).getDate())

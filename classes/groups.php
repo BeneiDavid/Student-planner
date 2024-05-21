@@ -137,6 +137,11 @@ class Groups {
         return $groups_query;
     }
 
+    public function getGroupMemberRows($user_id, $group_id){
+        $group_ids_query =  mysqli_query($this->connection, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id' AND `group_id`='$group_id'");
+        return $group_ids_query;
+    }
+
 }
 
 ?>

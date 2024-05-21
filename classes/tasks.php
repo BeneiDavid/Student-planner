@@ -72,10 +72,36 @@ class Tasks {
         return $task_query;
     }
 
-    public function getTaskLabelsOrdered($task_id){
+    public function getTaskIdsForuser($user_id){
+        $task_query = mysqli_query($this->connection, "SELECT `task_id` FROM `tasks` WHERE `user_id`='$user_id'");
+        return $task_query;
+    }
+
+    public function getAllTasksForUser($user_id){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE `user_id`='$user_id'");
+        return $tasks_query;
+    }
+
+    public function getTasksForUserAndGroups($user_id, $group_task_ids){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' OR (`task_id` IN (" . implode(',', $group_task_ids) . "))");
+        return $tasks_query;
+    }
+
+    public function getTaskLabelsByTaskOrdered($task_id){
         $task_labels_query = mysqli_query($this->connection, "SELECT * FROM `task_labels` WHERE `task_id`='$task_id' ORDER BY `label_id`");
         return $task_labels_query;
     }
+
+    public function getTaskLabelsByTask($task_id){
+        $task_labels_query = mysqli_query($this->connection, "SELECT * FROM `task_labels` WHERE `task_id`='$task_id'");
+        return $task_labels_query;
+    }
+
+    public function getTaskLabelsByLabel($label_id){
+        $task_labels_query = mysqli_query($this->connection, "SELECT * FROM `task_labels` WHERE `label_id`='$label_id'");
+        return $task_labels_query;
+    }
+
 
     public function saveAssociatedLabel($task_id, $label_id){
         mysqli_query($this->connection, "INSERT INTO `task_labels` SET 
@@ -96,6 +122,11 @@ class Tasks {
     public function getTaskSortingForUser($task_id, $user_id){
         $sorting_query = mysqli_query($this->connection, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id' AND `user_id`='$user_id'");
         return $sorting_query;
+    }
+
+    public function getTaskSortingForTask($task_id){
+        $task_sorting_query = mysqli_query($this->connection, "SELECT * FROM `task_sorting` WHERE `task_id`='$task_id'");
+        return $task_sorting_query;
     }
 
     public function setEisenhoverSortingForTask($task_id, $user_id, $sort_by){
@@ -244,20 +275,41 @@ class Tasks {
     }
 
     public function getTaskIdsForGroup($group_id){
-        $group_task_ids_query =  mysqli_query($this->connection, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+        $group_task_ids_query =  mysqli_query($this->connection, "SELECT `task_id` FROM `group_tasks` WHERE `group_id`='$group_id'");
         return $group_task_ids_query;
     }
 
     public function getTaskDatesWithYearAndMonthByUser($year, $month, $user_id){
         $date_query = mysqli_query($this->connection, "SELECT `date` FROM `tasks` WHERE YEAR(`date`) = $year AND MONTH(`date`) = $month AND `user_id` = '$user_id'");
-        return  $date_query;
+        return $date_query;
     }
 
     public function getTaskDatesWithYearAndMonthByTask($year, $month, $task_id){
         $task_date_query = mysqli_query($this->connection, "SELECT `date` FROM `tasks` WHERE YEAR(`date`) = $year AND MONTH(`date`) = $month AND `task_id` = '$task_id'");
-        return  $task_date_query;
+        return $task_date_query;
     }
 
+
+    public function getTaskByUserAndDate($user_id, $date){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date')");
+        return $tasks_query;
+    }
+
+
+    public function getUserAndGroupTasksForDate($user_id, $date, $group_task_ids){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE (`user_id`='$user_id' AND `date`='$date') OR (`task_id` IN (" . implode(',', $group_task_ids) . ") AND `date`='$date')");
+        return $tasks_query;
+    }
+
+    public function getTasksByGroupTaskIds($group_task_ids){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE (`task_id` IN (" . implode(',', $group_task_ids) . "))");
+        return $tasks_query;
+    }
+
+    public function getTasksByTaskIds($user_id, $task_ids_string){
+        $tasks_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE `user_id`='$user_id' AND `task_id` IN ($task_ids_string)");
+        return $tasks_query;
+    }
 }
 
 ?>

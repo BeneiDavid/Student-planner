@@ -35,6 +35,7 @@ function chooseLabel(divId){
     dataType: "json",
     credentials: 'same-origin',
     success: function(response) {
+      console.log(response + "asd");
         var labelsHeader = document.getElementById('labelsHeader');
         if(response.length == 0){
           removeTasks();
