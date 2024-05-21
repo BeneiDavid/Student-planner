@@ -53,6 +53,30 @@ class Tasks {
         ");
     }
 
+    public function updateTask($task_id, $user_id, $title, $task_description, $task_color, $date, $start_time, $end_time, $start_time_enabled, $end_time_endabled){
+        mysqli_query($this->connection, "UPDATE `tasks` SET 
+        `user_id`='".$user_id."',
+        `title`='".$title."',
+        `task_description`='".$task_description."',
+        `task_color` = '".$task_color."',
+        `date`='".$date."',
+        `start_time`='".$start_time."',
+        `end_time`='".$end_time."',
+        `start_time_enabled`='".$start_time_enabled."',
+        `end_time_enabled`='".$end_time_endabled."'
+        WHERE `task_id` = ".$task_id);
+    }
+
+    public function getTask($task_id){
+        $task_query = mysqli_query($this->connection, "SELECT * FROM `tasks` WHERE `task_id`='$task_id'");
+        return $task_query;
+    }
+
+    public function getTaskLabelsOrdered($task_id){
+        $task_labels_query = mysqli_query($this->connection, "SELECT * FROM `task_labels` WHERE `task_id`='$task_id' ORDER BY `label_id`");
+        return $task_labels_query;
+    }
+
     public function saveAssociatedLabel($task_id, $label_id){
         mysqli_query($this->connection, "INSERT INTO `task_labels` SET 
       `task_label_id`=NULL,
@@ -192,6 +216,46 @@ class Tasks {
         else{
             mysqli_query($this->connection, "UPDATE `task_sorting` SET `by_progress`='' WHERE `task_id`='$task_id' AND `user_id`='$user_id'");
         }
+    }
+
+    public function getAssociatedLabelIds($task_id){
+        $label_ids_query = mysqli_query($this->connection, "SELECT `label_id` FROM `task_labels` WHERE `task_id`='$task_id'");
+        return  $label_ids_query;
+    }
+
+    public function removeLabelsFromTask($task_id, $labels_to_remove){
+        mysqli_query($this->connection, "DELETE FROM `task_labels` WHERE `task_id`='$task_id' AND `label_id` IN ('$labels_to_remove')");
+    }
+
+
+    public function addLabelToTask($task_id, $label_id){
+        mysqli_query($this->connection, "INSERT INTO `task_labels` SET 
+              `task_label_id`=NULL,
+              `task_id`='".$task_id."',
+              `label_id`='".$label_id."'
+          ");
+    }
+
+    public function getTaskLabelRelationCount($task_id, $label_id){
+        $task_labels_query = mysqli_query($this->connection, "SELECT COUNT(*) FROM `task_labels` WHERE `task_id`='".$task_id."' AND `label_id`='".$label_id."'");
+        $task_label_data = mysqli_fetch_row($task_labels_query);
+        $relation_count = $task_label_data[0];
+        return $relation_count;
+    }
+
+    public function getTaskIdsForGroup($group_id){
+        $group_task_ids_query =  mysqli_query($this->connection, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
+        return $group_task_ids_query;
+    }
+
+    public function getTaskDatesWithYearAndMonthByUser($year, $month, $user_id){
+        $date_query = mysqli_query($this->connection, "SELECT `date` FROM `tasks` WHERE YEAR(`date`) = $year AND MONTH(`date`) = $month AND `user_id` = '$user_id'");
+        return  $date_query;
+    }
+
+    public function getTaskDatesWithYearAndMonthByTask($year, $month, $task_id){
+        $task_date_query = mysqli_query($this->connection, "SELECT `date` FROM `tasks` WHERE YEAR(`date`) = $year AND MONTH(`date`) = $month AND `task_id` = '$task_id'");
+        return  $task_date_query;
     }
 
 }

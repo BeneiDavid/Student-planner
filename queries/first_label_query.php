@@ -3,6 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once __DIR__ . '/../config.php';
 require_once BASE_PATH . '/classes/user.php';
+require_once BASE_PATH . '/classes/labels.php';
+require_once BASE_PATH . '/classes/groups.php';
+require_once BASE_PATH . '/classes/tasks.php';
 
 $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 
@@ -20,9 +23,11 @@ if (!isset($_SESSION['user'])) {
 
 $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
+$labels = new Labels($l);
+$groups = new Groups($l);
+$tasks = new Tasks($l);
 
-$first_label_query = mysqli_query($l, "SELECT `label_id` FROM `labels` WHERE `user_id`='$user_id' LIMIT 1");
-
+$first_label_query = $labels->getFirstLabelId($user_id);
 $first_label_id = "";
 
 if ($first_label_query) {
@@ -33,7 +38,7 @@ if ($first_label_query) {
   }
   else if(isset($_POST['showGroups'])){
     if($_POST['showGroups'] == "true"){
-      $groups_query =  mysqli_query($l, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id'");
+      $groups_query = $groups->getGroupsForStudent($user_id);
 
       $groups = [];
 
@@ -45,16 +50,17 @@ if ($first_label_query) {
 
       foreach ($groups as $group) {
         $group_id = $group['group_id'];
-        $groups_tasks_query =  mysqli_query($l, "SELECT task_id FROM `group_tasks` WHERE `group_id`='$group_id'");
-    
+        $groups_tasks_query = $tasks->getTaskIdsForGroup($group_id);
+
         while ($group_task = mysqli_fetch_assoc($groups_tasks_query)) {
           $group_task_ids[] = $group_task['task_id'];
         }
       }
 
       $group_label_ids = [];
+
       foreach ($group_task_ids as $taskId){
-        $groups_task_labels_query =  mysqli_query($l, "SELECT label_id FROM `task_labels` WHERE `task_id`='$taskId'");
+        $groups_task_labels_query = getLabelIdsForTask($taskId);
 
         while ($task_label = mysqli_fetch_assoc($groups_task_labels_query)) {
           $group_label_ids[] = $task_label['label_id'];
@@ -64,7 +70,8 @@ if ($first_label_query) {
       $group_label_ids = array_unique($group_label_ids);
       
       foreach ($group_label_ids as $labelId ){
-        $groups_labels_query =  mysqli_query($l, "SELECT * FROM `labels` WHERE `label_id`='$labelId' LIMIT 1");
+        $groups_labels_query = getFirstLabelData($labelId);
+
         if ($groups_labels_query) {
           $first_label_data = mysqli_fetch_assoc($groups_labels_query);
 

@@ -43,8 +43,31 @@ class Labels {
         return $labels_query;
     }
 
+    public function getUserLabels($user_id){
+        $labels_query = mysqli_query($this->connection, "SELECT * FROM `labels` WHERE `user_id`='$user_id'");
+        return $labels_query;
+    }
+
+    public function getGroupLabelsForStudent($label_id, $user_id){
+        $groups_labels_query =  mysqli_query($this->connection, "SELECT * FROM `labels` WHERE `label_id`='$label_id' AND `user_id` != '$user_id'");
+        return $groups_labels_query;
+    }
     
-    
+    public function getFirstLabelId($user_id){
+        $first_label_query = mysqli_query($this->connection, "SELECT `label_id` FROM `labels` WHERE `user_id`='$user_id' LIMIT 1");
+        return $first_label_query;
+    }
+
+    public function getLabelIdsForTask($task_id){
+        $groups_task_labels_query =  mysqli_query($this->connection, "SELECT label_id FROM `task_labels` WHERE `task_id`='$task_id'");
+        return $groups_task_labels_query;
+    }
+
+    public function getFirstLabelData($label_id){
+        $groups_labels_query =  mysqli_query($this->connection, "SELECT * FROM `labels` WHERE `label_id`='$label_id' LIMIT 1");
+        return $groups_labels_query;
+    }
+
 }
 
 ?>
