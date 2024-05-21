@@ -60,6 +60,7 @@ function listWeekTasks(){
                 data: {'date': date}, 
                 credentials: 'same-origin',
                 success: function(response) {
+                    console.log(response + "asd");
                     fillWeekDay(index, response);
                 },
                 error: function(xhr) {

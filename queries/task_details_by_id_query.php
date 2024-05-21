@@ -16,7 +16,7 @@ $task_query = $tasks->getTask($task_id);
 $task_details = mysqli_fetch_assoc($task_query);
 $data["task_details"][] = $task_details;
 
-$task_labels_query = $tasks->getTaskLabelsOrdered($task_id);
+$task_labels_query = $tasks->getTaskLabelsByTaskOrdered($task_id);
 
 while ($row = mysqli_fetch_assoc($task_labels_query)) {
     $label_id = $row['label_id'];
