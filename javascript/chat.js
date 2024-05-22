@@ -12,7 +12,7 @@ async function openChat(){
     var currentUserId = await getCurrentUserId();
     var sendToUserId = this.parentNode.id.split("_")[1];
 
-    chat = new Chat(currentUserId, sendToUserId, "chatModal");
+    chat = new Chat(currentUserId, sendToUserId);
     await chat.getLogs();
     
     var sendToUserName = await getFullname(sendToUserId);
@@ -90,12 +90,10 @@ class Chat {
 
     // Constructor
 
-    constructor(currentUserId, receivingUserId, modalId) {
+    constructor(currentUserId, receivingUserId) {
         this.currentUserId = currentUserId;
         this.receivingUserId = receivingUserId;
-        this.modalId = modalId;
         this.refreshMessages = null; 
-
     }
 
     // Methods

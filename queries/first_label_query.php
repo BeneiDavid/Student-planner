@@ -38,7 +38,7 @@ if ($first_label_query) {
   }
   else if(isset($_POST['showGroups'])){
     if($_POST['showGroups'] == "true"){
-      $groups_query = $groups->getGroupsForStudent($user_id);
+      $groups_query = $groups->getGroupIdsForStudent($user_id);
 
       $groups = [];
 
@@ -70,7 +70,7 @@ if ($first_label_query) {
       $group_label_ids = array_unique($group_label_ids);
       
       foreach ($group_label_ids as $labelId ){
-        $groups_labels_query = $labels->getFirstLabelData($labelId);
+        $groups_labels_query = $labels->getLabel($labelId);
 
         if ($groups_labels_query) {
           $first_label_data = mysqli_fetch_assoc($groups_labels_query);

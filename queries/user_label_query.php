@@ -39,7 +39,7 @@ if(isset($_POST['showGroups'])){
   $query_group_labels = $_POST['showGroups'];
 
   if($query_group_labels == "true"){
-    $groups_query = $groups->getGroupsForStudent($user_id);
+    $groups_query = $groups->getGroupIdsForStudent($user_id);
 
     $groups = [];
 

@@ -22,7 +22,7 @@ $data = [];
 $groups = new Groups($l);
 $users = new Users($l);
 
-$group_members_data_query = $groups->getGroupMembersDataForUser($user_id);
+$group_members_data_query = $groups->getGroupMembersDataForStudent($user_id);
 
 if (mysqli_num_rows($group_members_data_query) > 0) {
     while ($group_member_data = mysqli_fetch_assoc($group_members_data_query)) {
