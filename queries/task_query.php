@@ -32,7 +32,7 @@ $data = [];
 if(isset($_POST['date'])){
   $date = $_POST['date'];
 
-  $groups_query = $groups->getGroupsForStudent($user_id);
+  $groups_query = $groups->getGroupIdsForStudent($user_id);
 
   $groups = [];
 
@@ -94,7 +94,7 @@ if(isset($_POST['date'])){
     $group_task_ids = [];
     $user_tasks = [];
     $group_tasks = [];
-    $groups_query = $groups->getGroupsForStudent($user_id);
+    $groups_query = $groups->getGroupIdsForStudent($user_id);
 
     if ($groups_query) {
       $groups = [];
@@ -115,7 +115,7 @@ if(isset($_POST['date'])){
 
     $task_labels_query = $tasks->getTaskLabelsByLabel($label_id);
 
-    $user_task_query = $tasks->getTaskIdsForuser($user_id);
+    $user_task_query = $tasks->getTaskIdsForUser($user_id);
 
     while ($user_task = mysqli_fetch_assoc($user_task_query)) {
       $user_task_ids[] = $user_task['task_id'];
@@ -219,7 +219,7 @@ else if(isset($_POST['groupId'])){
   }
   // Hallgató
   else{
-    $groups_query = $groups->getGroupMemberRows($user_id, $group_id);
+    $groups_query = $groups->getGroupMemberIds($user_id, $group_id);
     $group_task_ids = [];
 
     if ($groups_query) {
@@ -281,7 +281,7 @@ else if(isset($_POST['groupId'])){
   }
 }// Összes feladat listázása
 else{
-  $groups_query = $groups->getGroupsForStudent($user_id);
+  $groups_query = $groups->getGroupIdsForStudent($user_id);
 
   if ($groups_query) {
     $groups = [];

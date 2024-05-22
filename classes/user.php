@@ -48,9 +48,6 @@ class User {
     public function getAddress(){
         return $this->address;
     }
-
-
-
 }
 
 ?>

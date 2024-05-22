@@ -26,7 +26,7 @@ $date_query = $tasks->getTaskDatesWithYearAndMonthByUser($current_year, $current
 
 $data = [];
 
-$groups_query = $groups->getGroupsForStudent($user_id);
+$groups_query = $groups->getGroupIdsForStudent($user_id);
 
 if ($groups_query) {
   $groups = [];

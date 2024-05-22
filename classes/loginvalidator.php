@@ -3,8 +3,8 @@
         // Properties
         private $error;
         private $fields = array();
-        private $connection;
         private $address;
+        private $connection;
 
         // Constructor
         public function __construct($connection) {

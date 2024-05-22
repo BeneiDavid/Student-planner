@@ -13,12 +13,12 @@ class Groups {
 
     // Csoport törlése
     private function deleteGroup($group_id){
-        $group_query = mysqli_query($this->connection, "DELETE FROM `groups` WHERE `group_id`='$group_id'");
+        mysqli_query($this->connection, "DELETE FROM `groups` WHERE `group_id`='$group_id'");
     }
 
     // Csoport összes tagjának törlése
     public function deleteGroupMembers($group_id){
-        $members_query = mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `group_id`='$group_id'");
+        mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `group_id`='$group_id'");
     }
     
     // Csoport feladatainak lekérdezése
@@ -30,7 +30,7 @@ class Groups {
 
     // Csoport összes feladatának törlése
     private function deleteGroupTasks($group_id){
-        $group_tasks_query =  mysqli_query($this->connection, "DELETE FROM `group_tasks` WHERE `group_id`='$group_id'");
+        mysqli_query($this->connection, "DELETE FROM `group_tasks` WHERE `group_id`='$group_id'");
     }
     
     // Csoport törlése minden hozzá tartozó adattal
@@ -60,10 +60,12 @@ class Groups {
         $this->deleteGroup($group_id);
     }
 
+    // Eltávolított tagságok törlése
     public function deleteRemovedMembers($group_id, $members_to_remove){
         mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `group_id`='$group_id' AND `student_id` IN ('$members_to_remove')");
     }
 
+    // Kilépés a csoportból
     public function quitGroup($group_id, $student_id){
         mysqli_query($this->connection, "DELETE FROM `group_members` WHERE `student_id`='$student_id' AND `group_id`='$group_id'");
     }
@@ -80,21 +82,25 @@ class Groups {
         return $group_name_fetch['group_name'];
     }
 
-    public function getGroupMembersDataForUser($user_id){
-        $group_members_data_query = mysqli_query($this->connection, "SELECT * FROM `group_members` WHERE `student_id`='$user_id'");
+    // Csoporttagok lekérdezése diákok azonosítója alapján
+    public function getGroupMembersDataForStudent($student_id){
+        $group_members_data_query = mysqli_query($this->connection, "SELECT * FROM `group_members` WHERE `student_id`='$student_id'");
         return $group_members_data_query;
     }
 
+    // Csoport adatainak lekérdezése csoport azonosító alapján
     public function getGroupDataById($group_id){
         $groups_query = mysqli_query($this->connection, "SELECT * FROM `groups` WHERE `group_id`='$group_id'");
         return $groups_query;
     }
 
+    // Csoport adatainak lekérdezése oktató azonosítója alapján
     public function getGroupDataByTeacherId($teacher_id){
         $groups_query = mysqli_query($this->connection, "SELECT * FROM `groups` WHERE `group_teacher_id`='$teacher_id'");
         return $groups_query;
     }
 
+    // Csoport adatainak mentése
     public function saveGroupDetails($teacher_id, $group_name){
         mysqli_query($this->connection, "INSERT INTO `groups` SET 
         `group_id`=NULL,
@@ -103,10 +109,12 @@ class Groups {
         "); 
     }
 
+    // Csoport adatainak frissítése
     public function updateGroupDetails($group_id, $group_name){
         mysqli_query($this->connection, "UPDATE `groups` SET `group_name`='$group_name' WHERE `group_id`='$group_id'"); 
     }
 
+    // Csoporttagok beállítása
     public function setGroupMembersData($group_id, $student_id){
         mysqli_query($this->connection, "INSERT INTO `group_members` SET 
         `membership_id`=NULL,
@@ -115,12 +123,14 @@ class Groups {
         ");
     }
 
+    // Csoporttagság számának lekérdezése diák azonosítója alapján
     public function getMembershipCountForStudent($group_id, $student_id){
         $result = mysqli_query($this->connection, "SELECT COUNT(*) FROM `group_members` WHERE `student_id`='".$student_id."' AND `group_id`='".$group_id."'");
         $count = mysqli_fetch_row($result)[0];
         return $count;
     }
 
+    // Diák azonosítók lekérdezése csoport azonosító alapján
     public function getStudentIdsFromGroup($group_id){
         $result = mysqli_query($this->connection, "SELECT `student_id` FROM `group_members` WHERE `group_id`='$group_id'");
         $student_ids = [];
@@ -132,12 +142,14 @@ class Groups {
         return $student_ids;
     }
 
-    public function getGroupsForStudent($student_id){
+    // Csoportazonosítók lekérdezése adott diákhoz
+    public function getGroupIdsForStudent($student_id){
         $groups_query = mysqli_query($this->connection, "SELECT `group_id` FROM `group_members` WHERE `student_id`='$student_id'");
         return $groups_query;
     }
 
-    public function getGroupMemberRows($user_id, $group_id){
+    // Csoporttagság azonosítók lekérdezése
+    public function getGroupMemberIds($user_id, $group_id){
         $group_ids_query =  mysqli_query($this->connection, "SELECT group_id FROM `group_members` WHERE `student_id`='$user_id' AND `group_id`='$group_id'");
         return $group_ids_query;
     }

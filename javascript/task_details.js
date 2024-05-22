@@ -4,6 +4,8 @@ async function addTask(event, taskDetails) {
     hideAddLabelModal();
     hideNewLabelModal();
     hideDeleteTaskModal();
+    hideTaskNameError();
+    hideDateError();
     var img = setAndGetAddLabelImage();
     var existingTask = document.getElementById('existingTask');
     var deleteTaskButton = document.getElementById('deleteTask');

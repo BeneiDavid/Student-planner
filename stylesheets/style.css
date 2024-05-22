@@ -1023,7 +1023,7 @@ background-color: white;
   text-align: center;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1000px) {
   .student-groups-div > div > div > p {
     text-indent: -9999px;
   }
