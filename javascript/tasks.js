@@ -355,9 +355,9 @@ function fillTaskTable(response, type){
                 byProgressBody.insertBefore(row, newSortByProgressRow);
             }
         });
-    } // Rendszerezés Eisenhover mátrix-szal
-    else if(type == "eisenhover"){
-        var eisenhoverBody = document.getElementById("eisenhoverBody");
+    } // Rendszerezés Eisenhower mátrix-szal
+    else if(type == "eisenhower"){
+        var eisenhowerBody = document.getElementById("eisenhowerBody");
         if(!hasData){
             return;
         }
@@ -439,43 +439,43 @@ function fillTaskTable(response, type){
             if (task_sorting_row && Array.isArray(task_sorting_row)){
                 for (var i = 0; i < task_sorting_row.length; i++){
                     if(task_sorting_row[i].task_id == task.task_id){
-                        if(task_sorting_row[i].eisenhover == 'urgent_important'){
+                        if(task_sorting_row[i].eisenhower == 'urgent_important'){
                             var urgImp = document.getElementById("urgImp");
                             var lastRow = urgImp.lastElementChild;
                             urgImp.insertBefore(row, lastRow);
                             found = true;
                         }
-                        else if(task_sorting_row[i].eisenhover == 'urgent_not_important'){
+                        else if(task_sorting_row[i].eisenhower == 'urgent_not_important'){
                             var urgNotImp = document.getElementById("urgNotImp");
                             var lastRow = urgNotImp.lastElementChild;
                             urgNotImp.insertBefore(row, lastRow);
                             found = true;
                         }
-                        else if(task_sorting_row[i].eisenhover == 'not_urgent_important'){
+                        else if(task_sorting_row[i].eisenhower == 'not_urgent_important'){
                             var notUrgImp = document.getElementById("notUrgImp");
                             var lastRow = notUrgImp.lastElementChild;
                             notUrgImp.insertBefore(row, lastRow);
                             found = true;
                         }
-                        else if(task_sorting_row[i].eisenhover == 'not_urgent_not_important'){
+                        else if(task_sorting_row[i].eisenhower == 'not_urgent_not_important'){
                             var notUrgNotImp = document.getElementById("notUrgNotImp");
                             var lastRow = notUrgNotImp.lastElementChild;
                             notUrgNotImp.insertBefore(row, lastRow);
                             found = true;
                         }
                         else{
-                            var newEisenhoverRow = document.getElementById("newEisenhoverRow");
-                            var eisenhoverBody = document.getElementById("eisenhoverBody");
-                            eisenhoverBody.insertBefore(row, newEisenhoverRow);
+                            var newEisenhowerRow = document.getElementById("newEisenhowerRow");
+                            var eisenhowerBody = document.getElementById("eisenhowerBody");
+                            eisenhowerBody.insertBefore(row, newEisenhowerRow);
                             found = true;
                         }
                     }
                 }
             }
             if(!found){
-                var newEisenhoverRow = document.getElementById("newEisenhoverRow");
-            var eisenhoverBody = document.getElementById("eisenhoverBody");
-            eisenhoverBody.insertBefore(row, newEisenhoverRow);
+                var newEisenhowerRow = document.getElementById("newEisenhowerRow");
+            var eisenhowerBody = document.getElementById("eisenhowerBody");
+            eisenhowerBody.insertBefore(row, newEisenhowerRow);
             }        
         });
     }

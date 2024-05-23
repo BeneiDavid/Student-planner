@@ -27,7 +27,7 @@ $(document).ready(function() {
 
             if (match) {
                 const tdId = match[1];
-                sortTaskByEisenhover(tdId, tableId);
+                sortTaskByEisenhower(tdId, tableId);
             } else {
                 console.error("ID attribute not found");
             }
@@ -35,12 +35,12 @@ $(document).ready(function() {
   }).disableSelection();
 });
 
-// Eisenhover szerinti rendezés mentése
-function sortTaskByEisenhover(tdId, tableId){
+// Eisenhower szerinti rendezés mentése
+function sortTaskByEisenhower(tdId, tableId){
     const id = tdId.split('-')[1];
     $.ajax({
         type: 'POST',
-        url: 'queries/sort_by_eisenhover_query.php', 
+        url: 'queries/sort_by_eisenhower_query.php', 
         data: {
             'taskId': id,
             'tableId': tableId
@@ -56,22 +56,22 @@ function sortTaskByEisenhover(tdId, tableId){
 }
 
 // Feladatok frissítése
-function refreshEisenhoverTasks(){
-    clearEisenhoverTasks();
+function refreshEisenhowerTasks(){
+    clearEisenhowerTasks();
     clearUrgentImportant();
     clearUrgentNotImportant();
     clearNotUrgentImportant();
     clearNotUrgentNotImportant();
-    fillEisenhoverTasks();
+    fillEisenhowerTasks();
 }
 
 // Feladatok kiürítése
-function clearEisenhoverTasks(){
-    var eisenhoverBody = document.getElementById("eisenhoverBody");
-    var children = eisenhoverBody.children;
+function clearEisenhowerTasks(){
+    var eisenhowerBody = document.getElementById("eisenhowerBody");
+    var children = eisenhowerBody.children;
     var childrenCount = children.length;
     for (var i = childrenCount - 2; i >= 2; i--) {
-        eisenhoverBody.removeChild(children[i]);
+        eisenhowerBody.removeChild(children[i]);
     }
 }
 
@@ -116,7 +116,7 @@ function clearNotUrgentNotImportant(){
 }
 
 // Táblázatok feltöltése
-function fillEisenhoverTasks(){
+function fillEisenhowerTasks(){
     $.ajax({
         type: 'POST',
         url: 'queries/task_query.php', 
@@ -128,7 +128,7 @@ function fillEisenhoverTasks(){
               return;
             } 
             else{
-              fillTaskTable(response, "eisenhover");
+              fillTaskTable(response, "eisenhower");
             }
         },
         error: function(xhr, status, error) {
@@ -139,7 +139,7 @@ function fillEisenhoverTasks(){
 
 // Inicializálás
 function init(){
-    fillEisenhoverTasks();
+    fillEisenhowerTasks();
 }
 
 window.addEventListener('load', init, false);

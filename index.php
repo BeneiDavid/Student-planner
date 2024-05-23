@@ -100,7 +100,7 @@ if (isset($_POST['login_button']))
               echo '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Rendszerezés segítő</a>';
               echo '  <ul class="dropdown-menu">';
               echo '    <li><a class="dropdown-item" href="index.php?page=folyamat">Folyamat alapú rendezés</a></li>';
-              echo '    <li><a class="dropdown-item" href="index.php?page=eisenhover">Eisenhover mátrix</a></li>';
+              echo '    <li><a class="dropdown-item" href="index.php?page=eisenhower">Eisenhower mátrix</a></li>';
               echo '    <li><a class="dropdown-item" href="index.php?page=cimkeszerint">Feladatok címkék szerint</a></li>';
               echo '  </ul>';
               echo '</li>';
@@ -154,7 +154,7 @@ if (isset($_POST['login_button']))
       case 'heti_megjelenites': include 'pages/heti_megjelenites.php'; break;
       case 'havi_megjelenites': include 'pages/havi_megjelenites.php'; break;
       case 'folyamat': include 'pages/folyamat.php'; break;
-      case 'eisenhover': include 'pages/eisenhover.php'; break;
+      case 'eisenhower': include 'pages/eisenhower.php'; break;
       case 'cimkeszerint': include 'pages/cimkeszerint.php'; break;
       case 'csoportok': include 'pages/csoportok.php'; break;
       case 'uzenetek': include 'pages/uzenetek.php'; break;

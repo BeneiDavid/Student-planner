@@ -19,21 +19,21 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes')
     echo '<script type="text/javascript"  src="javascript/modify_label_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/add_label_functions.js"></script>';
     echo '<script type="text/javascript"  src="javascript/tasks.js"></script>';
-    echo '<script type="text/javascript"  src="javascript/eisenhover.js"></script>';
+    echo '<script type="text/javascript"  src="javascript/eisenhower.js"></script>';
 
-    echo "<h1>Eisenhover mátrix</h1>";
+    echo "<h1>Eisenhower mátrix</h1>";
 
     echo "
         <br><br>
 
         <table class='tables_ui col selected-day-div sorting-table-header center-horizontally' id='task_table'>
-            <tbody id='eisenhoverBody' class='t_sortable'>
+            <tbody id='eisenhowerBody' class='t_sortable'>
                 <tr>
                 <th colspan='1' id='labelsHeader' class='progress-cell'>Feladatok</th>
                 </tr>
                 <tr class='display-none'></tr>
                 
-                <tr id='newEisenhoverRow' class='no-drag-drop'>
+                <tr id='newEisenhowerRow' class='no-drag-drop'>
                 <td class='new-task-td'>
                 <button class='add-task-button' id='add-task-button'>
                     <img class='add-task-icon' src='pictures/plus-square.svg' alt='Feladat hozzáadása'>
@@ -112,5 +112,5 @@ else{
 ?>
 
 <script>
-  document.title = "Student Planner - Eisenhover mátrix";
+  document.title = "Student Planner - Eisenhower mátrix";
 </script>

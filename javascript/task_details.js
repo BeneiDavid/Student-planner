@@ -691,8 +691,8 @@ function init(){
         if(document.getElementById('byProgressBody')){
             refreshSortByProgressTasks();
         }
-        if(document.getElementById('eisenhoverBody')){
-            refreshEisenhoverTasks();
+        if(document.getElementById('eisenhowerBody')){
+            refreshEisenhowerTasks();
         }
         if(document.getElementById('groupTasksBody') && document.getElementById('createNewGroup')){
             refreshGroupTasks();
