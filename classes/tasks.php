@@ -144,13 +144,13 @@ class Tasks {
         return $task_sorting_query;
     }
 
-    // Eisenhover rendezés mentése
-    public function setEisenhoverSortingForTask($task_id, $user_id, $sort_by){
+    // Eisenhower rendezés mentése
+    public function setEisenhowerSortingForTask($task_id, $user_id, $sort_by){
         if($sort_by == "urgent_important") {
             mysqli_query($this->connection, "INSERT INTO `task_sorting` SET 
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
-        `eisenhover`='urgent_important',
+        `eisenhower`='urgent_important',
         `by_progress`='',
         `user_id` = '$user_id'
         ");
@@ -159,7 +159,7 @@ class Tasks {
             mysqli_query($this->connection, "INSERT INTO `task_sorting` SET 
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
-        `eisenhover`='urgent_not_important',
+        `eisenhower`='urgent_not_important',
         `by_progress`='',
         `user_id` = '$user_id'
         ");
@@ -168,7 +168,7 @@ class Tasks {
             mysqli_query($this->connection, "INSERT INTO `task_sorting` SET 
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
-        `eisenhover`='not_urgent_important',
+        `eisenhower`='not_urgent_important',
         `by_progress`='',
         `user_id` = '$user_id'
         ");
@@ -177,7 +177,7 @@ class Tasks {
             mysqli_query($this->connection, "INSERT INTO `task_sorting` SET 
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
-        `eisenhover`='not_urgent_not_important',
+        `eisenhower`='not_urgent_not_important',
         `by_progress`='',
         `user_id` = '$user_id'
         ");
@@ -186,29 +186,29 @@ class Tasks {
             mysqli_query($this->connection, "INSERT INTO `task_sorting` SET 
             `task_sort_id`=NULL,
             `task_id`='".$task_id."',
-            `eisenhover`='',
+            `eisenhower`='',
             `by_progress`='',
             `user_id` = '$user_id'
             ");
         }
     }
 
-    // Eisenhover rendezés frissítése
-    public function updateEisenhoverSortingForTask($task_id, $user_id, $sort_by){
+    // Eisenhower rendezés frissítése
+    public function updateEisenhowerSortingForTask($task_id, $user_id, $sort_by){
         if($sort_by == "urgent_important") {
-            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhover`='urgent_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
+            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhower`='urgent_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else if($sort_by == "urgent_notimportant") {
-            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhover`='urgent_not_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
+            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhower`='urgent_not_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else if($sort_by == "noturgent_important") {
-            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhover`='not_urgent_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
+            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhower`='not_urgent_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else if($sort_by == "noturgent_notimportant"){
-            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhover`='not_urgent_not_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
+            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhower`='not_urgent_not_important' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'"); 
         }
         else{
-            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhover`='' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'");
+            mysqli_query($this->connection, "UPDATE `task_sorting` SET `eisenhower`='' WHERE `task_id`='$task_id' AND `user_id` = '$user_id'");
         }
     }
 
@@ -219,7 +219,7 @@ class Tasks {
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='to_do',
-        `eisenhover`='',
+        `eisenhower`='',
         `user_id` = '$user_id'
         ");
         }
@@ -228,7 +228,7 @@ class Tasks {
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='in_progress',
-        `eisenhover`='',
+        `eisenhower`='',
         `user_id` = '$user_id'
         ");
         }
@@ -237,7 +237,7 @@ class Tasks {
         `task_sort_id`=NULL,
         `task_id`='".$task_id."',
         `by_progress`='done',
-        `eisenhover`='',
+        `eisenhower`='',
         `user_id` = '$user_id'
         ");
         }
@@ -246,7 +246,7 @@ class Tasks {
             `task_sort_id`=NULL,
             `task_id`='".$task_id."',
             `by_progress`='',
-            `eisenhover`='',
+            `eisenhower`='',
             `user_id` = '$user_id'
             ");
         }

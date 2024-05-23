@@ -102,9 +102,9 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
 
   <div class='row'>
 
-    <h4>Eisenhover mátrix</h4>
+    <h4>Eisenhower mátrix</h4>
     <p>
-      Az <a href='index.php?page=eisenhover'>Eisenhover mátrix</a>-szal való rendezés egy jól bevált módja a fontossági sorrend áttekintésének. 
+      Az <a href='index.php?page=eisenhower'>Eisenhower mátrix</a>-szal való rendezés egy jól bevált módja a fontossági sorrend áttekintésének. 
       Feladatait négy szempont szerint rendezheti egy feladat sürgősségének
        és fontosságának figyelembe vételével.
        A létrehozott feladatait könnyedén áthúzhatja valamelyik táblázatba,

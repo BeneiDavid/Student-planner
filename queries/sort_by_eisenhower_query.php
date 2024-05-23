@@ -24,10 +24,10 @@ $tasks_query = $tasks->getTaskSortingForUser($task_id, $user_id);
 
 if($tasks_query){
 if (mysqli_num_rows($tasks_query) > 0) {
-    $tasks->updateEisenhoverSortingForTask($task_id, $user_id, $table_id);
+    $tasks->updateEisenhowerSortingForTask($task_id, $user_id, $table_id);
 }
 else{
-    $tasks->setEisenhoverSortingForTask($task_id, $user_id, $table_id);
+    $tasks->setEisenhowerSortingForTask($task_id, $user_id, $table_id);
 }
 }
 
