@@ -75,6 +75,10 @@ class RegistrationValidator {
         $this->errors["username"] = "A diák azonosítónak 6 karakterből kell állnia!";
         return false;
     }
+    else if(!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+      $this->errors["username"] = "A diák azonosító csak betűket és számokat tartalmazhat!";
+      return false;
+    }
     
     $usernameCount = mysqli_num_rows(mysqli_query($this->connection, "SELECT * FROM `users` WHERE `username`='$username'"));
 
@@ -92,7 +96,7 @@ class RegistrationValidator {
     $this->fields["address"] = $address;
 
     if(empty($address)){
-        $this->errors["address"] = "A e-mail cím megadása kötelező!";
+        $this->errors["address"] = "Az e-mail cím megadása kötelező!";
         return false;
     }
     else if(!filter_var($address, FILTER_VALIDATE_EMAIL)){
