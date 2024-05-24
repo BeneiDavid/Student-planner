@@ -107,13 +107,13 @@ function showSaveButton(){
     document.getElementById('saveTaskButton').style.display = "inline-block";
 }
 
-// Címkék hozzádása feltöltése az új feladathoz
+// Címkék hozzádása ablak feltöltése címkékkel az új feladathoz
 function fillAddedLabels(img){
     var added_labels = document.getElementById("added_labels");
     added_labels.appendChild(img);
 }
 
-// Címkék hozzádása feltöltése a létező feladathoz
+// Címkék hozzádása ablak feltöltése címkékkel a létező feladathoz
 function fillAddedLabels(img, labels){
     var added_labels = document.getElementById("added_labels");
 
@@ -250,7 +250,7 @@ function enableEndTime(){
 }
 
 // Feladat módosítás mentése
-function saveTaskButton(event){
+async function saveTaskButton(event){
     var addLabelModal = document.getElementById("addLabelModal");  
     var newLabel_modal = document.getElementById("newLabelModal");
     var deleteTaskModal = document.getElementById("deleteTaskModal");
@@ -295,7 +295,7 @@ function saveTaskButton(event){
 
     // Létező feladat módosítása
     if(existingTask.value != -1){
-        $.ajax({
+        await $.ajax({
             type: 'POST',
             url: 'queries/task_details_update_query.php', 
             data: {'taskAddData': taskAddData,
@@ -319,7 +319,7 @@ function saveTaskButton(event){
         });
     }
     else{ // Új feladat létrehozása
-        $.ajax({
+        await $.ajax({
             type: 'POST',
             url: 'modals/task_details_modal.php', 
             data: {'taskAddData': taskAddData,

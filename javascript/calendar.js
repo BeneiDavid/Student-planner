@@ -201,13 +201,17 @@ function chooseDay(){
     var date = new Date(year, month - 1);
     setSeasonColors(date);
     
-    var selectedDayText = document.getElementById('selectedDay');
-    selectedDayText.textContent = year + ". " + monthNames[month] + " " + day + ".";
+    var selectedDay = document.getElementById('selectedDay');
+    selectedDay.textContent = year + ". " + monthNames[month] + " " + day + ".";
     
     
     var fullDate = year + "-" + month + "-" + day;
     var selectedDate = document.getElementById('selectedDate');
     selectedDate.value = fullDate;
+
+    if(selectedDay){
+        document.getElementById('selectedDay').style.backgroundColor = getSeasonDarkColor(date);
+    }
 
     listTasks(fullDate);
 }
@@ -221,7 +225,7 @@ function updateCalendar(year, month){
         month = 1;
     }
 
-    monthAndYearText = document.getElementById('monthAndYear');
+    var monthAndYearText = document.getElementById('monthAndYear');
     monthAndYearText.textContent = monthNames[month] + " " + year;
 
     setDays(year, month, day);
@@ -234,7 +238,9 @@ function setCalendar(){
     var currentMonth = currentDate.getMonth() + 1; 
     var currentYear = currentDate.getFullYear();
 
-    selectedDate = document.getElementById('selectedDate');
+    document.getElementById('selectedDay').style.backgroundColor = getSeasonDarkColor(currentDate);
+
+    var selectedDate = document.getElementById('selectedDate');
     selectedDate.value = currentYear + "-" + currentMonth + "-" + currentDay;
     calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
     calendarYearAndMonth.value = currentYear + "-" + currentMonth;
@@ -243,10 +249,10 @@ function setCalendar(){
         currentMonth = 12;
     }
 
-    monthAndYearText = document.getElementById('monthAndYear');
+    var monthAndYearText = document.getElementById('monthAndYear');
     monthAndYearText.textContent = monthNames[currentMonth] + " " + currentYear;
-    selectedDayText = document.getElementById('selectedDay');
-    selectedDayText.textContent = currentYear + ". " + monthNames[currentMonth] + " " + currentDay + ".";
+    var selectedDay = document.getElementById('selectedDay');
+    selectedDay.textContent = currentYear + ". " + monthNames[currentMonth] + " " + currentDay + ".";
 
     setDays(currentYear, currentMonth);
 
@@ -254,24 +260,27 @@ function setCalendar(){
 
 // Naptár beállítása adott dátumra
 function setCalendarToDate(date){
-    var Year = date.split('-')[0];
-    var Month = date.split('-')[1];
-    var Day = date.split('-')[2];
-    selectedDate = document.getElementById('selectedDate');
-    selectedDate.value = Year + "-" + Month + "-" + Day;
+    var year = date.split('-')[0];
+    var month = date.split('-')[1];
+    var day = date.split('-')[2];
+    var selectedDate = document.getElementById('selectedDate');
+    selectedDate.value = year + "-" + month + "-" + day;
     calendarYearAndMonth = document.getElementById('calendarYearAndMonth');
-    calendarYearAndMonth.value = Year + "-" + Month;
+    calendarYearAndMonth.value = year + "-" + month;
 
-    if(Month == 0){
-        Month = 12;
+    var seasonDate = new Date(year, month - 1);
+    document.getElementById('selectedDay').style.backgroundColor = getSeasonDarkColor(seasonDate);
+
+    if(month == 0){
+        month = 12;
     }
 
-    monthAndYearText = document.getElementById('monthAndYear');
-    monthAndYearText.textContent = monthNames[Month] + " " + Year;
-    selectedDayText = document.getElementById('selectedDay');
-    selectedDayText.textContent = Year + ". " + monthNames[Month] + " " + Day + ".";
+    var monthAndYearText = document.getElementById('monthAndYear');
+    monthAndYearText.textContent = monthNames[month] + " " + year;
+    var selectedDay = document.getElementById('selectedDay');
+    selectedDay.textContent = year + ". " + monthNames[month] + " " + day + ".";
 
-    setDays(Year, Month);
+    setDays(year, month);
 
 }
 

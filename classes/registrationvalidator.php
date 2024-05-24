@@ -28,7 +28,7 @@ class RegistrationValidator {
                     <br><br>
                     Köszönjük, hogy regisztrált!<br>
                     A regisztráció megerősítéséhez kérem kattintson a következő linkre:
-                    <a href="http://localhost/Szakdolgozat/index.php?page=confirmation&email='.base64_encode($this->fields["address"]).'">http://localhost/Szakdolgozat.php?page=confirmation&email='.base64_encode($this->fields["address"]).'</a>
+                    <a href="http://localhost/Student_Planner/index.php?page=confirmation&email='.base64_encode($this->fields["address"]).'">http://localhost/Student_Planner.php?page=confirmation&email='.base64_encode($this->fields["address"]).'</a>
                   
                     <br><br>                    
                     Üdvözlettel: <br>
