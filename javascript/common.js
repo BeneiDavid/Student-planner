@@ -158,13 +158,7 @@ function setSeasonColors(date) {
      
       if(activeDay){
           activeDay.style.backgroundColor = '#de5d83';
-      }
-
-      const selectedDay = document.getElementById('selectedDay');
-      if(selectedDay){
-        document.getElementById('selectedDay').style.backgroundColor = '#de5d83';
-      }
-      
+      }    
 
   } else if (month >= 6 && month <= 8) {
       const dayElements = document.querySelectorAll('.day');
@@ -192,12 +186,6 @@ function setSeasonColors(date) {
           activeDay.style.backgroundColor = '#6f9270';
       }
 
-      const selectedDay = document.getElementById('selectedDay');
-      if(selectedDay){
-        document.getElementById('selectedDay').style.backgroundColor = '#6f9270';
-      }
-
-
   } else if (month >= 9 && month <= 11) {
       const dayElements = document.querySelectorAll('.day');
 
@@ -223,11 +211,6 @@ function setSeasonColors(date) {
      
       if(activeDay){
           activeDay.style.backgroundColor = '#dd7116';
-      }
-
-      const selectedDay = document.getElementById('selectedDay');
-      if(selectedDay){
-        document.getElementById('selectedDay').style.backgroundColor = '#dd7116';
       }
       
   } else {
@@ -256,12 +239,7 @@ function setSeasonColors(date) {
       if(activeDay){
           activeDay.style.backgroundColor = '#9AAFC5';
       }
-
-      const selectedDay = document.getElementById('selectedDay');
-      if(selectedDay){
-        document.getElementById('selectedDay').style.backgroundColor = '#9AAFC5';
-      }
-      }
+    }
      
 
 }

@@ -43,7 +43,7 @@ if(isset($_POST['new_password_button']))
                     Mostantól a következő jelszóval fog tudni belépni az oldalra, ahol megváltoztathatja ezt a jelszót!<br>
 
                     <p style="color: red">Új jelszava: '.$new_password.'</p> 
-                    Itt tud belépni: <a href="http://localhost/Szakdolgozat/index.php?page=bejelentkezes">http://localhost/Szakdolgozat/index.php?page=bejelentkezes</a>
+                    Itt tud belépni: <a href="http://localhost/Student_Planner/index.php?page=bejelentkezes">http://localhost/Student_Planner/index.php?page=bejelentkezes</a>
                     
                     <br><br>                    
                     Üdvözlettel: <br>
