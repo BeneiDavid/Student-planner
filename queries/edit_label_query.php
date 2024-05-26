@@ -11,7 +11,7 @@ if (!$l) {
 }
 
 $label_id = $_POST['label_id'];
-$label_name = $_POST['label_name'];
+$label_name =  mysqli_real_escape_string($l, $_POST['label_name']);
 $label_color = $_POST['label_color'];
 $label_enabled = $_POST["label_enabled"];
 

@@ -14,7 +14,7 @@ if (!$l) {
 $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
 
-$message = $_POST['message'];
+$message =  mysqli_real_escape_string($l, $_POST['message']);
 $receiving_user_id = $_POST['receivingUserId'];
 
 $messages = new Messages($l);

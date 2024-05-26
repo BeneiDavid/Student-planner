@@ -62,7 +62,6 @@ async function listGroupMembers(groupId){
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var groupMembersDiv = document.getElementById('groupMembersDiv');
             if(response.length != 0){
                 var studentData = response.student_data;
@@ -143,7 +142,6 @@ async function listGroupMembers(groupId){
                 data: { 'otherUserId': sendToUserId },
                 success: function(secondResponse) {
                     if(secondResponse == "false"){
-                        console.log(secondResponse);
                         var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
                         var firstChild = messageDiv.firstChild;
                         messageDiv.insertBefore(unseenMessageDot, firstChild);

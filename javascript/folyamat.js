@@ -32,7 +32,6 @@ function fillSortByProgressTasks(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             if(response.length == 0){
               return;
             } 

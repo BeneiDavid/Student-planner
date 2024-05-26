@@ -20,7 +20,7 @@ if (isset($_POST['taskAddData']))
     $endTime = $_POST["endTime"];
     $enable_start_time = $_POST["enableStartTime"];
     $enable_end_time = $_POST["enableEndTime"];
-    $task_description = $_POST["taskDescription"];
+    $task_description = mysqli_real_escape_string($l, $_POST["taskDescription"]);
 
     $user = unserialize($_SESSION['user']);
     $user_id = $user->getId();

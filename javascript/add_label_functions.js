@@ -127,7 +127,6 @@ function listUserLabels(fromLabelPopover, showGroups){
         dataType: "json",
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             response.forEach(function(item) {
                 var newDiv = document.createElement('div');
                 var newP = document.createElement('p');

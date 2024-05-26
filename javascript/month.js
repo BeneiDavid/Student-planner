@@ -131,7 +131,6 @@ function listMonthTasks(){
                 data: {'date': date},
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response + "asd");
                     fillMonthDay(index + 1, response);
                 },
                 error: function(xhr) {

@@ -111,7 +111,6 @@ async function fillTeachersDiv(){
                 type: 'POST',
                 data: { 'otherUserId': sendToUserId },
                 success: function(secondResponse) {
-                    console.log(secondResponse);
                     if(secondResponse == "false"){
                         var unseenMessageDot = createColoredSVG("blue", "35px", "dot");
                         var firstChild = messageDiv.firstChild;
