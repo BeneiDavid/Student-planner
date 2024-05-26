@@ -38,7 +38,7 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
         Itt meg kell adnia hallgatói azonosítóját ami alapján az oktatói meg
         fogják tudni Önt találni és csoportokhoz rendelni. Sikeres regisztráció után kapni fog egy e-mailt egy megerősítő hivatkozással, miután erre
         rákattint lehetősége nyílik a bejelentkezésre. Lehetséges, hogy a megerősítő e-mail a spam mappába érkezik, ezért kérem, hogy ellenőrizze azt. Amennyiben a diákazonosító melyet megadott már foglalt, vagy a regisztráció során bármilyen egyéb problémába ütközik
-        vegye fel a kapcsolatot a rendszergazdával a következő e-mail címen: <a href='mailto:beneidavid.it@gmail.com'>beneidavid.it@gmail.com</a>
+        vegye fel a kapcsolatot a rendszergazdával a következő e-mail címen: <a href='mailto:studentplannermail@gmail.com'>studentplannermail@gmail.com</a>
       </p>
 
 
@@ -163,7 +163,7 @@ echo "<h2 class='content-padding'>Segítség az oldal használatához</h2>
     <h4>Fiók létrehozása</h4>
     <p>
       A hallgatók személyes adatainak védelme érdekében oktatói jogosultságot csak a rendszergazda adhat. Amennyiben szeretne felhasználói fiókot
-      igényelni kérem keresse meg a rendszergazdát a következő e-mail címen: <a href='mailto:beneidavid.it@gmail.com'>beneidavid.it@gmail.com</a>
+      igényelni kérem keresse meg a rendszergazdát a következő e-mail címen: <a href='mailto:studentplannermail@gmail.com'>studentplannermail@gmail.com</a>
     </p>
 
   </div>
