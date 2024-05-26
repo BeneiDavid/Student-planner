@@ -126,7 +126,6 @@ function showGroupTasks(){
         data: {'groupId': groupId},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             if(response.length == 0){
                 var groupTasksBody = document.getElementById('groupTasksBody');
                 var tr = document.createElement('tr');
@@ -186,7 +185,6 @@ function quitGroup(event){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var divToDelete = document.getElementById(groupQuitId.value);
             groupsDiv.removeChild(divToDelete);
 

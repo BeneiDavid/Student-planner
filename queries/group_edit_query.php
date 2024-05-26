@@ -12,7 +12,7 @@ $l = mysqli_connect('localhost', 'root', '', 'student_planner');
 
 $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
-$group_name = $_POST['groupName'];
+$group_name =  mysqli_real_escape_string($l, $_POST['groupName']);
 $group_id = $_POST['groupId'];
 $groups = new Groups($l);
 $tasks = new Tasks($l);

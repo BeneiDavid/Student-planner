@@ -35,7 +35,6 @@ function chooseLabel(divId){
     dataType: "json",
     credentials: 'same-origin',
     success: function(response) {
-      console.log(response + "asd");
         var labelsHeader = document.getElementById('labelsHeader');
         if(response.length == 0){
           removeTasks();
@@ -103,7 +102,6 @@ async function getFirstLabel(){
         credentials: 'same-origin',
         dataType: 'text',
         success: function(response) {
-          console.log("asd" + response);
           resolve(response);
         },
         error: function(xhr) {

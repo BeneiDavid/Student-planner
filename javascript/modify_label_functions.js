@@ -59,7 +59,6 @@ function saveLabelSetting(event){
           },
           credentials: 'same-origin',
           success: function(response) {
-            console.log(response);
               clearLabelModalLabels();
               listUserLabels(false, false);
               hideLabelNameError();

@@ -15,7 +15,7 @@ if (isset($_POST['groupAddData']))
     $user = unserialize($_SESSION['user']);
     $user_id = $user->getId();
     $groups =  new Groups($l);
-    $group_name = $_POST['groupName'];
+    $group_name =  mysqli_real_escape_string($l, $_POST['groupName']);
 
     $groups->saveGroupDetails($user_id, $group_name);
 

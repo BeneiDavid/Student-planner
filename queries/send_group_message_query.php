@@ -15,7 +15,7 @@ $user = unserialize($_SESSION['user']);
 $user_id = $user->getId();
 
 $student_ids = $_POST['studentIds'];
-$message = $_POST['message'];
+$message =  mysqli_real_escape_string($l, $_POST['message']);
 
 $messages = new Messages($l);
 

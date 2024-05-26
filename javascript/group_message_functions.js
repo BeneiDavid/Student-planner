@@ -32,7 +32,6 @@ function listStudents(groupId){
         data: {'groupId': groupId },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
             if(typeof student_data === 'undefined'){
@@ -183,7 +182,6 @@ function sendGroupMessage(event){
                 dataType: "text",
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                 },
                 error: function(xhr) {
                     console.error(xhr.responseText);

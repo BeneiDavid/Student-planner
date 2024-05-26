@@ -47,7 +47,6 @@ function sortTaskByEisenhower(tdId, tableId){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log("asd" + response);
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -123,7 +122,6 @@ function fillEisenhowerTasks(){
         data: {},
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             if(response.length == 0){
               return;
             } 

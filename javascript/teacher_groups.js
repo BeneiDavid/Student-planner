@@ -224,7 +224,6 @@ function saveGroup(event){
                 },
                 credentials: 'same-origin',
                 success: function(response) {
-                    console.log(response);
                     groupName.value  = "";
                     membersDiv.innerHTML = "";
                     listGroups();
@@ -383,7 +382,6 @@ function showGroupTasks(){
         data: {'groupId': groupId },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             fillTaskTable(response, "teacher");
         },
         error: function(xhr) {
@@ -404,7 +402,6 @@ function refreshGroupTasks(){
         data: {'groupId': groupId },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response + "asd");
             fillTaskTable(response, "teacher");
         },
         error: function(xhr) {
@@ -527,7 +524,6 @@ function editGroupClick(){
         },
         credentials: 'same-origin',
         success: function(response) {
-            console.log(response);
             var membersDiv = document.getElementById('membersDiv');
             var parsedData = JSON.parse(response);
             var student_data = parsedData.student_data;
